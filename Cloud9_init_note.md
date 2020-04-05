@@ -15,6 +15,7 @@ git config --global user.email you@example.com
 ```
 
 ### エディタの設定
+#### 永続
 ```
 cd 
 vi .bashrc
@@ -24,6 +25,9 @@ vi .bashrc
     # git config --global core.editor /usr/bin/nano
     git config --global core.editor /usr/bin/vim
 ```
+
+#### 一時
+git config --global core.editor 'vim -c "set fenc=utf-8"'
 
 ## Java
 インストールされているが…
