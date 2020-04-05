@@ -16,7 +16,13 @@ git config --global user.email you@example.com
 
 ### エディタの設定
 ```
-git config --global core.editor vi
+cd 
+vi .bashrc
+```
+
+```
+    # git config --global core.editor /usr/bin/nano
+    git config --global core.editor /usr/bin/vim
 ```
 
 ## Java
