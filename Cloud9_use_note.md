@@ -25,6 +25,7 @@ https://qiita.com/KevinFQ/items/e8363ad6123713815e68
   <java.version>1.8</java.version>
   <maven.compiler.target>${java.version}</maven.compiler.target>
   <maven.compiler.source>${java.version}</maven.compiler.source>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 </properties>
 ```
 
@@ -42,6 +43,33 @@ https://qiita.com/KevinFQ/items/e8363ad6123713815e68
 		</plugin>
 	</plugins>
 </build>
+```
+
+### dependencyタグのjarをまとめてjarにする
+```
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <mainClass>sample.mq.client.MQClientSample</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
 ```
 
 #### 参考
@@ -62,3 +90,5 @@ df -hT /dev/xvda1
 ```
 git pull https://github.com/SampleUser0001/ant_Sample.git
 ```
+
+## Docker
