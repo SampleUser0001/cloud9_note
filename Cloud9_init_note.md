@@ -83,3 +83,22 @@ sudo ln -s /usr/share/ant/apache-ant-1.10.7/bin/ant /usr/bin/ant
 ```
 ※yumのantは古いため使わない。
 
+## telnet 
+
+### telnetインストール
+```
+sudo yum -y install telnet
+```
+
+## docker-compose
+### docker-composeインストール
+'''
+sudo curl -L https://github.com/docker/compose/releases/download/1.25.5/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+'''
+
+※バージョンは参考サイトから確認。
+
+### 参考サイト
+https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af
