@@ -12,8 +12,8 @@ https://docs.aws.amazon.com/cloud9/index.html
 ```
 mvn -B archetype:generate \
  -DarchetypeGroupId=org.apache.maven.archetypes \
- -DgroupId=sample.serialize \
- -DartifactId=SerializeVersionUID
+ -DgroupId=sample.getPowerMock \
+ -DartifactId=GetPowerMock
 ```
 
 #### 参考
@@ -92,3 +92,8 @@ git pull https://github.com/SampleUser0001/ant_Sample.git
 ```
 
 ## Docker
+
+## AWS
+
+### グローバルIP取得
+curl http://169.254.169.254/latest/meta-data/public-ipv4
