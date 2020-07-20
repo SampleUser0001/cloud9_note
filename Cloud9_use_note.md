@@ -6,14 +6,30 @@ Cloud9を使うときに一緒に持っていきたいメモ
 ## ドキュメントホーム
 https://docs.aws.amazon.com/cloud9/index.html
 
+## git
+
+### .gitignoreについて
+https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff
+
 ## Maven
 
 ### 新規プロジェクト作成
 ```
 mvn -B archetype:generate \
  -DarchetypeGroupId=org.apache.maven.archetypes \
- -DgroupId=sample.getPowerMock \
- -DartifactId=GetPowerMock
+ -DgroupId=jp.tool.linux.organizer.top \
+ -DartifactId=organizer_for_top_command
+```
+
+※変更していいのは3行目と4行目のみ。1行目と2行目は変えてはいけない。
+
+### WebApplicationプロジェクト作成
+
+```
+mvn -B archetype:generate \
+  -DarchetypeArtifactId=maven-archetype-webapp \
+  -DgroupId=com.example.log4j2 \
+  -DartifactId=Log4j2_Web_Application_Sample
 ```
 
 #### 参考
@@ -26,6 +42,7 @@ https://qiita.com/KevinFQ/items/e8363ad6123713815e68
   <maven.compiler.target>${java.version}</maven.compiler.target>
   <maven.compiler.source>${java.version}</maven.compiler.source>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <project.mainClass>com.example.Main</project.mainClass>
 </properties>
 ```
 
@@ -75,6 +92,22 @@ https://qiita.com/KevinFQ/items/e8363ad6123713815e68
 #### 参考
 https://qiita.com/hide/items/0c8795054219d04e5e98
 
+### getter,setterを作成しない
+
+```
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.12</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+#### 参考
+
+https://qiita.com/opengl-8080/items/671ffd4bf84fe5e32557  
+https://mvnrepository.com/artifact/org.projectlombok/lombok
 
 ## ディスク使用量チェック
 https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ebs-describing-volumes.html
