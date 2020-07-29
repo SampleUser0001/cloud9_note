@@ -11,6 +11,11 @@ https://docs.aws.amazon.com/cloud9/index.html
 ### .gitignoreについて
 https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff
 
+### 親ブランチを取得する
+```
+git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
+```
+
 ## Maven
 
 ### 新規プロジェクト作成
