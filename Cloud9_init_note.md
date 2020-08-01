@@ -92,13 +92,50 @@ sudo yum -y install telnet
 
 ## docker-compose
 ### docker-composeインストール
-'''
+```
 sudo curl -L https://github.com/docker/compose/releases/download/1.25.5/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
-'''
+```
 
 ※バージョンは参考サイトから確認。
 
 ### 参考サイト
 https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af
+
+## goofys
+
+S3バケットをEC2のストレージとしてマウントすることができる。
+
+### goofysインストール
+
+S3バケットは作成済み、AWS CLIは設定済みの前提。
+
+go, fuseインストール
+```
+sudo yum install golang fuse
+```
+
+goofysインストール
+```
+export GOPATH=$HOME/go
+go get github.com/kahing/goofys
+go install github.com/kahing/goofys
+```
+
+S3マウント
+```
+mkdir ~/mount-goofys
+./go/bin/goofys kohei-goofys ~/mount-goofys
+```
+
+### 自動マウント設定
+
+上記だけだと再起動したときにマウントが解除されてしまう。  
+参考サイトに手順が書いてあるが、まだ対応していない。  
+（どこにマウントしたらいいか、考える。）
+
+### 参考
+
+[Qiita : goofysを使ってAmazon LinuxにS3をマウントする。](https://qiita.com/kooohei/items/a14f22cb0381342d1861)
+
