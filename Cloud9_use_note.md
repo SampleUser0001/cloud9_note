@@ -22,8 +22,8 @@ git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head
 ```
 mvn -B archetype:generate \
  -DarchetypeGroupId=org.apache.maven.archetypes \
- -DgroupId=jp.tool.linux.organizer.top \
- -DartifactId=organizer_for_top_command
+ -DgroupId=sample.json \
+ -DartifactId=Use_Json_in_Java
 ```
 
 ※変更していいのは3行目と4行目のみ。1行目と2行目は変えてはいけない。

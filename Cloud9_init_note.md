@@ -139,3 +139,59 @@ mkdir ~/mount-goofys
 
 [Qiita : goofysを使ってAmazon LinuxにS3をマウントする。](https://qiita.com/kooohei/items/a14f22cb0381342d1861)
 
+## Vue.js
+
+### 準備
+```
+ec2-user:~/environment/Sample_Vue $ node -v
+v10.19.0
+ec2-user:~/environment/Sample_Vue $ npm -v
+6.13.4
+```
+
+### インストール
+
+npmを入れた記憶がないが…まあいいか。
+```
+npm install -g @vue/cli
+npm install -g @vue/cli-service-global
+```
+
+```
+ec2-user:~/environment/Sample_Vue/test-vue (master) $ vue -V
+@vue/cli 4.5.3
+```
+
+### init
+
+```
+vue create test-vue
+cd test-vue
+
+touch  vue.config.js
+```
+
+vue.config.jsの中身
+```
+module.exports = {
+  devServer: {
+    disableHostCheck: true
+  }
+}
+```
+
+```
+npm run serve
+```
+
+http://<IPアドレス>:8080  
+にアクセス
+
+### init 別パターン
+
+[公式サンプル](./Vuejs_init/index.html)
+
+### 参考
+
+[Qitt:Vue.jsについての基礎(インストール)](https://qiita.com/watataku/items/26f2ce546fcd562e4b46)  
+[Qiita:AWS Cloud9 で Vue.js を使う](https://qiita.com/tamusan100/items/32acfd5e70336f33273f)
