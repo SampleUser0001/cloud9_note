@@ -131,6 +131,26 @@ git pull https://github.com/SampleUser0001/ant_Sample.git
 
 ## Docker
 
+### nginxイメージを使用して公開する
+
+#### docker-compose.yml
+
+```yml
+nginx:
+    image: nginx
+    container_name: <任意のコンテナ名>
+    ports: 
+        - "80:80"
+    volumes:
+        - ./<任意のパス>:/usr/share/nginx/html/
+```
+
+#### 起動コマンド
+
+```
+docker-compose up
+```
+
 ## AWS
 
 ### グローバルIP取得
