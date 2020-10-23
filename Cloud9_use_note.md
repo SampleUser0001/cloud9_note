@@ -1,7 +1,33 @@
 # Cloud9 Use Note
-
-## 概要
 Cloud9を使うときに一緒に持っていきたいメモ
+
+- [Cloud9 Use Note](#cloud9-use-note)
+  - [ドキュメントホーム](#ドキュメントホーム)
+  - [git](#git)
+    - [.gitignoreについて](#gitignoreについて)
+    - [親ブランチを取得する](#親ブランチを取得する)
+  - [Maven](#maven)
+    - [新規プロジェクト作成](#新規プロジェクト作成)
+    - [WebApplicationプロジェクト作成](#webapplicationプロジェクト作成)
+      - [参考](#参考)
+    - [Javaバージョンを指定する](#javaバージョンを指定する)
+    - [exec:javaコマンドで実行する](#execjavaコマンドで実行する)
+      - [引数でmainメソッドのクラスを指定する](#引数でmainメソッドのクラスを指定する)
+      - [起動引数を渡す](#起動引数を渡す)
+    - [dependencyタグのjarをまとめてjarにする](#dependencyタグのjarをまとめてjarにする)
+      - [参考](#参考-1)
+    - [getter,setterを作成しない](#gettersetterを作成しない)
+      - [参考](#参考-2)
+  - [ディスク使用量チェック](#ディスク使用量チェック)
+    - [コマンド](#コマンド)
+  - [ant](#ant)
+    - [サンプルダウンロード](#サンプルダウンロード)
+  - [Docker](#docker)
+    - [nginxイメージを使用して公開する](#nginxイメージを使用して公開する)
+      - [docker-compose.yml](#docker-composeyml)
+      - [起動コマンド](#起動コマンド)
+  - [AWS](#aws)
+    - [グローバルIP取得](#グローバルip取得)
 
 ## ドキュメントホーム
 https://docs.aws.amazon.com/cloud9/index.html
@@ -54,44 +80,56 @@ https://qiita.com/KevinFQ/items/e8363ad6123713815e68
 ### exec:javaコマンドで実行する
 ```
 <build>
-	<plugins>
-		<plugin>
-			<groupId>org.codehaus.mojo</groupId>
-			<artifactId>exec-maven-plugin</artifactId>
-			<version>1.2.1</version>
-			<configuration>
-				<mainClass>com.example.Main</mainClass>
-			</configuration>
-		</plugin>
-	</plugins>
+  <plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>1.2.1</version>
+      <configuration>
+        <mainClass>com.example.Main</mainClass>
+      </configuration>
+    </plugin>
+  </plugins>
 </build>
+```
+
+#### 引数でmainメソッドのクラスを指定する
+
+```
+exec:java -Dexec.mainClass="<クラス名>"
+```
+
+#### 起動引数を渡す
+
+```
+exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="<引数１> <引数２> ..."
 ```
 
 ### dependencyタグのjarをまとめてjarにする
 ```
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.2.0</version>
-        <executions>
-          <execution>
-            <id>make-assembly</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <archive>
-            <manifest>
-              <mainClass>sample.mq.client.MQClientSample</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
+<plugin>
+  <artifactId>maven-assembly-plugin</artifactId>
+  <version>3.2.0</version>
+  <executions>
+    <execution>
+      <id>make-assembly</id>
+      <phase>package</phase>
+      <goals>
+        <goal>single</goal>
+      </goals>
+    </execution>
+  </executions>
+  <configuration>
+    <descriptorRefs>
+      <descriptorRef>jar-with-dependencies</descriptorRef>
+    </descriptorRefs>
+    <archive>
+      <manifest>
+        <mainClass>sample.mq.client.MQClientSample</mainClass>
+      </manifest>
+    </archive>
+  </configuration>
+</plugin>
 ```
 
 #### 参考
@@ -154,4 +192,7 @@ docker-compose up
 ## AWS
 
 ### グローバルIP取得
+
+```
 curl http://169.254.169.254/latest/meta-data/public-ipv4
+```
