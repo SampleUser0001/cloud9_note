@@ -137,6 +137,16 @@ jd-cli --version
 sudo yum -y install telnet
 ```
 
+## docker
+
+入ってたっけ…？記憶にない。
+
+### dockerインストール
+
+```
+sudo yum install docker
+```
+
 ## docker-compose
 ### docker-composeインストール
 ```
