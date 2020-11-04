@@ -111,6 +111,25 @@ sudo ln -s /usr/share/ant/apache-ant-1.10.7/bin/ant /usr/bin/ant
 ```
 ※yumのantは古いため使わない。
 
+## jd-cli
+
+Javaの逆コンパイルツール。
+
+※バージョンは事前に確認。
+```
+mkdir tmp
+cd tmp
+wget https://github.com/kwart/jd-cli/releases/download/jd-cmd-1.1.0.Final/jd-cli-1.1.0.Final-dist.tar.gz
+tar -zxvf jd-cli-1.1.0.Final-dist.tar.gz
+sudo cp jd-cli /usr/local/bin/
+sudo cp jd-cli.jar /usr/local/bin/
+cd ..
+```
+
+```
+jd-cli --version
+```
+
 ## telnet 
 
 ### telnetインストール
