@@ -189,6 +189,18 @@ nginx:
 docker-compose up
 ```
 
+## Linux
+
+### scpコマンド
+
+```
+scp <ローカルパス> <ユーザ名>@<接続先ホスト>:<コピー先パス>
+```
+
+#### scp 参考
+
+[Qiita:scpコマンド](https://qiita.com/chihiro/items/142ebe6980a498b5d4a7)
+
 ## AWS
 
 ### グローバルIP取得
