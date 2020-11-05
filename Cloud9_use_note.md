@@ -102,8 +102,9 @@ exec:java -Dexec.mainClass="<クラス名>"
 #### 起動引数を渡す
 
 ```
-exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="<引数１> <引数２> ..."
+mvn exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="'<引数１>' '<引数２>' ..."
 ```
+シングルクオーテーションはなくても動くが、スペースを含む場合は必要。
 
 ### dependencyタグのjarをまとめてjarにする
 ```
