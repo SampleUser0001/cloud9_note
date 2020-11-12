@@ -161,6 +161,11 @@ https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ebs-describing-volumes
 df -hT /dev/xvda1
 ```
 
+### ディレクトリごとの使用量確認
+```
+du -ms <対象ディレクトリ>　| sort -nr | less
+```
+
 ## ant
 
 ### サンプルダウンロード
