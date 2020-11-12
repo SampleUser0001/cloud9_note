@@ -51,3 +51,34 @@ spool off
 
 exit
 ```
+
+## CSVデータ登録
+
+sql*lorder を使う。
+
+### ctlファイル
+
+```
+options(skip = 1)
+load data
+infile '<csvパス>'
+<登録方法>
+into table <テーブル名>
+fields terminated by ','
+optionally enclosed by '"'
+trailing nullcols(
+  <カラム名>, <カラム名> ...
+)
+```
+登録方法はとりあえずtruncateでいいんじゃないかな…
+
+#### 参考：登録方法
+
+[忘れっぽいエンジニアのオラクルSQLリファレンス:４種類のロードタイプ（INSERT/APPEND/REPLACE/TRUNCATE）](http://oracle.se-free.com/utl/C2_type.html)
+
+### 実行
+
+```
+sqlldr <接続情報> <ctlファイルパス>
+```
+※接続情報はsql*plusと同じ。
