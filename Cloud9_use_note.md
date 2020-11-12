@@ -209,3 +209,18 @@ scp <ローカルパス> <ユーザ名>@<接続先ホスト>:<コピー先パス
 ```
 curl http://169.254.169.254/latest/meta-data/public-ipv4
 ```
+
+### S3
+
+#### 例のページ
+
+down
+```
+aws s3 cp s3://ittimfn-public/index.html .
+```
+
+up
+```
+aws s3 cp ./index.html s3://ittimfn-public/index.html
+```
+
