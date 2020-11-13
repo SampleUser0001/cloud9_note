@@ -36,12 +36,12 @@ Cloud9を使うときに一緒に持っていきたいメモ
       - [例のページ](#例のページ)
 
 ## ドキュメントホーム
-https://docs.aws.amazon.com/cloud9/index.html
+[https://docs.aws.amazon.com/cloud9/index.html](https://docs.aws.amazon.com/cloud9/index.html)
 
 ## git
 
 ### .gitignoreについて
-https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff
+[https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff](https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff)
 
 ### 親ブランチを取得する
 ```
@@ -70,7 +70,7 @@ mvn -B archetype:generate \
 ```
 
 #### 参考
-https://qiita.com/KevinFQ/items/e8363ad6123713815e68
+[https://qiita.com/KevinFQ/items/e8363ad6123713815e68](https://qiita.com/KevinFQ/items/e8363ad6123713815e68)
 
 ### Javaバージョンを指定する
 ```
@@ -140,7 +140,7 @@ mvn exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="'<引数１>' '<引
 ```
 
 #### 参考
-https://qiita.com/hide/items/0c8795054219d04e5e98
+[https://qiita.com/hide/items/0c8795054219d04e5e98](https://qiita.com/hide/items/0c8795054219d04e5e98)
 
 ### getter,setterを作成しない
 

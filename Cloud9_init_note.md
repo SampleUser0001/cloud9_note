@@ -85,7 +85,7 @@ sudo update-alternatives --config javac
 
 
 ### 参考
-https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html
+[https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html](https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html)
 
 ## Maven
 インストールされていない。
@@ -98,7 +98,7 @@ sudo yum install -y apache-maven
 ```
 
 ### 参考
-https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html
+[https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html](https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html)
 
 
 ## ant
@@ -161,7 +161,7 @@ docker-compose --version
 ※バージョンは参考サイトから確認。
 
 ### 参考サイト
-https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af
+[https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af](https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af)
 
 ## goofys
 
