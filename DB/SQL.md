@@ -2,6 +2,10 @@
 
 SQLのテクニック全般
 
+- [SQL](#sql)
+  - [case-when-then](#case-when-then)
+    - [実行例](#実行例)
+
 ## case-when-then
 
 case-when-thenを使用してif文的なことを行う。  
