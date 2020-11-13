@@ -180,13 +180,15 @@ git pull https://github.com/SampleUser0001/ant_Sample.git
 #### docker-compose.yml
 
 ```yml
-nginx:
+version: '3'
+services:
+  nginx:
     image: nginx
     container_name: <任意のコンテナ名>
     ports: 
-        - "80:80"
+      - "80:80"
     volumes:
-        - ./<任意のパス>:/usr/share/nginx/html/
+      - ./<任意のパス>:/usr/share/nginx/html/
 ```
 
 #### 起動コマンド
