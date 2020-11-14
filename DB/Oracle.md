@@ -40,7 +40,7 @@ Oracleの統計情報更新と実行計画取得方法について記載。
 
 ### 統計情報更新
 
-```analyze.sql
+```sql
 set pagesize 400
 set linsize 200
 set echo on
@@ -67,7 +67,7 @@ spool off
 
 ※事前に評価対象のSQLを用意する。
 
-```
+```sql
 set pagesize 400
 set linsize 200
 set echo on
