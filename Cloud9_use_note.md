@@ -214,14 +214,15 @@ scp <ローカルパス> <ユーザ名>@<接続先ホスト>:<コピー先パス
 
 #### scp 参考
 
+[Qiita:scpコマンド](https://qiita.com/chihiro/items/142ebe6980a498b5d4a7)
+
+
+
 ### ファイル名にDateを使う
 
 ```
 cp -p <ファイル名> <ファイル名>`date "+%Y%m%d_%H%M%S"`.<拡張子>
 ```
-
-[Qiita:scpコマンド](https://qiita.com/chihiro/items/142ebe6980a498b5d4a7)
-
 ## AWS
 
 ### グローバルIP取得
