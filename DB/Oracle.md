@@ -1,6 +1,9 @@
 # Oracle
 
 - [Oracle](#oracle)
+  - [SQL*plus](#sqlplus)
+    - [ログイン](#ログイン)
+  - [ユーザ・テーブルごと権限確認](#ユーザテーブルごと権限確認)
   - [実行計画取得](#実行計画取得)
     - [統計情報更新](#統計情報更新)
     - [実行計画取得](#実行計画取得-1)
@@ -8,6 +11,27 @@
     - [ctlファイル](#ctlファイル)
       - [参考：登録方法](#参考登録方法)
     - [実行](#実行)
+
+## SQL*plus
+
+### ログイン
+
+```
+sqlplus /nolog
+conn sys/oracle as sysdba
+```
+
+## ユーザ・テーブルごと権限確認
+
+```sql
+select 
+  grantee,
+  table_name,
+  privilege
+from
+  user_tab_privu
+;
+```
 
 ## 実行計画取得
 
