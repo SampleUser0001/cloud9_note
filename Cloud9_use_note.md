@@ -20,6 +20,7 @@ Cloud9を使うときに一緒に持っていきたいメモ
       - [参考](#参考-2)
   - [ディスク使用量チェック](#ディスク使用量チェック)
     - [コマンド](#コマンド)
+    - [ディレクトリごとの使用量確認](#ディレクトリごとの使用量確認)
   - [ant](#ant)
     - [サンプルダウンロード](#サンプルダウンロード)
   - [Docker](#docker)
@@ -27,6 +28,9 @@ Cloud9を使うときに一緒に持っていきたいメモ
       - [docker-compose.yml](#docker-composeyml)
       - [起動コマンド](#起動コマンド)
   - [Linux](#linux)
+    - [scpコマンド](#scpコマンド)
+      - [scp 参考](#scp-参考)
+    - [ファイル名にDateを使う](#ファイル名にdateを使う)
     - [Shell](#shell)
       - [ディレクトリ配下のファイルでループする](#ディレクトリ配下のファイルでループする)
       - [ファイルを一行ずつ読み込んでループする](#ファイルを一行ずつ読み込んでループする)
@@ -36,14 +40,16 @@ Cloud9を使うときに一緒に持っていきたいメモ
     - [ヘッダ業の表示タイミングを制御する](#ヘッダ業の表示タイミングを制御する)
   - [AWS](#aws)
     - [グローバルIP取得](#グローバルip取得)
+    - [S3](#s3)
+      - [例のページ](#例のページ)
 
 ## ドキュメントホーム
-https://docs.aws.amazon.com/cloud9/index.html
+[https://docs.aws.amazon.com/cloud9/index.html](https://docs.aws.amazon.com/cloud9/index.html)
 
 ## git
 
 ### .gitignoreについて
-https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff
+[https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff](https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff)
 
 ### 親ブランチを取得する
 ```
@@ -72,7 +78,7 @@ mvn -B archetype:generate \
 ```
 
 #### 参考
-https://qiita.com/KevinFQ/items/e8363ad6123713815e68
+[https://qiita.com/KevinFQ/items/e8363ad6123713815e68](https://qiita.com/KevinFQ/items/e8363ad6123713815e68)
 
 ### Javaバージョンを指定する
 ```
@@ -110,8 +116,9 @@ exec:java -Dexec.mainClass="<クラス名>"
 #### 起動引数を渡す
 
 ```
-exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="<引数１> <引数２> ..."
+mvn exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="'<引数１>' '<引数２>' ..."
 ```
+シングルクオーテーションはなくても動くが、スペースを含む場合は必要。
 
 ### dependencyタグのjarをまとめてjarにする
 ```
@@ -141,7 +148,7 @@ exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="<引数１> <引数２>
 ```
 
 #### 参考
-https://qiita.com/hide/items/0c8795054219d04e5e98
+[https://qiita.com/hide/items/0c8795054219d04e5e98](https://qiita.com/hide/items/0c8795054219d04e5e98)
 
 ### getter,setterを作成しない
 
@@ -168,6 +175,11 @@ https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ebs-describing-volumes
 df -hT /dev/xvda1
 ```
 
+### ディレクトリごとの使用量確認
+```
+du -ms <対象ディレクトリ>　| sort -nr | less
+```
+
 ## ant
 
 ### サンプルダウンロード
@@ -182,13 +194,15 @@ git pull https://github.com/SampleUser0001/ant_Sample.git
 #### docker-compose.yml
 
 ```yml
-nginx:
+version: '3'
+services:
+  nginx:
     image: nginx
     container_name: <任意のコンテナ名>
     ports: 
-        - "80:80"
+      - "80:80"
     volumes:
-        - ./<任意のパス>:/usr/share/nginx/html/
+      - ./<任意のパス>:/usr/share/nginx/html/
 ```
 
 #### 起動コマンド
@@ -198,6 +212,21 @@ docker-compose up
 ```
 
 ## Linux
+
+### scpコマンド
+
+```
+scp <ローカルパス> <ユーザ名>@<接続先ホスト>:<コピー先パス>
+```
+#### scp 参考
+
+[Qiita:scpコマンド](https://qiita.com/chihiro/items/142ebe6980a498b5d4a7)
+
+### ファイル名にDateを使う
+
+```
+cp -p <ファイル名> <ファイル名>`date "+%Y%m%d_%H%M%S"`.<拡張子>
+```
 
 ### Shell
 
@@ -245,3 +274,18 @@ set pagesize <値>
 ```
 curl http://169.254.169.254/latest/meta-data/public-ipv4
 ```
+
+### S3
+
+#### 例のページ
+
+down
+```
+aws s3 cp s3://ittimfn-public/index.html .
+```
+
+up
+```
+aws s3 cp ./index.html s3://ittimfn-public/index.html
+```
+

@@ -15,8 +15,11 @@ Cloud9を起動したときに行うことの備忘録。
     - [参考](#参考-1)
   - [ant](#ant)
     - [antインストール](#antインストール)
+  - [jd-cli](#jd-cli)
   - [telnet](#telnet)
     - [telnetインストール](#telnetインストール)
+  - [docker](#docker)
+    - [dockerインストール](#dockerインストール)
   - [docker-compose](#docker-compose)
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
@@ -82,7 +85,7 @@ sudo update-alternatives --config javac
 
 
 ### 参考
-https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html
+[https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html](https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html)
 
 ## Maven
 インストールされていない。
@@ -95,7 +98,7 @@ sudo yum install -y apache-maven
 ```
 
 ### 参考
-https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html
+[https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html](https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html)
 
 
 ## ant
@@ -111,6 +114,25 @@ sudo ln -s /usr/share/ant/apache-ant-1.10.7/bin/ant /usr/bin/ant
 ```
 ※yumのantは古いため使わない。
 
+## jd-cli
+
+Javaの逆コンパイルツール。
+
+※バージョンは事前に確認。
+```
+mkdir tmp
+cd tmp
+wget https://github.com/kwart/jd-cli/releases/download/jd-cmd-1.1.0.Final/jd-cli-1.1.0.Final-dist.tar.gz
+tar -zxvf jd-cli-1.1.0.Final-dist.tar.gz
+sudo cp jd-cli /usr/local/bin/
+sudo cp jd-cli.jar /usr/local/bin/
+cd ..
+```
+
+```
+jd-cli --version
+```
+
 ## telnet 
 
 ### telnetインストール
@@ -118,10 +140,20 @@ sudo ln -s /usr/share/ant/apache-ant-1.10.7/bin/ant /usr/bin/ant
 sudo yum -y install telnet
 ```
 
+## docker
+
+入ってたっけ…？記憶にない。
+
+### dockerインストール
+
+```
+sudo yum install docker
+```
+
 ## docker-compose
 ### docker-composeインストール
 ```
-sudo curl -L https://github.com/docker/compose/releases/download/1.25.5/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 ```
@@ -129,7 +161,7 @@ docker-compose --version
 ※バージョンは参考サイトから確認。
 
 ### 参考サイト
-https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af
+[https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af](https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af)
 
 ## goofys
 
