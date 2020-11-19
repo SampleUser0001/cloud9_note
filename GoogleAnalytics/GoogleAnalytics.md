@@ -13,11 +13,11 @@
 
 ## 導入
 
-アカウントの取得からgtag.jsの生成までを記載する。
+アカウントの取得からgtag.jsの生成までを記載する。  
 
 ### アカウントの取得
 1. 下記ページに遷移
-   - [https://analytics.google.com/analytics/web/provision/#/provision]
+   - [https://analytics.google.com/analytics/web/provision/#/provision](https://analytics.google.com/analytics/web/provision/#/provision)
 2. 「無料で設定」ボタンをクリックする。
 3. アカウントの設定を行う。
    1. 任意の「アカウント名」を入力する。
