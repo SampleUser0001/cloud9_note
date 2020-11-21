@@ -27,6 +27,12 @@ Cloud9を使うときに一緒に持っていきたいメモ
     - [nginxイメージを使用して公開する](#nginxイメージを使用して公開する)
       - [docker-compose.yml](#docker-composeyml)
       - [起動コマンド](#起動コマンド)
+    - [shを実行する](#shを実行する)
+      - [ディレクトリ構造](#ディレクトリ構造)
+      - [Dockerfile](#dockerfile)
+      - [docker-compose.yml](#docker-composeyml-1)
+      - [start.sh](#startsh)
+      - [Dockerコマンド](#dockerコマンド)
   - [Linux](#linux)
     - [scpコマンド](#scpコマンド)
       - [scp 参考](#scp-参考)
@@ -213,6 +219,69 @@ services:
 ```
 docker-compose up
 ```
+
+### shを実行する
+
+#### ディレクトリ構造
+
+```
+.
+├── Dockerfile
+├── app
+│   └── app.js
+├── docker-compose.yml
+└── start.sh
+```
+
+#### Dockerfile
+
+```
+# 任意のイメージを取得
+FROM node
+
+WORKDIR /app
+
+COPY app /app
+COPY start.sh /start.sh
+
+RUN chmod 755 /start.sh
+
+CMD [ "/start.sh"]
+```
+
+#### docker-compose.yml
+
+サービス名、コンテナ名は任意。  
+ポートは外からアクセスするために必要なポートを開ける。
+```
+version: '3'
+services:
+  node:
+    build: .
+    container_name: node
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./start.sh:/start.sh
+      - ./app:/app
+```
+
+#### start.sh
+
+```
+#!/bin/bash
+
+exec node app.js
+```
+
+#### Dockerコマンド
+
+```
+chmod 755 start.sh
+docker-compose build
+docker-compose up -d
+```
+
 
 ## Linux
 
