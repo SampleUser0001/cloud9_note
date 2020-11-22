@@ -37,6 +37,7 @@ Cloud9を使うときに一緒に持っていきたいメモ
     - [scpコマンド](#scpコマンド)
       - [scp 参考](#scp-参考)
     - [ファイル名にDateを使う](#ファイル名にdateを使う)
+    - [freeコマンド](#freeコマンド)
     - [Shell](#shell)
       - [ディレクトリ配下のファイルでループする](#ディレクトリ配下のファイルでループする)
       - [ファイルを一行ずつ読み込んでループする](#ファイルを一行ずつ読み込んでループする)
@@ -298,6 +299,34 @@ scp <ローカルパス> <ユーザ名>@<接続先ホスト>:<コピー先パス
 
 ```
 cp -p <ファイル名> <ファイル名>`date "+%Y%m%d_%H%M%S"`.<拡張子>
+```
+
+### freeコマンド
+メモリの調査を行う
+
+|オプション|効果|
+|:---|:---|
+|-s <数字>|<数字>秒ごとに表示|
+|-b, -k, -m|xxxバイト単位で表示|
+|-t|物理メモリ、スワップメモリの合計を表示|
+
+実行例
+```sh
+$ free -s 5 -mt
+              total        used        free      shared  buff/cache   available
+Mem:           3933         508        2114         251        1309        2995
+Swap:             0           0           0
+Total:         3933         508        2114
+
+              total        used        free      shared  buff/cache   available
+Mem:           3933         508        2114         251        1309        2995
+Swap:             0           0           0
+Total:         3933         508        2114
+
+              total        used        free      shared  buff/cache   available
+Mem:           3933         508        2114         251        1309        2995
+Swap:             0           0           0
+Total:         3933         508        2114
 ```
 
 ### Shell
