@@ -5,6 +5,9 @@ SQLのテクニック全般
 - [SQL](#sql)
   - [case-when-then](#case-when-then)
     - [実行例](#実行例)
+  - [not in → not exists](#not-in--not-exists)
+    - [not in](#not-in)
+    - [not exists](#not-exists)
 
 ## case-when-then
 
@@ -83,4 +86,29 @@ mysql> select case pref_name
 | その他    |             500 |
 +-----------+-----------------+
 3 rows in set (0.00 sec)
+```
+
+## not in → not exists
+
+### not in
+
+```sql
+select id, name
+from EMP
+where id not in (
+  select id
+  from EMP_HIST
+)
+```
+
+### not exists
+
+```sql
+select id, name
+from EMP e
+where id not exists (
+  select 'X'
+  from EMP_HIST eh
+  where e.id = eh.id
+)
 ```
