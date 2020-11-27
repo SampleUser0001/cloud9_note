@@ -38,6 +38,13 @@ from
 Oracleの統計情報更新と実行計画取得方法について記載。  
 （※誤字はチェックしていない。）
 
+### 対象テーブル一覧取得
+
+```sql
+SELECT TABLE_NAME FROM USER_TABLES
+ORDER BY TABLE_NAME
+```
+
 ### 統計情報更新
 
 ```sql
