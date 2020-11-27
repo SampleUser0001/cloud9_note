@@ -115,17 +115,20 @@ where id not exists (
 
 ## 外部結合
 
-### fromにしかないレコードを抽出する
+### fromにしかないレコードも抽出する
 ```sql
-from <テーブル1> left outer join <テーブル2> on <結合条件>
+from テーブル1 left outer join テーブル2 on 結合条件
+where その他の条件
 ```
 
-### joinにしかないレコードを抽出する
+### joinにしかないレコードも抽出する
 ```sql
-from <テーブル1> right outer join <テーブル2> on <結合条件>
+from テーブル1 right outer join テーブル2 on 結合条件
+where その他の条件
 ```
 
 ### どちらでもいいから片方にあるレコードを抽出する
 ```sql
-from <テーブル1> full outer join <テーブル2> on <結合条件>
+from テーブル1 full outer join テーブル2 on 結合条件
+where その他の条件
 ```
