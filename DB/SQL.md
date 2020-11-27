@@ -112,3 +112,20 @@ where id not exists (
   where e.id = eh.id
 )
 ```
+
+## 外部結合
+
+### fromにしかないレコードを抽出する
+```sql
+from <テーブル1> left outer join <テーブル2> on <結合条件>
+```
+
+### joinにしかないレコードを抽出する
+```sql
+from <テーブル1> right outer join <テーブル2> on <結合条件>
+```
+
+### どちらでもいいから片方にあるレコードを抽出する
+```sql
+from <テーブル1> full outer join <テーブル2> on <結合条件>
+```
