@@ -221,6 +221,47 @@ services:
 docker-compose up
 ```
 
+### nginxイメージを使用してhttpsとして公開する
+
+当然オレオレ証明書。
+
+```
+version: '3'
+services:
+  nginx:
+    image: nginx
+    container_name: <任意のコンテナ名>
+    ports: 
+      - "8080:80"
+    volumes:
+      - ./<任意のパス>:/usr/share/nginx/html/
+  https-portal:
+    image: steveltn/https-portal:1.15.0
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - nginx
+    restart: always
+    environment:
+      DOMAINS: 'localhost => http://nginx:3000'
+      STAGE: local
+```
+
+#### 起動コマンド
+
+```
+docker-compose up
+```
+
+#### 参照方法
+
+1. cloud9
+2. Preview
+3. Preview Running Application
+
+※外部から参照する場合も同じURL。
+
 ### shを実行する
 
 #### ディレクトリ構造
