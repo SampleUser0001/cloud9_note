@@ -1,4 +1,4 @@
-# Use AWS
+# AWS
 
 ## AWS CloudFront
 
