@@ -385,8 +385,7 @@ done
 ```
 while read data ; do
     echo ${data}
-done << END
-`cat <対象ファイル>`
+done << <対象ファイル>
 ```
 
 #### 起動引数を使う
