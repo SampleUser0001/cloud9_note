@@ -27,6 +27,9 @@ Cloud9を使うときに一緒に持っていきたいメモ
     - [nginxイメージを使用して公開する](#nginxイメージを使用して公開する)
       - [docker-compose.yml](#docker-composeyml)
       - [起動コマンド](#起動コマンド)
+    - [nginxイメージを使用してhttpsとして公開する](#nginxイメージを使用してhttpsとして公開する)
+      - [起動コマンド](#起動コマンド-1)
+      - [参照方法](#参照方法)
     - [shを実行する](#shを実行する)
       - [ディレクトリ構造](#ディレクトリ構造)
       - [Dockerfile](#dockerfile)
@@ -34,6 +37,7 @@ Cloud9を使うときに一緒に持っていきたいメモ
       - [start.sh](#startsh)
       - [Dockerコマンド](#dockerコマンド)
   - [Linux](#linux)
+    - [フォルダのサイズを確認する(duコマンド)](#フォルダのサイズを確認するduコマンド)
     - [scpコマンド](#scpコマンド)
       - [scp 参考](#scp-参考)
     - [ファイル名にDateを使う](#ファイル名にdateを使う)
@@ -326,6 +330,17 @@ docker-compose up -d
 
 
 ## Linux
+
+### フォルダのサイズを確認する(duコマンド)
+
+```
+du -ms <パス> | sort -nr
+```
+
+- \-m
+  - MB単位表示
+- \-s
+  - 総計を表示
 
 ### scpコマンド
 
