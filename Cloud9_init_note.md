@@ -27,12 +27,15 @@ Cloud9を起動したときに行うことの備忘録。
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
     - [参考](#参考-2)
+  - [Node.js](#nodejs)
+    - [動作確認](#動作確認)
+    - [参考](#参考-3)
   - [Vue.js](#vuejs)
     - [準備](#準備)
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-3)
+    - [参考](#参考-4)
 
 ## git
 ```
@@ -198,6 +201,37 @@ mkdir ~/mount-goofys
 ### 参考
 
 [Qiita : goofysを使ってAmazon LinuxにS3をマウントする。](https://qiita.com/kooohei/items/a14f22cb0381342d1861)
+
+## Node.js
+
+```
+cd tmp
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+reboot
+```
+
+```
+nvm ls-remote
+```
+
+```
+nvm install <インストールしたいバージョン>
+```
+
+### 動作確認
+
+```
+node -v
+npm -v
+```
+
+```
+echo "console.log( 'Hello' );" > hello.js | node hello
+```
+
+### 参考
+
+- [Qiita:ChromeOSにNode.jsをnvmでインストールする](https://qiita.com/Hiroki_M/items/f1af64fa0d6807d1cbb0)
 
 ## Vue.js
 
