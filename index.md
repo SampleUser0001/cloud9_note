@@ -11,7 +11,8 @@
 - [Oracle.md](./DB/Oracle.md)
 
 ## AWS
-- [AWS.md](./AWS/AWS.md)
+- [CloudFront.md](./AWS/CloudFront.md)
+- [ElementalMediaConvert.md](./AWS/ElementalMediaConvert.md)
 
 ## GoogleAnalytics
 - [GoogleAnalytics.md](./GoogleAnalytics/GoogleAnalytics.md)

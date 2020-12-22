@@ -1,8 +1,6 @@
-# AWS
+# AWS CloudFront
 
-## AWS CloudFront
-
-### S3 + CloudFrontで、S3へのアクセスを遮断する
+## S3 + CloudFrontで、S3へのアクセスを遮断する
 
 1. S3バケットを作成する
 2. 「ブロックパブリックアクセス (バケット設定)」の「パブリックアクセスをすべて ブロック」をオフにする。
