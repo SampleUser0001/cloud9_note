@@ -48,3 +48,5 @@
 ### 参考
 
 - [AWS:「AWS Elemental MediaConvert の開始方法」](https://aws.amazon.com/jp/mediaconvert/getting-started/)
+- [AWS:MediaConvert:設定変数のリストと例](https://docs.aws.amazon.com/ja_jp/mediaconvert/latest/ug/list-of-settings-variables-with-examples.html)
+  - 名前修飾子の一覧
