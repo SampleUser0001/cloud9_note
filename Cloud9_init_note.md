@@ -30,6 +30,7 @@ Cloud9を起動したときに行うことの備忘録。
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
     - [参考](#参考-3)
+  - [webpack](#webpack)
   - [Vue.js](#vuejs)
     - [準備](#準備)
     - [インストール](#インストール)
@@ -232,6 +233,15 @@ echo "console.log( 'Hello' );" > hello.js | node hello
 ### 参考
 
 - [Qiita:ChromeOSにNode.jsをnvmでインストールする](https://qiita.com/Hiroki_M/items/f1af64fa0d6807d1cbb0)
+
+
+## webpack
+
+ビルドで使う…つもりだったが、使えていない。
+```
+npm install -g webpack
+npm install -g webpack-cli
+```
 
 ## Vue.js
 
