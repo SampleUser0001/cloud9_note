@@ -43,6 +43,15 @@ column <列名> format a{値} [TRUNCATE]
 set pagesize <値>
 ```
 
+## ユーザアカウントロック解除
+
+```
+ALTER USER <ユーザ名> ACCOUNT UNLOCK;
+```
+
+### 参考
+
+[Qiita:急にoracleに繋がらなくなった！？～ORA-28001:パスワードが期限切れです～](https://qiita.com/maruyama42/items/cb3177f8701f1679669a)
 
 ## ユーザ・テーブルごと権限確認
 
