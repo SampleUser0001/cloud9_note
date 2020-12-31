@@ -28,6 +28,7 @@ Cloud9を使うときに一緒に持っていきたいメモ
     - [グローバルIP取得](#グローバルip取得)
     - [S3](#s3)
       - [例のページ](#例のページ)
+  - [その他](#その他)
 
 ## ドキュメントホーム
 [https://docs.aws.amazon.com/cloud9/index.html](https://docs.aws.amazon.com/cloud9/index.html)
@@ -199,3 +200,6 @@ up
 aws s3 cp ./index.html s3://ittimfn-public/index.html
 ```
 
+## その他
+
+- [Githubの認証方法をプライベートトークンに変更する](./other/Github_authentication_token.md)
