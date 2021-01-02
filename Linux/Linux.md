@@ -13,6 +13,8 @@
   - [起動引数を使う](#起動引数を使う)
   - [部分文字列の取得](#部分文字列の取得)
     - [部分文字列の取得：参考](#部分文字列の取得参考)
+  - [シェルの実行ディレクトリを取得する](#シェルの実行ディレクトリを取得する)
+    - [例：シェルの実行ディレクトリを取得する](#例シェルの実行ディレクトリを取得する)
 
 ## フォルダのサイズを確認する(duコマンド)
 
@@ -171,3 +173,42 @@ abcdef
 
 [Qiita:bashで変数から部分文字列を取得する](https://qiita.com/koara-local/items/04d3efd1031ea62d8db5)
 
+## シェルの実行ディレクトリを取得する
+
+```
+`dirname $0`
+```
+
+### 例：シェルの実行ディレクトリを取得する
+
+```sh:test.sh
+#!/bin/bash
+
+echo `dirname $0`
+```
+
+ファイルパス
+```
+ittimfn@penguin:~/cloud9_note/tmp$ pwd
+/home/ittimfn/cloud9_note/tmp
+ittimfn@penguin:~/cloud9_note/tmp$ ls
+test.sh
+```
+
+shがあるディレクトリで実行
+```
+ittimfn@penguin:~/cloud9_note/tmp$ sh test.sh 
+.
+```
+
+shより上のディレクトリで実行
+```
+ittimfn@penguin:~$ sh ./cloud9_note/tmp/test.sh 
+./cloud9_note/tmp
+```
+
+shより下のディレクトリで実行
+```
+ittimfn@penguin:~/cloud9_note/tmp/tmp2$ sh ../test.sh 
+..
+```
