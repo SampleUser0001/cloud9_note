@@ -1,5 +1,4 @@
 # Home
-
 - [Cloud9_init_note.md](./Cloud9_init_note.md)
 - [Cloud9_use_note.md](./Cloud9_use_note.md)
 
@@ -16,3 +15,6 @@
 
 ## GoogleAnalytics
 - [GoogleAnalytics.md](./GoogleAnalytics/GoogleAnalytics.md)
+
+## Other
+- [other.md](./other/other.md)
