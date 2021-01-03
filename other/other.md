@@ -8,5 +8,5 @@
 
 ### exewrap
 
-jarファイルをexe化できる。
-
+jarファイルをexe化できる。  
+[窓の杜:exewrap](https://forest.watch.impress.co.jp/library/software/exewrap/)
