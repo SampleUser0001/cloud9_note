@@ -19,6 +19,10 @@
 ## GoogleAnalytics
 - [GoogleAnalytics.md](./GoogleAnalytics/GoogleAnalytics.md)
 
+## VSCode
+
+- [VSCode.md](./VSCode/VSCode.md)
+
 ## Other
 - [other.md](./other/other.md)
 - [Github_authentication_token.md](./other/Github_authentication_token.md)
