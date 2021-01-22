@@ -22,4 +22,5 @@ jarファイルをexe化できる。
 - [Slack Emoji Generator](https://slackemojigen.com/)
 - [Cult of the Party Parrot](https://cultofthepartyparrot.com/)
 - [絵文字ジェネレーター](https://emoji-gen.ninja/)
+- [Slack Custom Emoji](https://slack-emoji.webflow.io/)
 - [MEGAMOJI - 簡単アニメ絵文字メーカー](https://zk-phi.github.io/MEGAMOJI/)
