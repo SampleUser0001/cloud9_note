@@ -8,10 +8,10 @@ Cloud9を起動したときに行うことの備忘録。
       - [永続](#永続)
       - [一時](#一時)
   - [Java](#java)
-  - [Javaインストール](#javaインストール)
+    - [Javaインストール](#javaインストール)
     - [参考](#参考)
   - [Maven](#maven)
-  - [Mavenインストール](#mavenインストール)
+    - [Mavenインストール](#mavenインストール)
     - [参考](#参考-1)
   - [ant](#ant)
     - [antインストール](#antインストール)
@@ -73,7 +73,7 @@ OpenJDK Runtime Environment (amzn-2.6.21.0.82.amzn1-x86_64 u251-b02)
 OpenJDK 64-Bit Server VM (build 24.251-b02, mixed mode)
 ```
 
-## Javaインストール
+### Javaインストール
 ```
 sudo yum -y update
 sudo yum -y install java-1.8.0-openjdk-devel
@@ -94,7 +94,7 @@ sudo update-alternatives --config javac
 ## Maven
 インストールされていない。
 
-## Mavenインストール
+### Mavenインストール
 ```
 sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
 sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
@@ -219,6 +219,17 @@ nvm ls-remote
 nvm install <インストールしたいバージョン>
 ```
 
+```
+cd $HOME
+vi .bashrc
+```
+
+```
+# Node.js setting
+source ~/.nvm/nvm.sh
+nvm use v14.15.4
+```
+
 ### 動作確認
 
 ```
@@ -233,6 +244,7 @@ echo "console.log( 'Hello' );" > hello.js | node hello
 ### 参考
 
 - [Qiita:ChromeOSにNode.jsをnvmでインストールする](https://qiita.com/Hiroki_M/items/f1af64fa0d6807d1cbb0)
+- [node.js - Node.jsバージョンは、再起動時に0.6から0.6に戻ります(NVM)](https://ja.ojit.com/so/node.js/1601993)
 
 
 ## webpack
