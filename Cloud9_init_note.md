@@ -220,8 +220,7 @@ nvm install <インストールしたいバージョン>
 ```
 
 ```
-cd $HOME
-vi .bashrc
+vi $HOME/.bashrc
 ```
 
 ```

@@ -6,6 +6,9 @@
     - [横幅を調整する](#横幅を調整する)
     - [項目表示時の横幅を調節する](#項目表示時の横幅を調節する)
     - [ヘッダ業の表示タイミングを制御する](#ヘッダ業の表示タイミングを制御する)
+  - [ユーザアカウントロック解除](#ユーザアカウントロック解除)
+    - [ユーザアカウントステータス確認](#ユーザアカウントステータス確認)
+    - [参考](#参考)
   - [ユーザ・テーブルごと権限確認](#ユーザテーブルごと権限確認)
   - [実行計画取得](#実行計画取得)
     - [対象テーブル一覧取得](#対象テーブル一覧取得)
@@ -48,10 +51,19 @@ set pagesize <値>
 ```
 ALTER USER <ユーザ名> ACCOUNT UNLOCK;
 ```
+### ユーザアカウントステータス確認
+
+```sql
+column username format a25 TRUNCATE
+column profile format a25 TRUNCATE
+
+select username, account_status, profile from dba_users where username = 'TEST';
+```
 
 ### 参考
 
-[Qiita:急にoracleに繋がらなくなった！？～ORA-28001:パスワードが期限切れです～](https://qiita.com/maruyama42/items/cb3177f8701f1679669a)
+- [Qiita:急にoracleに繋がらなくなった！？～ORA-28001:パスワードが期限切れです～](https://qiita.com/maruyama42/items/cb3177f8701f1679669a)
+- [Oracle使いのネタ帳。:ORA-28000：Oracleユーザのアカウントロックを解除する](https://www.sql-dbtips.com/architecture/account-lock/)
 
 ## ユーザ・テーブルごと権限確認
 
