@@ -65,6 +65,7 @@ vi .bashrc
 git config --global core.editor 'vim -c "set fenc=utf-8"'
 
 ## Java
+
 インストールされているが…
 ```
 ec2-user:~/environment $ java -version
@@ -73,7 +74,8 @@ OpenJDK Runtime Environment (amzn-2.6.21.0.82.amzn1-x86_64 u251-b02)
 OpenJDK 64-Bit Server VM (build 24.251-b02, mixed mode)
 ```
 
-### Javaインストール
+### yumでJavaをインストール
+
 ```
 sudo yum -y update
 sudo yum -y install java-1.8.0-openjdk-devel
@@ -88,8 +90,30 @@ sudo update-alternatives --config javac
 ```
 
 
-### 参考
+#### 参考
 [https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html](https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html)
+
+### antでJavaをインストール
+
+```
+sudo apt install default-jdk
+```
+
+```
+$ java --version
+openjdk 11.0.9.1 2020-11-04
+OpenJDK Runtime Environment (build 11.0.9.1+1-Ubuntu-0ubuntu1.20.04)
+OpenJDK 64-Bit Server VM (build 11.0.9.1+1-Ubuntu-0ubuntu1.20.04, mixed mode, sharing)
+```
+
+```
+$ javac --version
+javac 11.0.9.1
+```
+
+#### 参考
+
+[Ubuntu 20.04にAptを使用してJavaをインストールする方法](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-20-04-ja)
 
 ## Maven
 インストールされていない。
