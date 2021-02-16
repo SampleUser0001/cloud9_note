@@ -221,7 +221,7 @@ select dbms_metadata.get_ddl('オブジェクトの種類','オブジェクト�
 ### 参考
 
 - [Oracle使いのネタ帳:Oracle DDL取得(DBMS_METADATA.GET_DDL)](https://www.sql-dbtips.com/backup-recovery/get-ddl/)
-- [SQL*Plus®ユーザーズ・ガイドおよびリファレンス:リリース1 (12.1):SET LONG {80 | n}](https://docs.oracle.com/cd/E57425_01/121/SQPUG/GUID-61E0AB01-A2C4-4AAE-97C7-C5D8BE5DE1BF.htm)
+- [SQL*Plus®ユーザーズ・ガイドおよびリファレンス:リリース1 (12.1):SET LONG {80 \| n}](https://docs.oracle.com/cd/E57425_01/121/SQPUG/GUID-61E0AB01-A2C4-4AAE-97C7-C5D8BE5DE1BF.htm)
   - set longについて
 
 ## CSVデータ取得
@@ -304,7 +304,7 @@ ORDER BY
 ### 参考
 
 - [Qiita:SELECT文の検索結果をCSVへ出力するSQL(Oracle)](https://qiita.com/uhooi/items/7d5e9b5deb5968dbbe8c)
-- [](https://qiita.com/riekure/items/b54c8a21d77e5fe1776d)
+- [Qiita:【Oracle】テーブルのカラム情報をSQLで取得する方法](https://qiita.com/riekure/items/b54c8a21d77e5fe1776d)
 
 ## CSVデータ登録
 
