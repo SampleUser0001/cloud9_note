@@ -275,8 +275,10 @@ SET FEEDBACK OFF
 SET TRIMSPOOL ON
 SPOOL <任意の出力パスに設定する>
 
-select <カラム1> || ','
-       <カラム2> || ','
+select <カラム1> || ',' ||
+       <カラム2> || ',' ||
+       ... || ',' ||
+       <カラムn>
 from テーブル名;
 
 SPOOL OFF
