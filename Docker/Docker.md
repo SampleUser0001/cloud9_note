@@ -14,6 +14,9 @@
     - [start.sh](#startsh)
     - [Dockerコマンド](#dockerコマンド)
   - [イメージの保存/読み込み](#イメージの保存読み込み)
+  - [docker-compose.yml ファイルで使用可能な値](#docker-composeyml-ファイルで使用可能な値)
+    - [何もしないコンテナでも上がり続ける](#何もしないコンテナでも上がり続ける)
+    - [読み取り専用(ReadOnly)としてバインドする](#読み取り専用readonlyとしてバインドする)
 
 ## nginxイメージを使用して公開する
 
@@ -41,7 +44,7 @@ docker-compose up
 
 当然オレオレ証明書。
 
-```
+``` yaml
 version: '3'
 services:
   nginx:
@@ -93,7 +96,7 @@ docker-compose up
 
 ### Dockerfile
 
-```
+``` sh
 # 任意のイメージを取得
 FROM node
 
@@ -111,7 +114,8 @@ CMD [ "/start.sh" ]
 
 サービス名、コンテナ名は任意。  
 ポートは外からアクセスするために必要なポートを開ける。
-```
+
+```yaml
 version: '3'
 services:
   node:
@@ -126,7 +130,7 @@ services:
 
 ### start.sh
 
-```
+``` sh
 #!/bin/bash
 
 exec node app.js
@@ -134,7 +138,7 @@ exec node app.js
 
 ### Dockerコマンド
 
-```
+``` sh
 chmod 755 start.sh
 docker-compose build
 docker-compose up -d
@@ -143,12 +147,28 @@ docker-compose up -d
 ## イメージの保存/読み込み
 
 保存
-```
+
+``` sh
 docker save <イメージ名> > <イメージ名>.tar
 ```
 
 読み込み
-```
+
+```sh
 docker load < <イメージ名>.tar
 ```
 
+## docker-compose.yml ファイルで使用可能な値
+
+### 何もしないコンテナでも上がり続ける
+
+``` yaml
+tty:true
+```
+
+### 読み取り専用(ReadOnly)としてバインドする
+
+``` yaml
+volumes:
+  - <ホスト側パス>:<コンテナ側パス>:ro
+```
