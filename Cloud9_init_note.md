@@ -346,8 +346,7 @@ http://<IPアドレス>:8080
 - root権限が必要。
 - 基本的にはウィンドウで動かすもの？
 
-```sh
-
+``` sh
 mkdir Download
 cd Download
 
@@ -357,9 +356,10 @@ tar xvfz ZAP_2.10.0_Linux.tar.gz
 sudo mv ZAP_2.10.0/ /opt/
 ```
 
-エイリアスの設定
+エイリアスの設定  
+${HOME}/.bashrc
 
-``` sh : ${HOME}/.bashrc
+``` sh 
 # OWASP ZAP
 alias owaspzap='java -jar /opt/ZAP_2.10.0/zap-2.10.0.jar'
 ```
