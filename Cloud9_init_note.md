@@ -39,6 +39,9 @@ Cloud9を起動したときに行うことの備忘録。
     - [init](#init)
     - [init 別パターン](#init-別パターン)
     - [参考](#参考-5)
+  - [OWASP ZAP](#owasp-zap)
+    - [備考](#備考)
+    - [参考](#参考-6)
 
 ## git
 ```
@@ -336,3 +339,48 @@ http://<IPアドレス>:8080
 
 [Qitt:Vue.jsについての基礎(インストール)](https://qiita.com/watataku/items/26f2ce546fcd562e4b46)  
 [Qiita:AWS Cloud9 で Vue.js を使う](https://qiita.com/tamusan100/items/32acfd5e70336f33273f)
+
+## OWASP ZAP
+
+- 事前にJREがインストールされていること。
+- root権限が必要。
+- 基本的にはウィンドウで動かすもの？
+
+```sh
+
+mkdir Download
+cd Download
+
+# URL,ファイル名は都度確認。
+wget https://github.com/zaproxy/zaproxy/releases/download/v2.10.0/ZAP_2.10.0_Linux.tar.gz
+tar xvfz ZAP_2.10.0_Linux.tar.gz
+sudo mv ZAP_2.10.0/ /opt/
+```
+
+エイリアスの設定
+
+``` sh : ${HOME}/.bashrc
+# OWASP ZAP
+alias owaspzap='java -jar /opt/ZAP_2.10.0/zap-2.10.0.jar'
+```
+
+起動確認。
+
+``` sh
+owaspzap -version
+```
+
+``` txt
+Defaulting ZAP install dir to /opt/ZAP_2.10.0
+2.10.0
+```
+
+### 備考
+
+- Xubuntuでインストーラを実行したら、画面が起動した。（コンソールを叩いてインストールしたい。）
+
+### 参考
+
+- [Qiita:ubuntu18.04 + OWASP ZAP でWEB脆弱性診断](https://qiita.com/crash-boy/items/cb35eadaa4cf4d2cef3f)
+- [OWASP ZAP](https://owasp.org/www-project-zap/)
+- [OWASP Japan](https://owasp.org/www-chapter-japan/)
