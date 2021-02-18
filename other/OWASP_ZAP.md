@@ -34,10 +34,12 @@
 ### OWASP ZAP
 
 1. *(重要) プロテクトモードに変更する。*
+2. ブラウザでテスト対象のページにアクセスする
+   - 本来、この時点でOWASP ZAPにテスト対象のURLとして取り込まれるはずだが、反応しない。
 
 ## コマンドライン実行例
 
-実行できる事自体は確認しているが、プロテクトモードで起動しているかわからないため、封印。
+OWASP ZAPの画面で設定した項目の影響を受ける。（プロテクトモードに設定していればプロテクトモードで実行されるが、テスト対象外のURLに接続しようとすると怒られる。）
 
 ``` sh
 mkdir owaspzap_report
@@ -52,3 +54,7 @@ owaspzap -daemon -quickurl http://192.168.1.34:8080/ -quickout ./owaspzap_report
   - コマンドラインの一覧
 - [「」:CentOS7: OWASP ZAP: コマンドライン](https://ameblo.jp/consa-spo/entry-12568024183.html)
   - コマンドラインで実行する方法
+- [Web Application Security Memo:OWASP ZAP スキャンポリシーの検査項目一覧(Release版)](https://www.pupha.net/archives/2106/)
+  - OWASP ZAPのチェック項目一覧。
+- [OWASP ZAP:Documentation](https://www.zaproxy.org/docs/)
+  - 公式ドキュメント1
