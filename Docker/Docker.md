@@ -14,6 +14,7 @@
     - [start.sh](#startsh)
     - [Dockerコマンド](#dockerコマンド)
   - [イメージの保存/読み込み](#イメージの保存読み込み)
+  - [docker-compose 起動オプション](#docker-compose-起動オプション)
   - [docker-compose.yml ファイルで使用可能な値](#docker-composeyml-ファイルで使用可能な値)
     - [何もしないコンテナでも上がり続ける](#何もしないコンテナでも上がり続ける)
     - [読み取り専用(ReadOnly)としてバインドする](#読み取り専用readonlyとしてバインドする)
@@ -157,6 +158,21 @@ docker save <イメージ名> > <イメージ名>.tar
 ```sh
 docker load < <イメージ名>.tar
 ```
+
+## docker-compose 起動オプション
+
+- up
+  - 個々のコンテナの出力をまとめる。
+  - 開始 or 再起動
+- -d
+  - バックグラウンドで動く
+- --build
+  - 開始時にビルドする
+- run
+  - ワンオフ起動
+- start
+  - 再起動
+
 
 ## docker-compose.yml ファイルで使用可能な値
 
