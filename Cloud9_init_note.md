@@ -33,6 +33,8 @@ Cloud9を起動したときに行うことの備忘録。
     - [動作確認](#動作確認)
     - [参考](#参考-4)
   - [webpack](#webpack)
+  - [TypeScript](#typescript)
+  - [forever](#forever)
   - [Vue.js](#vuejs)
     - [準備](#準備)
     - [インストール](#インストール)
@@ -274,7 +276,7 @@ echo "console.log( 'Hello' );" > hello.js | node hello
 
 - [Qiita:ChromeOSにNode.jsをnvmでインストールする](https://qiita.com/Hiroki_M/items/f1af64fa0d6807d1cbb0)
 - [node.js - Node.jsバージョンは、再起動時に0.6から0.6に戻ります(NVM)](https://ja.ojit.com/so/node.js/1601993)
-
+- [Qiita:Node.jsアプリをLinux環境で常駐化させる　forever編](https://qiita.com/chihiro/items/24ca8ac81cb20c22b47e)
 
 ## webpack
 
@@ -282,6 +284,26 @@ echo "console.log( 'Hello' );" > hello.js | node hello
 ```
 npm install -g webpack
 npm install -g webpack-cli
+```
+
+## TypeScript
+
+``` sh
+npm install -g typescript
+```
+
+## forever
+
+Nodeをサービス化する。
+
+``` sh
+npm install -g forever
+```
+
+登録方法
+
+``` sh
+forever start <JavaScriptファイル>
 ```
 
 ## Vue.js
