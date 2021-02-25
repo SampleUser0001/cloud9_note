@@ -18,48 +18,43 @@ git checkout HEAD -- node_modules
 scripts/install-sdk.sh
 ```
 
-## 起動シェル作成
+## サービス化する
 
-```
-mkdir ${HOME}/environment
-touch start.sh
-chmod 755 start.sh
+foreverをインストールする。
+
+``` sh
+npm install -g forever
 ```
 
-``` sh : start.sh
-#/!bin/bash
-node server.js -l 0.0.0.0 -p 8181 -a user:pass -w ${HOME}/environment
+登録
+
+``` sh
+forever start server.js -l 0.0.0.0 -p 8181 -a user:pass -w ${HOME}/environment
 ```
 
 ### 起動オプション
 
-```
+``` sh
 # すべてのホストに公開
 -l 0.0.0.0
 ```
 
-```
+``` sh
 # 接続ポート
 -p 8181
 ```
 
-```
+``` sh
 # ベーシック認証
 -a <user>:<pass>
 ```
 
-```
+``` sh
 # デフォルトディレクトリ
 -w <ディレクトリ>
-```
-
-## 起動コマンド
-
-``` sh
-cd c9sdk
-sh start.sh
 ```
 
 ## 参考
 
 - [Qiita:cloud9をwindowsにインストールして、幸せになる](https://qiita.com/aki-f/items/b7b45a6e6ed33ce81eb9)
+- [Qiita:Node.jsアプリをLinux環境で常駐化させる　forever編](https://qiita.com/chihiro/items/24ca8ac81cb20c22b47e)
