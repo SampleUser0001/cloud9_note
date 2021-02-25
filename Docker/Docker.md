@@ -179,7 +179,7 @@ docker load < <イメージ名>.tar
 ### 何もしないコンテナでも上がり続ける
 
 ``` yaml
-tty:true
+tty: true
 ```
 
 ### 読み取り専用(ReadOnly)としてバインドする
