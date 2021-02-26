@@ -35,6 +35,8 @@ Cloud9を起動したときに行うことの備忘録。
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
+    - [systemdを使って自動起動するように設定する(Ubuntu)](#systemdを使って自動起動するように設定するubuntu)
+    - [参考:systemdを使って自動起動するように設定する(Ubuntu)](#参考systemdを使って自動起動するように設定するubuntu)
   - [Vue.js](#vuejs)
     - [準備](#準備)
     - [インストール](#インストール)
@@ -306,10 +308,52 @@ npm install -g forever
 forever start <JavaScriptファイル>
 ```
 
+### systemdを使って自動起動するように設定する(Ubuntu)
+
+/etc/systemd/system/forever.service
+
+``` service
+[Unit]
+Description=forever service
+After=network.target
+
+[Service]
+Type=forking
+Environment="NODE_ENV=production"
+ExecStart=<which foreverのパス> start <登録しておきたいサービス>
+ExecStop=<which foreverのパス> stop <登録しておきたいサービス>
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=forever-example
+
+[Install]
+WantedBy=multi-user.target
+```
+
+自動起動有効化
+
+``` sh
+sudo systemctl start forever.service
+sudo systemctl enable forever.service
+```
+
+ステータス確認
+
+``` sh
+systemctl status forever.service
+```
+
+### 参考:systemdを使って自動起動するように設定する(Ubuntu)
+
+- [Qiita:Ubuntu16.04以降でsystemdを使ってforeverを自動起動する](https://qiita.com/subaru44k/items/eb19b8549a294145b103)
+
 ## Vue.js
 
 ### 準備
-```
+
+``` sh
 ec2-user:~/environment/Sample_Vue $ node -v
 v10.19.0
 ec2-user:~/environment/Sample_Vue $ npm -v
@@ -319,7 +363,8 @@ ec2-user:~/environment/Sample_Vue $ npm -v
 ### インストール
 
 npmを入れた記憶がないが…まあいいか。
-```
+
+``` sh
 npm install -g @vue/cli
 npm install -g @vue/cli-service-global
 ```
