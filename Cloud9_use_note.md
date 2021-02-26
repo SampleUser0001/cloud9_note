@@ -4,8 +4,6 @@ Cloud9を使うときに一緒に持っていきたいメモ
 - [Cloud9 Use Note](#cloud9-use-note)
   - [ドキュメントホーム](#ドキュメントホーム)
   - [git](#git)
-    - [.gitignoreについて](#gitignoreについて)
-    - [親ブランチを取得する](#親ブランチを取得する)
   - [Maven](#maven)
     - [新規プロジェクト作成](#新規プロジェクト作成)
     - [WebApplicationプロジェクト作成](#webapplicationプロジェクト作成)
@@ -35,13 +33,7 @@ Cloud9を使うときに一緒に持っていきたいメモ
 
 ## git
 
-### .gitignoreについて
-[https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff](https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff)
-
-### 親ブランチを取得する
-```
-git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
-```
+[git.md](./Git_cli/git.md)
 
 ## Maven
 
