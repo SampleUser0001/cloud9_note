@@ -26,6 +26,8 @@ Cloud9を起動したときに行うことの備忘録。
   - [docker-compose](#docker-compose)
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
+  - [go](#go)
+    - [go(参考)](#go参考)
   - [goofys](#goofys)
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
@@ -201,6 +203,19 @@ docker-compose --version
 
 ### 参考サイト
 [https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af](https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af)
+
+## go
+
+Ubuntu版
+
+``` sh
+sudo apt install golang
+```
+
+### go(参考)
+
+- [Qiita:Ubuntuに最新のGolangをインストールする](https://qiita.com/notchi/items/5f76b2f77cff39eca4d8)
+  - 最新が欲しい時に使う。
 
 ## goofys
 
