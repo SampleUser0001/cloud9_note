@@ -28,7 +28,7 @@ npm install -g forever
 
 登録
 
-``` sh : ${HOME}/.bashrc
+``` sh 
 # cloud9
 forever start server.js -l 0.0.0.0 -p 8181 -a user:pass -w ${HOME}/environment
 ```

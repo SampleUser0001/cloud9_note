@@ -159,6 +159,40 @@ grep -rE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' .
 file --mime <対象ファイル>
 ```
 
+## サービスの登録(systemd)(Ubuntu)
+
+### 登録方法
+
+1. /etc/systemd/system配下に*.serviceのファイル名でファイル作成
+2. 作成したファイルの中身を記載する。
+3. ```sudo systemctl enable <サービス>.service```
+
+
+### 起動/停止/ステータス確認
+
+起動
+
+``` sh
+systemctl start <サービス名>
+```
+
+停止
+
+``` sh
+systemctl stop <サービス名>
+```
+
+ステータス
+
+``` sh
+systemctl status <サービス名>
+```
+
+
+
+### 参考
+
+- [YUUKO's経験値:Ubuntu環境で自分で作ったサービスをシステムに登録する方法](https://yuukou-exp.plus/ubuntu-register-my-service-to-system/)
 
 # Shell
 
