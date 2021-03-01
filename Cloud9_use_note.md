@@ -26,6 +26,9 @@ Cloud9を使うときに一緒に持っていきたいメモ
     - [グローバルIP取得](#グローバルip取得)
     - [S3](#s3)
       - [例のページ](#例のページ)
+  - [WSL2](#wsl2)
+    - [使用可能なメモリを増やす](#使用可能なメモリを増やす)
+      - [参考](#参考-3)
   - [その他](#その他)
 
 ## ドキュメントホーム
@@ -191,6 +194,22 @@ up
 ```
 aws s3 cp ./index.html s3://ittimfn-public/index.html
 ```
+
+## WSL2
+
+### 使用可能なメモリを増やす
+
+Windows側から設定する。
+
+1. ```%UserProfile%\.wslconfig```を開く。
+2. memoryの値を修正する。
+3. PowerShellで下記を実行する。
+   - ```wsl --shutdown```
+
+
+#### 参考
+
+- [Qiita:WSL2のメモリ割り当て量を変えたい](https://qiita.com/Ischca/items/121d91eb3b1a0a1cd8a8)
 
 ## その他
 
