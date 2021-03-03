@@ -31,6 +31,8 @@
 - [ECR.md](./AWS/ECR.md)
 - [CloudFront.md](./AWS/CloudFront.md)
 - [ElementalMediaConvert.md](./AWS/ElementalMediaConvert.md)
+- EC2
+  - [メモリ使用量とストレージ容量の監視](./AWS/EC2/Surveillance_Memory_and_Strage.md)
 
 ## Docker
 
