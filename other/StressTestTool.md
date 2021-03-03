@@ -46,7 +46,7 @@ ${HOME}/.bashrc
 ``` sh
 # JMeter
 # shではない方を指定。
-alias jmetergui='sh /opt/jmeter/bin/jmeter'
+alias jmeter='sh /opt/jmeter/bin/jmeter'
 ```
 
 #### (Windows)ショートカット作成
@@ -69,7 +69,6 @@ alias jmetergui='sh /opt/jmeter/bin/jmeter'
 # Japanese
 : "${JMETER_LANGUAGE:="-Duser.language=ja -Duser.region=JP"}"
 ```
-
 
 ### GUI起動
 
@@ -110,7 +109,12 @@ ctrl + sを押下して、ファイル保存。
 
 #### Linux
 
-(未確認)
+ヘルプが```jmeter --help```で見られる。  
+ここには全部載せていないので、適宜確認。
+
+``` sh
+jmeter -n -t <jmxファイル> [-l <実行結果CSV>] [-j <実行ログファイル>] -e -o [<アウトプットパス>]
+```
 
 #### Windows
 
