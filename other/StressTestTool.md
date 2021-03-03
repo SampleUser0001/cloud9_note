@@ -46,7 +46,7 @@ ${HOME}/.bashrc
 ``` sh
 # JMeter
 # shではない方を指定。
-alias jmetergui='sh /opt/jmeter/bin/jmeter'
+alias jmeter='sh /opt/jmeter/bin/jmeter'
 ```
 
 #### (Windows)ショートカット作成
@@ -69,7 +69,6 @@ alias jmetergui='sh /opt/jmeter/bin/jmeter'
 # Japanese
 : "${JMETER_LANGUAGE:="-Duser.language=ja -Duser.region=JP"}"
 ```
-
 
 ### GUI起動
 
@@ -126,11 +125,12 @@ jmxファイルをjmeter-n.cmdにドロップする。
   - 公式
 - [Qiita:Jmeter のインストールから負荷テストまで](https://qiita.com/shotets/items/d553d7be0d407a9a9a53)
 - [Qiita:Apache JMeterの設定（日本語化、プロキシ設定）](https://qiita.com/gtom7156/items/92aab9185c5b7d5feda9)
-- [](https://qiita.com/ryoi084/items/0dff11134592d0bb895c)
+- [Qiita:WSL2におけるVcXsrvの設定](https://qiita.com/ryoi084/items/0dff11134592d0bb895c)
   - WSL2でGUI起動しようとすると下記エラーで起動できない。
     - ```No X11 DISPLAY variable was set, but this program performed an operation which requires it.```
   - その回避方法。
   - そのうちやる。
+- [Check!Site:Linuxコマンドラインで JMeter を実行する方法](https://www.checksite.jp/jmeter-on-linux/)
 
 ## Vegeta
 
