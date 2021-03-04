@@ -24,6 +24,8 @@
     - [参考](#参考-3)
   - [CPU,メモリの監視をログに出力する(vmstat, tee)](#cpuメモリの監視をログに出力するvmstat-tee)
     - [参考](#参考-4)
+  - [標準出力/エラー出力を捨てる](#標準出力エラー出力を捨てる)
+    - [参考](#参考-5)
 - [Shell](#shell)
   - [ディレクトリ配下のファイルでループする](#ディレクトリ配下のファイルでループする)
   - [ファイルを一行ずつ読み込んでループする](#ファイルを一行ずつ読み込んでループする)
@@ -194,8 +196,6 @@ systemctl stop <サービス名>
 systemctl status <サービス名>
 ```
 
-
-
 ### 参考
 
 - [YUUKO's経験値:Ubuntu環境で自分で作ったサービスをシステムに登録する方法](https://yuukou-exp.plus/ubuntu-register-my-service-to-system/)
@@ -248,6 +248,24 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 【 vmstat 】コマンド――仮想メモリやディスクI/Oの統計情報を表示する](https://www.atmarkit.co.jp/ait/articles/1707/13/news015.html)
   - vmstatのオプションについて
 
+## 標準出力/エラー出力を捨てる
+
+標準出力
+
+``` sh
+${何らかのコマンド} 1> /dev/null
+```
+
+エラー出力
+
+``` sh
+${何らかのコマンド} 2> /dev/null
+```
+
+### 参考
+
+- [Qiita:bashで標準出力、エラーを捨てるとか、ファイルディスクリプタ](https://qiita.com/harasakih/items/868a850fcdc99a2c37b0)
+- [UNIX/Linuxの部屋 用語集:リダイレクト:用語集 リダイレクト コマンドの出力をファイルや別のコマンドに振り分ける (リダイレクション・パイプ) ](http://x68000.q-e-d.net/%7E68user/unix/pickup?%A5%EA%A5%C0%A5%A4%A5%EC%A5%AF%A5%C8)
 
 # Shell
 
