@@ -13,6 +13,8 @@
     - [docker-compose.yml](#docker-composeyml-1)
     - [start.sh](#startsh)
     - [Dockerコマンド](#dockerコマンド)
+  - [イメージのビルド](#イメージのビルド)
+  - [イメージのpush](#イメージのpush)
   - [イメージの保存/読み込み](#イメージの保存読み込み)
   - [docker-compose 起動オプション](#docker-compose-起動オプション)
   - [docker-compose.yml ファイルで使用可能な値](#docker-composeyml-ファイルで使用可能な値)
@@ -143,6 +145,18 @@ exec node app.js
 chmod 755 start.sh
 docker-compose build
 docker-compose up -d
+```
+
+## イメージのビルド
+
+```
+docker build　-t {ユーザ名}/{イメージ名}:{タグ名} {Dockerfileがあるディレクトリ}
+```
+
+## イメージのpush
+
+```
+docker push {ユーザ名}/{イメージ名}:{タグ名}
 ```
 
 ## イメージの保存/読み込み
