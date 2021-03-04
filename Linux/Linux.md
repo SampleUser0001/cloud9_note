@@ -171,10 +171,11 @@ file --mime <対象ファイル>
 
 ### 登録方法
 
-1. /etc/systemd/system配下に*.serviceのファイル名でファイル作成
+1. /usr/lib/systemd/system配下に*.serviceのファイル名でファイル作成
 2. 作成したファイルの中身を記載する。
 3. ```sudo systemctl enable <サービス>.service```
 
+[Install]が書いてあればシンボリックリンクは勝手に貼ってくれるはず。```/etc/systemd/system```配下のディレクトリに作成される。
 
 ### 起動/停止/ステータス確認
 
