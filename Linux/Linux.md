@@ -203,7 +203,7 @@ systemctl status <サービス名>
 ## CPU,メモリの監視をログに出力する(vmstat, tee)
 
 ``` sh
-vmstat -t -d {出力間隔(秒)} | tee {ログファイル名} 
+vmstat -tn {出力間隔(秒)} | tee {ログファイル名} 
 ```
 
 出力例
