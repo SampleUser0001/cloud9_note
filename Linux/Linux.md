@@ -252,6 +252,8 @@ systemctl status <サービス名>
 ### 参考
 
 - [YUUKO's経験値:Ubuntu環境で自分で作ったサービスをシステムに登録する方法](https://yuukou-exp.plus/ubuntu-register-my-service-to-system/)
+- [cles::blog:CentOS 7 で自分でビルドした apache を使うと systemctl start が戻ってこない](https://blog.cles.jp/item/9413)
+- [Github:SampleUser0001:Transfer_service_memlog](https://github.com/SampleUser0001/Transfer_service_memlog)
 
 ## CPU,メモリの監視をログに出力する(vmstat, tee)
 
