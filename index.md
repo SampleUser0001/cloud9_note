@@ -9,6 +9,7 @@
   - [git](#git)
   - [GoogleAnalytics](#googleanalytics)
   - [VSCode](#vscode)
+  - [Windows](#windows)
   - [Other](#other)
 
 ## init/use
@@ -49,6 +50,10 @@
 ## VSCode
 
 - [VSCode.md](./VSCode/VSCode.md)
+
+## Windows
+
+- [cmd_PowerShell.md](./Windows/cmd_PowerShell.md)
 
 ## Other
 
