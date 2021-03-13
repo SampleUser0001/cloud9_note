@@ -9,6 +9,7 @@
     - [圧縮](#圧縮)
       - [tar.gz圧縮](#targz圧縮)
       - [tar圧縮](#tar圧縮)
+      - [gz圧縮](#gz圧縮)
   - [別名の設定(aliasコマンド)](#別名の設定aliasコマンド)
   - [フォルダのサイズを確認する(duコマンド)](#フォルダのサイズを確認するduコマンド)
   - [フォルダの空き容量を表示する(dfコマンド)](#フォルダの空き容量を表示するdfコマンド)
@@ -72,6 +73,12 @@ tar xvf ${対象ファイル}.tar
 gunzip -k ${対象ファイル}.gz
 ```
 
+または
+
+``` sh
+gzip -d ${対象ファイル}.gz
+```
+
 ### 圧縮
 
 #### tar.gz圧縮
@@ -84,6 +91,12 @@ tar zcvf ${対象ファイル}.tar.gz ${対象ディレクトリ}
 
 ``` sh
 tar cvf ${対象ファイル}.tar ${対象ディレクトリ}
+```
+
+#### gz圧縮
+
+```sh
+gzip -r ${対象ディレクトリ}
 ```
 
 ## 別名の設定(aliasコマンド)
@@ -253,6 +266,8 @@ systemctl status <サービス名>
 ### 参考
 
 - [YUUKO's経験値:Ubuntu環境で自分で作ったサービスをシステムに登録する方法](https://yuukou-exp.plus/ubuntu-register-my-service-to-system/)
+- [cles::blog:CentOS 7 で自分でビルドした apache を使うと systemctl start が戻ってこない](https://blog.cles.jp/item/9413)
+- [Github:SampleUser0001:Transfer_service_memlog](https://github.com/SampleUser0001/Transfer_service_memlog)
 
 ## CPU,メモリの監視をログに出力する(vmstat, tee)
 

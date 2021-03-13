@@ -9,6 +9,7 @@
   - [git](#git)
   - [GoogleAnalytics](#googleanalytics)
   - [VSCode](#vscode)
+  - [Windows](#windows)
   - [Other](#other)
 
 ## init/use
@@ -50,6 +51,10 @@
 
 - [VSCode.md](./VSCode/VSCode.md)
 
+## Windows
+
+- [cmd_PowerShell.md](./Windows/cmd_PowerShell.md)
+
 ## Other
 
 - [other.md](./other/other.md)
@@ -58,3 +63,4 @@
 - [cloud9_on-premiss.md](./other/cloud9_on-premiss.md)
 - [StressTestTool.md](./other/StressTestTool.md)
   - 負荷テストツール
+- [Gitlab.md](./other/Gitlab.md)
