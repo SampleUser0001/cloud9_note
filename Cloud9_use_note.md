@@ -41,7 +41,7 @@ Cloud9を使うときに一緒に持っていきたいメモ
 ## Maven
 
 ### 新規プロジェクト作成
-```
+``` sh
 mvn -B archetype:generate \
  -DarchetypeGroupId=org.apache.maven.archetypes \
  -DgroupId=sample.json \
@@ -52,7 +52,7 @@ mvn -B archetype:generate \
 
 ### WebApplicationプロジェクト作成
 
-```
+``` sh
 mvn -B archetype:generate \
   -DarchetypeArtifactId=maven-archetype-webapp \
   -DgroupId=com.example.log4j2 \
@@ -63,7 +63,8 @@ mvn -B archetype:generate \
 [https://qiita.com/KevinFQ/items/e8363ad6123713815e68](https://qiita.com/KevinFQ/items/e8363ad6123713815e68)
 
 ### Javaバージョンを指定する
-```
+
+``` xml
 <properties>
   <java.version>1.8</java.version>
   <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -74,7 +75,8 @@ mvn -B archetype:generate \
 ```
 
 ### exec:javaコマンドで実行する
-```
+
+``` xml
 <build>
   <plugins>
     <plugin>
@@ -82,7 +84,7 @@ mvn -B archetype:generate \
       <artifactId>exec-maven-plugin</artifactId>
       <version>1.2.1</version>
       <configuration>
-        <mainClass>com.example.Main</mainClass>
+        <mainClass>${project.mainClass}</mainClass>
       </configuration>
     </plugin>
   </plugins>
@@ -122,7 +124,7 @@ mvn exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="'<引数１>' '<引
     </descriptorRefs>
     <archive>
       <manifest>
-        <mainClass>sample.mq.client.MQClientSample</mainClass>
+        <mainClass>${project.mainClass}</mainClass>
       </manifest>
     </archive>
   </configuration>

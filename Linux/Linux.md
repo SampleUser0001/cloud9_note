@@ -496,5 +496,5 @@ tr '変換元改行コード' '変換先改行コード' < 変換元ファイル
 ## .envファイルの読み込み方
 
 ``` sh
-export $(cat .env | grep -v ^# | xargs);
+export $(cat .env | grep -v ^# | xargs)
 ```
