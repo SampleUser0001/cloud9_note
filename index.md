@@ -10,6 +10,7 @@
   - [GoogleAnalytics](#googleanalytics)
   - [VSCode](#vscode)
   - [Windows](#windows)
+  - [Java](#java)
   - [Other](#other)
 
 ## init/use
@@ -54,6 +55,10 @@
 ## Windows
 
 - [cmd_PowerShell.md](./Windows/cmd_PowerShell.md)
+
+## Java
+
+- [Java.md](./Java/Java.md)
 
 ## Other
 
