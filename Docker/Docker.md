@@ -20,6 +20,7 @@
   - [docker-compose.yml ファイルで使用可能な値](#docker-composeyml-ファイルで使用可能な値)
     - [何もしないコンテナでも上がり続ける](#何もしないコンテナでも上がり続ける)
     - [読み取り専用(ReadOnly)としてバインドする](#読み取り専用readonlyとしてバインドする)
+  - [fs.file-max](#fsfile-max)
 
 ## nginxイメージを使用して公開する
 
@@ -201,4 +202,10 @@ tty: true
 ``` yaml
 volumes:
   - <ホスト側パス>:<コンテナ側パス>:ro
+```
+
+## fs.file-max
+
+``` 
+sudo sysctl -w fs.file-max=524288
 ```
