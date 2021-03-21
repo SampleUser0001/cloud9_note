@@ -63,7 +63,8 @@
 
 ## JavaScript
 
-- [Node.js]
+- [Node.js](./JavaScript/Node.md)
+- [Vue.js](./JavaScript/Vue.md)
 
 ## Other
 
