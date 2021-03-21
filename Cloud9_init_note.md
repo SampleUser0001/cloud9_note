@@ -22,7 +22,8 @@ Cloud9を起動したときに行うことの備忘録。
   - [telnet](#telnet)
     - [telnetインストール](#telnetインストール)
   - [docker](#docker)
-    - [dockerインストール](#dockerインストール)
+    - [yum](#yum)
+    - [apt](#apt)
   - [docker-compose](#docker-compose)
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
@@ -185,11 +186,15 @@ sudo yum -y install telnet
 
 入ってたっけ…？記憶にない。
 
-### dockerインストール
+### yum
 
 ```
 sudo yum install docker
 ```
+
+### apt
+
+- [docker docks:Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 
 ## docker-compose
 ### docker-composeインストール
