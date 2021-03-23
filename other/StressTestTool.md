@@ -16,6 +16,7 @@
     - [出力結果確認](#出力結果確認)
     - [参考:JMeter](#参考jmeter)
   - [Vegeta](#vegeta)
+    - [Vegeta on Docker](#vegeta-on-docker)
     - [インストール](#インストール-1)
     - [参考:Vegeta](#参考vegeta)
 
@@ -142,6 +143,10 @@ jmxファイルをjmeter-n.cmdにドロップする。
 コマンドラインで使用できる。  
 goが必要。
 
+### Vegeta on Docker
+
+[Vegeta_on_Docker.md](./Vegeta/Vegeta_on_Docker.md)
+
 ### インストール
 
 ``` sh
@@ -153,3 +158,4 @@ go get -u github.com/tsenart/vegeta
 - [Github:vegeta](https://github.com/tsenart/vegeta)
   - 公式
 - [M:HTTP/HTTPSリクエスト向け負荷テストツールのVegetaがとても良かった](https://mmiyauchi.com/?p=1711)
+- [DockerHub:peterevans/vegeta](https://hub.docker.com/r/peterevans/vegeta)
