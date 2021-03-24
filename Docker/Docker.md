@@ -20,6 +20,9 @@
   - [docker-compose.yml ファイルで使用可能な値](#docker-composeyml-ファイルで使用可能な値)
     - [何もしないコンテナでも上がり続ける](#何もしないコンテナでも上がり続ける)
     - [読み取り専用(ReadOnly)としてバインドする](#読み取り専用readonlyとしてバインドする)
+  - [ログ出力](#ログ出力)
+    - [ログローテ](#ログローテ)
+    - [参考](#参考)
   - [fs.file-max](#fsfile-max)
 
 ## nginxイメージを使用して公開する
@@ -204,8 +207,31 @@ volumes:
   - <ホスト側パス>:<コンテナ側パス>:ro
 ```
 
+## ログ出力
+
+下記ファイルに出力される。
+
+``` sh
+/var/lib/docker/containers/${コンテナID}/${コンテナID}-json.log
+```
+
+### ログローテ
+
+``` yml
+    logging:
+      driver: "json-file" # defaults if not specified
+      options:
+        max-size: "10m"
+        max-file: "3"
+```
+
+### 参考
+
+- [Qiita:Dockerコンテナのログは標準オプションでローテートできる](https://qiita.com/hidekuro/items/b1c7ce58c9d9fe342907)
+
 ## fs.file-max
 
 ``` 
 sudo sysctl -w fs.file-max=524288
 ```
+
