@@ -20,6 +20,7 @@
   - [docker-compose.yml ファイルで使用可能な値](#docker-composeyml-ファイルで使用可能な値)
     - [何もしないコンテナでも上がり続ける](#何もしないコンテナでも上がり続ける)
     - [読み取り専用(ReadOnly)としてバインドする](#読み取り専用readonlyとしてバインドする)
+  - [コンテナ内でホストと同じユーザになる](#コンテナ内でホストと同じユーザになる)
   - [ログ出力](#ログ出力)
     - [ログローテ](#ログローテ)
     - [参考](#参考)
@@ -206,6 +207,48 @@ tty: true
 volumes:
   - <ホスト側パス>:<コンテナ側パス>:ro
 ```
+
+## コンテナ内でホストと同じユーザになる
+
+注意点
+
+1. ホスト側とユーザ側のOS（権限管理）が一致している必要がある。
+   - ディストリビューションが違う場合も注意が必要なはずだが、未確認。
+
+ホスト側
+
+``` sh
+export USERID=$(id -u)
+export GROUPID=$(id -g)
+export HOSTUSER=`whoami`
+docker-compose up
+```
+
+docker-compose.yml
+
+``` yml : docker-compose.yml
+version: '3'
+services:
+  hoge:
+    # userでコンテナ内で実行するユーザを変更できるが、
+    # 実行する内容によってはrootが必要なので、rootのまま実行したほうが無難。
+    # user: "${USERID}:${GROUPID}"
+    volumes:
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+    environment:
+      - USERID=${USERID}
+      - GROUPID=${GROUPID}
+      - HOSTUSER=${HOSTUSER}
+```
+
+コンテナ内
+
+``` sh
+chown -R ${HOSTUSER}: ${所有者を変更するディレクトリ}
+```
+
+groupidの指定は不要。コロンだけ書いて実行すると、ユーザのプライマリグループに変更される。
 
 ## ログ出力
 
