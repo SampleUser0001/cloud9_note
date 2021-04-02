@@ -28,15 +28,20 @@ Cloud9を起動したときに行うことの備忘録。
     - [参考サイト](#参考サイト)
   - [pip3](#pip3)
     - [apt](#apt)
+  - [PHP](#php)
+    - [ソースからコンパイル](#ソースからコンパイル)
+      - [参考](#参考-3)
+    - [apt](#apt-1)
+  - [Composer](#composer)
   - [go](#go)
     - [go(参考)](#go参考)
   - [goofys](#goofys)
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
-    - [参考](#参考-3)
+    - [参考](#参考-4)
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
-    - [参考](#参考-4)
+    - [参考](#参考-5)
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
@@ -47,11 +52,11 @@ Cloud9を起動したときに行うことの備忘録。
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-5)
+    - [参考](#参考-6)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-6)
+    - [参考](#参考-7)
 
 ## git
 ```
@@ -214,6 +219,54 @@ docker-compose --version
 sudo apt update && sudo apt -y upgrade
 sudo apt install -y python3-pip
 ```
+
+${HOME}/.bashrc
+``` sh
+alias pip=pip3
+```
+
+## PHP
+
+LaravelのComposerをインストールするときに使う。
+
+Laravelをローカルで管理するだけなら、Dockerとdocker-composeがあればいいが、gitのリモートリポジトリにpushする場合は、(デフォルトでは)vender配下がpushされない。  
+```composer update```が必要だが、composerインストールでphpコマンドを使う。
+
+### ソースからコンパイル
+
+あとで書く。
+
+#### 参考
+
+- [Qiita:CentOS 7 PHP 7.2.3のソースファイルからのインストール](https://qiita.com/knutpb1205/items/cba2610b4ccb5ecd7b92)
+
+### apt
+
+この方法は最新バージョンが手に入らない。
+
+``` sh
+sudo apt install -y php
+```
+
+``` sh
+php --version
+```
+
+## Composer
+
+Laravelで使う。
+
+``` sh
+cd /tmp
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+```
+
+``` sh
+cd
+composer --version
+```
+
 
 ## go
 
