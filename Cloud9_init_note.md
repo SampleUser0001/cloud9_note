@@ -30,6 +30,8 @@ Cloud9を起動したときに行うことの備忘録。
     - [apt](#apt)
   - [PHP](#php)
     - [ソースからコンパイル](#ソースからコンパイル)
+      - [libxml2](#libxml2)
+      - [krb5](#krb5)
       - [参考](#参考-3)
     - [apt](#apt-1)
   - [Composer](#composer)
@@ -234,7 +236,42 @@ Laravelをローカルで管理するだけなら、Dockerとdocker-composeが�
 
 ### ソースからコンパイル
 
-あとで書く。
+最新を確認。
+
+[PHP:Download](https://www.php.net/downloads.php)
+
+足りないものは都度インストール。
+
+``` sh
+sudo su
+export PHP_VERSION=8.0.3
+cd /usr/local/src
+wget https://www.php.net/distributions/php-${PHP_VERSION}.tar.gz
+tar zxvf php-${PHP_VERSION}.tar.gz
+cd php-${PHP_VERSION}
+./buildconf --force
+./configure --with-libdir=lib64 --with-pic --with-bz2 --with-freetype-dir --with-png-dir --with-xpm-dir --with-gettext --with-gmp --with-iconv --with-jpeg-dir --with-curl --with-webp-dir --with-png-dir --with-openssl --with-pcre-regex --with-zlib --with-layout=GNU --enable-exif --enable-ftp --enable-sockets --with-kerberos --enable-shmop --enable-calendar --with-libxml-dir --with-mhash --with-ldap --with-readline --with-snmp --with-tidy --with-xsl --with-gnu-ld --enable-mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-mysql-sock=/var/lib/mysql/mysql.sock --enable-mbstring --with-gd --with-apxs2=/usr/bin/apxs
+make
+make install
+```
+
+#### libxml2
+
+``` sh
+cd /tmp
+git clone https://gitlab.gnome.org/GNOME/libxml2.git
+cd libxml2
+sh ./autogen.sh
+./configure --prefix=/usr
+make
+make install
+```
+
+#### krb5
+
+``` sh
+apt install krb5-*
+```
 
 #### 参考
 
