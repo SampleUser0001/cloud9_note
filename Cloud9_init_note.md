@@ -28,14 +28,15 @@ Cloud9を起動したときに行うことの備忘録。
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
   - [pip3](#pip3)
-    - [apt](#apt)
+    - [apt](#apt-1)
   - [PHP](#php)
+    - [apt](#apt-2)
     - [ソースからコンパイル](#ソースからコンパイル)
       - [libxml2](#libxml2)
       - [krb5](#krb5)
       - [参考](#参考-3)
-    - [apt](#apt-1)
   - [Composer](#composer)
+  - [php-xml](#php-xml)
   - [go](#go)
     - [go(参考)](#go参考)
   - [goofys](#goofys)
@@ -234,10 +235,22 @@ alias pip=pip3
 
 ## PHP
 
-LaravelのComposerをインストールするときに使う。
+Laravel用のComposerをインストールするときに使う。
 
 Laravelをローカルで管理するだけなら、Dockerとdocker-composeがあればいいが、gitのリモートリポジトリにpushする場合は、(デフォルトでは)vender配下がpushされない。  
 ```composer update```が必要だが、composerインストールでphpコマンドを使う。
+
+### apt
+
+この方法は最新バージョンが手に入らない。
+
+``` sh
+sudo apt install -y php
+```
+
+``` sh
+php --version
+```
 
 ### ソースからコンパイル
 
@@ -245,7 +258,8 @@ Laravelをローカルで管理するだけなら、Dockerとdocker-composeが�
 
 [PHP:Download](https://www.php.net/downloads.php)
 
-足りないものは都度インストール。
+足りないものは都度インストール。  
+※完了できていない。
 
 ``` sh
 sudo su
@@ -282,18 +296,6 @@ apt install krb5-*
 
 - [Qiita:CentOS 7 PHP 7.2.3のソースファイルからのインストール](https://qiita.com/knutpb1205/items/cba2610b4ccb5ecd7b92)
 
-### apt
-
-この方法は最新バージョンが手に入らない。
-
-``` sh
-sudo apt install -y php
-```
-
-``` sh
-php --version
-```
-
 ## Composer
 
 Laravelで使う。
@@ -309,6 +311,13 @@ cd
 composer --version
 ```
 
+## php-xml
+
+```composer update```したときにエラーになったのでメモ。
+
+``` sh
+sudo apt install -y php-xml
+```
 
 ## go
 
