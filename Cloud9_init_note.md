@@ -27,15 +27,24 @@ Cloud9を起動したときに行うことの備忘録。
   - [docker-compose](#docker-compose)
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
+  - [pip3](#pip3)
+    - [apt](#apt)
+  - [PHP](#php)
+    - [ソースからコンパイル](#ソースからコンパイル)
+      - [libxml2](#libxml2)
+      - [krb5](#krb5)
+      - [参考](#参考-3)
+    - [apt](#apt-1)
+  - [Composer](#composer)
   - [go](#go)
     - [go(参考)](#go参考)
   - [goofys](#goofys)
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
-    - [参考](#参考-3)
+    - [参考](#参考-4)
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
-    - [参考](#参考-4)
+    - [参考](#参考-5)
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
@@ -46,11 +55,11 @@ Cloud9を起動したときに行うことの備忘録。
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-5)
+    - [参考](#参考-6)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-6)
+    - [参考](#参考-7)
 
 ## git
 ```
@@ -208,6 +217,98 @@ docker-compose --version
 
 ### 参考サイト
 [https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af](https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af)
+
+## pip3
+
+### apt
+
+``` sh
+sudo apt update && sudo apt -y upgrade
+sudo apt install -y python3-pip
+```
+
+${HOME}/.bashrc
+``` sh
+alias pip=pip3
+```
+
+## PHP
+
+LaravelのComposerをインストールするときに使う。
+
+Laravelをローカルで管理するだけなら、Dockerとdocker-composeがあればいいが、gitのリモートリポジトリにpushする場合は、(デフォルトでは)vender配下がpushされない。  
+```composer update```が必要だが、composerインストールでphpコマンドを使う。
+
+### ソースからコンパイル
+
+最新を確認。
+
+[PHP:Download](https://www.php.net/downloads.php)
+
+足りないものは都度インストール。
+
+``` sh
+sudo su
+export PHP_VERSION=8.0.3
+cd /usr/local/src
+wget https://www.php.net/distributions/php-${PHP_VERSION}.tar.gz
+tar zxvf php-${PHP_VERSION}.tar.gz
+cd php-${PHP_VERSION}
+./buildconf --force
+./configure --with-libdir=lib64 --with-pic --with-bz2 --with-freetype-dir --with-png-dir --with-xpm-dir --with-gettext --with-gmp --with-iconv --with-jpeg-dir --with-curl --with-webp-dir --with-png-dir --with-openssl --with-pcre-regex --with-zlib --with-layout=GNU --enable-exif --enable-ftp --enable-sockets --with-kerberos --enable-shmop --enable-calendar --with-libxml-dir --with-mhash --with-ldap --with-readline --with-snmp --with-tidy --with-xsl --with-gnu-ld --enable-mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-mysql-sock=/var/lib/mysql/mysql.sock --enable-mbstring --with-gd --with-apxs2=/usr/bin/apxs
+make
+make install
+```
+
+#### libxml2
+
+``` sh
+cd /tmp
+git clone https://gitlab.gnome.org/GNOME/libxml2.git
+cd libxml2
+sh ./autogen.sh
+./configure --prefix=/usr
+make
+make install
+```
+
+#### krb5
+
+``` sh
+apt install krb5-*
+```
+
+#### 参考
+
+- [Qiita:CentOS 7 PHP 7.2.3のソースファイルからのインストール](https://qiita.com/knutpb1205/items/cba2610b4ccb5ecd7b92)
+
+### apt
+
+この方法は最新バージョンが手に入らない。
+
+``` sh
+sudo apt install -y php
+```
+
+``` sh
+php --version
+```
+
+## Composer
+
+Laravelで使う。
+
+``` sh
+cd /tmp
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+```
+
+``` sh
+cd
+composer --version
+```
+
 
 ## go
 

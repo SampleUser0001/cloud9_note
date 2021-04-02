@@ -7,6 +7,8 @@
   - [変更の取り消し](#変更の取り消し)
   - [追跡していないファイルの削除](#追跡していないファイルの削除)
     - [git cleanのオプション](#git-cleanのオプション)
+  - [ログをCSVに変換する](#ログをcsvに変換する)
+    - [フォーマット](#フォーマット)
 
 ## .gitignoreについて
 
@@ -44,3 +46,14 @@ git clean <オプション>
 | -d | ディレクトリを含める |
 | -f | 削除を実行する |
 
+## ログをCSVに変換する
+
+``` sh
+git --no-pager log \
+--pretty=format:"\"%ae\",\"%s\"" \
+--date=short --no-merges --all --date-order > ../commits.csv
+```
+
+### フォーマット
+
+- [Qiita:git logのフォーマットを指定する](https://qiita.com/harukasan/items/9149542584385e8dea75)
