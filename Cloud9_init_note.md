@@ -172,6 +172,7 @@ sudo vi /etc/profile
 ```
 
 ``` sh
+# Maven
 MVN_HOME=/opt/apache-maven
 PATH=$PATH:$MVN_HOME/bin
 ```
@@ -289,9 +290,31 @@ Laravel用のComposerをインストールするときに使う。
 Laravelをローカルで管理するだけなら、Dockerとdocker-composeがあればいいが、gitのリモートリポジトリにpushする場合は、(デフォルトでは)vender配下がpushされない。  
 ```composer update```が必要だが、composerインストールでphpコマンドを使う。
 
+AWS cloud9(Amazon Linux 2)には一応最初から入っている。
+
+``` sh
+ec2-user:~/environment $ php -v
+PHP 7.2.24 (cli) (built: Oct 31 2019 18:27:08) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
+```
+
+### amazon-linux-extras
+
+AWS cloud9用。
+
+インストールできるバージョンの確認。
+
+``` sh
+amazon-linux-extras list | less
+```
+
+``` sh
+amazon-linux-extras install  php80-php php80-php-devel
+
 ### apt
 
-この方法は最新バージョンが手に入らない。
+この方法は最新バージョンが手に入らない。(Composer用なら気にしなくてよい？)
 
 ``` sh
 sudo apt install -y php
@@ -434,13 +457,13 @@ nvm install <インストールしたいバージョン>
 ```
 
 ```
-vi $HOME/.bashrc
+sudo vi /etc/profile
 ```
 
 ```
 # Node.js setting
 source ~/.nvm/nvm.sh
-nvm use v14.15.4
+nvm use v14.16.0
 ```
 
 ### 動作確認
