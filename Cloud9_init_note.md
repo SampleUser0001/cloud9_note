@@ -90,13 +90,21 @@ git config --global core.editor 'vim -c "set fenc=utf-8"'
 
 ## Java
 
-インストールされているが…
-```
+Amazon Linux 2でcloud9を再作成したすると、最初から入っている。  
+Mavenをyumでインストールすると7がインストールされる。
+
+``` sh
 ec2-user:~/environment $ java -version
-java version "1.7.0_251"
-OpenJDK Runtime Environment (amzn-2.6.21.0.82.amzn1-x86_64 u251-b02)
-OpenJDK 64-Bit Server VM (build 24.251-b02, mixed mode)
+openjdk version "11.0.10" 2021-01-19 LTS
+OpenJDK Runtime Environment Corretto-11.0.10.9.1 (build 11.0.10+9-LTS)
+OpenJDK 64-Bit Server VM Corretto-11.0.10.9.1 (build 11.0.10+9-LTS, mixed mode)
 ```
+
+``` sh
+ec2-user:~/environment $ javac -version
+javac 11.0.10
+```
+
 
 ### yumでJavaをインストール
 
@@ -142,14 +150,55 @@ javac 11.0.9.1
 ## Maven
 インストールされていない。
 
-### Mavenインストール
+### Maven(binary)
+
+バージョンは[ダウンロードページ](https://maven.apache.org/download.cgi)で事前に確認する。
+
+``` sh
+export MAVEN_VERSION=3.6.3
+cd /usr/local/lib/
+sudo wget http://ftp.meisei-u.ac.jp/mirror/apache/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+
+sudo tar -xzvf apache-maven-${MAVEN_VERSION}-bin.tar.gz
+sudo mv apache-maven-${MAVEN_VERSION} /opt/
+cd /opt/
+sudo ln -s /opt/apache-maven-${MAVEN_VERSION} apache-maven
 ```
+
+パスの追加
+
+``` sh
+sudo vi /etc/profile
+```
+
+``` sh
+MVN_HOME=/opt/apache-maven
+PATH=$PATH:$MVN_HOME/bin
+```
+
+```
+source /etc/profile
+```
+
+```
+mvn -version
+```
+
+#### 参考
+
+- [Qiita:【AWS EC2】Amazon Linux 2にMavenをインストールする方法](https://qiita.com/tamorieeeen/items/bcdf9729a5e9194c5d20)
+
+### Maven(yum)
+
+Java7がインストールされるため、非推奨。
+
+``` sh
 sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
 sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
 sudo yum install -y apache-maven
 ```
 
-### 参考
+#### 参考
 [https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html](https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html)
 
 
