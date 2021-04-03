@@ -303,14 +303,37 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
 
 AWS cloud9用。
 
-インストールできるバージョンの確認。
+現在稼働中のバージョンとインストールできるバージョンの確認。
 
 ``` sh
 amazon-linux-extras list | less
 ```
 
 ``` sh
-amazon-linux-extras install  php80-php php80-php-devel
+sudo amazon-linux-extras disable lamp-mariadb10.2-php7.2
+sudo amazon-linux-extras enable php8.0
+```
+
+``` sh
+sudo yum remove mariadb-*
+sudo yum remove php-*
+```
+
+``` sh
+sudo yum clean metadata
+sudo yum install php-cli php-pdo php-fpm php-mysqlnd 
+```
+
+``` sh
+ec2-user:~/environment/Practice_Laravel/practice-laravel (main) $ php -v
+PHP 8.0.2 (cli) (built: Feb 11 2021 18:25:29) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v4.0.2, Copyright (c) Zend Technologies
+```
+
+#### 参考
+
+- [AWS:Amazon Linux 2 を実行している EC2 インスタンスに Extras Library からソフトウェアパッケージをインストールする方法を教えてください。](https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-install-extras-library-software/)
 
 ### apt
 
@@ -383,12 +406,18 @@ cd
 composer --version
 ```
 
-## php-xml
+### よく見るエラーの対応
 
-```composer update```したときにエラーになったのでメモ。
+#### mbstring
 
 ``` sh
-sudo apt install -y php-xml
+sudo yum -y install php-mbstring
+```
+
+#### dom
+
+``` sh
+sudo yum -y install php-xml
 ```
 
 ## go
