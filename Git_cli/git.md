@@ -9,6 +9,7 @@
     - [git cleanのオプション](#git-cleanのオプション)
   - [ログをCSVに変換する](#ログをcsvに変換する)
     - [フォーマット](#フォーマット)
+  - [git stash](#git-stash)
 
 ## .gitignoreについて
 
@@ -57,3 +58,23 @@ git --no-pager log \
 ### フォーマット
 
 - [Qiita:git logのフォーマットを指定する](https://qiita.com/harukasan/items/9149542584385e8dea75)
+
+## git stash
+
+stash 
+
+``` sh
+git stash
+```
+
+一覧
+
+``` sh
+git stash list
+```
+
+適用
+
+``` sh
+git stash apply stash@{0}
+```
