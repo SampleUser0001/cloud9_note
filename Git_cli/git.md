@@ -10,6 +10,10 @@
   - [ログをCSVに変換する](#ログをcsvに変換する)
     - [フォーマット](#フォーマット)
   - [git stash](#git-stash)
+  - [git submodule](#git-submodule)
+    - [登録](#登録)
+    - [読み込む](#読み込む)
+    - [更新する](#更新する)
 
 ## .gitignoreについて
 
@@ -77,4 +81,28 @@ git stash list
 
 ``` sh
 git stash apply stash@{0}
+```
+
+## git submodule
+
+他のリポジトリをライブラリとして取り込むことができる。
+
+### 登録
+
+``` sh
+git submodule add ${リポジトリURL}
+```
+
+### 読み込む
+
+git cloneしただけだと、読み込まれない。
+
+``` sh
+git submodule init
+```
+
+### 更新する
+
+``` sh
+git submodule update
 ```
