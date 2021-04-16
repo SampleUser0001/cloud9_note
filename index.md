@@ -12,6 +12,7 @@
   - [Windows](#windows)
   - [Java](#java)
   - [JavaScript](#javascript)
+  - [Python](#python)
   - [Other](#other)
 
 ## init/use
@@ -65,6 +66,10 @@
 
 - [Node.js](./JavaScript/Node.md)
 - [Vue.js](./JavaScript/Vue.md)
+
+## Python
+
+- [Python](./Python/Python.md)
 
 ## Other
 
