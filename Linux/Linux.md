@@ -42,7 +42,7 @@
   - [ログローテート](#ログローテート)
   - [ダミーファイルを作成する(ddコマンド)](#ダミーファイルを作成するddコマンド)
     - [参考](#参考-8)
-  - [cat *.json | jq | lessを色付きにする](#cat-json--jq--lessを色付きにする)
+  - [cat json - jq - lessを色付きにする](#cat-json---jq---lessを色付きにする)
 - [Shell](#shell)
   - [ディレクトリ配下のファイルでループする](#ディレクトリ配下のファイルでループする)
   - [ファイルを一行ずつ読み込んでループする](#ファイルを一行ずつ読み込んでループする)
@@ -378,7 +378,7 @@ dd if=/dev/zero of=15G.dummy bs=1G count=15
 
 - [Qiita:Linux で任意のサイズのファイルを作る](https://qiita.com/toshihirock/items/6cb99a85d86f524bc153)
 
-## cat *.json | jq | lessを色付きにする
+## cat json - jq - lessを色付きにする
 
 ``` sh
 cat ${任意のファイル} | jq '.' -C | less -R
