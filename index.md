@@ -23,6 +23,8 @@
 ## Linux
 
 - [Linux.md](./Linux/Linux.md)
+- [jq.md](./Linux/jq.md)
+- [logrotate.md](./Linux/logrotate.md)
 
 ## DB
 
