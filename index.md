@@ -84,3 +84,4 @@
   - 負荷テストツール
 - [Gitlab.md](./other/Gitlab.md)
 - [Redmine.md](./other/Redmine.md)
+- [License.md](./other/License.md)
