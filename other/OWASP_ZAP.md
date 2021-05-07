@@ -53,6 +53,8 @@
 2. ブラウザでテスト対象のページにアクセスする
    - OWASP ZAPにテスト対象のURLとして取り込まれる。
      - Windows版だと取り込まれるが、Java版だと取り込まれなかった？
+     - テスト対象ページすべてにアクセスする。
+       - アクセスしたページがテスト対象となる。アクセスしていないページは、IP,Portが同じでもテスト対象に追加されない。
 3. テスト対象ページをコンテキストに含める
    1. 対象URLを右クリック→コンテキストに含める→New Context
    2. OKボタン押下
@@ -84,3 +86,9 @@ owaspzap -daemon -quickurl http://192.168.1.34:8080/ -quickout ./owaspzap_report
   - OWASP ZAPのチェック項目一覧。
 - [OWASP ZAP:Documentation](https://www.zaproxy.org/docs/)
   - 公式ドキュメント1
+- 実行結果
+  - [HTML5_CSS_JavaScript_Programing](https://github.com/SampleUser0001/HTML5_CSS_JavaScript_Programing)に対して実行した結果
+    - [sample.json](./OWASP_ZAP/sample.json)
+      - トップページのみ
+    - [sample2.json](./OWASP_ZAP/sample2.json)
+      - トップページ + Sample1.html ～ Sample6.html
