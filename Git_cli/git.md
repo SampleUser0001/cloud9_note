@@ -4,6 +4,8 @@
   - [.gitignoreについて](#gitignoreについて)
   - [親ブランチを取得する](#親ブランチを取得する)
   - [ステージング解除](#ステージング解除)
+    - [新規](#新規)
+    - [変更](#変更)
   - [変更の取り消し](#変更の取り消し)
   - [追跡していないファイルの削除](#追跡していないファイルの削除)
     - [git cleanのオプション](#git-cleanのオプション)
@@ -27,8 +29,16 @@ git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head
 
 ## ステージング解除
 
+### 新規
+
 ``` sh
-git reset HEAD <対象ファイル>
+git rm --cached -r ${対象ファイル}
+```
+
+### 変更
+
+``` sh
+git reset HEAD ${対象ファイル}
 ```
 
 ## 変更の取り消し
