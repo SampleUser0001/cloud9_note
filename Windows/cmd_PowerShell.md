@@ -4,6 +4,8 @@
   - [tail](#tail)
   - [grep](#grep)
     - [再帰grep](#再帰grep)
+  - [findstr](#findstr)
+    - [findstr:オプション](#findstrオプション)
 
 ## tail
 
@@ -22,4 +24,18 @@ Select-String -Path ${ファイルパス} -Pattern ${検索文字列}
 ``` powershell
 dir -Recurse | Select-String -Pattern ${検索文字列}
 ```
+
+## findstr
+
+``` cmd
+findstr /s /i /n "検索文字列" "検索対象パス"
+```
+
+### findstr:オプション
+
+| オプション | 効果 |
+| :------  | :-- |
+| /s       | 再帰検索する。 |
+| /n       | 検索結果に行番号を表示する。 |
+| /i       | 大文字小文字の違いを無視する。 |
 
