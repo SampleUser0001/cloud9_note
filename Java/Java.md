@@ -1,13 +1,83 @@
 # Java
 
-実装の話ではなくて、環境の話。
-
 - [Java](#java)
+  - [Stream](#stream)
+    - [重複排除](#重複排除)
+    - [1行目を読み飛ばす](#1行目を読み飛ばす)
+    - [String -> Model](#string---model)
+    - [Stream -> List](#stream---list)
+    - [Stream -> Map](#stream---map)
+    - [合計値算出](#合計値算出)
+    - [List -> Stream](#list---stream)
+    - [配列 -> Stream](#配列---stream)
+    - [ファイル -> Stream](#ファイル---stream)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
     - [参考](#参考)
+
+## Stream
+
+### 重複排除
+
+``` java
+.distinct()
+```
+
+### 1行目を読み飛ばす
+
+``` java
+.skip(1)
+```
+
+### String -> Model
+
+``` java
+.map(line -> new Model(line))
+```
+
+### Stream -> List
+
+``` sh
+.collect(Collectors.toList())
+```
+
+### Stream -> Map
+
+``` sh
+collect(Collectors.toMap(Model::getId, Bean::getValue))
+```
+
+### 合計値算出
+
+``` sh
+.mapToInt(model -> model.getInt())
+.sum();
+```
+
+### List -> Stream
+
+``` sh
+list.stream()
+```
+
+### 配列 -> Stream
+
+``` sh
+Stream.of(配列)
+```
+
+### ファイル -> Stream
+
+``` java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+Path inputPath = Paths.get(filePath);
+Stream stream = Files.lines(inputPath);
+```
 
 ## 実行可能jarファイルの実行
 
