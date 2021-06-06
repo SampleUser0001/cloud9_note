@@ -48,6 +48,14 @@
   - [diff](#diff)
     - [差分の行数を取得する](#差分の行数を取得する)
   - [ファイルの行数を取得する(wc)](#ファイルの行数を取得するwc)
+  - [GUIとCUIを切り替える](#guiとcuiを切り替える)
+    - [CUIにする](#cuiにする)
+      - [一時的な変更](#一時的な変更)
+      - [永続的な変更](#永続的な変更)
+      - [ログイン](#ログイン)
+    - [GUIにする](#guiにする)
+      - [一時的な変更](#一時的な変更-1)
+      - [永続的な変更](#永続的な変更-1)
 
 ## 圧縮解凍(tar, gunzip)
 
@@ -400,4 +408,38 @@ diff ${ファイルパス1} ${ファイルパス2} | grep "^>" | wc -l
 
 ``` sh
 cat ${ファイルパス} | wc -l
+```
+
+## GUIとCUIを切り替える
+
+### CUIにする
+
+#### 一時的な変更
+
+``` sh
+systemctl isolate multi-user.target
+```
+
+#### 永続的な変更
+
+``` sh
+systemctl set-default multi-user.target
+```
+
+#### ログイン
+
+Ctrl + Alt + F1 〜 F5
+
+### GUIにする
+
+#### 一時的な変更
+
+``` sh
+systemctl isolate graphical.target
+```
+
+#### 永続的な変更
+
+``` sh
+systemctl set-default graphical.target
 ```
