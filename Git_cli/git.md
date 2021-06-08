@@ -12,6 +12,7 @@
   - [ログをCSVに変換する](#ログをcsvに変換する)
     - [フォーマット](#フォーマット)
   - [git stash](#git-stash)
+  - [差分があり、ステージングしていないファイル一覧](#差分がありステージングしていないファイル一覧)
   - [git submodule](#git-submodule)
     - [登録](#登録)
     - [読み込む](#読み込む)
@@ -91,6 +92,12 @@ git stash list
 
 ``` sh
 git stash apply stash@{0}
+```
+
+## 差分があり、ステージングしていないファイル一覧
+
+``` sh
+git diff --name-only
 ```
 
 ## git submodule
