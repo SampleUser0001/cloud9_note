@@ -14,6 +14,7 @@
   - [JavaScript](#javascript)
   - [PHP](#php)
   - [Python](#python)
+  - [Microsoft Office](#microsoft-office)
   - [Other](#other)
 
 ## init/use
@@ -79,6 +80,10 @@
 ## Python
 
 - [Python](./Python/Python.md)
+
+## Microsoft Office
+
+- [Excel.md](./MicrosoftOffice/Excel.md)
 
 ## Other
 
