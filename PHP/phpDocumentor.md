@@ -16,7 +16,7 @@ composer require --with-all-dependencies --dev phpdocumentor/phpdocumentor
 ## 実行
 
 ``` sh
-phpdoc run -d ${取得対象} -t ${ドキュメント出力先} --template=clean
+./vendor/phpdocumentor/phpdocumentor/bin/phpdoc run -d ${取得対象} -t ${ドキュメント出力先} --template=clean
 ```
 
 ### サンプル
@@ -26,4 +26,4 @@ phpdoc run -d ${取得対象} -t ${ドキュメント出力先} --template=clean
 ## 参考
 
 - [phpDocumentorでドキュメント自動生成してみた:Wedding Park CREATORS](https://engineers.weddingpark.co.jp/phpdocumentor-document-automatic-generation/)
-  [PHP Documentorを使う:Qiita](https://qiita.com/zaburo/items/ebd0b0d55f8abf41f001)
+- [PHP Documentorを使う:Qiita](https://qiita.com/zaburo/items/ebd0b0d55f8abf41f001)
