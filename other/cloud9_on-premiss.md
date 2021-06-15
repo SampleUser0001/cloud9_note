@@ -55,7 +55,27 @@ forever start server.js -l 0.0.0.0 -p 8181 -a user:pass -w ${HOME}/environment
 -w <ディレクトリ>
 ```
 
+## Xubuntuでログイン時に起動する
+
+forever使ったり、スタートアップに起動シェルを登録したりすればいいはずなのだが、何故かうまく動かなかったので別解。  
+GUI＋自動ログイン前提。
+
+1. 起動sh作成。
+``` sh
+. ~/.nvm/nvm.sh
+nvm use v12.20.1
+
+cd /home/satorutanaka/c9sdk 
+node server.js -l 0.0.0.0 -p 8181 -a user:pass -w /home/satorutanaka/environment 1> /dev/null 2> /dev/null &
+```
+
+2. ${HOME}/.bashrcに上記のshを実行するように追記。
+3. Terminalの起動をスタートアップに登録する。
+    1. ターミナル起動アイコンを右クリック -> 起動コマンド確認
+    2. 設定マネージャー -> セッションと起動 -> 自動開始アプリケーション から、1で確認したコマンドを登録。
+
 ## 参考
 
-- [Qiita:cloud9をwindowsにインストールして、幸せになる](https://qiita.com/aki-f/items/b7b45a6e6ed33ce81eb9)
-- [Qiita:Node.jsアプリをLinux環境で常駐化させる　forever編](https://qiita.com/chihiro/items/24ca8ac81cb20c22b47e)
+- [cloud9をwindowsにインストールして、幸せになる:Qiita](https://qiita.com/aki-f/items/b7b45a6e6ed33ce81eb9)
+- [Node.jsアプリをLinux環境で常駐化させる　forever編:Qiita](https://qiita.com/chihiro/items/24ca8ac81cb20c22b47e)
+- [xubuntuのスタートアップにアプリを追加:気まま・お気楽日記](http://kimamaokiraku.jugem.jp/?eid=723)
