@@ -39,32 +39,32 @@
 
 ### Stream -> List
 
-``` sh
+``` java
 .collect(Collectors.toList())
 ```
 
 ### Stream -> Map
 
-``` sh
+``` java
 collect(Collectors.toMap(Model::getId, Bean::getValue))
 ```
 
 ### 合計値算出
 
-``` sh
+``` java
 .mapToInt(model -> model.getInt())
 .sum();
 ```
 
 ### List -> Stream
 
-``` sh
+``` java
 list.stream()
 ```
 
 ### 配列 -> Stream
 
-``` sh
+``` java
 Stream.of(配列)
 ```
 
