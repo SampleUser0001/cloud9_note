@@ -76,7 +76,6 @@
 
 - [phpDocumentor](./PHP/phpDocumentor.md)
 
-
 ## Python
 
 - [Python](./Python/Python.md)
@@ -87,6 +86,7 @@
 
 ## Other
 
+- [curl.md](./other/curl.md)
 - [other.md](./other/other.md)
 - [OWASP_ZAP.md](./other/OWASP_ZAP.md)
 - [Github_authentication_token.md](./other/Github_authentication_token.md)
