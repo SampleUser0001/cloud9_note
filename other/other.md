@@ -5,6 +5,7 @@
     - [exewrap](#exewrap)
   - [Slack](#slack)
     - [スタンプ](#スタンプ)
+  - [サンプル動画](#サンプル動画)
 
 ## Tool
 
@@ -24,3 +25,7 @@ jarファイルをexe化できる。
 - [絵文字ジェネレーター](https://emoji-gen.ninja/)
 - [Slack Custom Emoji](https://slack-emoji.webflow.io/)
 - [MEGAMOJI - 簡単アニメ絵文字メーカー](https://zk-phi.github.io/MEGAMOJI/)
+
+## サンプル動画
+
+- [NHK Creative Library](http://www.nhk.or.jp/archives/creative/)
