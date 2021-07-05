@@ -17,6 +17,8 @@
     - [登録](#登録)
     - [読み込む](#読み込む)
     - [更新する](#更新する)
+  - [git log](#git-log)
+    - [更新したファイル一覧を表示する](#更新したファイル一覧を表示する)
 
 ## .gitignoreについて
 
@@ -123,3 +125,16 @@ git submodule init
 ``` sh
 git submodule update
 ```
+
+## git log
+
+### 更新したファイル一覧を表示する
+
+``` sh
+git log --name-only
+```
+
+``` sh
+git log --stat
+```
+
