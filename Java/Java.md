@@ -14,6 +14,7 @@
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
+  - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
@@ -106,6 +107,34 @@ try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("書き込みフ�
 ### ファイルの書き込み：参考
 
 [https://docs.oracle.com/javase/jp/8/docs/api/java/nio/file/Files.html#newBufferedWriter-java.nio.file.Path-java.nio.charset.Charset-java.nio.file.OpenOption...-](https://docs.oracle.com/javase/jp/8/docs/api/java/nio/file/Files.html#newBufferedWriter-java.nio.file.Path-java.nio.charset.Charset-java.nio.file.OpenOption...-)
+
+## propertiesファイルの読み込み
+
+``` java
+import java.util.Properties;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+
+// (省略)
+
+  try {
+    Properties prop = new Properties();
+    String propFilePath = "propertiesファイルのパス";
+
+    prop.load(
+      Files.newBufferedReader(
+        Paths.get(propFilePath),
+        StandardCharsets.UTF_8
+      )
+    );
+    String value = prop.getProperty("propertiesのキー");
+  } catch(IOException e){
+    e.printStackTrace();
+  }
+
+```
 
 ## 最小の実行環境を提供する(jdeps, jlink)
 
