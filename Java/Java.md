@@ -15,6 +15,7 @@
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
+  - [Mapのループ](#mapのループ)
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
@@ -133,6 +134,16 @@ import java.io.IOException;
   } catch(IOException e){
     e.printStackTrace();
   }
+
+```
+
+## Mapのループ
+
+``` java
+for(Map.Entry<String, String> entry : map.entrySet()){
+  entry.getKey();
+  entry.getValue();
+}
 
 ```
 
