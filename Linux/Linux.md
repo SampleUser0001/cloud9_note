@@ -57,6 +57,7 @@
     - [GUIにする](#guiにする)
       - [一時的な変更](#一時的な変更-1)
       - [永続的な変更](#永続的な変更-1)
+  - [起動時に何らかのサービスを起動する](#起動時に何らかのサービスを起動する)
 
 ## 圧縮解凍(tar, gunzip)
 
@@ -449,4 +450,29 @@ systemctl isolate graphical.target
 
 ``` sh
 systemctl set-default graphical.target
+```
+
+## 起動時に何らかのサービスを起動する
+
+Ubuntuでは通常systemctlを使用するらしいが・・・
+
+```sh
+crontab -e
+```
+
+``` crontab
+@reboot /etc/rc.local
+```
+
+``` sh
+touch /etc/rc.local
+nano /etc/rc.local
+```
+
+``` sh
+# /etc/rc.localに起動したいサービスを書く
+```
+
+``` sh
+chmod 755 /etc/rc.local
 ```

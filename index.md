@@ -58,6 +58,7 @@
 ## VSCode
 
 - [VSCode.md](./VSCode/VSCode.md)
+- [CodeServer.md](./VSCode/CodeServer.md)
 
 ## Windows
 
