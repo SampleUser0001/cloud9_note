@@ -16,6 +16,7 @@ Cloud9を使うときに一緒に持っていきたいメモ
       - [参考](#参考-1)
     - [getter,setterを作成しない](#gettersetterを作成しない)
       - [参考](#参考-2)
+    - [依存ライブラリを取り込む](#依存ライブラリを取り込む)
   - [ディスク使用量チェック](#ディスク使用量チェック)
     - [コマンド](#コマンド)
     - [ディレクトリごとの使用量確認](#ディレクトリごとの使用量確認)
@@ -150,6 +151,12 @@ mvn exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="'<引数１>' '<引
 
 https://qiita.com/opengl-8080/items/671ffd4bf84fe5e32557  
 https://mvnrepository.com/artifact/org.projectlombok/lombok
+
+### 依存ライブラリを取り込む
+
+``` sh
+mvn dependency:copy-dependencies
+```
 
 ## ディスク使用量チェック
 https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ebs-describing-volumes.html
