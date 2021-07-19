@@ -2,6 +2,7 @@
 
 - [Java](#java)
   - [Stream](#stream)
+    - [ファイル -> Stream](#ファイル---stream)
     - [重複排除](#重複排除)
     - [1行目を読み飛ばす](#1行目を読み飛ばす)
     - [String -> Model](#string---model)
@@ -10,7 +11,7 @@
     - [合計値算出](#合計値算出)
     - [List -> Stream](#list---stream)
     - [配列 -> Stream](#配列---stream)
-    - [ファイル -> Stream](#ファイル---stream)
+  - [Path -> List](#path---list)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
@@ -22,6 +23,17 @@
     - [参考](#参考)
 
 ## Stream
+
+### ファイル -> Stream
+
+``` java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+Path inputPath = Paths.get(filePath);
+Stream stream = Files.lines(inputPath);
+```
 
 ### 重複排除
 
@@ -74,15 +86,16 @@ list.stream()
 Stream.of(配列)
 ```
 
-### ファイル -> Stream
+## Path -> List
 
 ``` java
+import java.util.List;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-Path inputPath = Paths.get(filePath);
-Stream stream = Files.lines(inputPath);
+Path filepath = Paths.get("読み込み対象のファイルパス");
+List<String> lines = Files.readAllLines(filepath, Charset.forName("UTF-8"));
 ```
 
 ## 実行可能jarファイルの実行
