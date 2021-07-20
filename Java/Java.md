@@ -21,6 +21,10 @@
     - [前提](#前提)
     - [手順](#手順)
     - [参考](#参考)
+  - [jarの展開/圧縮](#jarの展開圧縮)
+    - [展開](#展開)
+    - [圧縮](#圧縮)
+    - [jarコマンド:参考](#jarコマンド参考)
 
 ## Stream
 
@@ -194,3 +198,22 @@ java -cp %jarファイル% %mainクラス%
 ### 参考
 
 - [Tech Blog:アプリケーション配布用に小さなJREを作る](https://blogs.osdn.jp/2018/03/26/jre-minimize.html)
+
+## jarの展開/圧縮
+
+### 展開
+
+```sh
+jar -xvf {対象ファイル}.jar
+```
+
+### 圧縮
+
+``` sh
+jar -cf ${jarファイル}.jar ${ディレクトリ}
+```
+
+### jarコマンド:参考
+
+- [jarコマンド:Oracle](https://docs.oracle.com/javase/jp/13/docs/specs/man/jar.html#:~:text=jar%20%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AF%E3%80%81ZIP%E3%81%8A%E3%82%88%E3%81%B3,%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82)
+- [jarコマンド入門:Qiita](https://qiita.com/maple_syrup/items/a2f21fe356fa5f06bf44)
