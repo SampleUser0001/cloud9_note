@@ -13,6 +13,7 @@
     - [docker-compose.yml](#docker-composeyml-1)
     - [start.sh](#startsh)
     - [Dockerコマンド](#dockerコマンド)
+  - [docker-compose使用時にENTRYPOINTに引数を渡す](#docker-compose使用時にentrypointに引数を渡す)
   - [イメージのビルド](#イメージのビルド)
   - [イメージのpush](#イメージのpush)
   - [イメージの保存/読み込み](#イメージの保存読み込み)
@@ -155,10 +156,14 @@ docker-compose build
 docker-compose up -d
 ```
 
+## docker-compose使用時にENTRYPOINTに引数を渡す
+
+[docker-compose_args:SampleUser0001:Github](https://github.com/SampleUser0001/docker-compose_args)
+
 ## イメージのビルド
 
 ```
-docker build　-t {ユーザ名}/{イメージ名}:{タグ名} {Dockerfileがあるディレクトリ}
+docker build -t {ユーザ名}/{イメージ名}:{タグ名} {Dockerfileがあるディレクトリ}
 ```
 
 ## イメージのpush
