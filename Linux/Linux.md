@@ -57,6 +57,9 @@
     - [GUIにする](#guiにする)
       - [一時的な変更](#一時的な変更-1)
       - [永続的な変更](#永続的な変更-1)
+  - [リモートデスクトップサービス](#リモートデスクトップサービス)
+    - [インストール](#インストール)
+    - [起動設定](#起動設定)
   - [起動時に何らかのサービスを起動する](#起動時に何らかのサービスを起動する)
 
 ## 圧縮解凍(tar, gunzip)
@@ -450,6 +453,22 @@ systemctl isolate graphical.target
 
 ``` sh
 systemctl set-default graphical.target
+```
+
+## リモートデスクトップサービス
+
+### インストール
+
+``` sh
+apt update && sudo apt upgrade -y
+sudo apt install -y xrdp
+```
+
+### 起動設定
+
+``` sh
+sudo systemctl enable xrdp
+sudo systemctl start xrdp
 ```
 
 ## 起動時に何らかのサービスを起動する
