@@ -25,6 +25,8 @@ jarファイルをexe化できる。
 - [絵文字ジェネレーター](https://emoji-gen.ninja/)
 - [Slack Custom Emoji](https://slack-emoji.webflow.io/)
 - [MEGAMOJI - 簡単アニメ絵文字メーカー](https://zk-phi.github.io/MEGAMOJI/)
+- [icon-icons.com](https://icon-icons.com/ja/)
+  - スペインのページらしい。
 
 ## サンプル動画
 
