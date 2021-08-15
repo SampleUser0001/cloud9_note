@@ -11,6 +11,11 @@
   - [ユーザ一覧表示](#ユーザ一覧表示)
   - [権限のはく奪](#権限のはく奪)
   - [ログイン](#ログイン)
+    - [.mylogin.cnfを使用する](#mylogincnfを使用する)
+      - [ファイル作成](#ファイル作成)
+      - [ログイン](#ログイン-1)
+      - [ファイル参照](#ファイル参照)
+      - [参考](#参考-1)
 
 ## 起動/終了/生存確認
 
@@ -47,6 +52,7 @@ CREATE DATABASE <DB名>
 下記のいずれか
 
 1. shell> mysql [DB名] < [ファイル名]
+  - ```-N```オプションでカラム名非表示にできる。
 2. mysql> source [ファイル名]
 3. mysql> ./[ファイル名]
 
@@ -75,3 +81,30 @@ REVOKE 権限
 3. ```mysql -u ${ユーザ名} -p${パスワード}```
    - pオプションの後ろにスペースを入れてはいけない
 4. ```mysql -h ${接続先ホスト} -u ${ユーザ名}```
+
+### .mylogin.cnfを使用する
+
+#### ファイル作成
+
+1. 下記実行。
+    ``` sh
+    mysql_config_editor set --host=${ホスト名} --login-path=${グループ名} --user=${MySQLユーザ} --password
+    ```
+2. パスワードを聞かれるので、パスワード入力
+3. ```~/.mylogin.cnf```ファイルが作成される。
+
+#### ログイン
+
+``` sh
+mysql --login-path=${グループ名}
+```
+
+#### ファイル参照
+
+``` sh
+mysql_config_editor print --all
+```
+
+#### 参考
+
+[How to use .mylogin.cnf:ゆるふわキャンパー](https://blog.lorentzca.me/how-to-use-mylogin-cnf/)
