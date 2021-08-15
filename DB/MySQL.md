@@ -107,4 +107,5 @@ mysql_config_editor print --all
 
 #### 参考
 
-[How to use .mylogin.cnf:ゆるふわキャンパー](https://blog.lorentzca.me/how-to-use-mylogin-cnf/)
+- [4.6.7 mysql_config_editor — MySQL 構成ユーティリティー:MySQL 8.0 リファレンスマニュアル](https://dev.mysql.com/doc/refman/8.0/ja/mysql-config-editor.html)
+- [How to use .mylogin.cnf:ゆるふわキャンパー](https://blog.lorentzca.me/how-to-use-mylogin-cnf/)
