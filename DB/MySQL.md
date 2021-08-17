@@ -6,16 +6,23 @@
     - [終了](#終了)
     - [生存確認](#生存確認)
     - [参考](#参考)
-  - [データベース作成](#データベース作成)
-  - [ファイルから実行する](#ファイルから実行する)
-  - [ユーザ一覧表示](#ユーザ一覧表示)
-  - [権限のはく奪](#権限のはく奪)
   - [ログイン](#ログイン)
     - [.mylogin.cnfを使用する](#mylogincnfを使用する)
       - [ファイル作成](#ファイル作成)
       - [ログイン](#ログイン-1)
       - [ファイル参照](#ファイル参照)
       - [参考](#参考-1)
+  - [データベース作成](#データベース作成)
+  - [ユーザ一覧表示](#ユーザ一覧表示)
+  - [ユーザ作成](#ユーザ作成)
+    - [例](#例)
+    - [参考](#参考-2)
+  - [権限の付与](#権限の付与)
+    - [例](#例-1)
+    - [参考](#参考-3)
+  - [付与されている権限の確認](#付与されている権限の確認)
+  - [権限のはく奪](#権限のはく奪)
+  - [ファイルから実行する](#ファイルから実行する)
 
 ## 起動/終了/生存確認
 
@@ -40,38 +47,6 @@ mysqladmin -u root ping
 ### 参考
 
 - [MySQL:4.3 MySQL サーバーとサーバー起動プログラム](https://dev.mysql.com/doc/refman/5.6/ja/windows-start-command-line.html)
-
-## データベース作成
-
-``` sql
-CREATE DATABASE <DB名>
-```
-
-## ファイルから実行する
-
-下記のいずれか
-
-1. shell> mysql [DB名] < [ファイル名]
-  - ```-N```オプションでカラム名非表示にできる。
-2. mysql> source [ファイル名]
-3. mysql> ./[ファイル名]
-
-## ユーザ一覧表示
-
-mysqlユーザでuserテーブルを参照する。
-
-``` sql
-use mysql
-select user, host from user;
-```
-
-## 権限のはく奪
-
-``` sql
-REVOKE 権限
-    ON データベース名.テーブル名
-  FROM 'ユーザ'@'ホスト'
-```
 
 ## ログイン
 
@@ -109,3 +84,72 @@ mysql_config_editor print --all
 
 - [4.6.7 mysql_config_editor — MySQL 構成ユーティリティー:MySQL 8.0 リファレンスマニュアル](https://dev.mysql.com/doc/refman/8.0/ja/mysql-config-editor.html)
 - [How to use .mylogin.cnf:ゆるふわキャンパー](https://blog.lorentzca.me/how-to-use-mylogin-cnf/)
+
+## データベース作成
+
+``` sql
+CREATE DATABASE <DB名>
+```
+
+## ユーザ一覧表示
+
+mysqlユーザでuserテーブルを参照する。
+
+``` sql
+use mysql
+select user, host from user;
+```
+
+## ユーザ作成
+
+### 例
+
+``` sql
+CREATE USER 'comment_user'@'localhost' IDENTIFIED BY 'userpassword';
+```
+
+### 参考
+
+[MySQLユーザ作成について:Qiita](https://qiita.com/gatapon/items/92b942fa7081cfe17482)
+
+## 権限の付与
+
+``` sql
+GRANT ${付与する権限} ON ${対象のDB}.${対象のテーブル} TO ${対象ユーザ}@${クライアントホスト};
+```
+
+### 例
+
+comment_user@localhostに、comment_managerデータベースの全テーブルに対する権限として、SELECT, INSERT, UPDATE, DELETEを付与する。
+
+``` sql
+GRANT SELECT, INSERT, UPDATE, DELETE ON comment_manager.* TO comment_user@localhost;
+```
+
+### 参考
+
+[[MySQL]権限の確認と付与:Qiita](https://qiita.com/shuntaro_tamura/items/2fb114b8c5d1384648aa)
+
+## 付与されている権限の確認
+
+``` sql
+show grants for '${ユーザ名}'@'${ホスト名}'
+```
+
+## 権限のはく奪
+
+``` sql
+REVOKE 権限
+    ON データベース名.テーブル名
+  FROM 'ユーザ'@'ホスト'
+```
+
+## ファイルから実行する
+
+下記のいずれか
+
+1. shell> mysql [DB名] < [ファイル名]
+  - ```-N```オプションでカラム名非表示にできる。
+2. mysql> source [ファイル名]
+3. mysql> ./[ファイル名]
+
