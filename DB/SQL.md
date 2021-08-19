@@ -8,6 +8,10 @@ SQLのテクニック全般
   - [not in → not exists](#not-in--not-exists)
     - [not in](#not-in)
     - [not exists](#not-exists)
+  - [外部結合](#外部結合)
+    - [fromにしかないレコードも抽出する](#fromにしかないレコードも抽出する)
+    - [joinにしかないレコードも抽出する](#joinにしかないレコードも抽出する)
+    - [どちらでもいいから片方にあるレコードを抽出する](#どちらでもいいから片方にあるレコードを抽出する)
 
 ## case-when-then
 
