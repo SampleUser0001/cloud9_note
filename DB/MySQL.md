@@ -23,6 +23,12 @@
   - [付与されている権限の確認](#付与されている権限の確認)
   - [権限のはく奪](#権限のはく奪)
   - [ファイルから実行する](#ファイルから実行する)
+  - [CSVインポート](#csvインポート)
+    - [設定修正](#設定修正)
+    - [CSV作成](#csv作成)
+    - [登録用SQL](#登録用sql)
+    - [SQL実行](#sql実行)
+    - [参考](#参考-4)
 
 ## 起動/終了/生存確認
 
@@ -153,3 +159,42 @@ REVOKE 権限
 2. mysql> source [ファイル名]
 3. mysql> ./[ファイル名]
 
+## CSVインポート
+
+### 設定修正
+
+MySQLにrootユーザでログイン。
+
+``` mysql
+set persist local_infile=1;
+```
+
+### CSV作成
+
+``` csv
+1,"hoge"
+```
+
+### 登録用SQL
+
+``` sql
+load data local
+  infile "${csvファイルのパス}"
+into table
+  ${DB名}.${登録対象テーブル名}
+fields
+  terminated by ','
+  optionally enclosed by '"';
+```
+
+### SQL実行
+
+```--local-infile=1```が必要。
+
+``` sh
+mysql --local-infile=1 -h ${DBサービスホスト} -u ${DBログインユーザ} -p${DBログインパスワード} ${DB名} < ${登録用SQLパス}
+```
+
+### 参考
+
+[【MySQL】csvファイルをDBにインポートする方法:Qiita](https://qiita.com/oden141/items/239a7ce3cfe3197a3ba7)
