@@ -42,6 +42,7 @@
 - [ElementalMediaConvert.md](./AWS/ElementalMediaConvert.md)
 - EC2
   - [メモリ使用量とストレージ容量の監視](./AWS/EC2/Surveillance_Memory_and_Strage.md)
+- [Use_AWS_Secrets_Manager](https://github.com/SampleUser0001/Use_AWS_Secrets_Manager)
 
 ## Docker
 
