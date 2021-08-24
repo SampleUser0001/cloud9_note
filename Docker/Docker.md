@@ -13,6 +13,11 @@
     - [docker-compose.yml](#docker-composeyml-1)
     - [start.sh](#startsh)
     - [Dockerコマンド](#dockerコマンド)
+  - [docker-composeコマンドに渡した引数をコンテナ内のshファイルに渡す](#docker-composeコマンドに渡した引数をコンテナ内のshファイルに渡す)
+    - [docker-compose.yml](#docker-composeyml-2)
+    - [sh](#sh)
+    - [コマンド](#コマンド)
+      - [実行結果](#実行結果)
   - [docker-compose使用時にENTRYPOINTに引数を渡す](#docker-compose使用時にentrypointに引数を渡す)
   - [イメージのビルド](#イメージのビルド)
   - [イメージのpush](#イメージのpush)
@@ -154,6 +159,41 @@ exec node app.js
 chmod 755 start.sh
 docker-compose build
 docker-compose up -d
+```
+
+## docker-composeコマンドに渡した引数をコンテナ内のshファイルに渡す
+
+### docker-compose.yml
+
+``` yml
+version: '3'
+services:
+  shell: # ここの値を使う
+    build: .
+    container_name: container_shell
+    volumes:
+      - ./start.sh:/start.sh
+```
+
+### sh
+
+``` sh
+#!/bin/bash
+
+echo 'Hello' $1 '!!'
+```
+
+### コマンド
+
+``` sh
+docker-compose run shell ${引数に渡したい値}
+```
+
+#### 実行結果
+
+``` txt
+Creating docker_args_shell_run ... done
+Hello hoge !!
 ```
 
 ## docker-compose使用時にENTRYPOINTに引数を渡す
