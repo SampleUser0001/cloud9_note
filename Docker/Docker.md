@@ -34,6 +34,12 @@
     - [Nameで検索](#nameで検索)
     - [参考](#参考-1)
   - [fs.file-max](#fsfile-max)
+  - [Dockerfile内で使用できるコマンド](#dockerfile内で使用できるコマンド)
+    - [ARG](#arg)
+      - [コマンド](#コマンド-1)
+      - [参考](#参考-2)
+      - [例](#例)
+      - [備考](#備考)
 
 ## nginxイメージを使用して公開する
 
@@ -340,3 +346,53 @@ docker ps --filter="name=${コンテナ名}"
 sudo sysctl -w fs.file-max=524288
 ```
 
+## Dockerfile内で使用できるコマンド
+
+### ARG
+
+```docker build```時に引数で受けた値を環境変数として設定できる。
+
+#### コマンド
+
+``` sh
+docker build --build-arg ${ARGで宣言した環境変数}=${渡したい値} ${Dockerfileが配置されているパス}
+```
+
+#### 参考
+
+[Dockerfile リファレンス](http://docs.docker.jp/engine/reference/builder.html#arg)
+
+#### 例
+
+``` Dockerfile
+FROM ubuntu:latest
+
+ARG HOGE
+
+RUN echo $HOGE
+
+```
+
+``` sh
+$ docker build --build-arg HOGE=hogehoge .
+```
+
+``` txt
+Sending build context to Docker daemon  2.048kB
+Step 1/3 : FROM ubuntu:latest
+ ---> 1318b700e415
+Step 2/3 : ARG HOGE
+ ---> Running in f8e120639f74
+Removing intermediate container f8e120639f74
+ ---> 53121a4f0530
+Step 3/3 : RUN echo $HOGE
+ ---> Running in d04a646dc28d
+hogehoge
+Removing intermediate container d04a646dc28d
+ ---> 55a01aafb8e9
+Successfully built 55a01aafb8e9
+```
+
+#### 備考
+
+大文字/小文字の判定がある。
