@@ -40,6 +40,7 @@
       - [参考](#参考-2)
       - [例](#例)
       - [備考](#備考)
+  - [ホストからコンテナの環境変数を設定する](#ホストからコンテナの環境変数を設定する)
 
 ## nginxイメージを使用して公開する
 
@@ -396,3 +397,9 @@ Successfully built 55a01aafb8e9
 #### 備考
 
 大文字/小文字の判定がある。
+
+## ホストからコンテナの環境変数を設定する
+
+少し試してみた。
+
+- [docker-compose_environment_sample](https://github.com/SampleUser0001/docker-compose_environment_sample)
