@@ -2,6 +2,8 @@
 
 - [Linux Shell](#linux-shell)
   - [ディレクトリ配下のファイルでループする](#ディレクトリ配下のファイルでループする)
+    - [直下のみ](#直下のみ)
+    - [再帰＋拡張子指定](#再帰拡張子指定)
   - [ファイルを一行ずつ読み込んでループする](#ファイルを一行ずつ読み込んでループする)
     - [その1](#その1)
     - [その2](#その2)
@@ -17,9 +19,19 @@
 
 ## ディレクトリ配下のファイルでループする
 
+### 直下のみ
+
 ``` sh
 for file in $(pwd)/<対象ディレクトリ>/* ; do
-    echo ${file}
+  echo ${file}
+done 
+```
+
+### 再帰＋拡張子指定
+
+``` sh
+for file in `\find . -type f -iname "*.json" ` ; do
+  echo ${file}
 done 
 ```
 
@@ -39,7 +51,7 @@ END
 
 ``` sh 
 while read data ; do
-    echo ${data}
+  echo ${data}
 done < <対象ファイル>
 ```
 
