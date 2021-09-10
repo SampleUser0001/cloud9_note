@@ -1,5 +1,7 @@
 # AWS CodeCommit
 
+AWSが提供しているgitリポジトリ。
+
 - [AWS CodeCommit](#aws-codecommit)
   - [アクセスキーの登録](#アクセスキーの登録)
     - [参考](#参考)
