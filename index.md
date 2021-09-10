@@ -38,6 +38,7 @@
 
 ## AWS
 
+- [AWS_Common.md](./AWS/AWS_Common.md)
 - [ECR.md](./AWS/ECR.md)
 - [CloudFront.md](./AWS/CloudFront.md)
 - [ElementalMediaConvert.md](./AWS/ElementalMediaConvert.md)
