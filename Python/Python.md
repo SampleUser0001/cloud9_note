@@ -5,6 +5,7 @@
     - [ソース](#ソース)
     - [実行結果](#実行結果)
     - [参考](#参考)
+  - [str -> datetime](#str---datetime)
   - [依存モジュールの一覧化](#依存モジュールの一覧化)
     - [取得](#取得)
     - [導入](#導入)
@@ -50,6 +51,31 @@ if __name__ == '__main__':
 ### 参考
 
 - [Python > list > 二重listを一重listに変換する](https://qiita.com/7of9/items/84dcb552668a8a3bdcd3)
+
+## str -> datetime
+
+``` python
+from datetime import datetime, timezone, timedelta
+
+converted = datetime.strptime("2021-09-11T12:45:18.448117+00:00", "%Y-%m-%dT%H:%M:%S.%f%z")
+print(converted)
+print(converted.tzinfo)
+
+# timezone変換
+# timezoneインスタンスの生成
+jst_timezone = timezone(timedelta(hours=9))
+jst = converted.astimezone(jst_timezone)
+print(jst)
+print(jst.tzinfo)
+```
+
+``` txt
+<class 'datetime.datetime'>
+2021-09-11 12:45:18.448117+00:00
+UTC
+2021-09-11 21:45:18.448117+09:00
+UTC+09:00
+```
 
 ## 依存モジュールの一覧化
 
