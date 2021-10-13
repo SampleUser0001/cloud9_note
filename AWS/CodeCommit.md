@@ -6,6 +6,7 @@ AWSが提供しているgitリポジトリ。
   - [アクセスキーの登録](#アクセスキーの登録)
     - [参考](#参考)
   - [clone](#clone)
+  - [通知](#通知)
 
 ## アクセスキーの登録
 
@@ -33,3 +34,20 @@ export AWS_REGION=（リージョン名）
 export REPOSITORY_NAME=（リポジトリ名）
 git clone https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/${REPOSITORY_NAME}
 ```
+
+## 通知
+
+下記の種類がある。
+
+- SNS トピック
+  - Amazon Kinesis Data Firehose
+    - リアルタイムでストリーミングデータをデータストアや分析ツールに配信するサービス。
+  - Amazon SQS
+    - メッセージキューイングサービス
+  - AWS Lambda
+    - 説明省略。
+- AWS Chatbot
+  - Slackなどにイベントの発生を連携できる。
+  - 下記は実際に試してみた例。
+    - [スクリーンショット](./Screenshot_2021-10-06_15.07.23.png)
+
