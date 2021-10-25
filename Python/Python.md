@@ -9,6 +9,13 @@
   - [依存モジュールの一覧化](#依存モジュールの一覧化)
     - [取得](#取得)
     - [導入](#導入)
+  - [venv（仮想環境）](#venv仮想環境)
+    - [仮想環境構築](#仮想環境構築)
+    - [アクティベート](#アクティベート)
+      - [Linux](#linux)
+      - [Windows](#windows)
+    - [デアクティベート](#デアクティベート)
+    - [参考](#参考-1)
 
 ## 配列の展開
 
@@ -92,3 +99,38 @@ pip freeze > requirements.txt
 ``` sh
 pip install -r requirements.txt
 ```
+
+## venv（仮想環境）
+
+### 仮想環境構築
+
+``` 
+python3 -m venv ${環境名}
+```
+環境名は「venv」とかでOK。
+
+### アクティベート
+
+アクティベートすると「${環境名}」が表示される。
+
+#### Linux
+
+``` sh
+source ${環境名}/bin/activate
+```
+
+#### Windows
+
+``` cmd
+.\${環境名}\Scripts\activate
+```
+
+### デアクティベート
+
+```
+deactivate
+```
+
+### 参考
+
+- [venv: Python 仮想環境管理:Qiita](https://qiita.com/fiftystorm36/items/b2fd47cf32c7694adc2e)
