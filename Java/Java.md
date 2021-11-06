@@ -17,6 +17,7 @@
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
   - [Mapのループ](#mapのループ)
+  - [Listの結合](#listの結合)
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
@@ -162,6 +163,16 @@ for(Map.Entry<String, String> entry : map.entrySet()){
   entry.getValue();
 }
 
+```
+
+## Listの結合
+
+``` java
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
+Stream.concat(list.stream(), list2.stream())
+      .collect(Collectors.toList());
 ```
 
 ## 最小の実行環境を提供する(jdeps, jlink)
