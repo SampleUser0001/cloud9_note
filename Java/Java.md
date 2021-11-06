@@ -175,6 +175,20 @@ Stream.concat(list.stream(), list2.stream())
       .collect(Collectors.toList());
 ```
 
+``` java
+import java.util.List;
+import java.util.stream.Collectors;
+
+List<List<String>> listInList;
+// listInListのインスタンス生成。省略。
+
+List<String> list
+  = listInList.stream()
+              .flatMap(l -> l.stream())
+              .collect(Collectors.toList());
+
+```
+
 ## 最小の実行環境を提供する(jdeps, jlink)
 
 ### 前提
