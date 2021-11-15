@@ -26,6 +26,8 @@
       - [コンフリクトの確認](#コンフリクトの確認)
       - [マージの取り消し](#マージの取り消し)
   - [直前のコミットの取り消し](#直前のコミットの取り消し)
+  - [ファイルごとの最終更新日の取得](#ファイルごとの最終更新日の取得)
+    - [参考](#参考)
 
 ## .gitignoreについて
 
@@ -182,3 +184,13 @@ git merge --abort
 ``` sh
 git reset --hard HEAD^
 ```
+
+## ファイルごとの最終更新日の取得
+
+``` sh
+git ls-files . | xargs -I@ bash -c 'echo "$(git log -1 --format="%cd" --date=format:'%Y/%m/%d_%H:%M:%S' -- @)" @'
+```
+
+### 参考
+
+- [gitのcommit日時順にファイル一覧を表示する:$shibayu36->blog;](https://blog.shibayu36.org/entry/2018/01/16/193000)
