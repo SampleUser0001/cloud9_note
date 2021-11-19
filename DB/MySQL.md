@@ -209,8 +209,6 @@ fields
 
 ### SQL実行
 
-```--local-infile=1```が必要。
-
 ``` sh
 mysql --local-infile=1 -h ${DBサービスホスト} -u ${DBログインユーザ} -p${DBログインパスワード} ${DB名} < ${登録用SQLパス}
 ```
