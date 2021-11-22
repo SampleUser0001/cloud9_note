@@ -61,13 +61,14 @@ forever使ったり、スタートアップに起動シェルを登録したり�
 GUI＋自動ログイン前提。
 
 1. 起動sh作成。
-``` sh
-. ~/.nvm/nvm.sh
-nvm use v12.20.1
 
-cd /home/satorutanaka/c9sdk 
-node server.js -l 0.0.0.0 -p 8181 -a user:pass -w /home/satorutanaka/environment 1> /dev/null 2> /dev/null &
-```
+    ``` sh
+    . ~/.nvm/nvm.sh
+    nvm use v12.20.1
+    
+    cd /home/satorutanaka/c9sdk 
+    node server.js -l 0.0.0.0 -p 8181 -a user:pass -w /home/satorutanaka/environment 1> /dev/null 2> /dev/null &
+    ```
 
 2. ${HOME}/.bashrcに上記のshを実行するように追記。
 3. Terminalの起動をスタートアップに登録する。
