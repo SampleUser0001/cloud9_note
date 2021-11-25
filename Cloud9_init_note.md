@@ -14,8 +14,10 @@ Cloud9を起動したときに行うことの備忘録。
     - [antでJavaをインストール](#antでjavaをインストール)
       - [参考](#参考-1)
   - [Maven](#maven)
-    - [Mavenインストール](#mavenインストール)
-    - [参考](#参考-2)
+    - [Maven(binary)](#mavenbinary)
+      - [参考](#参考-2)
+    - [Maven(yum)](#mavenyum)
+      - [参考](#参考-3)
   - [ant](#ant)
     - [antインストール](#antインストール)
   - [jd-cli](#jd-cli)
@@ -30,22 +32,26 @@ Cloud9を起動したときに行うことの備忘録。
   - [pip3](#pip3)
     - [apt](#apt-1)
   - [PHP](#php)
+    - [amazon-linux-extras](#amazon-linux-extras)
+      - [参考](#参考-4)
     - [apt](#apt-2)
     - [ソースからコンパイル](#ソースからコンパイル)
       - [libxml2](#libxml2)
       - [krb5](#krb5)
-      - [参考](#参考-3)
+      - [参考](#参考-5)
   - [Composer](#composer)
-  - [php-xml](#php-xml)
+    - [よく見るエラーの対応](#よく見るエラーの対応)
+      - [mbstring](#mbstring)
+      - [dom](#dom)
   - [go](#go)
     - [go(参考)](#go参考)
   - [goofys](#goofys)
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
-    - [参考](#参考-4)
+    - [参考](#参考-6)
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
-    - [参考](#参考-5)
+    - [参考](#参考-7)
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
@@ -56,11 +62,11 @@ Cloud9を起動したときに行うことの備忘録。
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-6)
+    - [参考](#参考-8)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-7)
+    - [参考](#参考-9)
 
 ## git
 ```
@@ -472,17 +478,19 @@ mkdir ~/mount-goofys
 ## Node.js
 
 ```
+mkdir tmp
 cd tmp
+
+# 最新バージョンは下記で確認。
+# https://github.com/nvm-sh/nvm/releases
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 reboot
 ```
 
 ```
-nvm ls-remote
-```
-
-```
-nvm install <インストールしたいバージョン>
+# インストール可能バージョンの確認
+nvm ls-remote | less
+nvm install ${インストールしたいバージョン}
 ```
 
 ```
