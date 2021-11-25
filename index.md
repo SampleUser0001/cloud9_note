@@ -14,6 +14,7 @@
     - [AWS Secrets Manager](#aws-secrets-manager)
     - [AWS CodeBuild](#aws-codebuild)
     - [AWS CodeCommit](#aws-codecommit)
+    - [その他](#その他)
   - [Docker](#docker)
   - [git](#git)
   - [GoogleAnalytics](#googleanalytics)
@@ -28,7 +29,6 @@
   - [Other](#other)
 
 ## init/use
-
 - [Cloud9_init_note.md](./Cloud9_init_note.md)
 - [Cloud9_use_note.md](./Cloud9_use_note.md)
 
@@ -82,6 +82,10 @@
 ### AWS CodeCommit
 
 - [CodeCommit.md](./AWS/CodeCommit.md)
+
+### その他
+
+- [Other.md](./AWS/Other.md)
 
 ## Docker
 
