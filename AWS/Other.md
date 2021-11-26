@@ -2,7 +2,9 @@
 
 - [その他](#その他)
   - [aws cli history](#aws-cli-history)
-    - [codepipeline](#codepipeline)
+    - [CodeBuild](#codebuild)
+      - [CodeBuild情報取得](#codebuild情報取得)
+    - [CodePipeline](#codepipeline)
       - [パイプライン一覧取得](#パイプライン一覧取得)
       - [全パイプラインの情報出力](#全パイプラインの情報出力)
       - [参考](#参考)
@@ -10,7 +12,15 @@
 
 ## aws cli history
 
-### codepipeline
+### CodeBuild
+
+#### CodeBuild情報取得
+
+``` sh
+aws codebuild batch-get-projects --name ${CodeBuildName}
+```
+
+### CodePipeline
 
 #### パイプライン一覧取得
 
