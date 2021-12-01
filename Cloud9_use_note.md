@@ -106,7 +106,7 @@ mvn exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="'<引数１>' '<引
 シングルクオーテーションはなくても動くが、スペースを含む場合は必要。
 
 ### dependencyタグのjarをまとめてjarにする
-```
+``` xml
 <plugin>
   <artifactId>maven-assembly-plugin</artifactId>
   <version>3.2.0</version>
@@ -137,7 +137,7 @@ mvn exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="'<引数１>' '<引
 
 ### getter,setterを作成しない
 
-```
+``` xml
 <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 <dependency>
     <groupId>org.projectlombok</groupId>
