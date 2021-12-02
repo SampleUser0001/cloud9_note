@@ -20,6 +20,9 @@
     - [拡張子だけがほしい](#拡張子だけがほしい)
     - [拡張子を除外したファイル名が欲しい](#拡張子を除外したファイル名が欲しい)
     - [参考](#参考)
+  - [配列](#配列)
+    - [実行結果](#実行結果)
+    - [参考](#参考-1)
 
 ## ディレクトリ配下のファイルでループする
 
@@ -213,3 +216,57 @@ done
 ### 参考
 
 - [bashの変数展開によるファイル名や拡張子の取得:Qiita](https://qiita.com/mriho/items/b30b3a33e8d2e25e94a8)
+
+## 配列
+
+**bash**で起動すること。
+
+``` bash
+#!/bin/bash
+# 重要：shだとエラーになる。bashコマンドの引数として渡すこと。
+
+# 宣言
+declare -a sample_list=("a" "b" "c")
+
+# 参照
+echo ${sample_list[0]}
+echo ${sample_list[1]}
+echo ${sample_list[2]}
+echo ${sample_list[-1]}
+echo ${sample_list[@]}
+echo ${sample_list[*]}
+echo "----"
+
+# 要素数確認
+echo ${#sample_list[@]}
+echo ${#sample_list[*]}
+echo "----"
+
+# forで参照する。
+# 他にも書き方はあるが、Cっぽいのがわかりやすい気がする。
+for ((i = 0 ; i < ${#sample_list[@]} ; i++)) {
+    echo "sample_list[$i] = ${sample_list[i]}"
+}
+```
+
+### 実行結果
+
+``` txt
+a
+b
+c
+c
+a b c
+a b c
+----
+3
+3
+----
+sample_list[0] = a
+sample_list[1] = b
+sample_list[2] = c
+```
+
+### 参考
+
+- [bash 配列まとめ:Qiita](https://qiita.com/b4b4r07/items/e56a8e3471fb45df2f59)
