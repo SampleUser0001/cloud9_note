@@ -209,6 +209,9 @@ done
 
 ``` sh
 for f in *.md ;do
+  # ファイル名取得。
+  echo ${f##*/}
+  # 拡張子除外
   echo ${f%.*}
 done
 ```
