@@ -37,6 +37,15 @@
     - [実行コマンド例](#実行コマンド例)
     - [実行結果例](#実行結果例)
     - [実行結果の読み方](#実行結果の読み方)
+      - [select_type](#select_type)
+      - [type](#type)
+      - [possible_keys](#possible_keys)
+      - [key](#key)
+      - [ref](#ref)
+      - [rows](#rows)
+      - [filterd](#filterd)
+      - [Extra : 実行戦略](#extra--実行戦略)
+      - [参考](#参考-7)
       - [実際に読んでみた](#実際に読んでみた)
 
 ## 起動/終了/生存確認
@@ -264,7 +273,60 @@ mysql -t -h ${ホスト名} -u ${ログインユーザ} -p${ログインパス�
 
 ### 実行結果の読み方
 
-[8.8.2 EXPLAIN 出力フォーマット:MySQL](https://dev.mysql.com/doc/refman/5.6/ja/explain-output.html)
+#### select_type
+
+| 値 | 説明 |
+| :-- | :-- |
+| PRIMARY | 一番外側 |
+| DERIVED | 派生テーブル(サブクエリ) |
+
+#### type
+
+| 値 | 説明 |
+| :-- | :-- |
+| const | 最大1件。最初に読む。 |
+| ref | 前テーブルの行ごとに検索。一致するインデックスを持つ行をtableから読まれる。行が少ない場合はこれが最適。 |
+| eq_ref | 前テーブルの行ごとに検索。一致す値を持つ行tableから読まれる。refが使えない場合は最適。|
+| ALL | テーブルスキャン。不適切。|
+| index | インデックス版のALL。ALLほどではないが不適切。まし、という程度。 |
+ 
+#### possible_keys
+
+行の検索に使用できるキー。Explainの順と無関係に出力されるので、実際には使用できないこともある。
+
+#### key
+
+実際に使用されたキー。
+
+#### ref
+
+keyを何と比較したか。
+
+#### rows
+
+比較対象の行。
+
+#### filterd
+
+フィルタ処理される推定割合。  
+rowsの行がどこまで減るか。
+
+#### Extra : 実行戦略
+
+- Using where
+  - whereで検索する。基本的に気にする必要はないが、下記の場合は注意。
+    1. typeがindexまたはALL。
+    2. rowsが多く、whereで弾かれる行が多い。
+    3. JOIN時に内部表で出る。
+- Using index
+  - 単一indexで処理できている。早い。
+
+※type = index で、Using where と Using indexが両方出るのは、whereの処理でindexを見ている。
+
+#### 参考
+
+- [8.8.2 EXPLAIN 出力フォーマット:MySQL](https://dev.mysql.com/doc/refman/5.6/ja/explain-output.html)
+- [MySQLのEXPLAINを徹底解説!!:漢のコンピュータ道](http://nippondanji.blogspot.com/2009/03/mysqlexplain.html)
 
 #### 実際に読んでみた
 
