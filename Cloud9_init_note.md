@@ -52,6 +52,8 @@ Cloud9を起動したときに行うことの備忘録。
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
     - [参考](#参考-7)
+  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
+    - [参考](#参考-8)
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
@@ -62,11 +64,11 @@ Cloud9を起動したときに行うことの備忘録。
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-8)
+    - [参考](#参考-9)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-9)
+    - [参考](#参考-10)
 
 ## git
 ```
@@ -519,6 +521,30 @@ echo "console.log( 'Hello' );" > hello.js | node hello
 - [Qiita:ChromeOSにNode.jsをnvmでインストールする](https://qiita.com/Hiroki_M/items/f1af64fa0d6807d1cbb0)
 - [node.js - Node.jsバージョンは、再起動時に0.6から0.6に戻ります(NVM)](https://ja.ojit.com/so/node.js/1601993)
 - [Qiita:Node.jsアプリをLinux環境で常駐化させる　forever編](https://qiita.com/chihiro/items/24ca8ac81cb20c22b47e)
+
+## PHPコンテナに特定バージョンのNode.jsをインストールする
+
+``` Dockerfile
+FROM node:13.14.0 as node
+FROM php:7.4-fpm
+
+COPY --from=node /usr/local/bin/node /usr/local/bin/
+COPY --from=node /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
+RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs \
+    && ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
+    && ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
+
+RUN node --version
+# 13.14.0
+
+RUN npm install npm@7.6.0 -g
+RUN npm --version
+# 7.6.0
+```
+
+### 参考
+
+- [PHPやRubyとNode.jsを同一コンテナ内に手っ取り早く管理したい人のためのマルチステージビルド:Qiita](https://qiita.com/ProjectEuropa/items/7435976d92793c8e9fe3)
 
 ## webpack
 
