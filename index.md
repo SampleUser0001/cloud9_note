@@ -137,6 +137,7 @@
 ## Logic
 
 - [誤差](./Logic/error.md)
+- [文字コード](./Logic/Character_encoding.md)
 
 ## Other
 
