@@ -26,6 +26,7 @@
   - [Python](#python)
   - [Microsoft Office](#microsoft-office)
   - [Middleware](#middleware)
+  - [Logic](#logic)
   - [Other](#other)
 
 ## init/use
@@ -132,6 +133,10 @@
 ## Middleware
 
 - [WebSphere.md](./Middleware/WebSphere.md)
+
+## Logic
+
+- [誤差](./Logic/error.md)
 
 ## Other
 
