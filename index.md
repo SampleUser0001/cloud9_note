@@ -138,6 +138,7 @@
 
 - [誤差](./Logic/error.md)
 - [文字コード](./Logic/Character_encoding.md)
+- [VPN](./Logic/VPN.md)
 
 ## Other
 
