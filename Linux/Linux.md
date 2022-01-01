@@ -34,6 +34,8 @@
   - [バイナリファイルかどうか確認する(fileコマンド)](#バイナリファイルかどうか確認するfileコマンド)
   - [文字コードを変換する(iconv)](#文字コードを変換するiconv)
     - [参考](#参考-4)
+  - [xargs](#xargs)
+    - [パイプで受け取ったファイルパスの出力位置を任意で修正する](#パイプで受け取ったファイルパスの出力位置を任意で修正する)
   - [サービスの登録(systemd)(Ubuntu)](#サービスの登録systemdubuntu)
     - [登録方法](#登録方法)
     - [起動/停止/ステータス確認](#起動停止ステータス確認)
@@ -280,6 +282,14 @@ iconv --f sjis -t utf8 ${変換対象ファイル}
 ### 参考
 
 - [atmarkit:【 iconv 】コマンド――文字コードを変換する](https://www.atmarkit.co.jp/ait/articles/1609/12/news019.html)
+
+## xargs
+
+### パイプで受け取ったファイルパスの出力位置を任意で修正する
+
+``` sh
+find . -type f | xargs -I{} bash -c "iconv --f sjis -t utf8 {} > iconv_utf8_{}
+```
 
 ## サービスの登録(systemd)(Ubuntu)
 
