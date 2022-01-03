@@ -29,16 +29,18 @@ Cloud9を起動したときに行うことの備忘録。
   - [docker-compose](#docker-compose)
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
+  - [python](#python)
+    - [参考](#参考-4)
   - [pip3](#pip3)
     - [apt](#apt-1)
   - [PHP](#php)
     - [amazon-linux-extras](#amazon-linux-extras)
-      - [参考](#参考-4)
+      - [参考](#参考-5)
     - [apt](#apt-2)
     - [ソースからコンパイル](#ソースからコンパイル)
       - [libxml2](#libxml2)
       - [krb5](#krb5)
-      - [参考](#参考-5)
+      - [参考](#参考-6)
   - [Composer](#composer)
     - [よく見るエラーの対応](#よく見るエラーの対応)
       - [mbstring](#mbstring)
@@ -48,12 +50,12 @@ Cloud9を起動したときに行うことの備忘録。
   - [goofys](#goofys)
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
-    - [参考](#参考-6)
+    - [参考](#参考-7)
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
-    - [参考](#参考-7)
-  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
     - [参考](#参考-8)
+  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
+    - [参考](#参考-9)
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
@@ -64,11 +66,11 @@ Cloud9を起動したときに行うことの備忘録。
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-9)
+    - [参考](#参考-10)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-10)
+    - [参考](#参考-11)
 
 ## git
 ```
@@ -277,6 +279,36 @@ docker-compose --version
 ### 参考サイト
 [https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af](https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af)
 
+## python
+
+``` sh
+# インストールバージョンは事前に確認
+export INSTALL_PYTHON_VERSION=3.9.9
+
+cd /opt 
+sudo wget https://www.python.org/ftp/python/${INSTALL_PYTHON_VERSION}/Python-${INSTALL_PYTHON_VERSION}.tgz
+sudo tar xzf Python-${INSTALL_PYTHON_VERSION}.tgz
+
+cd Python-${INSTALL_PYTHON_VERSION}
+sudo ./configure --enable-optimizations 
+sudo make altinstall 
+
+sudo rm -f /opt/Python-${INSTALL_PYTHON_VERSION}.tgz 
+
+# /usr/local/binにインストールされる。シンボリックリンクを貼る。
+cd /usr/local/bin
+
+# ファイル名を確認
+ls python*
+sudo ln -s /usr/local/bin/${lsで確認したpythonコマンドのファイル名} python3
+ls pip*
+sudo ln -s /usr/local/bin/${lsで確認したpipコマンドのファイル名} pip3
+```
+
+### 参考
+
+[Tecadmin](https://tecadmin.net/install-python-3-9-on-amazon-linux/)
+
 ## pip3
 
 ### apt
@@ -287,6 +319,7 @@ sudo apt install -y python3-pip
 ```
 
 ${HOME}/.bashrc
+
 ``` sh
 alias pip=pip3
 ```
