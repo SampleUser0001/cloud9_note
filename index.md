@@ -14,6 +14,7 @@
     - [AWS Secrets Manager](#aws-secrets-manager)
     - [AWS CodeBuild](#aws-codebuild)
     - [AWS CodeCommit](#aws-codecommit)
+    - [AWS Lambda](#aws-lambda)
     - [その他](#その他)
   - [Docker](#docker)
   - [git](#git)
@@ -83,6 +84,10 @@
 ### AWS CodeCommit
 
 - [CodeCommit.md](./AWS/CodeCommit.md)
+
+### AWS Lambda
+
+- [AWS_Lambda](./AWS/AWS_Lambda.md)
 
 ### その他
 
