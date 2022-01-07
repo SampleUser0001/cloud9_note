@@ -67,10 +67,12 @@ Cloud9を起動したときに行うことの備忘録。
     - [init](#init)
     - [init 別パターン](#init-別パターン)
     - [参考](#参考-10)
+  - [Terraform](#terraform)
+    - [参考](#参考-11)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-11)
+    - [参考](#参考-12)
 
 ## git
 ```
@@ -706,6 +708,28 @@ http://<IPアドレス>:8080
 
 [Qitt:Vue.jsについての基礎(インストール)](https://qiita.com/watataku/items/26f2ce546fcd562e4b46)  
 [Qiita:AWS Cloud9 で Vue.js を使う](https://qiita.com/tamusan100/items/32acfd5e70336f33273f)
+
+## Terraform
+
+``` sh
+# latest version
+# https://www.terraform.io/downloads
+export TERRAFORM_INSTALL_VERSION=1.1.3
+
+# download last version
+# OSは確認すること。
+wget https://releases.hashicorp.com/terraform/${TERRAFORM_INSTALL_VERSION}/terraform_${TERRAFORM_INSTALL_VERSION}_linux_amd64.zip
+
+# unzip in bin folder
+sudo unzip ./terraform_${TERRAFORM_INSTALL_VERSION}_linux_amd64.zip -d /usr/local/bin/
+
+# check its working
+terraform -v
+```
+
+### 参考
+
+- [5分で分かるTerraform（Infrastructure as Code）:LAC WATCH](https://www.lac.co.jp/lacwatch/service/20200903_002270.html)
 
 ## OWASP ZAP
 
