@@ -20,6 +20,8 @@ Cloud9を起動したときに行うことの備忘録。
       - [参考](#参考-3)
   - [ant](#ant)
     - [antインストール](#antインストール)
+  - [Spring boot cli](#spring-boot-cli)
+    - [参考](#参考-4)
   - [jd-cli](#jd-cli)
   - [telnet](#telnet)
     - [telnetインストール](#telnetインストール)
@@ -30,17 +32,17 @@ Cloud9を起動したときに行うことの備忘録。
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
   - [python](#python)
-    - [参考](#参考-4)
+    - [参考](#参考-5)
   - [pip3](#pip3)
     - [apt](#apt-1)
   - [PHP](#php)
     - [amazon-linux-extras](#amazon-linux-extras)
-      - [参考](#参考-5)
+      - [参考](#参考-6)
     - [apt](#apt-2)
     - [ソースからコンパイル](#ソースからコンパイル)
       - [libxml2](#libxml2)
       - [krb5](#krb5)
-      - [参考](#参考-6)
+      - [参考](#参考-7)
   - [Composer](#composer)
     - [よく見るエラーの対応](#よく見るエラーの対応)
       - [mbstring](#mbstring)
@@ -50,12 +52,12 @@ Cloud9を起動したときに行うことの備忘録。
   - [goofys](#goofys)
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
-    - [参考](#参考-7)
+    - [参考](#参考-8)
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
-    - [参考](#参考-8)
-  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
     - [参考](#参考-9)
+  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
+    - [参考](#参考-10)
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
@@ -66,13 +68,13 @@ Cloud9を起動したときに行うことの備忘録。
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-10)
-  - [Terraform](#terraform)
     - [参考](#参考-11)
+  - [Terraform](#terraform)
+    - [参考](#参考-12)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-12)
+    - [参考](#参考-13)
 
 ## git
 ```
@@ -227,6 +229,30 @@ sudo mv apache-ant-1.10.7 /usr/share/ant
 sudo ln -s /usr/share/ant/apache-ant-1.10.7/bin/ant /usr/bin/ant
 ```
 ※yumのantは古いため使わない。
+
+## Spring boot cli
+
+``` sh
+# バージョンは事前に確認。
+export SPRING_BOOT_CLI_INSTALL_VERSION=2.6.2
+cd /opt
+sudo wget https://repo.spring.io/release/org/springframework/boot/spring-boot-cli/${SPRING_BOOT_CLI_INSTALL_VERSION}/spring-boot-cli-${SPRING_BOOT_CLI_INSTALL_VERSION}-bin.tar.gz
+sudo tar zxvf spring-boot-cli-${SPRING_BOOT_CLI_INSTALL_VERSION}-bin.tar.gz
+
+# パスは要確認。
+# SpringBootのドキュメントにはREADMEに従えと書いてあるが・・・
+sudo ln -s ${PWD}/spring-${SPRING_BOOT_CLI_INSTALL_VERSION}/bin/spring /usr/local/bin/spring
+
+# インストールできたことを確認
+spring --version
+
+# ダウンロードしてきたファイルを削除
+sudo rm spring-boot-cli-${SPRING_BOOT_CLI_INSTALL_VERSION}-bin.tar.gz
+```
+
+### 参考
+
+- [](https://spring.pleiades.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.installing.cli.manual-installation)
 
 ## jd-cli
 
