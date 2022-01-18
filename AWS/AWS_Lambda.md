@@ -7,6 +7,7 @@
     - [CodeCommitにソースを登録する](#codecommitにソースを登録する)
     - [Run Local](#run-local)
     - [Deploy](#deploy)
+  - [CodeCommitのプルリクエストにコメントを記載する](#codecommitのプルリクエストにコメントを記載する)
 
 ## cloud9に開発環境を作成する
 
@@ -41,3 +42,19 @@ Local Functions -> 実行したいLambda関数を選択 -> 上の実行マーク
 
 Local Functions -> デプロイしたいLambda関数を右クリック -> Deploy
 
+## CodeCommitのプルリクエストにコメントを記載する
+
+``` python
+import boto3
+from datetime import datetime as dt
+
+def lambda_handler(event, context):
+    content = [dt.now().strftime('%Y/%m/%d %H:%M:%S'), 'hoge','piyo']
+    boto3.client('codecommit').post_comment_for_pull_request(
+        pullRequestId='13',
+        repositoryName='CodeBuild_Environment',
+        beforeCommitId='385416ed5c736e73920993f1d0eb6eb7ef2d2cb0',
+        afterCommitId='8768709c4620f7c858515a3aeb31bdf65a3f6035',
+        content='  \n'.join(content)
+    )
+```
