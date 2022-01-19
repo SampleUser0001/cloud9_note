@@ -8,6 +8,12 @@
     - [Run Local](#run-local)
     - [Deploy](#deploy)
   - [CodeCommitのプルリクエストにコメントを記載する](#codecommitのプルリクエストにコメントを記載する)
+  - [serverless framework](#serverless-framework)
+    - [コマンド](#コマンド)
+      - [初期化](#初期化)
+      - [デプロイ](#デプロイ)
+      - [削除](#削除)
+    - [参考](#参考)
 
 ## cloud9に開発環境を作成する
 
@@ -58,3 +64,31 @@ def lambda_handler(event, context):
         content='  \n'.join(content)
     )
 ```
+
+## serverless framework
+
+AWS Lambdaをリリースするフレームワーク
+
+### コマンド
+
+#### 初期化
+
+``` sh
+serverless create --template aws-python3 --name ${プロジェクト名} --path ${ディレクトリ名}
+```
+
+#### デプロイ
+
+``` sh
+sls deploy -v --stage ${ステージング名}
+```
+
+#### 削除
+
+``` sh
+sls remove -v 
+```
+
+### 参考
+
+- [ServerlessSampleLambdaProject:SampleUser0001:Github](https://github.com/SampleUser0001/ServerlessSampleLambdaProject)
