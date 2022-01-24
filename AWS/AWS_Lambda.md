@@ -13,7 +13,10 @@
       - [初期化](#初期化)
       - [デプロイ](#デプロイ)
       - [削除](#削除)
-    - [参考](#参考)
+    - [設定](#設定)
+      - [参考](#参考)
+    - [参考](#参考-1)
+  - [ホスト側のaws cli設定をコンテナに持ち込んで、boto3する](#ホスト側のaws-cli設定をコンテナに持ち込んでboto3する)
 
 ## cloud9に開発環境を作成する
 
@@ -100,3 +103,24 @@ profileを設定する場合は、credentialsに記載する。
 ### 参考
 
 - [ServerlessSampleLambdaProject:SampleUser0001:Github](https://github.com/SampleUser0001/ServerlessSampleLambdaProject)
+
+## ホスト側のaws cli設定をコンテナに持ち込んで、boto3する
+
+~/.awsをコンテナに持ち込めばOK。  
+```.gitignore```に```.aws```を記載すること。
+
+``` sh
+# docker-compose.ymlと同じディレクトリで実行する。
+ln -s ~/.aws .aws
+```
+
+パスは実行ユーザに依存。
+
+docker-compose.yml
+
+``` yml
+services:
+  python:
+    volumes:
+      - .aws:/root/.aws
+```
