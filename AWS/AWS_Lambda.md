@@ -89,6 +89,14 @@ sls deploy -v --stage ${ステージング名}
 sls remove -v 
 ```
 
+### 設定
+
+profileを設定する場合は、credentialsに記載する。
+
+#### 参考
+
+- [Serverless FrameworkでProfileが存在しないというエラーの対処法:DevelopersIO](https://dev.classmethod.jp/articles/serverless-framework-profil-edoes-not-exist/)
+
 ### 参考
 
 - [ServerlessSampleLambdaProject:SampleUser0001:Github](https://github.com/SampleUser0001/ServerlessSampleLambdaProject)
