@@ -33,7 +33,7 @@ aws codepipeline list-pipelines
 ``` sh 
 #!/bin/bash
 while read data ; do
-  aws codepipeline -get-pipeline --name ${data} > ${data}.json
+  aws codepipeline get-pipeline --name ${data} > ${data}.json
 done << END
 `aws codepipeline list-pipelines | jq -r '.[] | .[] | .name'`
 ```
