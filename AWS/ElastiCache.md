@@ -49,7 +49,7 @@ alias redis-cli=/opt/redis-stable/src/redis-cli
 
 ```
 export redis_host=${ElastiCacheのホスト名}
-redis-cli -c -h mycachecluster.eaogs8.0001.usw2.cache.amazonaws.com -p 6379
+redis-cli -c -h ${redis_host} -p 6379
 ```
 
 ### redis-cliコマンド
