@@ -16,6 +16,7 @@
       - [Windows](#windows)
     - [デアクティベート](#デアクティベート)
     - [参考](#参考-1)
+  - [for](#for)
 
 ## 配列の展開
 
@@ -134,3 +135,32 @@ deactivate
 ### 参考
 
 - [venv: Python 仮想環境管理:Qiita](https://qiita.com/fiftystorm36/items/b2fd47cf32c7694adc2e)
+
+## for
+
+``` python
+# -*- coding: utf-8 -*-
+
+dic = {0:'hoge', 1:'piyo'}
+
+# キーを取得
+for k in dic:
+    print('k : {}'.format(k))
+    
+# 値だけを取得
+for v in dic.values():
+    print('v : {}'.format(v))
+
+# 両方取得
+for (k, v) in dic.items():
+    print('k : {} , v : {}'.format(k,v))
+```
+
+``` txt
+k : 0
+k : 1
+v : hoge
+v : piyo
+k : 0 , v : hoge
+k : 1 , v : piyo
+```
