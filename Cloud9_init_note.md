@@ -102,6 +102,31 @@ vi .bashrc
 #### 一時
 git config --global core.editor 'vim -c "set fenc=utf-8"'
 
+## aws-cli
+
+一応初期設定されているが、設定を変更したい場合に行う。
+
+### 一時
+
+```
+export AWS_ACCESS_KEY_ID=****5678
+export AWS_SECRET_ACCESS_KEY=****5678
+```
+
+### 永続
+
+1. Preferences(右上)をクリック。
+2. AWS Settings -> Credentials -> AWS managed temporary credentialsをoffにする。
+3. ```aws configure```を実行。
+
+### 参考
+
+- 一時
+  - [AWS ECRでAWS CLIの認証で弾かれた問題:Qiita](https://qiita.com/kaito_program/items/7b9ba489e44d2295cf6f)
+- 永続
+  - [Cloud9からIAM Roleの権限でAWS CLIを実行する:Developers:IO](https://dev.classmethod.jp/articles/execute-aws-cli-with-iam-role-on-cloud9/)
+    - credentialsのチェックをoffにする。
+
 ## Java
 
 Amazon Linux 2でcloud9を再作成したすると、最初から入っている。  
