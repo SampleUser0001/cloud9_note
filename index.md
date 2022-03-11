@@ -136,6 +136,7 @@
 
 ## PHP
 
+- [Composer](./PHP/composer.md)
 - [phpDocumentor](./PHP/phpDocumentor.md)
 
 ## Python
