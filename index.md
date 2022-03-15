@@ -139,6 +139,7 @@
 
 - [Composer](./PHP/composer.md)
 - [phpDocumentor](./PHP/phpDocumentor.md)
+- [Laravel](./PHP/Laravel.md)
 
 ### Laravel VerUP リンク
 
