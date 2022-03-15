@@ -20,6 +20,11 @@ function func01(args, (error, callback) => {
 ``` bash
 npm cache clean --force
 rm -rf ~/.npm
+
+# yarnを使っている場合はこれも実行。
+yarn cache clean --force
+rm -rf ~/.yarn
+
 rm -rf node_modules
 ```
 
