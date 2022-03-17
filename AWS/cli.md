@@ -1,11 +1,22 @@
 # aws cli
 
 - [aws cli](#aws-cli)
-  - [s3](#s3)
+  - [S3](#s3)
+    - [正規表現を使う](#正規表現を使う)
     - [recursiveオプションの挙動](#recursiveオプションの挙動)
       - [S3 → local](#s3--local)
 
-## s3
+## S3
+
+### 正規表現を使う
+
+``` bash
+aws s3 rm s3://${バケット名}/${パス}/ --exclude '*' --include '${処理対象の正規表現}' --recursive --dryrun
+```
+
+- ```--dryrun```で確認したほうが良い。
+- 再帰処理される。
+  - ```--recursive```オプションの影響だが、削除すると動かない。
 
 ### recursiveオプションの挙動
 
