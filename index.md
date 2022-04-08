@@ -16,6 +16,7 @@
     - [AWS CodeCommit](#aws-codecommit)
     - [AWS Lambda](#aws-lambda)
     - [ElastiCache](#elasticache)
+    - [CodeGuru](#codeguru)
     - [cloud9](#cloud9)
     - [その他](#その他)
   - [Docker](#docker)
@@ -96,6 +97,10 @@
 ### ElastiCache
 
 - [ElastiCache.md](./AWS/ElastiCache.md)
+
+### CodeGuru
+
+- [CodeGuru.md](./AWS/CodeGuru.md)
 
 ### cloud9
 
