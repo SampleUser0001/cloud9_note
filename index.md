@@ -44,6 +44,7 @@
 - [Shell.md](./Linux/Shell.md)
 - [jq.md](./Linux/jq.md)
 - [logrotate.md](./Linux/logrotate.md)
+- [FTP.md](./Linux/FTP.md)
 
 ## DB
 
