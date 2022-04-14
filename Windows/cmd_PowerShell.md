@@ -6,6 +6,7 @@
     - [再帰grep](#再帰grep)
   - [findstr](#findstr)
     - [findstr:オプション](#findstrオプション)
+  - [find](#find)
 
 ## tail
 
@@ -39,3 +40,8 @@ findstr /s /i /n "検索文字列" "検索対象パス"
 | /n       | 検索結果に行番号を表示する。 |
 | /i       | 大文字小文字の違いを無視する。 |
 
+## find
+
+``` powershell
+Get-ChildItem -r -Filter "条件" -Name
+```
