@@ -25,12 +25,12 @@
   - [VSCode](#vscode)
   - [Windows](#windows)
   - [Java](#java)
+    - [Middleware](#middleware)
   - [JavaScript](#javascript)
   - [PHP](#php)
     - [Laravel VerUP リンク](#laravel-verup-リンク)
   - [Python](#python)
   - [Microsoft Office](#microsoft-office)
-  - [Middleware](#middleware)
   - [Logic](#logic)
   - [Other](#other)
 
@@ -136,7 +136,11 @@
 
 - [Java.md](./Java/Java.md)
 - [SpringBoot.md](./Java/SpringBoot.md)
-- [Tomcat.md](./Java/Tomcat.md)
+
+### Middleware
+
+- [WebSphere.md](./Java/Middleware/WebSphere.md)
+- [Tomcat.md](./Java/Middleware/Tomcat.md)
 
 ## JavaScript
 
@@ -169,10 +173,6 @@
 ## Microsoft Office
 
 - [Excel.md](./MicrosoftOffice/Excel.md)
-
-## Middleware
-
-- [WebSphere.md](./Middleware/WebSphere.md)
 
 ## Logic
 
