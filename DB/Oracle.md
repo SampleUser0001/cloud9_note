@@ -27,6 +27,7 @@
     - [ctlファイル](#ctlファイル)
       - [参考：登録方法](#参考登録方法)
     - [実行](#実行)
+  - [Timestamp型 -> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
 
 ## SQL*plus
 
@@ -338,3 +339,7 @@ trailing nullcols(
 sqlldr <接続情報> <ctlファイルパス>
 ```
 ※接続情報はsql*plusと同じ。
+
+## Timestamp型 -> 秒変換する(EXTRACT)
+
+[SQL.md](https://sampleuser0001.github.io/cloud9_note/DB/SQL.html#timestamp%E5%9E%8B---%E7%A7%92%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8Bextract)参照。
