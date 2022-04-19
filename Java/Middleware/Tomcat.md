@@ -4,6 +4,7 @@
   - [ディレクトリ構成](#ディレクトリ構成)
     - [conf配下](#conf配下)
     - [webapps配下](#webapps配下)
+  - [環境変数](#環境変数)
   - [Dockerコンテナとして起動する](#dockerコンテナとして起動する)
     - [設定ファイルの取得](#設定ファイルの取得)
     - [tomcat/webapps/${APPLICATION_NAME}/WEB-INF/web.xml](#tomcatwebappsapplication_nameweb-infwebxml)
@@ -40,6 +41,13 @@ work/
 ./${TOMCAT_APPLICATION_NAME}/WEB-INF/classes/**/*.class
 ./${TOMCAT_APPLICATION_NAME}/WEB-INF/lib/**/*.jar
 ```
+
+## 環境変数
+
+| 環境変数名 | 概要 | デフォルト |
+| :--------- | :--- | :--------- |
+| CATALINA_BASE | ロギング、作業ディレクトリ、confディレクトリ、webappディレクトリ等のベースディレクトリ | Tomcatインストールディレクトリ |
+| CATALINA_HOME | lib、スクリプトなどの静的なものが格納されているディレクトリ | Tomcatインストールディレクトリ |
 
 ## Dockerコンテナとして起動する
 
