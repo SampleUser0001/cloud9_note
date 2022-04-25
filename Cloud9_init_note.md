@@ -8,20 +8,24 @@ Cloud9を起動したときに行うことの備忘録。
     - [エディタの設定](#エディタの設定)
       - [永続](#永続)
       - [一時](#一時)
+  - [aws-cli](#aws-cli)
+    - [一時](#一時-1)
+    - [永続](#永続-1)
+    - [参考](#参考)
   - [Java](#java)
     - [yumでJavaをインストール](#yumでjavaをインストール)
-      - [参考](#参考)
-    - [antでJavaをインストール](#antでjavaをインストール)
       - [参考](#参考-1)
+    - [antでJavaをインストール](#antでjavaをインストール)
+      - [参考](#参考-2)
   - [Maven](#maven)
     - [Maven(binary)](#mavenbinary)
-      - [参考](#参考-2)
-    - [Maven(yum)](#mavenyum)
       - [参考](#参考-3)
+    - [Maven(yum)](#mavenyum)
+      - [参考](#参考-4)
   - [ant](#ant)
     - [antインストール](#antインストール)
   - [Spring boot cli](#spring-boot-cli)
-    - [参考](#参考-4)
+    - [参考](#参考-5)
   - [jd-cli](#jd-cli)
   - [telnet](#telnet)
     - [telnetインストール](#telnetインストール)
@@ -32,17 +36,17 @@ Cloud9を起動したときに行うことの備忘録。
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
   - [python](#python)
-    - [参考](#参考-5)
+    - [参考](#参考-6)
   - [pip3](#pip3)
     - [apt](#apt-1)
   - [PHP](#php)
     - [amazon-linux-extras](#amazon-linux-extras)
-      - [参考](#参考-6)
+      - [参考](#参考-7)
     - [apt](#apt-2)
     - [ソースからコンパイル](#ソースからコンパイル)
       - [libxml2](#libxml2)
       - [krb5](#krb5)
-      - [参考](#参考-7)
+      - [参考](#参考-8)
   - [Composer](#composer)
     - [よく見るエラーの対応](#よく見るエラーの対応)
       - [mbstring](#mbstring)
@@ -52,12 +56,12 @@ Cloud9を起動したときに行うことの備忘録。
   - [goofys](#goofys)
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
-    - [参考](#参考-8)
+    - [参考](#参考-9)
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
-    - [参考](#参考-9)
-  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
     - [参考](#参考-10)
+  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
+    - [参考](#参考-11)
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
@@ -68,13 +72,13 @@ Cloud9を起動したときに行うことの備忘録。
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-11)
-  - [Terraform](#terraform)
     - [参考](#参考-12)
+  - [Terraform](#terraform)
+    - [参考](#参考-13)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-13)
+    - [参考](#参考-14)
 
 ## git
 ```
@@ -100,7 +104,10 @@ vi .bashrc
 ```
 
 #### 一時
+
+``` bash
 git config --global core.editor 'vim -c "set fenc=utf-8"'
+```
 
 ## aws-cli
 
@@ -108,7 +115,7 @@ git config --global core.editor 'vim -c "set fenc=utf-8"'
 
 ### 一時
 
-```
+``` bash
 export AWS_ACCESS_KEY_ID=****5678
 export AWS_SECRET_ACCESS_KEY=****5678
 ```

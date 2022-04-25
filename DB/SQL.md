@@ -12,6 +12,8 @@ SQLのテクニック全般
     - [fromにしかないレコードも抽出する](#fromにしかないレコードも抽出する)
     - [joinにしかないレコードも抽出する](#joinにしかないレコードも抽出する)
     - [どちらでもいいから片方にあるレコードを抽出する](#どちらでもいいから片方にあるレコードを抽出する)
+  - [Timestamp型 -> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
+    - [参考](#参考)
 
 ## case-when-then
 
@@ -120,19 +122,44 @@ where id not exists (
 ## 外部結合
 
 ### fromにしかないレコードも抽出する
+
 ```sql
 from テーブル1 left outer join テーブル2 on 結合条件
 where その他の条件
 ```
 
 ### joinにしかないレコードも抽出する
+
 ```sql
 from テーブル1 right outer join テーブル2 on 結合条件
 where その他の条件
 ```
 
 ### どちらでもいいから片方にあるレコードを抽出する
+
 ```sql
 from テーブル1 full outer join テーブル2 on 結合条件
 where その他の条件
 ```
+
+## Timestamp型 -> 秒変換する(EXTRACT)
+
+Oracle限定。  
+EXTRACT関数を使う。  
+EXTRACT関数は```EXTRACT( 要素名 from Timestamp型 )で、その要素の値が取得できる。  
+日時分秒を取得して、単位の値をかける。
+
+例)ミリ秒を取得する。
+
+``` SQL
+select extract( day from diff )*24*60*60*1000 +
+       extract( hour from diff )*60*60*1000 +
+       extract( minute from diff )*60*1000 +
+       round(extract( second from diff )*1000 ) total_milliseconds
+ from (select systimestamp - to_timestamp( '2012-07-23', 'yyyy-mm-dd' ) diff
+         from dual);
+```
+
+### 参考
+
+- [Oracleの2つのタイムスタンプの差をミリ秒単位で計算する:Code Examples](https://code-examples.net/ja/q/b146aa)

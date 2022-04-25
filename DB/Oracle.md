@@ -27,6 +27,9 @@
     - [ctlファイル](#ctlファイル)
       - [参考：登録方法](#参考登録方法)
     - [実行](#実行)
+  - [Timestamp型 -> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
+  - [Oracle on Docker](#oracle-on-docker)
+    - [参考](#参考-4)
 
 ## SQL*plus
 
@@ -338,3 +341,15 @@ trailing nullcols(
 sqlldr <接続情報> <ctlファイルパス>
 ```
 ※接続情報はsql*plusと同じ。
+
+## Timestamp型 -> 秒変換する(EXTRACT)
+
+[SQL.md](https://sampleuser0001.github.io/cloud9_note/DB/SQL.html#timestamp%E5%9E%8B---%E7%A7%92%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8Bextract)参照。
+
+## Oracle on Docker
+
+近いうちに書く。
+
+### 参考
+
+- [DockerでOracle動かしたついでに、公式サンプルデータを突っ込んでから、ER図を自動生成してみようぜ:Zenn](https://zenn.dev/angelica/articles/9e2411db5fc1b7)
