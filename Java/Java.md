@@ -165,6 +165,22 @@ for(Map.Entry<String, String> entry : map.entrySet()){
 
 ```
 
+## ディレクトリを再帰的にたどる
+
+``` java
+import java.util.stream.Stream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.IOException;
+
+try (Stream<Path> stream = Files.walk(Paths.get("."))) {
+    stream.forEach(System.out::println);
+} catch(IOException e) {
+    e.printStackTrace();
+}
+```
+
 ## Listの結合
 
 ``` java
