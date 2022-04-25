@@ -39,3 +39,8 @@ findstr /s /i /n "検索文字列" "検索対象パス"
 | /n       | 検索結果に行番号を表示する。 |
 | /i       | 大文字小文字の違いを無視する。 |
 
+## touch（新しいファイルを生成する）
+
+``` powershell
+New-Item -Path . -Name "test.txt" -ItemType "file" -Value "New-Item cmdlet test."
+```
