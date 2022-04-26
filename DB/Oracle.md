@@ -2,36 +2,61 @@
 
 - [Oracle](#oracle)
   - [SQL*plus](#sqlplus)
+    - [インストール](#インストール)
+      - [参考](#参考)
     - [ログイン](#ログイン)
     - [横幅を調整する](#横幅を調整する)
     - [項目表示時の横幅を調節する](#項目表示時の横幅を調節する)
     - [ヘッダ行の表示タイミングを制御する](#ヘッダ行の表示タイミングを制御する)
+    - [「レコードが選択されませんでした」を出力しない](#レコードが選択されませんでしたを出力しない)
   - [ユーザアカウントロック解除](#ユーザアカウントロック解除)
     - [ユーザアカウントステータス確認](#ユーザアカウントステータス確認)
-    - [参考](#参考)
+    - [参考](#参考-1)
   - [ユーザ・テーブルごと権限確認](#ユーザテーブルごと権限確認)
   - [実行計画取得](#実行計画取得)
     - [対象テーブル一覧取得](#対象テーブル一覧取得)
     - [統計情報更新](#統計情報更新)
     - [実行計画取得](#実行計画取得-1)
   - [テーブル一覧確認](#テーブル一覧確認)
-    - [参考](#参考-1)
-  - [テーブル定義取得](#テーブル定義取得)
     - [参考](#参考-2)
+  - [テーブル定義取得](#テーブル定義取得)
+    - [参考](#参考-3)
   - [CSVデータ取得](#csvデータ取得)
     - [方法1](#方法1)
     - [方法2](#方法2)
     - [カラム名の出力について](#カラム名の出力について)
-    - [参考](#参考-3)
+    - [参考](#参考-4)
   - [CSVデータ登録](#csvデータ登録)
     - [ctlファイル](#ctlファイル)
       - [参考：登録方法](#参考登録方法)
     - [実行](#実行)
   - [Timestamp型 -> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
   - [Oracle on Docker](#oracle-on-docker)
-    - [参考](#参考-4)
+    - [参考](#参考-5)
 
 ## SQL*plus
+
+### インストール
+
+Windowsにインストールする方法を記載。
+
+1. [ここ](https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html)からファイルダウンロード。
+  - Basic Package
+  - SQL*Plus Package
+2. ```mkdir c:\oracle```
+3. 取得したファイルを展開し、```c:\oracle```に配置。
+4. ```c:\oracle\tnsnames.ora```を作成
+5. 環境変数追加
+  ``` cmd
+  set ORACLE_HOME=c:\oracle
+  set PATH=%PATH%;%ORACLE_HOME%
+  set TNS_ADMIN=%ORACLE_HOME%
+  set NLS_LANG = JAPANESE_JAPAN.JA16SJISTILDE
+  ```
+
+#### 参考
+
+- [【最新】Oracleクライアントのインストール手順:おじさんネットワークエンジニアの気まぐれ日記](https://yutoko.com/oracle%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/)
 
 ### ログイン
 
@@ -40,9 +65,27 @@ sqlplus /nolog
 conn sys/oracle as sysdba
 ```
 
+``` cmd
+set ORACLE_LOGIN_USER=
+set ORACLE_LOGIN_PASSWORD=
+set ORACLE_SERVER_HOST=
+set ORACLE_SERVER_PORT=
+set ORACLE_CONNECT_WORD=
+set EXECUTE_SQL_PATH=
+sqlplus -s %ORACLE_LOGIN_USER%/%ORACLE_LOGIN_PASSWORD%@%ORACLE_SERVER_HOST%:%ORACLE_SERVER_PORT%/%ORACLE_CONNECT_WORD% @%EXECUTE_SQL_PATH%
 ```
-sqlplus <ユーザ名（スキーマ名）>/<パスワード>@<接続先ホスト>:<ポート番号>/<接続文字列> @<実行したいSQLのパス>
+
+``` bash
+export ORACLE_LOGIN_USER=
+export ORACLE_LOGIN_PASSWORD=
+export ORACLE_SERVER_HOST=
+export ORACLE_SERVER_PORT=
+export ORACLE_CONNECT_WORD=
+export EXECUTE_SQL_PATH=
+sqlplus -s ${ORACLE_LOGIN_USER}/${ORACLE_LOGIN_PASSWORD}@${ORACLE_SERVER_HOST}:${ORACLE_SERVER_PORT}/${ORACLE_CONNECT_WORD} @${EXECUTE_SQL_PATH%}
 ```
+
+```-s```オプションはWelcomeメッセージを表示しない設定。
 
 ### 横幅を調整する
 
@@ -60,6 +103,12 @@ column <列名> format a{値} [TRUNCATE]
 
 ``` sql
 set pagesize <値>
+```
+
+### 「レコードが選択されませんでした」を出力しない
+
+``` sql
+set FEEDBACK off
 ```
 
 ## ユーザアカウントロック解除
