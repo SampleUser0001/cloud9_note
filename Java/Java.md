@@ -17,6 +17,7 @@
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
   - [Mapのループ](#mapのループ)
+  - [ディレクトリを再帰的にたどる](#ディレクトリを再帰的にたどる)
   - [Listの結合](#listの結合)
   - [指定した文字列で結合する](#指定した文字列で結合する)
     - [Streamを結合する](#streamを結合する)
@@ -165,6 +166,22 @@ for(Map.Entry<String, String> entry : map.entrySet()){
   entry.getValue();
 }
 
+```
+
+## ディレクトリを再帰的にたどる
+
+``` java
+import java.util.stream.Stream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.IOException;
+
+try (Stream<Path> stream = Files.walk(Paths.get("."))) {
+    stream.forEach(System.out::println);
+} catch(IOException e) {
+    e.printStackTrace();
+}
 ```
 
 ## Listの結合
