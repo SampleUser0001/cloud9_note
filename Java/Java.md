@@ -18,6 +18,8 @@
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
   - [Mapのループ](#mapのループ)
   - [Listの結合](#listの結合)
+  - [指定した文字列で結合する](#指定した文字列で結合する)
+    - [Streamを結合する](#streamを結合する)
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
@@ -118,7 +120,7 @@ import java.nio.file.Paths;
 import java.nio.charset.Charset;
 import java.nio.file.StandardOpenOption;
 
-try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("書き込みファイルパス"), Charset.forName("UTF-8"))) {
+try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("書き込みファイルパス"), Charset.forName("UTF-8"), StandardOpenOption.CREATE)) {
 
 }
 ```
@@ -186,6 +188,31 @@ List<String> list
   = listInList.stream()
               .flatMap(l -> l.stream())
               .collect(Collectors.toList());
+
+```
+
+## 指定した文字列で結合する
+
+``` java
+import java.util.StringJoiner;
+
+StringJoiner joiner = new StringJoiner(",");
+joiner.add("hoge");
+joiner.add("piyo");
+System.out.println(joiner.toString());
+```
+
+### Streamを結合する
+
+``` java
+import java.util.stream.Collectors;
+
+Stream<String> stream = // 任意の値
+String joined = stream.forEachOrdered(Collectors(joining(","));
+
+// String head = "head";
+// String tail = "tail";
+// stream.forEachOrdered(Collectors(joining(",", head, tail));
 
 ```
 
