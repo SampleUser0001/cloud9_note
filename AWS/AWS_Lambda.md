@@ -107,7 +107,7 @@ profileを設定する場合は、credentialsに記載する。
 ## ホスト側のaws cli設定をコンテナに持ち込んで、boto3する
 
 ~/.awsをコンテナに持ち込めばOK。  
-```.gitignore```に```.aws```を記載すること。
+.gitignoreに.awsを記載すること。
 
 ``` sh
 # docker-compose.ymlと同じディレクトリで実行する。
