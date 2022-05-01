@@ -17,6 +17,10 @@
       - [参考](#参考)
     - [参考](#参考-1)
   - [ホスト側のaws cli設定をコンテナに持ち込んで、boto3する](#ホスト側のaws-cli設定をコンテナに持ち込んでboto3する)
+  - [Function URLs](#function-urls)
+    - [ソース](#ソース)
+    - [テスト用イベントJSON](#テスト用イベントjson)
+    - [実行](#実行)
 
 ## cloud9に開発環境を作成する
 
@@ -107,7 +111,7 @@ profileを設定する場合は、credentialsに記載する。
 ## ホスト側のaws cli設定をコンテナに持ち込んで、boto3する
 
 ~/.awsをコンテナに持ち込めばOK。  
-```.gitignore```に```.aws```を記載すること。
+.gitignoreに.awsを記載すること。
 
 ``` sh
 # docker-compose.ymlと同じディレクトリで実行する。
@@ -123,4 +127,47 @@ services:
   python:
     volumes:
       - .aws:/root/.aws
+```
+
+## Function URLs
+
+### ソース
+
+``` python
+import json
+
+def lambda_handler(event, context):
+
+    request = event['body']
+    loaded = json.loads(request)
+    keys = list(loaded.keys())
+    values = list(loaded.values())
+
+    returnBody = { keys[0] : values[0] }
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps(returnBody)
+    }
+```
+
+### テスト用イベントJSON
+
+``` json
+{
+  "body": "{\"example\":\"value\"}"
+}
+```
+
+### 実行
+
+``` bash
+# URLはLambdaのページから確認する。
+export FUNCTION_URL=
+export FUNCTION_ARGS='{"example":"test"}'
+curl -X GET -H "Content-Type: application/json" -d ${FUNCTION_ARGS} ${FUNCTION_URL}
+```
+
+``` json
+{"example": "test"}
 ```
