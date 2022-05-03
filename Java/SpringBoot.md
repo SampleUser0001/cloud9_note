@@ -6,6 +6,7 @@
     - [pom.xml](#pomxml)
     - [main](#main)
     - [test](#test)
+  - [実行](#実行)
 
 ## Spring Initializer
 
@@ -95,4 +96,10 @@ public class AppTest {
     public void contextLoads() {
     }
 }
+```
+
+## 実行
+
+``` bash
+mvn clean spring-boot:run
 ```

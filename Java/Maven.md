@@ -6,7 +6,6 @@
     - [参考](#参考)
   - [Javaバージョンを指定する](#javaバージョンを指定する)
   - [SpringBootの場合](#springbootの場合)
-    - [実行](#実行)
   - [exec:javaコマンドで実行する](#execjavaコマンドで実行する)
     - [引数でmainメソッドのクラスを指定する](#引数でmainメソッドのクラスを指定する)
     - [起動引数を渡す](#起動引数を渡す)
@@ -53,47 +52,7 @@ mvn -B archetype:generate \
 
 ## SpringBootの場合
 
-``` xml
-<project>
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.6.6</version>
-    <relativePath/> <!-- lookup parent from repository -->
-  </parent>
-
-  <dependencies>
-    <!-- Webアプリを作成する場合 -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
-
-</project>
-```
-
-### 実行
-
-``` bash
-mvn clean spring-boot:run
-```
-
+- [./SpringBoot.md#init](./SpringBoot.md#init)
 
 ## exec:javaコマンドで実行する
 
