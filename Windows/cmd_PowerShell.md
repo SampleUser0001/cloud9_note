@@ -7,10 +7,12 @@
     - [grep](#grep)
       - [再帰grep](#再帰grep)
     - [find](#find)
+    - [touch（新しいファイルを生成する）](#touch新しいファイルを生成する)
   - [コマンドプロンプト](#コマンドプロンプト)
     - [findstr](#findstr)
       - [findstr:オプション](#findstrオプション)
-  - [touch（新しいファイルを生成する）](#touch新しいファイルを生成する)
+    - [ファイルサイズを取得する(where)](#ファイルサイズを取得するwhere)
+      - [参考](#参考-1)
 
 
 ## PowerShell
@@ -43,6 +45,12 @@ dir -Recurse | Select-String -Pattern ${検索文字列}
 Get-ChildItem -r -Filter "条件" -Name
 ```
 
+### touch（新しいファイルを生成する）
+
+``` powershell
+New-Item -Path . -Name "test.txt" -ItemType "file" -Value "New-Item cmdlet test."
+```
+
 ## コマンドプロンプト
 
 ### findstr
@@ -59,8 +67,12 @@ findstr /s /i /n "検索文字列" "検索対象パス"
 | /n       | 検索結果に行番号を表示する。 |
 | /i       | 大文字小文字の違いを無視する。 |
 
-## touch（新しいファイルを生成する）
+### ファイルサイズを取得する(where)
 
-``` powershell
-New-Item -Path . -Name "test.txt" -ItemType "file" -Value "New-Item cmdlet test."
+``` cmd
+where /R %検索対象パス% * /T > %実行結果出力パス%
 ```
+
+#### 参考
+
+- [【Windows10】コマンドプロンプトでファイルサイズ一覧を簡単に作成する方法(where):梅屋ラボ](https://umeyalabo.com/cmd_where)
