@@ -28,6 +28,8 @@
   - [直前のコミットの取り消し](#直前のコミットの取り消し)
   - [ファイルごとの最終更新日の取得](#ファイルごとの最終更新日の取得)
     - [参考](#参考)
+  - [リモートリポジトリと紐づける](#リモートリポジトリと紐づける)
+    - [Github](#github)
 
 ## .gitignoreについて
 
@@ -194,3 +196,13 @@ git ls-files . | xargs -I@ bash -c 'echo "$(git log -1 --format="%cd" --date=for
 ### 参考
 
 - [gitのcommit日時順にファイル一覧を表示する:$shibayu36->blog;](https://blog.shibayu36.org/entry/2018/01/16/193000)
+
+## リモートリポジトリと紐づける
+
+### Github
+
+``` bash
+git remote add origin git@github.com:SampleUser0001/${プロジェクト名}.git
+git branch -M main
+git push -u origin main
+```
