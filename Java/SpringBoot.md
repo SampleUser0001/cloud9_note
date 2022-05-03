@@ -7,6 +7,9 @@
     - [main](#main)
     - [test](#test)
   - [実行](#実行)
+  - [Spring Boot CLI](#spring-boot-cli)
+    - [プロジェクト作成](#プロジェクト作成)
+    - [参考](#参考)
 
 ## Spring Initializer
 
@@ -103,3 +106,15 @@ public class AppTest {
 ``` bash
 mvn clean spring-boot:run
 ```
+
+## Spring Boot CLI
+
+### プロジェクト作成
+
+``` cmd
+spring init --dependencies=${依存関係},${依存関係} --group-id=~${グループID} ${プロジェクト名}
+```
+
+### 参考
+
+- [Spring Boot CLI](https://spring.pleiades.io/spring-boot/docs/current/reference/html/cli.html)
