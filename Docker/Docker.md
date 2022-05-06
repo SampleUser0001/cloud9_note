@@ -426,7 +426,7 @@ Successfully built 55a01aafb8e9
 
 ### docker-compose.yml
 
-```/etc/passwd```と```/etc/group```をバインドする。
+``` /etc/passwd ``` と ``` /etc/group ``` をバインドする。
 
 ``` yml
 version: '3'
@@ -443,7 +443,7 @@ services:
 
 ### 実行
 
-```-u```オプションでコンテナ内で実行するユーザを指定する。
+``` -u ``` オプションでコンテナ内で実行するユーザを指定する。
 
 ``` sh
 docker-compose run  -u "$(id -u $USER):$(id -g $USER)"  --rm sh 
