@@ -43,6 +43,10 @@
       - [例](#例)
       - [備考](#備考)
   - [ホストからコンテナの環境変数を設定する](#ホストからコンテナの環境変数を設定する)
+  - [ホストとコンテナで同じユーザを使用する](#ホストとコンテナで同じユーザを使用する)
+    - [docker-compose.yml](#docker-composeyml-3)
+    - [実行](#実行)
+    - [参考](#参考-3)
 
 ## nginxイメージを使用して公開する
 
@@ -417,3 +421,36 @@ Successfully built 55a01aafb8e9
 少し試してみた。
 
 - [docker-compose_environment_sample](https://github.com/SampleUser0001/docker-compose_environment_sample)
+
+## ホストとコンテナで同じユーザを使用する
+
+### docker-compose.yml
+
+```/etc/passwd```と```/etc/group```をバインドする。
+
+``` yml
+version: '3'
+services:
+  sh:
+    build: .
+    container_name: hogehoge
+    volumes:
+      - ./work:/tmp/work
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+    command: sh /tmp/work/create_directory.sh
+```
+
+### 実行
+
+```-u```オプションでコンテナ内で実行するユーザを指定する。
+
+``` sh
+docker-compose run  -u "$(id -u $USER):$(id -g $USER)"  --rm sh 
+```
+
+### 参考
+
+- [Docker コンテナ内で Docker ホストと同じユーザを使う:CUBE SUGAR CONTAINER](https://blog.amedama.jp/entry/docker-container-host-same-user)
+- [SameUser_onDocker:SampleUser0001:Github](https://github.com/SampleUser0001/SameUser_onDocker)
+  - 実際にやってみた。
