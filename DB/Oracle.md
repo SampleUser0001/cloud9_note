@@ -85,7 +85,7 @@ export EXECUTE_SQL_PATH=
 sqlplus -s ${ORACLE_LOGIN_USER}/${ORACLE_LOGIN_PASSWORD}@${ORACLE_SERVER_HOST}:${ORACLE_SERVER_PORT}/${ORACLE_CONNECT_WORD} @${EXECUTE_SQL_PATH%}
 ```
 
-```-s```オプションはWelcomeメッセージを表示しない設定。
+``` -s ``` オプションはWelcomeメッセージを表示しない設定。
 
 ### 横幅を調整する
 
