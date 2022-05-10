@@ -7,6 +7,10 @@
     - [参照](#参照)
   - [if : 条件分岐](#if--条件分岐)
     - [例 : 文字列](#例--文字列)
+  - [for](#for)
+    - [ディレクトリ配下のファイル一覧を取得する](#ディレクトリ配下のファイル一覧を取得する)
+      - [オプション](#オプション)
+      - [実行例](#実行例)
 
 ## 起動引数
 
@@ -64,4 +68,43 @@ true
 ``` bat
 >if.bat piyo
 false
+```
+
+## for
+
+### ディレクトリ配下のファイル一覧を取得する
+
+``` bat
+for オプション 検索対象フォルダ %%A in (ファイル名) do (
+  echo %%A 
+)
+```
+
+#### オプション
+
+| オプション | 効果 |
+| :--------- | :--- |
+| /r | 再帰検索して、ファイルのみ取得 |
+| /d | ディレクトリのみ取得 |
+
+#### 実行例
+
+``` cmd
+>dir sample01 /b /s
+sample01\sample01_01.txt
+sample01\sample02
+sample01\sample02\sample02_01.txt
+```
+
+``` bat
+@echo off
+
+for /r .\sample01 %%A in (*.*) do (
+  echo %%A 
+)
+```
+
+``` txt
+C:\Users\ittim\BatchSample\sample01\sample01_01.txt
+C:\Users\ittim\BatchSample\sample01\sample02\sample02_01.txt
 ```
