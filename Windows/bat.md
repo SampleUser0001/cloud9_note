@@ -11,6 +11,7 @@
     - [ディレクトリ配下のファイル一覧を取得する](#ディレクトリ配下のファイル一覧を取得する)
       - [オプション](#オプション)
       - [実行例](#実行例)
+      - [参考](#参考)
 
 ## 起動引数
 
@@ -108,3 +109,7 @@ for /r .\sample01 %%A in (*.*) do (
 C:\Users\ittim\BatchSample\sample01\sample01_01.txt
 C:\Users\ittim\BatchSample\sample01\sample02\sample02_01.txt
 ```
+
+#### 参考
+
+- [.bat（バッチファイル）のforコマンド解説。:Qiita](https://qiita.com/plcherrim/items/67be34bab1fdf3fb87f9)
