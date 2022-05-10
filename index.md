@@ -131,6 +131,7 @@
 ## Windows
 
 - [cmd_PowerShell.md](./Windows/cmd_PowerShell.md)
+- [bat.md](./Windows/bat.md)
 
 ## Java
 
