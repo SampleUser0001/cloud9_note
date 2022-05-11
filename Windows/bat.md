@@ -109,6 +109,10 @@ C:\Users\ittim\BatchSample\sample01\sample01_01.txt
 C:\Users\ittim\BatchSample\sample01\sample02\sample02_01.txt
 ```
 
+#### 参考
+
+- [.bat（バッチファイル）のforコマンド解説。:Qiita](https://qiita.com/plcherrim/items/67be34bab1fdf3fb87f9)
+
 ## ファイルの???のみ取得する
 
 | オプション | 取得するもの |
@@ -173,4 +177,5 @@ ECHO は <OFF> です。
 
 ### 参考
 
-- [](https://rainbow-engine.com/batch-get-filepath-filename/)
+- [バッチでファイルパスやファイル名を取得する方法:Rainbow Engine](https://rainbow-engine.com/batch-get-filepath-filename/)
+
