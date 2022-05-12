@@ -12,9 +12,11 @@
       - [オプション](#オプション)
       - [実行例](#実行例)
       - [参考](#参考)
+    - [ファイルを読み込む](#ファイルを読み込む)
+      - [参考](#参考-1)
   - [ファイルの???のみ取得する](#ファイルののみ取得する)
     - [実行例](#実行例-1)
-    - [参考](#参考-1)
+    - [参考](#参考-2)
 
 ## 起動引数
 
@@ -116,6 +118,22 @@ C:\Users\ittim\BatchSample\sample01\sample02\sample02_01.txt
 #### 参考
 
 - [.bat（バッチファイル）のforコマンド解説。:Qiita](https://qiita.com/plcherrim/items/67be34bab1fdf3fb87f9)
+
+### ファイルを読み込む
+
+``` bat
+@echo off
+
+set filename=%1
+
+for /f %%l in (%filename%) do (
+  echo %%l
+)
+```
+
+#### 参考
+
+- [ファイルから文字列を読み込む:知識ゼロからのwindowsバッチファイル超入門](https://jj-blues.com/cms/wantto-readstringfromfile/)
 
 ## ファイルの???のみ取得する
 
