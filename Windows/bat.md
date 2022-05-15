@@ -11,6 +11,15 @@
     - [ディレクトリ配下のファイル一覧を取得する](#ディレクトリ配下のファイル一覧を取得する)
       - [オプション](#オプション)
       - [実行例](#実行例)
+      - [参考](#参考)
+    - [ファイルを読み込む](#ファイルを読み込む)
+      - [参考](#参考-1)
+  - [ファイルの???のみ取得する](#ファイルののみ取得する)
+    - [実行例](#実行例-1)
+    - [参考](#参考-2)
+  - [置換](#置換)
+    - [実装例](#実装例)
+    - [参考](#参考-3)
 
 ## 起動引数
 
@@ -113,6 +122,22 @@ C:\Users\ittim\BatchSample\sample01\sample02\sample02_01.txt
 
 - [.bat（バッチファイル）のforコマンド解説。:Qiita](https://qiita.com/plcherrim/items/67be34bab1fdf3fb87f9)
 
+### ファイルを読み込む
+
+``` bat
+@echo off
+
+set filename=%1
+
+for /f %%l in (%filename%) do (
+  echo %%l
+)
+```
+
+#### 参考
+
+- [ファイルから文字列を読み込む:知識ゼロからのwindowsバッチファイル超入門](https://jj-blues.com/cms/wantto-readstringfromfile/)
+
 ## ファイルの???のみ取得する
 
 | オプション | 取得するもの |
@@ -179,3 +204,36 @@ ECHO は <OFF> です。
 
 - [バッチでファイルパスやファイル名を取得する方法:Rainbow Engine](https://rainbow-engine.com/batch-get-filepath-filename/)
 
+## 置換
+
+### 実装例
+
+``` bat
+@echo off
+setlocal enabledelayedexpansion
+
+set PROJECT_HOME=c:\work\
+set PWD=%~dp0
+
+for /f "delims=" %%a in (%1) do (
+    set line=%%a
+    echo !line:%PROJECT_HOME%=%PWD%!
+
+)
+```
+
+``` txt
+c:\work2\copies>type list.txt
+c:\work\hoge\hoge.txt
+c:\work\hoge\piyo\piyo.txt
+```
+
+``` txt
+c:\work2\copies>create_copies.bat list.txt
+c:\work2\copies\hoge\hoge.txt
+c:\work2\copies\hoge\piyo\piyo.txt
+```
+
+### 参考
+
+- [Windowsバッチでファイル内の特定文字を置換する方法:Qiita](https://qiita.com/yacchi1123/items/97e75c6784b5b507f701)
