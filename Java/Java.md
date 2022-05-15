@@ -158,6 +158,10 @@ import java.io.IOException;
 
 ```
 
+### Mavenのresources配下のpropertiesを読み込む
+
+- [ReadExternalProperties_Maven:SampleUser0001:Github](https://github.com/SampleUser0001/ReadExternalProperties_Maven)
+
 ## Mapのループ
 
 ``` java

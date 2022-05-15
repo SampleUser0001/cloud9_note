@@ -172,7 +172,7 @@ ORDER BY TABLE_NAME
 
 ### 統計情報更新
 
-```sql
+``` sql
 set pagesize 400
 set linsize 200
 set echo on
