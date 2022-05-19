@@ -73,12 +73,14 @@ Cloud9を起動したときに行うことの備忘録。
     - [init](#init)
     - [init 別パターン](#init-別パターン)
     - [参考](#参考-12)
-  - [Terraform](#terraform)
+  - [sqlite](#sqlite)
     - [参考](#参考-13)
+  - [Terraform](#terraform)
+    - [参考](#参考-14)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-14)
+    - [参考](#参考-15)
 
 ## git
 ```
@@ -769,6 +771,20 @@ http://<IPアドレス>:8080
 
 [Qitt:Vue.jsについての基礎(インストール)](https://qiita.com/watataku/items/26f2ce546fcd562e4b46)  
 [Qiita:AWS Cloud9 で Vue.js を使う](https://qiita.com/tamusan100/items/32acfd5e70336f33273f)
+
+## sqlite
+
+最新ではない点に注意。
+
+``` bash
+sudo apt update && sudo apt upgrade
+sudo apt install -y sqlite3
+```
+
+### 参考
+
+- [SQLite Download Page](https://www.sqlite.org/download.html)
+  - 今回は使っていないが、一応リンクを貼っておく。
 
 ## Terraform
 
