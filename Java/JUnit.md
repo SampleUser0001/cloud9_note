@@ -47,7 +47,7 @@ public class AppTest {
     @Test
     public void test() {
         String actual = app.execute();
-        assertThat(actual, is(equalTo("hogehoge")));
+        assertThat(actual, is(equalTo("expected")));
     }
 }
 

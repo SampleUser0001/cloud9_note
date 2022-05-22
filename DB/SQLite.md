@@ -23,7 +23,7 @@ sqlite3 ${DBファイルパス}
 ## テーブル作成
 
 ``` sql
-create table username(id, name);
+create table username(id integer primary key autoincrement, name text);
 ```
 
 ### 参考
@@ -33,6 +33,7 @@ create table username(id, name);
 ## insert
 
 ``` sql
+--autoincrementしている場合、idは不要。
 insert into username (id, name) values (1, 'hoge');
 ```
 
