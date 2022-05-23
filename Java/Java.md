@@ -30,6 +30,7 @@
     - [展開](#展開)
     - [圧縮](#圧縮)
     - [jarコマンド:参考](#jarコマンド参考)
+  - [StringBuilderとStringBufferの違い](#stringbuilderとstringbufferの違い)
 
 ## Stream
 
@@ -291,3 +292,12 @@ jar -cf ${jarファイル}.jar ${ディレクトリ}
 
 - [jarコマンド:Oracle](https://docs.oracle.com/javase/jp/13/docs/specs/man/jar.html#:~:text=jar%20%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AF%E3%80%81ZIP%E3%81%8A%E3%82%88%E3%81%B3,%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82)
 - [jarコマンド入門:Qiita](https://qiita.com/maple_syrup/items/a2f21fe356fa5f06bf44)
+
+## StringBuilderとStringBufferの違い
+
+- StringBuilder
+  - スレッドセーフではない。
+  - 早い
+- StringBuffer
+  - スレッドセーフ。
+  - 早くない。
