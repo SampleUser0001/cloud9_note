@@ -149,6 +149,7 @@
 ## JavaScript
 
 - [JavaScript](./JavaScript/JavaScript.md)
+- [jQuery](./JavaScript/jQuery.md)
 - [Node.js](./JavaScript/Node.md)
 - [Vue.js](./JavaScript/Vue.md)
 
