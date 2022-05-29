@@ -7,6 +7,7 @@
     - [参考](#参考)
   - [insert](#insert)
   - [終了](#終了)
+  - [外部ファイルを実行する](#外部ファイルを実行する)
 
 ## 公式サイトへのリンク
 
@@ -41,4 +42,10 @@ insert into username (id, name) values (1, 'hoge');
 
 ``` sqlite
 sqlite> .quit
+```
+
+## 外部ファイルを実行する
+
+``` bash
+sqlite3 ${ファイルパス} < ${SQLパス}
 ```
