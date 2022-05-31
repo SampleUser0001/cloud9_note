@@ -124,22 +124,22 @@ where id not exists (
 ### fromにしかないレコードも抽出する
 
 ```sql
-from テーブル1 left outer join テーブル2 on 結合条件
-where その他の条件
+from table1 left outer join table2 on table1.id = table2.id
+where table1.value = table2.value
 ```
 
 ### joinにしかないレコードも抽出する
 
 ```sql
-from テーブル1 right outer join テーブル2 on 結合条件
-where その他の条件
+from table1 right outer join table2 on table1.id = table2.id
+where table1.value = table2.value
 ```
 
 ### どちらでもいいから片方にあるレコードを抽出する
 
 ```sql
-from テーブル1 full outer join テーブル2 on 結合条件
-where その他の条件
+from table1 full outer join table2 on table1.id = table2.id
+where table1.value = table2.value
 ```
 
 ## Timestamp型 -> 秒変換する(EXTRACT)
@@ -163,3 +163,7 @@ select extract( day from diff )*24*60*60*1000 +
 ### 参考
 
 - [Oracleの2つのタイムスタンプの差をミリ秒単位で計算する:Code Examples](https://code-examples.net/ja/q/b146aa)
+
+## 便利に使える環境
+
+- [SQLite_Sample:SampleUser0001:Github](https://sampleuser0001.github.io/SQLite_Sample/)

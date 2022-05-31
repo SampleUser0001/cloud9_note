@@ -49,3 +49,7 @@ sqlite> .quit
 ``` bash
 sqlite3 ${ファイルパス} < ${SQLパス}
 ```
+
+## 参考
+
+-[SQLite_Sample:SampleUser0001:Github](https://sampleuser0001.github.io/SQLite_Sample/)
