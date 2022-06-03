@@ -12,6 +12,7 @@
     - [List -> Stream](#list---stream)
     - [配列 -> Stream](#配列---stream)
   - [Path -> List](#path---list)
+  - [PropertiesEnum](#propertiesenum)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
@@ -106,6 +107,44 @@ import java.nio.file.Paths;
 
 Path filepath = Paths.get("読み込み対象のファイルパス");
 List<String> lines = Files.readAllLines(filepath, Charset.forName("UTF-8"));
+```
+
+## PropertiesEnum
+
+``` java
+package hogehoge.enums;
+
+import java.util.Properties;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+
+public enum PropertiesEnum {
+    HOGE("hoge"),
+    PIYO("piyo");
+
+    private static Properties properties;
+    
+    private final String key;
+
+    private PropertiesEnum(String key) {
+        this.key = key;
+    }
+    
+    public static void load(Path propertiesPath) throws IOException {
+        properties = new Properties();
+        properties.load(
+            Files.newBufferedReader(propertiesPath, StandardCharsets.UTF_8)
+        );
+    }
+    
+    public String getPropertiesValue() {
+        return properties.getProperty(this.key);
+    }
+    
+    
+}
 ```
 
 ## 実行可能jarファイルの実行
