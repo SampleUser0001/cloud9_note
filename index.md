@@ -141,6 +141,7 @@
 - [SpringBoot.md](./Java/SpringBoot.md)
 - [Maven.md](./Java/Maven.md)
 - [JUnit](./Java/JUnit.md)
+- [Jackson](./Java/Jackson.md)
 
 ### Middleware
 
