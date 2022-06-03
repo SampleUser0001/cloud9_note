@@ -6,6 +6,7 @@
     - [参考](#参考)
   - [Javaバージョンを指定する](#javaバージョンを指定する)
   - [SpringBootの場合](#springbootの場合)
+  - [src/main/resources配下のファイルパスを取得する](#srcmainresources配下のファイルパスを取得する)
   - [exec:javaコマンドで実行する](#execjavaコマンドで実行する)
     - [引数でmainメソッドのクラスを指定する](#引数でmainメソッドのクラスを指定する)
     - [起動引数を渡す](#起動引数を渡す)
@@ -53,6 +54,20 @@ mvn -B archetype:generate \
 ## SpringBootの場合
 
 - [./SpringBoot.md#init](./SpringBoot.md#init)
+
+## src/main/resources配下のファイルパスを取得する
+
+``` java
+import java.nio.file.Paths;
+
+Path path = 
+    Paths.get(
+        Thread.currentThread()
+              .getContextClassLoader()
+              .getResource("app.properties") // resources下のファイルパスを指定する。
+              .getPath()
+    );
+```
 
 ## exec:javaコマンドで実行する
 
