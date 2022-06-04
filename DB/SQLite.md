@@ -48,7 +48,7 @@ sqlite> .quit
 ## 外部ファイルを実行する
 
 ``` bash
-sqlite3 ${ファイルパス} < ${SQLパス}
+sqlite3 ${SQLiteファイルパス} < ${SQLパス}
 ```
 
 ## 参考
