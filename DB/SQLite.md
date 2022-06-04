@@ -8,6 +8,8 @@
   - [insert](#insert)
   - [終了](#終了)
   - [外部ファイルを実行する](#外部ファイルを実行する)
+    - [sqlite3コマンドを使う](#sqlite3コマンドを使う)
+    - [sqlite3起動後に使う](#sqlite3起動後に使う)
   - [csvインポート](#csvインポート)
   - [参考](#参考-1)
 
@@ -48,8 +50,16 @@ sqlite> .quit
 
 ## 外部ファイルを実行する
 
+### sqlite3コマンドを使う
+
 ``` bash
 sqlite3 ${SQLiteファイルパス} < ${SQLパス}
+```
+
+### sqlite3起動後に使う
+
+``` sqlite
+.read ${SQLパス}
 ```
 
 ## csvインポート
