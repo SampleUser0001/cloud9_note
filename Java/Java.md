@@ -3,6 +3,8 @@
 - [Java](#java)
   - [Stream](#stream)
     - [ファイル -> Stream](#ファイル---stream)
+    - [Stream -> String](#stream---string)
+      - [参考](#参考)
     - [重複排除](#重複排除)
     - [1行目を読み飛ばす](#1行目を読み飛ばす)
     - [String -> Model](#string---model)
@@ -26,7 +28,7 @@
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
-    - [参考](#参考)
+    - [参考](#参考-1)
   - [jarの展開/圧縮](#jarの展開圧縮)
     - [展開](#展開)
     - [圧縮](#圧縮)
@@ -45,6 +47,23 @@ import java.nio.file.Paths;
 Path inputPath = Paths.get(filePath);
 Stream stream = Files.lines(inputPath);
 ```
+
+### Stream -> String
+
+``` java
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+Path inputPath = Paths.get(filePath);
+String str = Files.lines(inputPath)
+                  .map(Object::toString)
+                  .collect(Collectors.joining());
+```
+
+#### 参考
+
+- [Collectors:javadoc:Java8](https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html)
 
 ### 重複排除
 
