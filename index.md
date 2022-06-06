@@ -142,7 +142,7 @@
 - [Maven.md](./Java/Maven.md)
 - [JUnit](./Java/JUnit.md)
 - [log4j2](./Java/log4j2.md)
-- [Jackson](./Java/Jackson.md)
+- [Jackson](https://sampleuser0001.github.io/Use_Json_in_Java/)
 
 ### Middleware
 
