@@ -197,7 +197,7 @@
 - [curl.md](./other/curl.md)
 - [other.md](./other/other.md)
 - [OWASP_ZAP.md](./other/OWASP_ZAP.md)
-- [Github_authentication_token.md](./other/Github_authentication_token.md)
+- [Github.md](./other/Github.md)
 - [Github API](./other/GithubAPI.md)
 - [cloud9_on-premiss.md](./other/cloud9_on-premiss.md)
 - [StressTestTool.md](./other/StressTestTool.md)
