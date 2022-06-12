@@ -19,7 +19,6 @@
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
-    - [Mavenのresources配下のpropertiesを読み込む](#mavenのresources配下のpropertiesを読み込む)
   - [Mapのループ](#mapのループ)
   - [ディレクトリを再帰的にたどる](#ディレクトリを再帰的にたどる)
   - [Listの結合](#listの結合)
@@ -217,10 +216,6 @@ import java.io.IOException;
   }
 
 ```
-
-### Mavenのresources配下のpropertiesを読み込む
-
-- [ReadExternalProperties_Maven:SampleUser0001:Github](https://github.com/SampleUser0001/ReadExternalProperties_Maven)
 
 ## Mapのループ
 

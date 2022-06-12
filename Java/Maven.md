@@ -7,6 +7,7 @@
   - [Javaバージョンを指定する](#javaバージョンを指定する)
   - [SpringBootの場合](#springbootの場合)
   - [src/main/resources配下のファイルパスを取得する](#srcmainresources配下のファイルパスを取得する)
+    - [Mavenのresources配下のpropertiesを読み込む](#mavenのresources配下のpropertiesを読み込む)
   - [exec:javaコマンドで実行する](#execjavaコマンドで実行する)
     - [引数でmainメソッドのクラスを指定する](#引数でmainメソッドのクラスを指定する)
     - [起動引数を渡す](#起動引数を渡す)
@@ -68,6 +69,10 @@ Path path =
               .getPath()
     );
 ```
+
+### Mavenのresources配下のpropertiesを読み込む
+
+- [ReadExternalProperties_Maven:SampleUser0001:Github](https://github.com/SampleUser0001/ReadExternalProperties_Maven)
 
 ## exec:javaコマンドで実行する
 
