@@ -34,6 +34,7 @@
   - [Microsoft Office](#microsoft-office)
   - [Logic](#logic)
   - [Other](#other)
+    - [外部へのリンク](#外部へのリンク)
 
 ## init/use
 - [Cloud9_init_note.md](./Cloud9_init_note.md)
@@ -205,3 +206,7 @@
 - [Gitlab.md](./other/Gitlab.md)
 - [Redmine.md](./other/Redmine.md)
 - [License.md](./other/License.md)
+
+### 外部へのリンク
+
+- [PoiのJUnitを回す](https://www.notion.so/Poi-JUnit-bafa0d7f199d49b8b8308b4dd5752208)
