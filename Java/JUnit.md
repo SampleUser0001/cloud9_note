@@ -11,16 +11,19 @@
 ### pom.xml
 
 ``` xml
+    <junit.version>4.13.2</junit.version>
+    <hamcrest.version>2.2</hamcrest.version>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest</artifactId>
-      <version>2.2</version>
+      <version>${hamcrest.version}</version>
       <scope>test</scope>
     </dependency>
 

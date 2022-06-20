@@ -143,7 +143,9 @@
 - [Maven.md](./Java/Maven.md)
 - [JUnit](./Java/JUnit.md)
 - [log4j2](./Java/log4j2.md)
-- [Jackson](https://sampleuser0001.github.io/Use_Json_in_Java/)
+- Jackson
+  - [単純なパターン](https://sampleuser0001.github.io/Use_Json_in_Java/)
+  - [その他]()
 - [Poi](./Java/Apache POI.md)
 
 ### Middleware
