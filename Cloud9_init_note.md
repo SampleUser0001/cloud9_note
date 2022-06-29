@@ -74,6 +74,7 @@ Cloud9を起動したときに行うことの備忘録。
     - [init 別パターン](#init-別パターン)
     - [参考](#参考-12)
   - [sqlite](#sqlite)
+    - [最新をインストールする](#最新をインストールする)
     - [参考](#参考-13)
   - [Terraform](#terraform)
     - [参考](#参考-14)
@@ -781,10 +782,65 @@ sudo apt update && sudo apt upgrade
 sudo apt install -y sqlite3
 ```
 
+### 最新をインストールする
+
+``` bash
+cd /tmp
+# バージョンは下記で確認する。
+# https://www.sqlite.org/download.html
+# 下記のURLは確認した時点での最新
+export SQLITE_YEAR=2022
+export SQLITE_VERSION=3390000
+wget https://www.sqlite.org/${SQLITE_YEAR}/sqlite-autoconf-${SQLITE_VERSION}.tar.gz
+tar xvfz sqlite-autoconf-${SQLITE_VERSION}.tar.gz
+
+# ビルド
+cd sqlite-autoconf-${SQLITE_VERSION}
+./configure --prefix=/usr/local
+make
+
+# インストール
+sudo make install
+
+# インストール結果確認
+sudo find /usr/ -name sqlite3
+
+# 不要ファイル/ディレクトリ削除
+cd ..
+rm sqlite-autoconf-${SQLITE_VERSION}.tar.gz
+rm -r sqlite-autoconf-${SQLITE_VERSION}
+
+# バージョン確認
+# 新しいはず
+/usr/local/bin/sqlite3 --version
+# 古いはず
+/usr/bin/sqlite3 --version
+# 新しいはず
+sqlite3 --version
+
+sudo mv /usr/bin/sqlite3 /usr/bin/sqlite3_old
+sudo ln -s /usr/local/bin/sqlite3 /usr/bin/sqlite3
+ls -all /usr/bin/sqlite3
+/usr/bin/sqlite3 --version
+```
+
+``` bash
+# Pythonで使う場合は下記も実行する。
+echo "export LD_LIBRARY_PATH=\"/usr/local/lib\"" >> ~/.bashrc
+source ~/.bashrc
+python
+```
+
+``` python
+import sqlite3
+sqlite3.sqlite_version
+exit()
+```
+
 ### 参考
 
 - [SQLite Download Page](https://www.sqlite.org/download.html)
-  - 今回は使っていないが、一応リンクを貼っておく。
+- [Django2.2で開発サーバー起動時にSQLite3のエラーが出た場合の対応:Qiita](https://qiita.com/rururu_kenken/items/8202b30b50e3bfa75821)
 
 ## Terraform
 
