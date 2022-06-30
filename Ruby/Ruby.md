@@ -5,4 +5,4 @@
 
 ## チュートリアル
 
-- [Tutorial_Ruby](https://sampleuser0001.github.io/Tutorial_Ruby/)
+- [Tutorial_Ruby](https://github.com/SampleUser0001/Tutorial_Ruby)
