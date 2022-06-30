@@ -73,15 +73,22 @@ Cloud9を起動したときに行うことの備忘録。
     - [init](#init)
     - [init 別パターン](#init-別パターン)
     - [参考](#参考-12)
+  - [Ruby](#ruby)
+    - [rbenvを使う](#rbenvを使う)
+      - [rbenvインストール](#rbenvインストール)
+      - [rbenvでRubyインストール](#rbenvでrubyインストール)
+      - [参考](#参考-13)
+    - [ソースからビルドする](#ソースからビルドする)
+      - [参考](#参考-14)
   - [sqlite](#sqlite)
     - [最新をインストールする](#最新をインストールする)
-    - [参考](#参考-13)
+    - [参考](#参考-15)
   - [Terraform](#terraform)
-    - [参考](#参考-14)
+    - [参考](#参考-16)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-15)
+    - [参考](#参考-17)
 
 ## git
 ```
@@ -772,6 +779,98 @@ http://<IPアドレス>:8080
 
 [Qitt:Vue.jsについての基礎(インストール)](https://qiita.com/watataku/items/26f2ce546fcd562e4b46)  
 [Qiita:AWS Cloud9 で Vue.js を使う](https://qiita.com/tamusan100/items/32acfd5e70336f33273f)
+
+## Ruby
+
+### rbenvを使う
+
+#### rbenvインストール
+
+``` bash
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+
+cd ~/.rbenv && src/configure && make -C src
+
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+# お好みで.bashrcにコメントを書く
+source ~/.bashrc
+
+# バージョン確認
+rbenv --version
+
+rbenv init
+# 「~/.bash_profile」に記載しろというコメントとともにコマンドが表示される。
+# 表示されたとおりのコマンドを書く。
+```
+
+#### rbenvでRubyインストール
+
+``` bash
+# インストール可能な安定バージョンを確認
+rbenv install -l
+
+# バージョン指定してインストール
+rbenv install ${RUBY_INSTALL_VERSION}
+# そこそこ時間がかかる。インストールログが/tmp配下に出力されるので眺める。
+
+# 指定したバージョンがインストールされていることを確認
+rbenv versions
+
+# バージョン切り替え
+rbenv global ${RUBY_INStALL_VERSION}
+
+# 切り替わったことを確認
+ruby -v
+```
+
+#### 参考
+
+- [CentOSにrbenv, Rubyをインストールする:Qiita](https://qiita.com/NaokiIshimura/items/ff04b6eaa40b33c4bea8)
+- [rbenv:Github](https://github.com/rbenv/rbenv)
+- [ruby-build:Github](https://github.com/rbenv/ruby-build)
+
+### ソースからビルドする
+
+``` bash
+cd /tmp
+# バージョンは公式サイトで確認
+export RUBY_INSTALL_VERSION=3.1.2
+wget https://cache.ruby-lang.org/pub/ruby/$(echo ${RUBY_INSTALL_VERSION} | cut -c 1-3)/ruby-${RUBY_INSTALL_VERSION}.tar.gz
+
+# 解凍
+tar zxvf ruby-${RUBY_INSTALL_VERSION}.tar.gz
+
+# ビルド
+cd ruby-${RUBY_INSTALL_VERSION}
+./configure
+make
+sudo make install
+
+# バージョン確認
+/usr/local/bin/ruby --version
+
+# ファイル削除
+rm /tmp/ruby-${RUBY_INSTALL_VERSION}.tar.gz
+rm -r /tmp/ruby-${RUBY_INSTALL_VERSION}
+```
+
+``` bash
+nano ~/.bashrc
+```
+
+``` bash
+# Ruby 
+alias ruby=/usr/local/bin/ruby
+```
+
+``` bash
+source ~/.bashrc
+```
+
+#### 参考
+
+- [Rubyのインストール](https://www.ruby-lang.org/ja/documentation/installation/#building-from-source)
 
 ## sqlite
 
