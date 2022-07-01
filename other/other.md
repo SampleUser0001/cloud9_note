@@ -7,6 +7,7 @@
   - [Slack](#slack)
     - [スタンプ](#スタンプ)
   - [サンプル動画](#サンプル動画)
+  - [ランダムで名言を取得できるサイト](#ランダムで名言を取得できるサイト)
   - [謎の表](#謎の表)
 
 ## Tool
@@ -39,6 +40,10 @@ jarファイルをexe化できる。
 
 - [pixabay](https://pixabay.com/ja/videos/)
 - [NHK Creative Library](http://www.nhk.or.jp/archives/creative/)
+
+## ランダムで名言を取得できるサイト
+
+[https://meigen.doodlenote.net/api/json.php](https://meigen.doodlenote.net/api/json.php)
 
 ## 謎の表
 
