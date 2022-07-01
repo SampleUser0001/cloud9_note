@@ -111,6 +111,10 @@
 
 - [cloud9.md](./AWS/cloud9.md)
 
+### EFS
+
+- [EFS.md](./AWS/EFS.md)
+
 ### その他
 
 - [Other.md](./AWS/Other.md)
