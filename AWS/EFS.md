@@ -15,7 +15,7 @@ cd efs-utils
 ./build-deb.sh
 sudo apt-get -y install ./build/amazon-efs-utils*deb
 
-sudo code /etc/amazon/efs/efs-utils.conf
+sudo nano /etc/amazon/efs/efs-utils.conf
 ```
 
 ``` conf
