@@ -131,7 +131,60 @@ services:
 
 ## Function URLs
 
-### ソース
+### new
+
+#### Lambda
+
+``` python
+import json
+
+KEY = 'name'
+
+def lambda_handler(event, context):
+
+    param = event.get('queryStringParameters')
+
+    if KEY in param:
+        message = 'Hello {}!'.format(param[KEY])
+    else:
+        message = 'Who are you?'
+
+    return {
+        'statusCode': 200,
+        'body': message
+    }  
+
+    # Deploy Test Comment
+      
+
+```
+
+#### .env
+
+``` .env
+API_URL=https://${採番された値}.lambda-url.ap-northeast-1.on.aws
+```
+
+#### sh
+
+``` bash
+#!/bin/bash
+
+source .env
+
+curl -X GET $API_URL?name=World
+```
+
+#### 実行
+
+``` bash
+$ bash call_lambda_function.sh 
+Hello World!
+```
+
+### old
+
+#### ソース
 
 ``` python
 import json
@@ -151,7 +204,7 @@ def lambda_handler(event, context):
     }
 ```
 
-### テスト用イベントJSON
+#### テスト用イベントJSON
 
 ``` json
 {
@@ -159,7 +212,7 @@ def lambda_handler(event, context):
 }
 ```
 
-### 実行
+#### 実行
 
 ``` bash
 # URLはLambdaのページから確認する。
