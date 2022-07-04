@@ -18,9 +18,17 @@
     - [参考](#参考-1)
   - [ホスト側のaws cli設定をコンテナに持ち込んで、boto3する](#ホスト側のaws-cli設定をコンテナに持ち込んでboto3する)
   - [Function URLs](#function-urls)
-    - [ソース](#ソース)
-    - [テスト用イベントJSON](#テスト用イベントjson)
-    - [実行](#実行)
+    - [new](#new)
+      - [Lambda](#lambda)
+      - [.env](#env)
+      - [sh](#sh)
+      - [実行](#実行)
+    - [old](#old)
+      - [ソース](#ソース)
+      - [テスト用イベントJSON](#テスト用イベントjson)
+      - [実行](#実行-1)
+  - [CORSエラーの対応をする](#corsエラーの対応をする)
+    - [参考](#参考-2)
 
 ## cloud9に開発環境を作成する
 
@@ -224,3 +232,25 @@ curl -X GET -H "Content-Type: application/json" -d ${FUNCTION_ARGS} ${FUNCTION_U
 ``` json
 {"example": "test"}
 ```
+
+## CORSエラーの対応をする
+
+戻り値のヘッダに```Access-Control-Allow-Headers```, ```Access-Control-Allow-Origin```をつける。
+
+``` python
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Origin': 'http://ittimfn-public-lambda.s3-website-ap-northeast-1.amazonaws.com',
+            'Access-Control-Allow-Methods': 'GET'
+        },
+        'body': message
+    }  
+
+```
+
+### 参考
+
+- [REST API リソースの CORS を有効にする](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/how-to-cors.html)
+- [なんとなく CORS がわかる...はもう終わりにする。:Qiita](https://qiita.com/att55/items/2154a8aad8bf1409db2b)
