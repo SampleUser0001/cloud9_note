@@ -165,6 +165,19 @@ select extract( day from diff )*24*60*60*1000 +
 
 - [Oracleの2つのタイムスタンプの差をミリ秒単位で計算する:Code Examples](https://code-examples.net/ja/q/b146aa)
 
+## 外部キー
+
+### 役割
+
+1. 存在しない値を外部キーに設定できなくなる
+2. 親テーブルに存在する子テーブルの外部キーで繋がれたデータを削除できなくなる
+3. 親テーブルのレコードを削除したときに外部キーで紐づいている子テーブルのレコードも削除する
+
+### 参考
+
+- [sqlite3で外部キーを有効にする:プロサバメモ](https://sym.me/page/p/26)
+- [外部キーとは？〜概要から変数や処理の書き方を解説〜:SI Object Browser](https://products.sint.co.jp/siob/blog/what-is-foreign-key)
+
 ## 便利に使える環境
 
 - [SQLite_Sample:SampleUser0001:Github](https://sampleuser0001.github.io/SQLite_Sample/)
