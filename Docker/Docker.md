@@ -29,24 +29,25 @@
     - [何もしないコンテナでも上がり続ける](#何もしないコンテナでも上がり続ける)
     - [読み取り専用(ReadOnly)としてバインドする](#読み取り専用readonlyとしてバインドする)
   - [コンテナ内でホストと同じユーザになる](#コンテナ内でホストと同じユーザになる)
+    - [実際にやってみた](#実際にやってみた)
+  - [ホストとコンテナで同じユーザを使用する（やってることは上と同じ）](#ホストとコンテナで同じユーザを使用するやってることは上と同じ)
+    - [docker-compose.yml](#docker-composeyml-3)
+    - [実行](#実行)
+    - [参考](#参考)
   - [ログ出力](#ログ出力)
     - [ログローテ](#ログローテ)
-    - [参考](#参考)
+    - [参考](#参考-1)
   - [docker psのオプション](#docker-psのオプション)
     - [Nameで検索](#nameで検索)
-    - [参考](#参考-1)
+    - [参考](#参考-2)
   - [fs.file-max](#fsfile-max)
   - [Dockerfile内で使用できるコマンド](#dockerfile内で使用できるコマンド)
     - [ARG](#arg)
       - [コマンド](#コマンド-1)
-      - [参考](#参考-2)
+      - [参考](#参考-3)
       - [例](#例)
       - [備考](#備考)
   - [ホストからコンテナの環境変数を設定する](#ホストからコンテナの環境変数を設定する)
-  - [ホストとコンテナで同じユーザを使用する](#ホストとコンテナで同じユーザを使用する)
-    - [docker-compose.yml](#docker-composeyml-3)
-    - [実行](#実行)
-    - [参考](#参考-3)
 
 ## nginxイメージを使用して公開する
 
@@ -323,6 +324,44 @@ chown -R ${HOSTUSER}: ${所有者を変更するディレクトリ}
 
 groupidの指定は不要。コロンだけ書いて実行すると、ユーザのプライマリグループに変更される。
 
+### 実際にやってみた
+
+- (https://github.com/SampleUser0001/Create_files_in_Docker_Container)[Create_files_in_Docker_Container]
+
+## ホストとコンテナで同じユーザを使用する（やってることは上と同じ）
+
+### docker-compose.yml
+
+``` /etc/passwd ``` と ``` /etc/group ``` をバインドする。
+
+``` yml
+version: '3'
+services:
+  sh:
+    build: .
+    container_name: hogehoge
+    volumes:
+      - ./work:/tmp/work
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+    command: sh /tmp/work/create_directory.sh
+```
+
+### 実行
+
+``` -u ``` オプションでコンテナ内で実行するユーザを指定する。
+
+``` sh
+docker-compose run  -u "$(id -u $USER):$(id -g $USER)"  --rm sh 
+```
+
+### 参考
+
+- [Docker コンテナ内で Docker ホストと同じユーザを使う:CUBE SUGAR CONTAINER](https://blog.amedama.jp/entry/docker-container-host-same-user)
+- [SameUser_onDocker:SampleUser0001:Github](https://github.com/SampleUser0001/SameUser_onDocker)
+  - 実際にやってみた。
+
+
 ## ログ出力
 
 下記ファイルに出力される。
@@ -422,35 +461,3 @@ Successfully built 55a01aafb8e9
 
 - [docker-compose_environment_sample](https://github.com/SampleUser0001/docker-compose_environment_sample)
 
-## ホストとコンテナで同じユーザを使用する
-
-### docker-compose.yml
-
-``` /etc/passwd ``` と ``` /etc/group ``` をバインドする。
-
-``` yml
-version: '3'
-services:
-  sh:
-    build: .
-    container_name: hogehoge
-    volumes:
-      - ./work:/tmp/work
-      - /etc/passwd:/etc/passwd:ro
-      - /etc/group:/etc/group:ro
-    command: sh /tmp/work/create_directory.sh
-```
-
-### 実行
-
-``` -u ``` オプションでコンテナ内で実行するユーザを指定する。
-
-``` sh
-docker-compose run  -u "$(id -u $USER):$(id -g $USER)"  --rm sh 
-```
-
-### 参考
-
-- [Docker コンテナ内で Docker ホストと同じユーザを使う:CUBE SUGAR CONTAINER](https://blog.amedama.jp/entry/docker-container-host-same-user)
-- [SameUser_onDocker:SampleUser0001:Github](https://github.com/SampleUser0001/SameUser_onDocker)
-  - 実際にやってみた。
