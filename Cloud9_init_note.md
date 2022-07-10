@@ -82,6 +82,7 @@ Cloud9を起動したときに行うことの備忘録。
       - [参考](#参考-14)
   - [sqlite](#sqlite)
     - [最新をインストールする](#最新をインストールする)
+    - [外部キー制約を常にONにする](#外部キー制約を常にonにする)
     - [参考](#参考-15)
   - [Terraform](#terraform)
     - [参考](#参考-16)
@@ -936,10 +937,18 @@ sqlite3.sqlite_version
 exit()
 ```
 
+### 外部キー制約を常にONにする
+
+``` bash
+touch ~/.sqliterc
+echo "PRAGMA foreign_keys = ON;" >> ~/.sqliterc
+```
+
 ### 参考
 
 - [SQLite Download Page](https://www.sqlite.org/download.html)
 - [Django2.2で開発サーバー起動時にSQLite3のエラーが出た場合の対応:Qiita](https://qiita.com/rururu_kenken/items/8202b30b50e3bfa75821)
+- [sqlite3で外部キー制約を常に有効にする:NANSYSTEM](https://nansystem.com/sqlite3-enable-foreign-key/)
 
 ## Terraform
 
