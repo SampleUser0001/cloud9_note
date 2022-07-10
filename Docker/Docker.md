@@ -290,7 +290,7 @@ volumes:
 
 ホスト側
 
-``` sh
+``` bash
 export USERID=$(id -u)
 export GROUPID=$(id -g)
 export HOSTUSER=`whoami`
@@ -299,7 +299,7 @@ docker-compose up
 
 docker-compose.yml
 
-``` yml : docker-compose.yml
+``` yml 
 version: '3'
 services:
   hoge:
@@ -317,7 +317,7 @@ services:
 
 コンテナ内
 
-``` sh
+``` bash
 chown -R ${HOSTUSER}: ${所有者を変更するディレクトリ}
 ```
 
