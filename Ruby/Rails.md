@@ -6,6 +6,7 @@
     - [sqliteでエラーになった場合](#sqliteでエラーになった場合)
   - [起動](#起動)
     - [任意のIPアドレスから接続する](#任意のipアドレスから接続する)
+  - [参考](#参考)
 
 ## install
 
@@ -39,3 +40,9 @@ rails s
 ``` bash
 rails s -b 0.0.0.0
 ```
+
+## 参考
+
+- [Ruby on Rails](https://rubyonrails.org/)
+  - 公式
+
