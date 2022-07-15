@@ -191,6 +191,7 @@
 ## Ruby
 
 - [Ruby](./Ruby/Ruby.md)
+- [Ruby on Rails](./Ruby/Rails.md)
 
 ## C#
 
