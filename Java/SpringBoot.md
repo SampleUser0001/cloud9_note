@@ -10,6 +10,7 @@
   - [Spring Boot CLI](#spring-boot-cli)
     - [プロジェクト作成](#プロジェクト作成)
     - [参考](#参考)
+  - [アノテーション](#アノテーション)
 
 ## Spring Initializer
 
@@ -118,3 +119,10 @@ spring init --dependencies=${依存関係},${依存関係} --group-id=~${グル�
 ### 参考
 
 - [Spring Boot CLI](https://spring.pleiades.io/spring-boot/docs/current/reference/html/cli.html)
+
+## アノテーション
+
+| アノテーション | パッケージ | 説明 | リンク |
+| :----------- | :------- | :--- | :--- |
+| @Bean | org.springframework.context.annotation.Bean | メソッドが Spring コンテナーによって管理される Bean を生成することを示します。 | [SpringBoot:Javadoc](https://spring.pleiades.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html) |
+| @Entity | javax.persistence.Entity | JPAで使う。エンティティとテーブルのマッピングをする。 | [JPA (Java Persistence API)のアノテーション:SE学院](https://segakuin.com/java/jpa/annotation.html) |
