@@ -15,6 +15,7 @@
     - [AWS CodeBuild](#aws-codebuild)
     - [AWS CodeCommit](#aws-codecommit)
     - [AWS Lambda](#aws-lambda)
+    - [AWS SQS](#aws-sqs)
     - [ElastiCache](#elasticache)
     - [CodeGuru](#codeguru)
     - [cloud9](#cloud9)
@@ -99,6 +100,10 @@
 ### AWS Lambda
 
 - [AWS_Lambda](./AWS/AWS_Lambda.md)
+
+### AWS SQS
+
+- [AWS_SQS](./AWS/AWS_SQS.md)
 
 ### ElastiCache
 
