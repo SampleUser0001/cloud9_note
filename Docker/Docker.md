@@ -48,6 +48,7 @@
       - [例](#例)
       - [備考](#備考)
   - [ホストからコンテナの環境変数を設定する](#ホストからコンテナの環境変数を設定する)
+  - [WSL2でDockerサービスを起動する](#wsl2でdockerサービスを起動する)
 
 ## nginxイメージを使用して公開する
 
@@ -460,4 +461,10 @@ Successfully built 55a01aafb8e9
 少し試してみた。
 
 - [docker-compose_environment_sample](https://github.com/SampleUser0001/docker-compose_environment_sample)
+
+## WSL2でDockerサービスを起動する
+
+``` bash
+sudo service docker start
+```
 
