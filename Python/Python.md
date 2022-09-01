@@ -5,6 +5,8 @@
     - [ソース](#ソース)
     - [実行結果](#実行結果)
     - [参考](#参考)
+  - [str -> int -> bool](#str---int---bool)
+    - [実行例](#実行例)
   - [str -> datetime](#str---datetime)
   - [依存モジュールの一覧化](#依存モジュールの一覧化)
     - [取得](#取得)
@@ -61,6 +63,52 @@ if __name__ == '__main__':
 ### 参考
 
 - [Python > list > 二重listを一重listに変換する](https://qiita.com/7of9/items/84dcb552668a8a3bdcd3)
+
+## str -> int -> bool
+
+あくまで整数。
+
+| 値  | True/False |
+| :-- | :--------- |
+| 1 | True |
+| 0 | False |
+| 上記以外 | True |
+
+### 実行例
+
+``` python
+import sys
+
+def main(args):
+    i = int(args[1]);
+    if i:
+        print(True)
+    else:
+        print(False)
+
+if __name__ == '__main__':
+    main(sys.argv)
+```
+
+``` bash
+$ python app.py 1
+True
+```
+
+``` bash
+$ python app.py 0
+False
+```
+
+``` bash
+$ python app.py 2
+True
+```
+
+``` bash
+$ python app.py -1
+True
+```
 
 ## str -> datetime
 
