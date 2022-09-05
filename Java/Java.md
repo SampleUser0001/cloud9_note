@@ -10,6 +10,7 @@
     - [String -> Model](#string---model)
     - [Stream -> List](#stream---list)
     - [Stream -> Map](#stream---map)
+      - [順番を保持する](#順番を保持する)
     - [合計値算出](#合計値算出)
     - [List -> Stream](#list---stream)
     - [配列 -> Stream](#配列---stream)
@@ -94,6 +95,12 @@ import java.util.stream.Collectors;
 
 ``` java
 collect(Collectors.toMap(Model::getId, Bean::getValue))
+```
+
+#### 順番を保持する
+
+``` java
+collect(Collectors.toMap(Model::getId, Bean::getValue, (x, y) -> y, LinkedHashMap::new))
 ```
 
 ### 合計値算出
