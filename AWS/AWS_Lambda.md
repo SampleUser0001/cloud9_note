@@ -114,6 +114,7 @@ profileを設定する場合は、credentialsに記載する。
 
 ### 参考
 
+- [Use_serverless_Python](https://github.com/SampleUser0001/Use_serverless_Python)
 - [ServerlessSampleLambdaProject:SampleUser0001:Github](https://github.com/SampleUser0001/ServerlessSampleLambdaProject)
 
 ## ホスト側のaws cli設定をコンテナに持ち込んで、boto3する
