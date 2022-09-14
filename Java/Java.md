@@ -13,6 +13,7 @@
       - [順番を保持する](#順番を保持する)
     - [合計値算出](#合計値算出)
     - [List -> Stream](#list---stream)
+    - [List<Model> -> Map<T, List<Model>>](#listmodel---mapt-listmodel)
     - [配列 -> Stream](#配列---stream)
   - [Path -> List](#path---list)
   - [PropertiesEnum](#propertiesenum)
@@ -114,6 +115,14 @@ collect(Collectors.toMap(Model::getId, Bean::getValue, (x, y) -> y, LinkedHashMa
 
 ``` java
 list.stream()
+```
+
+### List<Model> -> Map<T, List<Model>>
+
+``` java
+list.stream()
+    .collect(Collectors.groupingBy(Model::getId,
+             Collectors.mapping(Model::clone, Collectors.toList())));
 ```
 
 ### 配列 -> Stream
