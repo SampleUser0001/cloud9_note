@@ -12,6 +12,7 @@ SQLのテクニック全般
     - [fromにしかないレコードも抽出する](#fromにしかないレコードも抽出する)
     - [joinにしかないレコードも抽出する](#joinにしかないレコードも抽出する)
     - [どちらでもいいから片方にあるレコードを抽出する](#どちらでもいいから片方にあるレコードを抽出する)
+    - [どちらかにしかないレコードをorder byで使う](#どちらかにしかないレコードをorder-byで使う)
   - [Timestamp型 -> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
     - [参考](#参考)
   - [外部キー](#外部キー)
@@ -146,6 +147,10 @@ where table1.value = table2.value
 from table1 full outer join table2 on table1.id = table2.id
 where table1.value = table2.value
 ```
+
+### どちらかにしかないレコードをorder byで使う
+
+- [left_outer_join_order_by](https://github.com/SampleUser0001/left_outer_join_order_by)
 
 ## Timestamp型 -> 秒変換する(EXTRACT)
 
