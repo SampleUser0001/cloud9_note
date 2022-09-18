@@ -23,7 +23,9 @@
     - [その他](#その他)
   - [Docker](#docker)
   - [git](#git)
-  - [GoogleAnalytics](#googleanalytics)
+  - [Google](#google)
+    - [Google Analytics](#google-analytics)
+    - [API](#api)
   - [VSCode](#vscode)
   - [Windows](#windows)
   - [Java](#java)
@@ -133,9 +135,15 @@
 
 - [git.md](./Git_cli/git.md)
 
-## GoogleAnalytics
+## Google
+
+### Google Analytics
 
 - [GoogleAnalytics.md](./GoogleAnalytics/GoogleAnalytics.md)
+
+### API
+
+- [Youtube_API.md](./Google_API/Youtube_API.md)
 
 ## VSCode
 
