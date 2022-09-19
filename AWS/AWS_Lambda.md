@@ -28,6 +28,9 @@
       - [ソース](#ソース)
       - [テスト用イベントJSON](#テスト用イベントjson)
       - [実行](#実行-2)
+  - [呼び出し元の入力パターン](#呼び出し元の入力パターン)
+    - [EventBridge](#eventbridge)
+      - [任意の値を設定する](#任意の値を設定する)
   - [CORSエラーの対応をする](#corsエラーの対応をする)
     - [参考](#参考-2)
 
@@ -240,6 +243,36 @@ curl -X GET -H "Content-Type: application/json" -d ${FUNCTION_ARGS} ${FUNCTION_U
 ``` json
 {"example": "test"}
 ```
+
+## 呼び出し元の入力パターン
+
+eventで取得できる値。
+
+### EventBridge 
+
+``` json
+{
+    "version": "0",
+    "id": "${id}",
+    "detail-type": "Scheduled Event",
+    "source": "aws.events",
+    "account": "${アカウントID}",
+    "time": "2022-09-19T14:16:44Z",
+    "region": "ap-northeast-1",
+    "resources": [
+        "arn:aws:events:${region}:${account}:rule/${EventBridge_Name}"
+    ],
+    "detail": {}
+}
+```
+
+#### 任意の値を設定する
+
+追加設定 -> 定数(JSONテキスト)でjsonを設定しておくと、eventが上書きされる。
+
+- [Amazon EventBridgeから起動したLambdaにパラメータを渡す : It works for me](https://www.blog.danishi.net/2021/04/20/post-4852/)
+
+
 
 ## CORSエラーの対応をする
 
