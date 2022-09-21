@@ -13,9 +13,9 @@
       - [順番を保持する](#順番を保持する)
     - [合計値算出](#合計値算出)
     - [List -> Stream](#list---stream)
-    - [List<Model> -> Map<T, List<Model>>](#listmodel---mapt-listmodel)
+    - [List\<Model\> -> Map<T, List\<Model\>>](#listmodel---mapt-listmodel)
     - [配列 -> Stream](#配列---stream)
-  - [Path -> List](#path---list)
+    - [Path -> List](#path---list)
   - [PropertiesEnum](#propertiesenum)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
@@ -117,7 +117,7 @@ collect(Collectors.toMap(Model::getId, Bean::getValue, (x, y) -> y, LinkedHashMa
 list.stream()
 ```
 
-### List<Model> -> Map<T, List<Model>>
+### List\<Model\> -> Map<T, List\<Model\>>
 
 ``` java
 list.stream()
@@ -131,7 +131,7 @@ list.stream()
 Stream.of(配列)
 ```
 
-## Path -> List
+### Path -> List
 
 ``` java
 import java.util.List;
