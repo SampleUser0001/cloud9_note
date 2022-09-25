@@ -5,22 +5,6 @@
   - [Linux](#linux)
   - [DB](#db)
   - [AWS](#aws)
-    - [共通](#共通)
-    - [ECR](#ecr)
-    - [ECS/Fargate](#ecsfargate)
-    - [CloudFront](#cloudfront)
-    - [Elemental Media Convert](#elemental-media-convert)
-    - [EC2](#ec2)
-    - [AWS Secrets Manager](#aws-secrets-manager)
-    - [AWS CodeBuild](#aws-codebuild)
-    - [AWS CodeCommit](#aws-codecommit)
-    - [AWS Lambda](#aws-lambda)
-    - [AWS SQS](#aws-sqs)
-    - [ElastiCache](#elasticache)
-    - [CodeGuru](#codeguru)
-    - [cloud9](#cloud9)
-    - [EFS](#efs)
-    - [その他](#その他)
   - [Docker](#docker)
   - [git](#git)
   - [Google](#google)
@@ -62,69 +46,26 @@
 
 ## AWS
 
-### 共通
-
 - [AWS_Common.md](./AWS/AWS_Common.md)
-
-### ECR
-
 - [ECR.md](./AWS/ECR.md)
-
-### ECS/Fargate
-
-- [Use_AWS_ECS](https://sampleuser0001.github.io/Use_AWS_ECS/)
-
-### CloudFront
-
+- ECS/Fargate
+  - [Use_AWS_ECS](https://sampleuser0001.github.io/Use_AWS_ECS/)
 - [CloudFront.md](./AWS/CloudFront.md)
-
-### Elemental Media Convert
-
 - [ElementalMediaConvert.md](./AWS/ElementalMediaConvert.md)
-
-### EC2
-
-- [メモリ使用量とストレージ容量の監視](./AWS/EC2/Surveillance_Memory_and_Strage.md)
-
-### AWS Secrets Manager
-
+- EC2
+  - [メモリ使用量とストレージ容量の監視](./AWS/EC2/Surveillance_Memory_and_Strage.md)
 - [Use_AWS_Secrets_Manager](https://github.com/SampleUser0001/Use_AWS_Secrets_Manager)
-
-### AWS CodeBuild
-
-- [CodeBuild.md](./AWS/CodeBuild.md)
-- [Use_AWS_CodeBuild](https://github.com/SampleUser0001/Use_AWS_CodeBuild)
-
-### AWS CodeCommit
-
-- [CodeCommit.md](./AWS/CodeCommit.md)
-
-### AWS Lambda
-
+- AWS CodeBuild
+  - [CodeBuild.md](./AWS/CodeBuild.md)
+  - [Use_AWS_CodeBuild](https://github.com/SampleUser0001/Use_AWS_CodeBuild)
+- [AWS_CodeCommit.md](./AWS/CodeCommit.md)
 - [AWS_Lambda](./AWS/AWS_Lambda.md)
-
-### AWS SQS
-
 - [AWS_SQS](./AWS/AWS_SQS.md)
-
-### ElastiCache
-
 - [ElastiCache.md](./AWS/ElastiCache.md)
-
-### CodeGuru
-
 - [CodeGuru.md](./AWS/CodeGuru.md)
-
-### cloud9
-
 - [cloud9.md](./AWS/cloud9.md)
-
-### EFS
-
 - [EFS.md](./AWS/EFS.md)
-
-### その他
-
+- [Amazon_EventBridge.md](./AWS/Amazon_EventBridge.md)
 - [Other.md](./AWS/Other.md)
 
 ## Docker
