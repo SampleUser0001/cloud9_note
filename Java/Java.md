@@ -22,6 +22,7 @@
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
   - [Mapのループ](#mapのループ)
+  - [Mapをほかの型のMapに変換する](#mapをほかの型のmapに変換する)
   - [ディレクトリを再帰的にたどる](#ディレクトリを再帰的にたどる)
   - [Listの結合](#listの結合)
   - [指定した文字列で結合する](#指定した文字列で結合する)
@@ -241,6 +242,18 @@ for(Map.Entry<String, String> entry : map.entrySet()){
   entry.getValue();
 }
 
+```
+
+## Mapをほかの型のMapに変換する
+
+``` java
+import java.util.stream.Collectors;
+
+Map<String, DataB> dataBMap
+    = dataAMap.entrySet()
+              .stream()
+              .collect(Collectors.toMap(Map.Entry::getKey,
+                                        entry -> new DataB(entry));
 ```
 
 ## ディレクトリを再帰的にたどる
