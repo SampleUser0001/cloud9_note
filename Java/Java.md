@@ -13,7 +13,8 @@
       - [順番を保持する](#順番を保持する)
     - [合計値算出](#合計値算出)
     - [List -> Stream](#list---stream)
-    - [List\<Model\> -> Map<T, List\<Model\>>](#listmodel---mapt-listmodel)
+    - [List\<ModelA\> -> Map<ModelA, List\<ModelB\>>](#listmodela---mapmodela-listmodelb)
+      - [List\<ModelA\> -> LinkedHashMap<ModelA, List\<ModelB\>>](#listmodela---linkedhashmapmodela-listmodelb)
     - [配列 -> Stream](#配列---stream)
     - [Path -> List](#path---list)
   - [PropertiesEnum](#propertiesenum)
@@ -118,12 +119,27 @@ collect(Collectors.toMap(Model::getId, Bean::getValue, (x, y) -> y, LinkedHashMa
 list.stream()
 ```
 
-### List\<Model\> -> Map<T, List\<Model\>>
+### List\<ModelA\> -> Map<ModelA, List\<ModelB\>>
 
 ``` java
+import java.util.stream.Collectors;
+
 list.stream()
-    .collect(Collectors.groupingBy(Model::getId,
-             Collectors.mapping(Model::clone, Collectors.toList())));
+    .collect(Collectors.groupingBy(
+                 m -> m,
+                 Collectors.mapping(modelA -> new ModelB(modelA), Collectors.toList())));
+```
+
+#### List\<ModelA\> -> LinkedHashMap<ModelA, List\<ModelB\>>
+
+``` java
+import java.util.stream.Collectors;
+
+list.stream()
+    .collect(Collectors.groupingBy(
+                 m -> m,
+                 LinkedHashMap::new,
+                 Collectors.mapping(modelA -> new ModelB(modelA), Collectors.toList())));
 ```
 
 ### 配列 -> Stream
