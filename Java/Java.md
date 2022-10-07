@@ -160,6 +160,14 @@ Path filepath = Paths.get("読み込み対象のファイルパス");
 List<String> lines = Files.readAllLines(filepath, Charset.forName("UTF-8"));
 ```
 
+### List<ModelA>をModelA内のListごとに展開する。
+
+``` java
+topLayerList.stream()
+            .flatMap(ma -> ma.list.stream())
+            .forEach(mb -> System.out.println(String.format("a : %s, b : %s", mb.a, mb.b)));
+```
+
 ## PropertiesEnum
 
 ``` java
