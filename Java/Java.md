@@ -17,6 +17,7 @@
       - [List\<ModelA\> -> LinkedHashMap<ModelA, List\<ModelB\>>](#listmodela---linkedhashmapmodela-listmodelb)
     - [配列 -> Stream](#配列---stream)
     - [Path -> List](#path---list)
+    - [List\<ModelA\>をModelA内のListごとに展開する。](#listmodelaをmodela内のlistごとに展開する)
   - [PropertiesEnum](#propertiesenum)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
@@ -160,7 +161,7 @@ Path filepath = Paths.get("読み込み対象のファイルパス");
 List<String> lines = Files.readAllLines(filepath, Charset.forName("UTF-8"));
 ```
 
-### List<ModelA>をModelA内のListごとに展開する。
+### List\<ModelA\>をModelA内のListごとに展開する。
 
 ``` java
 topLayerList.stream()
