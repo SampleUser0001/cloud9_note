@@ -36,6 +36,7 @@ Cloud9を起動したときに行うことの備忘録。
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
   - [python](#python)
+    - [3.10.x以上](#310x以上)
     - [参考](#参考-6)
   - [pip3](#pip3)
     - [apt](#apt-1)
@@ -379,9 +380,24 @@ ls pip*
 sudo ln -s /usr/local/bin/${lsで確認したpipコマンドのファイル名} pip3
 ```
 
+### 3.10.x以上
+
+OpenSSL1.1.1以上が必要。
+
+``` bash
+# Amazon Linux 2の場合
+sudo yum install -y openssl11 openssl11-devel
+
+# 使っていたら削除する。
+# sudo yum list openssl
+# sudo yum remove -y openssl-devel
+```
+
+
 ### 参考
 
-[Tecadmin](https://tecadmin.net/install-python-3-9-on-amazon-linux/)
+- [Tecadmin](https://tecadmin.net/install-python-3-9-on-amazon-linux/)
+- [OpenSSL 1.1.1 が必須なPython 3.10.x をAmazon Linux 2 にインストールする](https://blog.serverworks.co.jp/install-python3-with-openssl11)
 
 ## pip3
 
