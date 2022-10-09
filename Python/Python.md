@@ -21,6 +21,11 @@
   - [for](#for)
   - [boto3](#boto3)
     - [サービスのclientを取得する](#サービスのclientを取得する)
+  - [pyenv](#pyenv)
+    - [インストール可能なバージョン一覧](#インストール可能なバージョン一覧)
+    - [特定バージョンのPythonインストール](#特定バージョンのpythonインストール)
+    - [切り替え](#切り替え)
+    - [アンインストール](#アンインストール)
 
 ## 配列の展開
 
@@ -220,3 +225,30 @@ k : 1 , v : piyo
 ### サービスのclientを取得する
 
 - [AWS_Pipeline_CodeBuild](https://github.com/SampleUser0001/AWS_Pipeline_CodeBuild)
+
+## pyenv
+
+### インストール可能なバージョン一覧
+
+``` bash
+pyenv install -l | less
+```
+
+### 特定バージョンのPythonインストール
+
+``` bash
+pyenv install ${python_version}
+```
+
+### 切り替え
+
+``` bash
+pyenv local ${python_version}
+```
+
+### アンインストール
+
+``` bash
+pyenv uninstall ${python_version}
+```
+
