@@ -36,6 +36,7 @@ Cloud9を起動したときに行うことの備忘録。
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
   - [python](#python)
+    - [pyenv](#pyenv)
     - [3.10.x以上](#310x以上)
     - [参考](#参考-6)
   - [pip3](#pip3)
@@ -380,6 +381,22 @@ ls pip*
 sudo ln -s /usr/local/bin/${lsで確認したpipコマンドのファイル名} pip3
 ```
 
+### pyenv
+
+``` bash
+sudo yum update -y
+sudo yum install -y git gcc zlib-devel openssl-devel
+
+git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+pyenv version
+
+# PATHを通す
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
+source ~/.bash_profile
+```
+
 ### 3.10.x以上
 
 OpenSSL1.1.1以上が必要。
@@ -398,6 +415,7 @@ sudo yum install -y openssl11 openssl11-devel
 
 - [Tecadmin](https://tecadmin.net/install-python-3-9-on-amazon-linux/)
 - [OpenSSL 1.1.1 が必須なPython 3.10.x をAmazon Linux 2 にインストールする](https://blog.serverworks.co.jp/install-python3-with-openssl11)
+- [Amazon Linux 2でDjango実行環境を構築する:DevelopersIO](https://dev.classmethod.jp/articles/run-django-on-amazon-linux-2/)
 
 ## pip3
 
