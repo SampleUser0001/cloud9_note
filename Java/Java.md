@@ -38,6 +38,9 @@
     - [圧縮](#圧縮)
     - [jarコマンド:参考](#jarコマンド参考)
   - [StringBuilderとStringBufferの違い](#stringbuilderとstringbufferの違い)
+  - [SimpleDateFormat](#simpledateformat)
+    - [String -> Date](#string---date)
+    - [Date -> String](#date---string)
 
 ## Stream
 
@@ -408,3 +411,25 @@ jar -cf ${jarファイル}.jar ${ディレクトリ}
 - StringBuffer
   - スレッドセーフ。
   - 早くない。
+
+## SimpleDateFormat
+
+### String -> Date
+
+``` java
+import java.text.ParseException;
+
+try {
+    SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+    Date date = format.parse("20221014");
+} catch (ParseException e) {
+    e.printStackTrace();
+}
+```
+
+### Date -> String
+
+``` java
+SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+format.format(new Date());
+```
