@@ -24,6 +24,7 @@
   - [pyenv](#pyenv)
     - [インストール可能なバージョン一覧](#インストール可能なバージョン一覧)
     - [特定バージョンのPythonインストール](#特定バージョンのpythonインストール)
+      - [参考](#参考-2)
     - [インストール済みバージョンの一覧](#インストール済みバージョンの一覧)
     - [切り替え](#切り替え)
     - [アンインストール](#アンインストール)
@@ -240,6 +241,11 @@ pyenv install -l | less
 ``` bash
 pyenv install ${python_version}
 ```
+
+#### 参考
+
+- [pyenv:github](https://github.com/pyenv/pyenv/wiki#suggested-build-environment)
+  - インストールに失敗したら参照する。
 
 ### インストール済みバージョンの一覧
 

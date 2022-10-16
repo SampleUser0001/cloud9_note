@@ -386,7 +386,7 @@ sudo ln -s /usr/local/bin/${lsで確認したpipコマンドのファイル名} 
 ``` bash
 sudo yum update -y
 # openssl-devalをインストールすると3.10.xをインストールするときに競合が発生するという情報がある。
-sudo yum install -y git gcc zlib-devel openssl-devel
+sudo yum install gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel
 
 git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 pyenv version
