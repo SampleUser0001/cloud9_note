@@ -141,6 +141,7 @@
 ## Python
 
 - [Python](./Python/Python.md)
+- [Django](./Python/Django.md)
 
 ## Ruby
 
