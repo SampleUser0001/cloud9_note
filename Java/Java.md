@@ -433,3 +433,7 @@ try {
 SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 format.format(new Date());
 ```
+
+## Optionalクラスを使ってnullチェックを行う
+
+- [Use_Optional_Java:SampleUser0001:Github](https://github.com/SampleUser0001/Use_Optional_Java)
