@@ -41,6 +41,7 @@
   - [SimpleDateFormat](#simpledateformat)
     - [String -> Date](#string---date)
     - [Date -> String](#date---string)
+  - [Optionalクラスを使ってnullチェックを行う](#optionalクラスを使ってnullチェックを行う)
 
 ## Stream
 
