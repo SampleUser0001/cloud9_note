@@ -28,6 +28,9 @@
     - [インストール済みバージョンの一覧](#インストール済みバージョンの一覧)
     - [切り替え](#切り替え)
     - [アンインストール](#アンインストール)
+    - [切り替わらないとき](#切り替わらないとき)
+      - [set by PYENV_VERSION environment variable](#set-by-pyenv_version-environment-variable)
+        - [参考](#参考-3)
 
 ## 配列の展開
 
@@ -265,3 +268,22 @@ pyenv local ${python_version}
 pyenv uninstall ${python_version}
 ```
 
+### 切り替わらないとき
+
+#### set by PYENV_VERSION environment variable
+
+``` bash
+$ pyenv version
+3.10.8 (set by PYENV_VERSION environment variable)
+```
+
+PYENV_VERSIONが優先されるため、切り替わらない。  
+下記を実行する。
+
+``` bash
+pyenv shell --unset
+```
+
+##### 参考
+
+- [[Sy] 「pyenv local」が効かない（バージョンがうまく切り替わってくれない）場合の対処 : Syntax Error.](https://utano.jp/entry/2019/02/pyenv-local-does-not-work/)
