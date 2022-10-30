@@ -52,7 +52,7 @@
   - [Use_AWS_ECS](https://sampleuser0001.github.io/Use_AWS_ECS/)
 - [CloudFront.md](./AWS/CloudFront.md)
 - [ElementalMediaConvert.md](./AWS/ElementalMediaConvert.md)
-- EC2
+- [EC2](./AWS/EC2/EC2.md)
   - [メモリ使用量とストレージ容量の監視](./AWS/EC2/Surveillance_Memory_and_Strage.md)
 - [Use_AWS_Secrets_Manager](https://github.com/SampleUser0001/Use_AWS_Secrets_Manager)
 - AWS CodeBuild
