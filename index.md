@@ -14,7 +14,7 @@
   - [Windows](#windows)
   - [Java](#java)
     - [Middleware](#middleware)
-  - [JavaScript](#javascript)
+  - [JavaScript/TypeScript](#javascripttypescript)
   - [PHP](#php)
     - [Laravel VerUP リンク](#laravel-verup-リンク)
   - [Python](#python)
@@ -113,9 +113,10 @@
 - [WebSphere.md](./Java/Middleware/WebSphere.md)
 - [Tomcat.md](./Java/Middleware/Tomcat.md)
 
-## JavaScript
+## JavaScript/TypeScript
 
 - [JavaScript](./JavaScript/JavaScript.md)
+- [TypeScript](./JavaScript/TypeScript.md)
 - [jQuery](./JavaScript/jQuery.md)
 - [Node.js](./JavaScript/Node.md)
 - [Vue.js](./JavaScript/Vue.md)
