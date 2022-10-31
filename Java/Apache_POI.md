@@ -195,3 +195,16 @@ public class App {
 ## XSSFとSXSSFの違い
 
 - [Apache POIでエクセル操作を作ってみて〜XSSFとSXSSFの違い:ハジカラ](https://kk90info.com/apache-poi%E3%81%A7%E3%82%A8%E3%82%AF%E3%82%BB%E3%83%AB%E6%93%8D%E4%BD%9C%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%A6%E3%80%9Cxssf%E3%81%A8sxssf%E3%81%AE%E9%81%95%E3%81%84/)
+
+## 作成者を変更する
+
+デフォルトだと```Apache POI```になるので、それが嫌だという時の対応。
+
+``` java
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+XSSFWorkbook workbook = new XSSFWorkbook();
+
+workbook.getProperties().getCoreProperties().setCreator("ittimfn");
+```
+
