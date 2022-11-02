@@ -19,6 +19,9 @@
     - [デアクティベート](#デアクティベート)
     - [参考](#参考-1)
   - [for](#for)
+  - [マルチプロセス](#マルチプロセス)
+    - [配列をマルチプロセスで処理する](#配列をマルチプロセスで処理する)
+    - [配列ではないがマルチプロセスで処理する](#配列ではないがマルチプロセスで処理する)
   - [boto3](#boto3)
     - [サービスのclientを取得する](#サービスのclientを取得する)
   - [pyenv](#pyenv)
@@ -223,6 +226,61 @@ v : hoge
 v : piyo
 k : 0 , v : hoge
 k : 1 , v : piyo
+```
+
+## マルチプロセス
+
+### 配列をマルチプロセスで処理する
+
+``` python
+# -*- coding: utf-8 -*-
+from multiprocessing import Pool
+
+SQUARE_COUNT = 10
+
+def square(i):
+    return i*i
+
+if __name__ == '__main__':
+    with Pool(4) as pool:
+        print(pool.map(square, range(SQUARE_COUNT)))
+```
+
+``` txt
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+```
+
+### 配列ではないがマルチプロセスで処理する
+
+``` python 
+# -*- coding: utf-8 -*-
+from multiprocessing import Pool
+import random
+import datetime 
+
+RANDOM_SQUARE_COUNT = 10000000
+
+def square(i):
+    return random.random() * random.random()
+
+def multi_process_performance(process_count):
+    start = datetime.datetime.now()
+    with Pool(process_count) as pool:
+        pool.map(square, range(RANDOM_SQUARE_COUNT))
+    finish = datetime.datetime.now()
+    print(f'process {process_count} , time : {finish - start}')
+
+if __name__ == '__main__':
+    multi_process_performance(1)
+    multi_process_performance(4)
+    multi_process_performance(100)
+
+```
+
+``` txt
+process 1 , time : 0:00:03.838766
+process 4 , time : 0:00:00.768664
+process 100 , time : 0:00:00.709970
 ```
 
 ## boto3
