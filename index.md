@@ -120,6 +120,7 @@
 - [jQuery](./JavaScript/jQuery.md)
 - [Node.js](./JavaScript/Node.md)
 - [Vue.js](./JavaScript/Vue.md)
+- [React.js](./JavaScript/React.md)
 
 ## PHP
 
