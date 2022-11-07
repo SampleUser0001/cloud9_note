@@ -18,6 +18,7 @@
     - [配列 -> Stream](#配列---stream)
     - [Path -> List](#path---list)
     - [List\<ModelA\>をModelA内のListごとに展開する。](#listmodelaをmodela内のlistごとに展開する)
+    - [List\<List\<Model\>\> -> List\<Model\>](#listlistmodel---listmodel)
   - [PropertiesEnum](#propertiesenum)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
@@ -171,6 +172,16 @@ List<String> lines = Files.readAllLines(filepath, Charset.forName("UTF-8"));
 topLayerList.stream()
             .flatMap(ma -> ma.list.stream())
             .forEach(mb -> System.out.println(String.format("a : %s, b : %s", mb.a, mb.b)));
+```
+
+### List\<List\<Model\>\> -> List\<Model\>
+
+``` java
+import java.util.stream.Collectors;
+
+list.stream()
+    .flatMap(lst -> lst.stream())
+    .collect(Collectors.toList());
 ```
 
 ## PropertiesEnum
