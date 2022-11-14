@@ -8,6 +8,8 @@
     - [参考](#参考)
   - [XSSFとSXSSFの違い](#xssfとsxssfの違い)
   - [作成者を変更する](#作成者を変更する)
+  - [getCellValue](#getcellvalue)
+    - [参考](#参考-1)
 
 ## 基本
 
@@ -209,3 +211,90 @@ XSSFWorkbook workbook = new XSSFWorkbook();
 workbook.getProperties().getCoreProperties().setCreator("ittimfn");
 ```
 
+## getCellValue
+
+Cellから値を取得する場合、Excel側で指定されている型（書式）によって、使うメソッドが異なる。
+
+``` java
+package ittimfn.tool.poi.enums;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.CellType;
+
+import java.math.BigDecimal;
+
+public enum CellTypeEnum {
+    NUMERIC(CellType.NUMERIC) { 
+        @Override
+        public String getCellValue(XSSFCell cell) {
+            return 
+                DateUtil.isCellDateFormatted(cell) ?
+                DATE.getCellValue(cell) : 
+                BigDecimal.valueOf(cell.getNumericCellValue()).toPlainString();
+        }
+    },
+    STRING(CellType.STRING) {
+        @Override
+        public String getCellValue(XSSFCell cell) {
+            return cell.getStringCellValue();
+        }
+    },
+    FORMULA(CellType.FORMULA) {
+        @Override
+        public String getCellValue(XSSFCell cell) {
+            return cell.getCellFormula();
+        }
+    },
+    BLANK(CellType.BLANK) {
+        @Override
+        public String getCellValue(XSSFCell cell) {
+            // TODO 機会があれば書く
+            return null;
+        }
+
+    },
+    BOOLEAN(CellType.BOOLEAN) {
+        @Override
+        public String getCellValue(XSSFCell cell) {
+            return Boolean.toString(cell.getBooleanCellValue());
+        }
+    },
+    ERROR(CellType.ERROR) {
+        @Override
+        public String getCellValue(XSSFCell cell) {
+            // TODO 機会があれば書く
+            return null;
+        }
+    },
+    DATE(null) {
+        @Override
+        public String getCellValue(XSSFCell cell) {
+            // TODO 機会があれば書く
+            // TODO Date -> String変換については形式指定が必要。
+            return null;
+        }
+    };
+    
+    private CellType cellType;
+    
+    private CellTypeEnum(CellType cellType) {
+        this.cellType = cellType;
+    }
+
+    public static CellTypeEnum valueOfCellType(CellType cellType) throws IllegalArgumentException {
+        for(CellTypeEnum e : values()) { 
+            if(e.cellType == cellType) {
+                return e;
+            }
+        }
+        throw new IllegalArgumentException("Not Found : " + cellType);
+    }
+
+    public abstract String getCellValue(XSSFCell cell);
+}
+```
+
+### 参考
+
+- [CellTypeEnum.java:Export_Excel_Width_Poi:SampleUser0001:Github](https://github.com/SampleUser0001/Export_Excel_Width_Poi/blob/main/src/main/java/ittimfn/tool/poi/enums/CellTypeEnum.java)
