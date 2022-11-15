@@ -8,6 +8,7 @@
     - [参考](#参考)
   - [XSSFとSXSSFの違い](#xssfとsxssfの違い)
   - [作成者を変更する](#作成者を変更する)
+  - [プログラム名を変更する](#プログラム名を変更する)
   - [getCellValue](#getcellvalue)
     - [参考](#参考-1)
 
@@ -209,6 +210,18 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 XSSFWorkbook workbook = new XSSFWorkbook();
 
 workbook.getProperties().getCoreProperties().setCreator("ittimfn");
+```
+
+## プログラム名を変更する
+
+デフォルトだと```Apache POI```になるので、それが嫌だという時の対応。
+
+``` java
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+XSSFWorkbook workbook = new XSSFWorkbook();
+
+workbook.getProperties().getExtendedProperties().getUnderlyingProperties().setApplication("");
 ```
 
 ## getCellValue
