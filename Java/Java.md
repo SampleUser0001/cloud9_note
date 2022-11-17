@@ -43,6 +43,7 @@
     - [String -> Date](#string---date)
     - [Date -> String](#date---string)
   - [Optionalクラスを使ってnullチェックを行う](#optionalクラスを使ってnullチェックを行う)
+  - [Mapのキーをあとから変更する](#mapのキーをあとから変更する)
 
 ## Stream
 
@@ -449,3 +450,9 @@ format.format(new Date());
 ## Optionalクラスを使ってnullチェックを行う
 
 - [Use_Optional_Java:SampleUser0001:Github](https://github.com/SampleUser0001/Use_Optional_Java)
+
+## Mapのキーをあとから変更する
+
+取得できなくなるのでやってはいけない。
+
+- [Map_UpdateKey_Java:SampleUser0001:Github](https://github.com/SampleUser0001/Map_UpdateKey_Java)
