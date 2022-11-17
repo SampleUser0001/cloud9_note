@@ -21,8 +21,8 @@
 ``` sh
 mvn -B archetype:generate \
  -DarchetypeGroupId=org.apache.maven.archetypes \
- -DgroupId=sample.json \
- -DartifactId=Use_Json_in_Java
+ -DgroupId=ittimfn.sample \
+ -DartifactId=sample
 ```
 
 ※変更していいのは3行目と4行目のみ。1行目と2行目は変えてはいけない。
