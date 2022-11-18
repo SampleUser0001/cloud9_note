@@ -19,6 +19,7 @@
     - [Path -> List](#path---list)
     - [List\<ModelA\>をModelA内のListごとに展開する。](#listmodelaをmodela内のlistごとに展開する)
     - [List\<List\<Model\>\> -> List\<Model\>](#listlistmodel---listmodel)
+    - [Streamの連結](#streamの連結)
   - [PropertiesEnum](#propertiesenum)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
@@ -183,6 +184,18 @@ import java.util.stream.Collectors;
 list.stream()
     .flatMap(lst -> lst.stream())
     .collect(Collectors.toList());
+```
+
+### Streamの連結
+
+``` java
+Stream<String> stream1 = Stream.of("hoge", "piyo");
+Stream<String> stream2 = Stream.of("foo", "vaa");
+
+Stream.of(stream1, stream2)
+      .flatMap(s -> s)
+      .forEach(System.out::println);
+
 ```
 
 ## PropertiesEnum
