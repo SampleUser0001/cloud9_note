@@ -45,6 +45,7 @@
     - [Date -> String](#date---string)
   - [Optionalクラスを使ってnullチェックを行う](#optionalクラスを使ってnullチェックを行う)
   - [Mapのキーをあとから変更する](#mapのキーをあとから変更する)
+  - [String.formatで「%」を出力する](#stringformatでを出力する)
 
 ## Stream
 
@@ -469,3 +470,14 @@ format.format(new Date());
 取得できなくなるのでやってはいけない。
 
 - [Map_UpdateKey_Java:SampleUser0001:Github](https://github.com/SampleUser0001/Map_UpdateKey_Java)
+
+## String.formatで「%」を出力する
+
+``` java
+System.out.println(String.format("%%ｺｽﾄ"));
+```
+
+``` txt
+%ｺｽﾄ
+```
+
