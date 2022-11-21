@@ -54,7 +54,7 @@
            %mはログメッセージ
            %nは改行
         -->
-        <Property name="format1">%d{yyyy/MM/dd HH:mm:ss.SSS} [%t] %-6p %c{10} %m%n</Property>
+        <Property name="format1">%d{yyyy/MM/dd HH:mm:ss.SSS} [%t] %-6p %c{10} line:%L %m%n</Property>
         <Property name="logfile">./logs/testlog.log</Property>
         <Property name="logfile-archive">./logs/testlog_%d{yyyy-MM-dd-HH-mm}.tar.gz</Property>
     </Properties>
