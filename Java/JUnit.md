@@ -3,16 +3,22 @@
 - [JUnit](#junit)
   - [基本](#基本)
     - [pom.xml](#pomxml)
+      - [JUnit4](#junit4)
+      - [JUnit5](#junit5)
+      - [全部](#全部)
+      - [参考](#参考)
     - [テストプログラム](#テストプログラム)
-    - [参考](#参考)
+    - [参考](#参考-1)
   - [一部のメソッドをMock化する。](#一部のメソッドをmock化する)
     - [テスト対象](#テスト対象)
     - [テストクラス](#テストクラス)
-    - [参考](#参考-1)
+    - [参考](#参考-2)
 
 ## 基本
 
 ### pom.xml
+
+#### JUnit4
 
 ``` xml
     <junit.version>4.13.2</junit.version>
@@ -32,6 +38,81 @@
     </dependency>
 
 ```
+
+#### JUnit5
+
+``` xml
+    <junit.version>5.4.0</junit.version>
+    <hamcrest.version>2.2</hamcrest.version>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <version>${hamcrest.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+```
+
+#### 全部
+
+``` xml
+    <junit.version>5.4.0</junit.version>
+    <hamcrest.version>2.2</hamcrest.version>
+    <mockito.version>4.9.0</mockito.version>
+    <powermock.version>2.0.9</powermock.version>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <version>${hamcrest.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>    
+
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito2</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4-rule-agent</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+```
+
+#### 参考
+
+- [Using JUnit 5 Platform : Apache Maven Project](https://maven.apache.org/surefire/maven-surefire-plugin/examples/junit-platform.html)
 
 ### テストプログラム
 
