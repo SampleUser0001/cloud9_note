@@ -5,9 +5,15 @@
     - [ソース](#ソース)
     - [実行結果](#実行結果)
     - [参考](#参考)
-  - [str -> int -> bool](#str---int---bool)
+  - [str -\> int -\> bool](#str---int---bool)
     - [実行例](#実行例)
-  - [str -> datetime](#str---datetime)
+  - [str -\> datetime](#str---datetime)
+  - [型の判定](#型の判定)
+    - [参考](#参考-1)
+  - [部分配列の取得](#部分配列の取得)
+    - [先頭を取得する](#先頭を取得する)
+    - [末尾を取得する](#末尾を取得する)
+    - [間を取得する](#間を取得する)
   - [依存モジュールの一覧化](#依存モジュールの一覧化)
     - [取得](#取得)
     - [導入](#導入)
@@ -17,7 +23,7 @@
       - [Linux](#linux)
       - [Windows](#windows)
     - [デアクティベート](#デアクティベート)
-    - [参考](#参考-1)
+    - [参考](#参考-2)
   - [for](#for)
   - [マルチプロセス](#マルチプロセス)
     - [配列をマルチプロセスで処理する](#配列をマルチプロセスで処理する)
@@ -27,13 +33,13 @@
   - [pyenv](#pyenv)
     - [インストール可能なバージョン一覧](#インストール可能なバージョン一覧)
     - [特定バージョンのPythonインストール](#特定バージョンのpythonインストール)
-      - [参考](#参考-2)
+      - [参考](#参考-3)
     - [インストール済みバージョンの一覧](#インストール済みバージョンの一覧)
     - [切り替え](#切り替え)
     - [アンインストール](#アンインストール)
     - [切り替わらないとき](#切り替わらないとき)
-      - [set by PYENV_VERSION environment variable](#set-by-pyenv_version-environment-variable)
-        - [参考](#参考-3)
+      - [set by PYENV\_VERSION environment variable](#set-by-pyenv_version-environment-variable)
+        - [参考](#参考-4)
 
 ## 配列の展開
 
@@ -146,6 +152,55 @@ print(jst.tzinfo)
 UTC
 2021-09-11 21:45:18.448117+09:00
 UTC+09:00
+```
+
+## 型の判定
+
+``` python
+if type(value) is str:
+    # 
+```
+
+### 参考
+
+- [Pythonで型を取得・判定するtype関数, isinstance関数:note.nkmk.me](https://note.nkmk.me/python-type-isinstance/)
+
+## 部分配列の取得
+
+### 先頭を取得する
+
+``` python
+l = [1,2,3,4,5]
+part = l[:3]
+print(part)
+```
+
+``` txt
+[1, 2, 3]
+```
+
+### 末尾を取得する
+
+``` python
+l = [1,2,3,4,5]
+part = l[3:]
+print(part)
+```
+
+``` txt
+[4, 5]
+```
+
+### 間を取得する
+
+``` python
+l = [1,2,3,4,5]
+part = l[1:3]
+print(part)
+```
+
+``` txt
+[2, 3]
 ```
 
 ## 依存モジュールの一覧化
