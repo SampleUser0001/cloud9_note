@@ -862,6 +862,8 @@ rbenv --version
 rbenv init
 # 「~/.bash_profile」に記載しろというコメントとともにコマンドが表示される。
 # 表示されたとおりのコマンドを書く。
+
+source ~/.bash_profile
 ```
 
 #### rbenvでRubyインストール
