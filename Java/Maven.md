@@ -1,7 +1,10 @@
 # Maven
 
 - [Maven](#maven)
+  - [公式](#公式)
   - [新規プロジェクト作成](#新規プロジェクト作成)
+    - [旧](#旧)
+    - [新](#新)
   - [WebApplicationプロジェクト作成](#webapplicationプロジェクト作成)
     - [参考](#参考)
   - [Javaバージョンを指定する](#javaバージョンを指定する)
@@ -9,6 +12,7 @@
   - [src/main/resources配下のファイルパスを取得する](#srcmainresources配下のファイルパスを取得する)
     - [Mavenのresources配下のpropertiesを読み込む](#mavenのresources配下のpropertiesを読み込む)
   - [exec:javaコマンドで実行する](#execjavaコマンドで実行する)
+    - [package, javaコマンドで実行する](#package-javaコマンドで実行する)
     - [引数でmainメソッドのクラスを指定する](#引数でmainメソッドのクラスを指定する)
     - [起動引数を渡す](#起動引数を渡す)
   - [dependencyタグのjarをまとめてjarにする](#dependencyタグのjarをまとめてjarにする)
@@ -17,15 +21,32 @@
     - [参考](#参考-2)
   - [依存ライブラリを取り込む](#依存ライブラリを取り込む)
 
+## 公式
+
+[Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/index.html#How_do_I_make_my_first_Maven_project)
+
 ## 新規プロジェクト作成
+
+### 旧
+
 ``` sh
 mvn -B archetype:generate \
  -DarchetypeGroupId=org.apache.maven.archetypes \
  -DgroupId=ittimfn.sample \
  -DartifactId=sample
 ```
-
 ※変更していいのは3行目と4行目のみ。1行目と2行目は変えてはいけない。
+
+### 新
+
+``` sh
+mvn -B archetype:generate \
+ -DgroupId=ittimfn.sample
+ -DartifactId=SampleApp
+ -DarchetypeArtifactId=maven-archetype-quickstart
+ -DarchetypeVersion=1.4
+```
+
 
 ## WebApplicationプロジェクト作成
 
@@ -89,6 +110,16 @@ Path path =
     </plugin>
   </plugins>
 </build>
+```
+
+### package, javaコマンドで実行する
+
+``` bash
+# clean compile package
+mvn clean compile package
+
+# 実行
+java -classpath target/${jarファイルパス} ${mainメソッドクラスフルパス} ${引数}
 ```
 
 ### 引数でmainメソッドのクラスを指定する
