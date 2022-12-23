@@ -12,9 +12,9 @@
   - [src/main/resources配下のファイルパスを取得する](#srcmainresources配下のファイルパスを取得する)
     - [Mavenのresources配下のpropertiesを読み込む](#mavenのresources配下のpropertiesを読み込む)
   - [exec:javaコマンドで実行する](#execjavaコマンドで実行する)
-    - [package, javaコマンドで実行する](#package-javaコマンドで実行する)
     - [引数でmainメソッドのクラスを指定する](#引数でmainメソッドのクラスを指定する)
     - [起動引数を渡す](#起動引数を渡す)
+  - [package, javaコマンドで実行する](#package-javaコマンドで実行する)
   - [dependencyタグのjarをまとめてjarにする](#dependencyタグのjarをまとめてjarにする)
     - [参考](#参考-1)
   - [getter,setterを作成しない](#gettersetterを作成しない)
@@ -112,16 +112,6 @@ Path path =
 </build>
 ```
 
-### package, javaコマンドで実行する
-
-``` bash
-# clean compile package
-mvn clean compile package
-
-# 実行
-java -classpath target/${jarファイルパス} ${mainメソッドクラスフルパス} ${引数}
-```
-
 ### 引数でmainメソッドのクラスを指定する
 
 ```
@@ -134,6 +124,16 @@ exec:java -Dexec.mainClass="<クラス名>"
 mvn exec:java -Dexec.mainClass="<クラス名>" -Dexec.args="'<引数１>' '<引数２>' ..."
 ```
 シングルクオーテーションはなくても動くが、スペースを含む場合は必要。
+
+## package, javaコマンドで実行する
+
+``` bash
+# clean compile package
+mvn clean compile package
+
+# 実行
+java -classpath target/${jarファイルパス} ${mainメソッドクラスフルパス} ${引数}
+```
 
 ## dependencyタグのjarをまとめてjarにする
 
