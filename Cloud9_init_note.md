@@ -229,7 +229,8 @@ ls gradle-${Gradle_version}
 
 ```
 
-```~/.bashrc```に下記を追記。
+~/.bashrc に下記を追記。
+
 ``` bash
 # gradle
 export PATH="$PATH:/opt/gradle/gradle-7.6/bin"
