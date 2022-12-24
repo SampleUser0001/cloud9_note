@@ -100,6 +100,7 @@
 
 - [Java.md](./Java/Java.md)
 - [SpringBoot.md](./Java/SpringBoot.md)
+- [Gradle](./Java/Gradle.md)
 - [Maven.md](./Java/Maven.md)
 - [JUnit](./Java/JUnit.md)
 - [log4j2](./Java/log4j2.md)

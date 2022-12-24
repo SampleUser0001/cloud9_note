@@ -208,6 +208,39 @@ javac 11.0.9.1
 
 [Ubuntu 20.04にAptを使用してJavaをインストールする方法](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-20-04-ja)
 
+## Gradle
+
+``` bash
+cd /tmp
+
+# download
+# 最新バージョンを確認
+# https://gradle.org/releases/
+Gradle_version=7.6
+wget https://services.gradle.org/distributions/gradle-${Gradle_version}-bin.zip
+
+# install
+sudo mkdir /opt/gradle
+sudo mv ./gradle-${Gradle_version}-bin.zip /opt/gradle
+cd /opt/gradle
+sudo unzip -d . gradle-7.6-bin.zip 
+ls gradle-${Gradle_version}
+
+```
+
+```~/.bashrc```に下記を追記。
+``` bash
+# gradle
+export PATH="$PATH:/opt/gradle/gradle-7.6/bin"
+```
+
+``` bash
+source ~/.bashrc
+gradle -v
+
+sudo rm /opt/gradle/gradle-${Gradle_version}-bin.zip
+```
+
 ## Maven
 インストールされていない。
 
