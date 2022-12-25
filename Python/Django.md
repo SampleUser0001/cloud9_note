@@ -4,6 +4,9 @@
   - [init](#init)
     - [参考](#参考)
   - [起動](#起動)
+  - [アプリケーションの作成](#アプリケーションの作成)
+    - [ビュー作成(仮)](#ビュー作成仮)
+    - [URLパス設定](#urlパス設定)
   - [CSRF検証でエラーになった場合](#csrf検証でエラーになった場合)
     - [参考](#参考-1)
 
@@ -63,6 +66,50 @@ python manage.py runserver
 ``` bash
 # 外からアクセスできるようにする場合は下記。
 python manage.py runserver 0.0.0.0:8000
+```
+
+## アプリケーションの作成
+
+``` bash
+python manage.py startapp ${app_name}
+```
+
+### ビュー作成(仮)
+
+``` python
+# ${app_name}/view.py 
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse('Hello World.")
+
+```
+
+### URLパス設定
+
+``` python
+# ${app_name}/urls.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+```
+
+``` python
+# django_project/urls.py
+
+# 追記
+from django.urls import include, path
+
+urlpatterns = [
+    path('app_name/', include('app_name.urls')),
+    path('admin/', admin.site.urls),
+]
+
 ```
 
 ## CSRF検証でエラーになった場合
