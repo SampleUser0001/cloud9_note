@@ -20,9 +20,17 @@
     - [app/template/index.html](#apptemplateindexhtml)
     - [app/template/success.html](#apptemplatesuccesshtml)
     - [参考](#参考-2)
+  - [Modelを使う](#modelを使う)
+    - [DB設定](#db設定)
+      - [project/settings.py](#projectsettingspy-1)
+    - [app/models.py](#appmodelspy)
+    - [make migrations](#make-migrations)
+  - [Django admin](#django-admin)
+  - [AdminにModelを追加する](#adminにmodelを追加する)
+    - [app/admin.py](#appadminpy)
   - [bootstrap導入](#bootstrap導入)
     - [pip install](#pip-install)
-    - [project/settings.py](#projectsettingspy-1)
+    - [project/settings.py](#projectsettingspy-2)
     - [テンプレートファイル](#テンプレートファイル)
     - [参考](#参考-3)
   - [CSRF検証でエラーになった場合](#csrf検証でエラーになった場合)
@@ -281,6 +289,72 @@ def handle_uploaded_file(f):
 
 - [ファイルのアップロード:django](https://docs.project.com/ja/4.1/topics/http/file-uploads/)
 - [Django でファイルをアップロード:Qiita](https://qiita.com/ekzemplaro/items/07abd9a941bcd0eb5834)
+
+## Modelを使う
+
+### DB設定
+
+#### project/settings.py
+
+``` python
+# Database
+# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+```
+
+- 使用するDBによって記載を変えること。
+- コメントのURLを参照。
+
+### app/models.py
+
+``` python
+from django.db import models
+
+class Message(models.Model):
+    message = models.CharField(max_length=256)
+    pub_date = models.DateTimeField('date published')
+
+    def __str__(self):
+        '''Adminページに表示する文言を設定する'''
+        return self.message
+```
+
+- [はじめての Django アプリ作成、その2:Django](https://docs.djangoproject.com/ja/4.1/intro/tutorial02/)
+- [models](https://docs.djangoproject.com/ja/4.1/ref/models/instances/#django.db.models.Model)
+
+### make migrations
+
+``` bash
+python manage.py makemigrations app
+python manage.py migrate
+```
+
+## Django admin
+
+``` bash
+python manage.py createsuperuser
+# ユーザ名、メールアドレス、パスワードを入力する。
+```
+
+## AdminにModelを追加する
+
+### app/admin.py
+
+``` python
+from django.contrib import admin
+
+# Register your models here.
+
+from .models import Message
+
+admin.site.register(Message)
+```
 
 ## bootstrap導入
 
