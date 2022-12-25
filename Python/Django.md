@@ -1,26 +1,34 @@
 # Django
 
 - [Django](#django)
+  - [前提](#前提)
   - [init](#init)
     - [参考](#参考)
   - [起動](#起動)
   - [アプリケーションの作成](#アプリケーションの作成)
     - [ビュー作成(仮)](#ビュー作成仮)
     - [URLパス設定](#urlパス設定)
-    - [${django\_project}/settings.py](#django_projectsettingspy)
+    - [project/settings.py](#projectsettingspy)
   - [テンプレート作成](#テンプレート作成)
-    - [${app}/views.py](#appviewspy)
+    - [app/views.py](#appviewspy)
       - [参考](#参考-1)
   - [ファイルアップロード](#ファイルアップロード)
-    - [${app}/forms.py](#appformspy)
-    - [${django\_project}/urls.py](#django_projecturlspy)
-    - [${app}/vies.py](#appviespy)
-    - [${app}/controller.py](#appcontrollerpy)
-    - [${app}/template/index.html](#apptemplateindexhtml)
-    - [${app}/template/success.html](#apptemplatesuccesshtml)
+    - [app/forms.py](#appformspy)
+    - [project/urls.py](#projecturlspy)
+    - [app/vies.py](#appviespy)
+    - [app/controller.py](#appcontrollerpy)
+    - [app/template/index.html](#apptemplateindexhtml)
+    - [app/template/success.html](#apptemplatesuccesshtml)
     - [参考](#参考-2)
   - [CSRF検証でエラーになった場合](#csrf検証でエラーになった場合)
     - [参考](#参考-3)
+
+## 前提
+
+このページでは下記で記載する。
+
+- Djangoプロジェクト名 : project
+- Djangoアプリケーション名：app
 
 ## init
 
@@ -37,10 +45,10 @@ python --version
 sqlite3 --version
 
 # ディレクトリ作成
-django_project=django_project
-mkdir ${django_project}
+project=project
+mkdir project
 
-cd ${django_project}
+cd project
 
 # venv作成
 python -m venv django_venv
@@ -53,7 +61,7 @@ python -m pip install Django
 python -m django --version
 
 # プロジェクト作成
-django-admin startproject ${django_project}
+django-admin startproject project
 ```
 
 ``` bash
@@ -63,16 +71,16 @@ pip freeze > requirements.txt
 
 ### 参考
 
-- [さぁ始めましょう:django ドキュメント](https://docs.djangoproject.com/ja/4.1/intro/)
+- [さぁ始めましょう:django ドキュメント](https://docs.project.com/ja/4.1/intro/)
 
 ## 起動
 
 ``` bash
-cd ${django_project}
+cd project
 source django_venv/bin/activate
 pip install -r requirements.txt
 
-cd ${django_project}
+cd project
 python manage.py runserver
 ```
 
@@ -84,13 +92,13 @@ python manage.py runserver 0.0.0.0:8000
 ## アプリケーションの作成
 
 ``` bash
-python manage.py startapp ${app}
+python manage.py startapp app
 ```
 
 ### ビュー作成(仮)
 
 ``` python
-# ${app}/view.py 
+# app/view.py 
 
 from django.http import HttpResponse
 
@@ -102,11 +110,11 @@ def index(request):
 ### URLパス設定
 
 ``` bash
-touch ${app}/urls.py
+touch app/urls.py
 ```
 
 ``` python
-# ${app}/urls.py
+# app/urls.py
 
 from django.urls import path
 from . import views
@@ -117,7 +125,7 @@ urlpatterns = [
 ```
 
 ``` python
-# ${django_project}/urls.py
+# project/urls.py
 
 # 追記
 from django.urls import include, path
@@ -129,7 +137,7 @@ urlpatterns = [
 
 ```
 
-### ${django_project}/settings.py
+### project/settings.py
 
 ``` python
 # 下記を追加
@@ -142,9 +150,9 @@ INSTALLED_APPS = [
 
 ``` bash
 # app=
-mkdir ${app}/templates/${app}
+mkdir app/templates/app
 # htmlfile=
-touch ${app}/templates/${app}/${htmlfile}
+touch app/templates/app/${htmlfile}
 ```
 
 ``` html
@@ -152,7 +160,7 @@ touch ${app}/templates/${app}/${htmlfile}
 <!-- この項目では触れない。 -->
 ```
 
-### ${app}/views.py
+### app/views.py
 
 ``` python
 from django.shortcuts import render
@@ -163,15 +171,15 @@ def index(request):
 
 #### 参考
 
-- [はじめての Django アプリ作成、その 3:Django ドキュメント](https://docs.djangoproject.com/ja/4.1/intro/tutorial03/)
+- [はじめての Django アプリ作成、その 3:Django ドキュメント](https://docs.project.com/ja/4.1/intro/tutorial03/)
 
 ## ファイルアップロード
 
 ``` bash
-touch ${django_project}/${app}/forms.py
+touch project/app/forms.py
 ```
 
-### ${app}/forms.py
+### app/forms.py
 
 ``` python
 from django import forms
@@ -181,7 +189,7 @@ class UploadFileForm(forms.Form):
     file = forms.FileField()
 ```
 
-### ${django_project}/urls.py
+### project/urls.py
 
 ``` python
 from django.contrib import admin
@@ -195,7 +203,7 @@ urlpatterns = [
 ]
 ```
 
-### ${app}/vies.py
+### app/vies.py
 
 ``` python
 from django.http import HttpResponseRedirect
@@ -228,7 +236,7 @@ def index(request):
 
 ```
 
-### ${app}/controller.py
+### app/controller.py
 
 ``` python
 def handle_uploaded_file(f):
@@ -239,7 +247,7 @@ def handle_uploaded_file(f):
     #         destination.write(chunk)
 ```
 
-### ${app}/template/index.html
+### app/template/index.html
 
 ``` html
 <h1>File upload</h1>
@@ -255,7 +263,7 @@ def handle_uploaded_file(f):
 </form>
 ```
 
-### ${app}/template/success.html
+### app/template/success.html
 
 ``` html
 <p>Success!</p>
@@ -264,12 +272,12 @@ def handle_uploaded_file(f):
 
 ### 参考
 
-- [ファイルのアップロード:django](https://docs.djangoproject.com/ja/4.1/topics/http/file-uploads/)
+- [ファイルのアップロード:django](https://docs.project.com/ja/4.1/topics/http/file-uploads/)
 - [Django でファイルをアップロード:Qiita](https://qiita.com/ekzemplaro/items/07abd9a941bcd0eb5834)
 
 ## CSRF検証でエラーになった場合
 
-django_project/settings.py に下記を追記する。
+project/settings.py に下記を追記する。
 
 ``` python
 CSRF_TRUSTED_ORIGINS = ['https://3a5caa305fbe48f8b96fbf040031a010.vfs.cloud9.ap-northeast-1.amazonaws.com']
