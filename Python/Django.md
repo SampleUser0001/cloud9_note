@@ -20,8 +20,13 @@
     - [app/template/index.html](#apptemplateindexhtml)
     - [app/template/success.html](#apptemplatesuccesshtml)
     - [参考](#参考-2)
-  - [CSRF検証でエラーになった場合](#csrf検証でエラーになった場合)
+  - [bootstrap導入](#bootstrap導入)
+    - [pip install](#pip-install)
+    - [project/settings.py](#projectsettingspy-1)
+    - [テンプレートファイル](#テンプレートファイル)
     - [参考](#参考-3)
+  - [CSRF検証でエラーになった場合](#csrf検証でエラーになった場合)
+    - [参考](#参考-4)
 
 ## 前提
 
@@ -276,6 +281,43 @@ def handle_uploaded_file(f):
 
 - [ファイルのアップロード:django](https://docs.project.com/ja/4.1/topics/http/file-uploads/)
 - [Django でファイルをアップロード:Qiita](https://qiita.com/ekzemplaro/items/07abd9a941bcd0eb5834)
+
+## bootstrap導入
+
+### pip install
+
+``` bash
+# venv起動済みであることを確認してから実行。
+pip install django-bootstrap5
+```
+
+### project/settings.py
+
+``` python
+# 追加
+INSTALLED_APPS = [
+    'django_bootstrap5',
+]
+```
+
+### テンプレートファイル
+
+``` html
+<!-- 1行目に記載 -->
+<!-- バックスラッシュは不要。(Githubの都合で記載。) -->
+\{\% load django_bootstrap5 \%\}
+
+<head>
+    \{\% bootstrap_css \%\}
+    \{\% bootstrap_javascript \%\}
+</head>
+```
+
+**デフォルトで適用できるbootstrap_formがあるので、調査して使うこと。**
+
+### 参考
+
+- [【Django】Bootstrap5の利用方法：django-bootstrap5:OFFICE54](https://office54.net/python/django/django-bootstrap5-css)
 
 ## CSRF検証でエラーになった場合
 
