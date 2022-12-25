@@ -254,10 +254,12 @@ def handle_uploaded_file(f):
 
 <form method="POST" enctype="multipart/form-data">
     <!-- ファイルの送信元を保証する -->
-    {% csrf_token %}
+    <!-- バックスラッシュは不要。(Githubのビルドでエラーになるため追加。) -->
+    {\% csrf_token \%}
 
     <!-- views.index内で生成されるUploadFileFormクラスのオブジェクトをレンダリングできるフォーマットに変換する。 -->
-    {{ form.as_p }}
+    <!-- バックスラッシュは不要。(Githubのビルドでエラーになるため追加。) -->
+    \{\{ form.as_p \}\}
 
     <button type="submit">Upload</button>
 </form>
