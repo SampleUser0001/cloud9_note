@@ -2,23 +2,23 @@
 
 - [Java](#java)
   - [Stream](#stream)
-    - [ファイル -> Stream](#ファイル---stream)
-    - [Stream -> String](#stream---string)
+    - [ファイル -\> Stream](#ファイル---stream)
+    - [Stream -\> String](#stream---string)
       - [参考](#参考)
     - [重複排除](#重複排除)
     - [1行目を読み飛ばす](#1行目を読み飛ばす)
-    - [String -> Model](#string---model)
-    - [Stream -> List](#stream---list)
-    - [Stream -> Map](#stream---map)
+    - [String -\> Model](#string---model)
+    - [Stream -\> List](#stream---list)
+    - [Stream -\> Map](#stream---map)
       - [順番を保持する](#順番を保持する)
     - [合計値算出](#合計値算出)
-    - [List -> Stream](#list---stream)
-    - [List\<ModelA\> -> Map<ModelA, List\<ModelB\>>](#listmodela---mapmodela-listmodelb)
-      - [List\<ModelA\> -> LinkedHashMap<ModelA, List\<ModelB\>>](#listmodela---linkedhashmapmodela-listmodelb)
-    - [配列 -> Stream](#配列---stream)
-    - [Path -> List](#path---list)
+    - [List -\> Stream](#list---stream)
+    - [List\<ModelA\> -\> Map\<ModelA, List\<ModelB\>\>](#listmodela---mapmodela-listmodelb)
+      - [List\<ModelA\> -\> LinkedHashMap\<ModelA, List\<ModelB\>\>](#listmodela---linkedhashmapmodela-listmodelb)
+    - [配列 -\> Stream](#配列---stream)
+    - [Path -\> List](#path---list)
     - [List\<ModelA\>をModelA内のListごとに展開する。](#listmodelaをmodela内のlistごとに展開する)
-    - [List\<List\<Model\>\> -> List\<Model\>](#listlistmodel---listmodel)
+    - [List\<List\<Model\>\> -\> List\<Model\>](#listlistmodel---listmodel)
     - [Streamの連結](#streamの連結)
   - [PropertiesEnum](#propertiesenum)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
@@ -41,11 +41,12 @@
     - [jarコマンド:参考](#jarコマンド参考)
   - [StringBuilderとStringBufferの違い](#stringbuilderとstringbufferの違い)
   - [SimpleDateFormat](#simpledateformat)
-    - [String -> Date](#string---date)
-    - [Date -> String](#date---string)
+    - [String -\> Date](#string---date)
+    - [Date -\> String](#date---string)
   - [Optionalクラスを使ってnullチェックを行う](#optionalクラスを使ってnullチェックを行う)
   - [Mapのキーをあとから変更する](#mapのキーをあとから変更する)
   - [String.formatで「%」を出力する](#stringformatでを出力する)
+  - [double -\> BigDecimalの誤差](#double---bigdecimalの誤差)
 
 ## Stream
 
@@ -481,3 +482,46 @@ System.out.println(String.format("%%ｺｽﾄ"));
 %ｺｽﾄ
 ```
 
+## double -> BigDecimalの誤差
+
+double -> BigDecimalを直接変換すると誤差が発生する。（実際にはdoubleの時点で誤差があるが、顕在化する。）  
+double -> String -> BigDecimal変換する。
+
+``` java
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class App {
+    public static void main(String[] args) {
+        double a = 2.15d;
+        double b = 1.00d;
+
+        App.wrong(a, b);
+        App.correct(a, b);
+
+        System.out.println(new BigDecimal(a));
+    }
+
+    public static void wrong(double a, double b) {
+        BigDecimal aBigDecimal = new BigDecimal(a);
+        BigDecimal bBigDecimal = new BigDecimal(b);
+
+        System.out.println(aBigDecimal.divide(bBigDecimal, 1, RoundingMode.HALF_UP));
+    }
+
+    public static void correct(double a, double b) {
+        BigDecimal aBigDecimal = new BigDecimal(Double.toString(a));
+        BigDecimal bBigDecimal = new BigDecimal(Double.toString(b));
+
+        System.out.println(aBigDecimal.divide(bBigDecimal, 1, RoundingMode.HALF_UP));
+
+    }
+}
+```
+
+``` bash
+$ java App
+2.1
+2.2
+2.149999999999999911182158029987476766109466552734375
+```
