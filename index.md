@@ -22,6 +22,7 @@
   - [C#](#c)
   - [Microsoft Office](#microsoft-office)
   - [Logic](#logic)
+  - [Security](#security)
   - [Other](#other)
     - [外部へのリンク](#外部へのリンク)
 
@@ -165,6 +166,10 @@
 - [誤差](./Logic/error.md)
 - [文字コード](./Logic/Character_encoding.md)
 - [VPN](./Logic/VPN.md)
+
+## Security
+
+- [脆弱性](./Security/Vulnerability.md)
 
 ## Other
 
