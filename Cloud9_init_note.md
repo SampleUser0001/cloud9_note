@@ -15,7 +15,7 @@ Cloud9を起動したときに行うことの備忘録。
   - [Java](#java)
     - [yumでJavaをインストール](#yumでjavaをインストール)
       - [参考](#参考-1)
-    - [antでJavaをインストール](#antでjavaをインストール)
+    - [aptでJavaをインストール](#aptでjavaをインストール)
       - [参考](#参考-2)
   - [Gradle](#gradle)
   - [Maven](#maven)
@@ -23,11 +23,11 @@ Cloud9を起動したときに行うことの備忘録。
       - [参考](#参考-3)
     - [Maven(yum)](#mavenyum)
       - [参考](#参考-4)
+  - [jd-cli(jad)](#jd-clijad)
   - [ant](#ant)
     - [antインストール](#antインストール)
   - [Spring boot cli](#spring-boot-cli)
     - [参考](#参考-5)
-  - [jd-cli](#jd-cli)
   - [telnet](#telnet)
     - [telnetインストール](#telnetインストール)
   - [docker](#docker)
@@ -187,7 +187,7 @@ sudo update-alternatives --config javac
 #### 参考
 [https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html](https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html)
 
-### antでJavaをインストール
+### aptでJavaをインストール
 
 ```
 sudo apt install default-jdk
@@ -299,6 +299,35 @@ sudo yum install -y apache-maven
 [https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html](https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html)
 
 
+## jd-cli(jad)
+
+逆コンパイルツール。  
+git, Java, Mavenインストール済みが前提。自分でビルドする。
+
+``` bash
+cd tmp
+git clone git@github.com:intoolswetrust/jd-cli.git
+
+cd jd-cli
+mvn package
+
+sudo cp ./jd-cli/target/jd-cli.jar /opt
+
+```
+
+~/.bashrc
+
+``` bash
+# jd-cli
+alias jd-cli="java -jar /opt/jd-cli.jar"
+```
+
+```
+source ~/.bashrc
+jd-cli --version
+rm -rf /tmp/jd-cli
+```
+
 ## ant
 いらないかもしれないが入れたのでメモを残す。
 
@@ -334,26 +363,7 @@ sudo rm spring-boot-cli-${SPRING_BOOT_CLI_INSTALL_VERSION}-bin.tar.gz
 
 ### 参考
 
-- [](https://spring.pleiades.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.installing.cli.manual-installation)
-
-## jd-cli
-
-Javaの逆コンパイルツール。
-
-※バージョンは事前に確認。
-```
-mkdir tmp
-cd tmp
-wget https://github.com/kwart/jd-cli/releases/download/jd-cmd-1.1.0.Final/jd-cli-1.1.0.Final-dist.tar.gz
-tar -zxvf jd-cli-1.1.0.Final-dist.tar.gz
-sudo cp jd-cli /usr/local/bin/
-sudo cp jd-cli.jar /usr/local/bin/
-cd ..
-```
-
-```
-jd-cli --version
-```
+- [インストールマニュアル:spring](https://spring.pleiades.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.installing.cli.manual-installation)
 
 ## telnet 
 
