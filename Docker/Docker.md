@@ -7,6 +7,7 @@
   - [nginxイメージを使用してhttpsとして公開する](#nginxイメージを使用してhttpsとして公開する)
     - [起動コマンド](#起動コマンド-1)
     - [参照方法](#参照方法)
+  - [docker login](#docker-login)
   - [shを実行する](#shを実行する)
     - [ディレクトリ構造](#ディレクトリ構造)
     - [Dockerfile](#dockerfile)
@@ -112,6 +113,17 @@ docker-compose up
 3. Preview Running Application
 
 ※外部から参照する場合も同じURL。
+
+## docker login
+
+``` bash
+# username=
+# password=
+# server=https://hub.docker.com/
+
+# serverは省略可能。省略した場合はhttps://hub.docker.com/にログイン。
+docker login -u ${username} -p ${password} ${server}
+```
 
 ## shを実行する
 
