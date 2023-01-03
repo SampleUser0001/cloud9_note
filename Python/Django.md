@@ -12,6 +12,9 @@
   - [テンプレート作成](#テンプレート作成)
     - [app/views.py](#appviewspy)
       - [参考](#参考-1)
+  - [テンプレートの作成例(listの表示)](#テンプレートの作成例listの表示)
+    - [テンプレート](#テンプレート)
+    - [app/views.py](#appviewspy-1)
   - [ファイルアップロード](#ファイルアップロード)
     - [app/forms.py](#appformspy)
     - [project/urls.py](#projecturlspy)
@@ -185,6 +188,63 @@ def index(request):
 #### 参考
 
 - [はじめての Django アプリ作成、その 3:Django ドキュメント](https://docs.project.com/ja/4.1/intro/tutorial03/)
+
+## テンプレートの作成例(listの表示)
+
+### テンプレート
+
+``` html
+<h1>Message List</h1>
+{% if message_list %}
+    <ul>
+        {% for model in message_list %}
+        <li>{{ model.message }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+<p>Message is not found.</p>
+{% endif %}
+<a href="add_message">Add Message</a>
+```
+
+### app/views.py
+
+``` python
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.template import loader
+from .models import Message
+
+def index(request):
+    message_list = Message.get_message_list()
+    template = loader.get_template('usermodel/index.html')
+    context = {
+        'message_list': message_list,
+    }
+    return HttpResponse(template.render(context, request))
+
+def add_message(request):
+    return render(request, 'usermodel/add_message.html')
+
+```
+
+または下記。
+
+``` python
+from django.shortcuts import render
+from .models import Message
+
+def index(request):
+    message_list = Message.get_message_list()
+    context = {
+        'message_list': message_list,
+    }
+    return render(request, 'usemodel/index.html', context)
+
+def add_message(request):
+    return render(request, 'usemodel/add_message.html')
+
+```
 
 ## ファイルアップロード
 
