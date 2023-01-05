@@ -23,11 +23,24 @@
     - [app/template/index.html](#apptemplateindexhtml)
     - [app/template/success.html](#apptemplatesuccesshtml)
     - [参考](#参考-2)
+  - [GetのURLの作成例](#getのurlの作成例)
+    - [app/views.py](#appviewspy-2)
+    - [app/urls.py](#appurlspy)
+    - [参考](#参考-3)
   - [Modelを使う](#modelを使う)
     - [DB設定](#db設定)
       - [project/settings.py](#projectsettingspy-1)
     - [app/models.py](#appmodelspy)
     - [make migrations](#make-migrations)
+    - [DBに登録する](#dbに登録する)
+    - [DBに登録されているデータを取得する](#dbに登録されているデータを取得する)
+    - [選択肢を登録/全部取得/選択/削除する](#選択肢を登録全部取得選択削除する)
+      - [参考](#参考-4)
+  - [404を送出する](#404を送出する)
+  - [POST](#post)
+    - [テンプレート](#テンプレート-1)
+    - [app/views.py](#appviewspy-3)
+    - [app/urls.py](#appurlspy-1)
   - [Django admin](#django-admin)
   - [AdminにModelを追加する](#adminにmodelを追加する)
     - [app/admin.py](#appadminpy)
@@ -35,11 +48,11 @@
     - [pip install](#pip-install)
     - [project/settings.py](#projectsettingspy-2)
     - [テンプレートファイル](#テンプレートファイル)
-    - [参考](#参考-3)
-  - [CSRF検証でエラーになった場合](#csrf検証でエラーになった場合)
-    - [参考](#参考-4)
-  - [manage.py](#managepy)
     - [参考](#参考-5)
+  - [CSRF検証でエラーになった場合](#csrf検証でエラーになった場合)
+    - [参考](#参考-6)
+  - [manage.py](#managepy)
+    - [参考](#参考-7)
 
 ## 前提
 
@@ -47,6 +60,11 @@
 
 - Djangoプロジェクト名 : project
 - Djangoアプリケーション名：app
+
+ビューの作成は、既存のものを使用したほうが良い。下記を参照。
+
+- [Tutorial_Django:Github](https://github.com/SampleUser0001/Tutorial_Django)
+- [Tutorial_Django_2:Github](https://github.com/SampleUser0001/Tutorial_Django_2)
 
 ## init
 
@@ -352,6 +370,47 @@ def handle_uploaded_file(f):
 - [ファイルのアップロード:django](https://docs.project.com/ja/4.1/topics/http/file-uploads/)
 - [Django でファイルをアップロード:Qiita](https://qiita.com/ekzemplaro/items/07abd9a941bcd0eb5834)
 
+## GetのURLの作成例
+
+### app/views.py
+
+``` python
+from django.http import HttpResponse
+
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+
+def detail(request, question_id):
+    return HttpResponse("You're looking at question %s." % question_id)
+
+def results(requests, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+```
+
+### app/urls.py
+
+``` python
+from django.urls import path
+
+from .import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('<int:question_id>/', views.detail, name='detail'),
+    path('<int:question_id/results/', views.results, name='results'),
+    path('<int:question_id/vote/', views.vote, name='vote'),
+]
+```
+
+### 参考
+
+- [](https://docs.djangoproject.com/ja/4.1/intro/tutorial03/)
+
 ## Modelを使う
 
 ### DB設定
@@ -395,6 +454,176 @@ class Message(models.Model):
 ``` bash
 python manage.py makemigrations app
 python manage.py migrate
+```
+
+### DBに登録する
+
+``` python
+from django.utils import timezone
+from app.models import Message
+
+# 登録したい値の設定
+message = Message(message='hoge', pub_date=timezone.now())
+
+# 登録
+message.save()
+```
+
+### DBに登録されているデータを取得する
+
+``` python
+from app.models import Message
+
+# 全部
+Message.objects.all()
+
+# 条件をつける
+Message.objects.filter(id=1)
+Message.objects.filter(message__startswith='ho')
+
+current_year = django.utils.timezone.now().year
+Message.objects.get(pub_date__year=current_year)
+
+Message.objects.get(pk=1)
+```
+
+### 選択肢を登録/全部取得/選択/削除する
+
+親子関係があり、子供側に選択肢をもたせて、カウントする。  
+参考から引用。
+
+``` python
+import datetime
+
+from django.db import models
+from django.utils import timezone
+
+# Create your models here.
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+
+    def __str__(self) -> str:
+        return self.question_text
+
+    def was_published_recently(self):
+        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+
+    def __str__(self) -> str:
+        return self.choice_text
+```
+
+``` python
+from polls.models import Choice, Question
+
+q = Question.objects.get(pk=1)
+
+# 登録
+q.choice_set.create(choice_text='Not much', votes=0)
+q.choice_set.create(choice_text='The sky', votes=0)
+c = q.choice_set.create(choice_text='Just hacking again', votes=0)
+
+# 全部取得
+q.choice_set.all()
+
+# 順番を指定する
+Question.objects.order_by('-pub_date')[:5]
+
+# 件数取得
+q.choice_set.count()
+
+# 選択
+c = q.choice_set.filter(choice_text='Just hacking again')
+
+# 削除
+c.delete()
+
+```
+
+#### 参考
+
+- [はじめての Django アプリ作成、その2:Django](https://docs.djangoproject.com/ja/4.1/intro/tutorial02/)
+
+## 404を送出する
+
+``` python
+from django.shortcuts import render, get_object_or_404
+
+def detail(request, question_id):
+    template_path = 'polls/detail.html'
+    question = get_object_or_404(Question, pk=question_id)
+
+    return render(request, template_path, {'question': question})
+```
+
+## POST
+
+### テンプレート
+
+``` html
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>{{ question.question_text }}</h1></legend>
+        {% if error_message %}
+            <p><strong>{{ error_message  }}</strong></p>
+        {% endif %}
+        {% for choice in question.choice_set.all %}
+            <!-- forloop.counter は indexを表す。-->
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Vote">
+
+</form>
+```
+
+### app/views.py
+
+``` python
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
+from .models import *
+
+def vote(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    try:
+        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        return render(
+            request,
+            'polls/detail.html',
+            {'question': question, 'error_message': "You didn't select a choice.", })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+```
+
+### app/urls.py
+
+``` python
+from django.urls import path
+
+from .import views
+
+app_name = 'polls'
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('<int:question_id>/', views.detail, name='detail'),
+    path('<int:question_id>/results/', views.results, name='results'),
+    path('<int:question_id>/vote/', views.vote, name='vote'),
+]
 ```
 
 ## Django admin
