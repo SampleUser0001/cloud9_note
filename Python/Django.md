@@ -38,6 +38,8 @@
     - [参考](#参考-3)
   - [CSRF検証でエラーになった場合](#csrf検証でエラーになった場合)
     - [参考](#参考-4)
+  - [manage.py](#managepy)
+    - [参考](#参考-5)
 
 ## 前提
 
@@ -465,3 +467,17 @@ CSRF_TRUSTED_ORIGINS = ['https://3a5caa305fbe48f8b96fbf040031a010.vfs.cloud9.ap-
 
 - [Djangoで特定のドメインで発生したエラーについて:book-reviews.blog](https://book-reviews.blog/specific-domain-errors-on-Django/)
 
+## manage.py
+
+- flush
+  - データベースからすべてのデータを削除し、同期化後のハンドラを再実行します。どのマイグレーションが適用されたかのテーブルはクリアされません。
+- makemigrations
+  - Modelを変更したときに実行する。
+  - マイグレーションファイルを作成する。
+- migrate
+  - Modelを変更したときい実行する。
+  - DBに反映する。
+
+### 参考
+
+- [django-admin と manage.py:django](https://docs.djangoproject.com/ja/4.1/ref/django-admin/)
