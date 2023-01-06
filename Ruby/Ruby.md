@@ -2,6 +2,11 @@
 
 - [Ruby](#ruby)
   - [チュートリアル](#チュートリアル)
+  - [配列](#配列)
+    - [存在しない添字](#存在しない添字)
+    - [値の追加](#値の追加)
+    - [値を末尾に追加](#値を末尾に追加)
+    - [配列から値を削除](#配列から値を削除)
   - [フォーマットの指定](#フォーマットの指定)
   - [\&\& の挙動](#-の挙動)
   - [unless](#unless)
@@ -9,11 +14,73 @@
   - [1行メソッド](#1行メソッド)
   - [既存のライブラリを読み込む(require)](#既存のライブラリを読み込むrequire)
   - [自作のライブラリを読み込む(require\_relative)](#自作のライブラリを読み込むrequire_relative)
+  - [自動テスト(Minitest)](#自動テストminitest)
 
 ## チュートリアル
 
 - [Tutorial_Ruby](https://sampleuser0001.github.io/Tutorial_Ruby/)
   - [リポジトリ](https://github.com/SampleUser0001/Tutorial_Ruby)
+- [Professional_Ruby](https://github.com/SampleUser0001/Professional_Ruby)
+
+## 配列
+
+### 存在しない添字
+
+``` ruby
+a = [1, 2, 3]
+# 下記はnil（エラーにならない。）
+puts a[100]
+```
+
+### 値の追加
+
+``` ruby
+a = [1, 2, 3]
+
+a[4] = 100
+
+puts a
+```
+
+``` txt
+1
+2
+3
+
+100
+```
+
+### 値を末尾に追加
+
+``` ruby
+a = [1, 2, 3]
+
+a << 4
+
+puts a
+```
+
+``` txt
+1
+2
+3
+4
+```
+
+### 配列から値を削除
+
+``` ruby
+a = [1, 2, 3]
+a.delete_at(1)
+
+printf("a : %s\n", a)
+printf("a.length : %d\n", a.length)
+```
+
+``` txt
+a : [1, 3]
+a.length : 2
+```
 
 ## フォーマットの指定
 
@@ -150,4 +217,54 @@ puts model.data
 
 ``` txt
 value
+```
+
+## 自動テスト(Minitest)
+
+```
+.
+├── README.md
+├── app.rb
+├── lib
+│   └── fizz_buzz.rb
+└── test
+    └── fizz_buzz_test.rb
+```
+
+``` ruby
+def fizz_buzz(size) 
+    for i in 1..size do
+        puts fizz_buzz_value(i)
+    end
+end
+
+def fizz_buzz_value(i)
+    if i % 15 == 0 
+        'Fizz Buzz'
+    elsif i % 5 == 0
+        'Buzz'
+    elsif i % 3 == 0
+        'Fizz'
+    else
+        i.to_s
+    end
+end
+
+```
+
+``` ruby
+require 'minitest/autorun'
+require_relative '../lib/fizz_buzz'
+
+class FizzBuzzTest < Minitest::Test
+    def test_fizz_buzz_value
+        assert_equal '1' , fizz_buzz_value(1)
+        assert_equal '2' , fizz_buzz_value(2)
+        assert_equal 'Fizz' , fizz_buzz_value(3)
+        assert_equal '4' , fizz_buzz_value(4)
+        assert_equal 'Buzz' , fizz_buzz_value(5)
+        assert_equal 'Fizz Buzz' , fizz_buzz_value(15)
+        
+    end
+end
 ```
