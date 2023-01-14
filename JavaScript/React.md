@@ -10,6 +10,11 @@
     - [src/App.js](#srcappjs)
     - [実行](#実行)
     - [備考](#備考)
+  - [useState](#usestate)
+  - [Reactコンテキスト](#reactコンテキスト)
+    - [コンテキストプロバイダー](#コンテキストプロバイダー)
+    - [コンテキストコンシューマー](#コンテキストコンシューマー)
+    - [参考](#参考)
   - [勉強用リポジトリ](#勉強用リポジトリ)
 
 ## init
@@ -129,6 +134,82 @@ npm run start
 ``` bash
 npx create-react-app ${プロジェクト名}
 ```
+
+## useState
+
+Reactが管理するstateと、stateを更新するための関数を返す。  
+stateを変更する場合は、必ずuseStateの戻り値として渡される関数を使う必要がある。
+
+``` javascript
+import React, { useState } from 'react';
+
+export default function Sample() {
+    const [status, setStatus] = useState(0);
+}
+```
+
+## Reactコンテキスト
+
+useStateを呼ぶ箇所と戻り値を使用する箇所が離れている場合、useStateで生成した変数と関数を引数経由で渡す必要があり、ソースが読みづらくなる。  
+コンテキストを使用すると、引数経由で渡す必要がなくなる。  
+(SpringBootのDIコンテナのイメージ？)
+
+- コンテキストプロパイダー
+    - 定義する。
+- コンテキストコンシューマー
+    - コンテキストを使用する。
+
+### コンテキストプロバイダー
+
+``` javascript
+import React, { createContext, useState, useContext } from "react";
+import messageDatas from "../static/messages.json";
+
+const ItemContext = createContext();
+export const useItems = () => useContext(ItemContext);
+
+export default function ItemProvider({ children }) {
+    const [items, setMessages] = useState(messageDatas);
+    
+    const onChange = (id) => {
+        items.map(item => item.id === id ? item.checked = !item.checked : item);
+        setMessages([...items]);
+    }
+
+    return (
+        <ItemContext.Provider value={{ items, onChange }}>
+            {children}
+        </ItemContext.Provider>
+    );
+    
+}
+```
+
+### コンテキストコンシューマー
+
+``` javascript
+import React from "react";
+import Item from "./Item";
+import { useItems } from "../provider/ItemProvider";
+
+export default function ItemList() {
+    const { items } = useItems();
+
+    // items.map(item => console.info(item.id));
+
+    return (
+        <div>
+            {items.map(item => (
+                <Item key={item.id} {...item} />
+            ))}
+        </div>
+    );
+}
+```
+
+### 参考
+
+- [List_React:SampleUser0001:Github](https://github.com/SampleUser0001/List_React)
 
 ## 勉強用リポジトリ
 
