@@ -15,6 +15,7 @@
     - [コンテキストプロバイダー](#コンテキストプロバイダー)
     - [コンテキストコンシューマー](#コンテキストコンシューマー)
     - [参考](#参考)
+  - [useEffect](#useeffect)
   - [勉強用リポジトリ](#勉強用リポジトリ)
 
 ## init
@@ -210,6 +211,50 @@ export default function ItemList() {
 ### 参考
 
 - [List_React:SampleUser0001:Github](https://github.com/SampleUser0001/List_React)
+
+## useEffect
+
+副作用フック。  
+指定した変数が更新されたときに、動く処理を定義できる。
+
+``` javascript
+import React, { useState, useEffect } from "react";
+
+export default function App() {
+    // 入力欄に入力されている値
+    const [val, set] = useState("");
+
+    // 入力欄のphrase
+    const [phrase, setPhrase] = useState("example phrase");
+
+    // phraseをvalで更新する。
+    // 入力欄自体は初期化する
+    const createPhrase = () => {
+        setPhrase(val);
+        set('');
+    };
+
+    useEffect(() => {
+        console.log(`typing "${val}"`);
+    }, [val]);
+
+    useEffect(() => {
+        console.log(`saved phrase: "${phrase}"`);
+    }, [phrase]);
+
+    return (
+        <>
+            <label>Favorite phrase:</label>
+            <input
+                value={val}
+                placeholder={phrase}
+                onChange={e => set(e.target.value)}
+            />
+            <button onClick={createPhrase}>send</button>
+        </>
+    );
+}
+```
 
 ## 勉強用リポジトリ
 
