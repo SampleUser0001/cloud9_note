@@ -9,6 +9,7 @@
     - [find](#find)
     - [touch（新しいファイルを生成する）](#touch新しいファイルを生成する)
   - [コマンドプロンプト](#コマンドプロンプト)
+    - [再帰削除](#再帰削除)
     - [findstr](#findstr)
       - [findstr:オプション](#findstrオプション)
     - [ファイルサイズを取得する(where)](#ファイルサイズを取得するwhere)
@@ -52,6 +53,14 @@ New-Item -Path . -Name "test.txt" -ItemType "file" -Value "New-Item cmdlet test.
 ```
 
 ## コマンドプロンプト
+
+### 再帰削除
+
+``` cmd
+rem rm -rfの代替
+rm /s /q %対象ディレクトリ%
+rmdir /s /q %対象ディレクトリ%
+```
 
 ### findstr
 
