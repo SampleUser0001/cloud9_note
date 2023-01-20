@@ -185,6 +185,7 @@
 - [Redmine.md](./other/Redmine.md)
 - [License.md](./other/License.md)
 - [MQ](./other/IBM_MQ.md)
+- [類語](./other/Synonym_word.md)
 
 ### 外部へのリンク
 
