@@ -8,6 +8,7 @@
       - [再帰grep](#再帰grep)
     - [find](#find)
     - [touch（新しいファイルを生成する）](#touch新しいファイルを生成する)
+    - [ファイルを空にする](#ファイルを空にする)
   - [コマンドプロンプト](#コマンドプロンプト)
     - [再帰削除](#再帰削除)
     - [findstr](#findstr)
@@ -50,6 +51,12 @@ Get-ChildItem -r -Filter "条件" -Name
 
 ``` powershell
 New-Item -Path . -Name "test.txt" -ItemType "file" -Value "New-Item cmdlet test."
+```
+
+### ファイルを空にする
+
+``` powershell
+Clear-Content ${ファイルパス}
 ```
 
 ## コマンドプロンプト
