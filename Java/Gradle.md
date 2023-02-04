@@ -4,7 +4,7 @@
   - [init](#init)
     - [参考](#参考)
   - [実行](#実行)
-  - [VSCodeで開いたとき、Lombokのアノテーションがエラーになる](#vscodeで開いたときlombokのアノテーションがエラーになる)
+  - [VSCodeの補完が効かないとき](#vscodeの補完が効かないとき)
 
 ## init
 
@@ -73,7 +73,7 @@ gradle run
 # ./gradlew run
 ```
 
-## VSCodeで開いたとき、Lombokのアノテーションがエラーになる
+## VSCodeの補完が効かないとき
 
-1. 拡張機能の「Lombok Annotations Support for VS Code」をインストール
-2. User Setting -> Java>Jdt>Ls>Lombok Support: Enabled -> Whether to load lombok processors project classpathのチェックを外す。
+- 拡張機能の再インストールを行う。
+
