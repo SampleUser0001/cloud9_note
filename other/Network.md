@@ -3,6 +3,7 @@
 - [Network](#network)
   - [CIDR(Classless Inter-Domain Routing)](#cidrclassless-inter-domain-routing)
   - [NAT(Network Address Translation)](#natnetwork-address-translation)
+  - [NAPT(IPマスカレード)](#naptipマスカレード)
 
 ## CIDR(Classless Inter-Domain Routing)
 
@@ -11,5 +12,10 @@
 
 ## NAT(Network Address Translation)
 
-グローバルIDアドレスとプライベートIPアドレスを1対1で紐づける。
+グローバルIPアドレスとプライベートIPアドレスを1対1で紐づける。
+
+## NAPT(IPマスカレード)
+
+1つのグローバルIPアドレスと、複数のプライベートIPアドレスを紐づける技術。  
+グローバルIPアドレス:ポート番号と、プライベートIPアドレスを紐づける。
 
