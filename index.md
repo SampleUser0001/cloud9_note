@@ -184,6 +184,7 @@
 - [Gitlab.md](./other/Gitlab.md)
 - [Redmine.md](./other/Redmine.md)
 - [License.md](./other/License.md)
+- [Network](./other/Network.md)
 - [MQ](./other/IBM_MQ.md)
 - [類語](./other/Synonym_word.md)
 
