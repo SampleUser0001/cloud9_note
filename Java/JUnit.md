@@ -9,6 +9,8 @@
       - [参考](#参考)
     - [テストプログラム](#テストプログラム)
     - [参考](#参考-1)
+  - [リフレクション](#リフレクション)
+    - [Method](#method)
   - [一部のメソッドをMock化する。](#一部のメソッドをmock化する)
     - [テスト対象](#テスト対象)
     - [テストクラス](#テストクラス)
@@ -171,6 +173,20 @@ public class AppTest {
 
 - [HamcrestのMatchersに定義されているメソッドの使い方メモ:Qiita](https://qiita.com/opengl-8080/items/e57dab6e1fa5940850a3)
 
+
+## リフレクション
+
+### Method
+
+``` java
+
+Method method = App.class.getDeclaredMethod("methodName", Object.class);
+method.setAccessible(true);
+
+Object args = new Object();
+App app = new App();
+String returnValue = method.invoke(app, args);
+```
 
 ## 一部のメソッドをMock化する。
 
