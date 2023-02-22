@@ -8,7 +8,17 @@
       - [再帰grep](#再帰grep)
     - [find](#find)
     - [touch（新しいファイルを生成する）](#touch新しいファイルを生成する)
+      - [空のファイルを作る](#空のファイルを作る)
     - [ファイルを空にする](#ファイルを空にする)
+    - [コンソール出力](#コンソール出力)
+    - [ps1ファイルの起動引数の取得](#ps1ファイルの起動引数の取得)
+    - [文字列の置換](#文字列の置換)
+    - [ファイル読み込み](#ファイル読み込み)
+      - [単一の文字列](#単一の文字列)
+      - [配列](#配列)
+    - [ファイル書き込み](#ファイル書き込み)
+    - [ファイルに追記](#ファイルに追記)
+    - [Map(ハッシュテーブル)](#mapハッシュテーブル)
   - [コマンドプロンプト](#コマンドプロンプト)
     - [再帰削除](#再帰削除)
     - [findstr](#findstr)
@@ -53,10 +63,79 @@ Get-ChildItem -r -Filter "条件" -Name
 New-Item -Path . -Name "test.txt" -ItemType "file" -Value "New-Item cmdlet test."
 ```
 
+#### 空のファイルを作る
+
+``` powershell
+New-Item -Type File ${ファイルパス}
+```
+
 ### ファイルを空にする
 
 ``` powershell
 Clear-Content ${ファイルパス}
+```
+
+### コンソール出力
+
+``` powershell
+Write-Host $str
+```
+
+### ps1ファイルの起動引数の取得
+
+``` powershell
+Write-Host $Args[0]
+Write-Host $Args[1]
+
+```
+
+### 文字列の置換
+
+``` powershell
+$str = '{hoge}'
+Write-Host $str.replace($str, 'hoge')
+```
+
+### ファイル読み込み
+
+#### 単一の文字列
+
+``` powershell
+$str = Get-Content $file_path -Raw
+```
+
+#### 配列
+
+``` powershell
+$list = Get-Content $file_path
+
+foreach ($str in $arr) {
+    Write-Host $str
+}
+```
+
+### ファイル書き込み
+
+``` powershell
+# -Encodingを指定しない場合、ShiftJISになる。
+Set-Content -Path $file_path -Value $str [-Encoding UTF8]
+```
+
+### ファイルに追記
+
+``` powershell
+Add-Content -Path $file_path -Value $str
+```
+
+### Map(ハッシュテーブル)
+
+``` powershell
+$hash_table = @{}
+$hash_table.add('key','value')
+
+foreach($key in $hash_table.Keys) {
+    Write-Host $hash_table[$key]
+}
 ```
 
 ## コマンドプロンプト
