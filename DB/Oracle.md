@@ -1,7 +1,7 @@
 # Oracle
 
 - [Oracle](#oracle)
-  - [SQL*plus](#sqlplus)
+  - [SQL\*plus](#sqlplus)
     - [インストール](#インストール)
       - [参考](#参考)
     - [ログイン](#ログイン)
@@ -9,6 +9,9 @@
     - [項目表示時の横幅を調節する](#項目表示時の横幅を調節する)
     - [ヘッダ行の表示タイミングを制御する](#ヘッダ行の表示タイミングを制御する)
     - [「レコードが選択されませんでした」を出力しない](#レコードが選択されませんでしたを出力しない)
+  - [tnsnames.ora](#tnsnamesora)
+    - [SID確認](#sid確認)
+    - [サービス名確認](#サービス名確認)
   - [ユーザ一覧](#ユーザ一覧)
   - [ユーザアカウントロック解除](#ユーザアカウントロック解除)
     - [ユーザアカウントステータス確認](#ユーザアカウントステータス確認)
@@ -31,7 +34,7 @@
     - [ctlファイル](#ctlファイル)
       - [参考：登録方法](#参考登録方法)
     - [実行](#実行)
-  - [Timestamp型 -> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
+  - [Timestamp型 -\> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
     - [参考](#参考-5)
   - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
     - [参考](#参考-6)
@@ -79,7 +82,12 @@ set ORACLE_SERVER_HOST=
 set ORACLE_SERVER_PORT=
 set ORACLE_CONNECT_WORD=
 set EXECUTE_SQL_PATH=
-sqlplus -s %ORACLE_LOGIN_USER%/%ORACLE_LOGIN_PASSWORD%@%ORACLE_SERVER_HOST%:%ORACLE_SERVER_PORT%/%ORACLE_CONNECT_WORD% @%EXECUTE_SQL_PATH%
+
+sqlplus %ORACLE_LOGIN_USER%/%ORACLE_LOGIN_PASSWORD%@%ORACLE_SERVER_HOST%:%ORACLE_SERVER_PORT%/%ORACLE_CONNECT_WORD% @%EXECUTE_SQL_PATH%
+
+rem tnsnames.oraでネットサービス名が指定されている場合
+set ORACLE_NET_SERVICE_NAME=
+sqlplus %ORACLE_LOGIN_USER%/%ORACLE_LOGIN_PASSWORD%@%ORACLE_NET_SERVICE_NAME%
 ```
 
 ``` bash
@@ -89,10 +97,15 @@ export ORACLE_SERVER_HOST=
 export ORACLE_SERVER_PORT=
 export ORACLE_CONNECT_WORD=
 export EXECUTE_SQL_PATH=
-sqlplus -s ${ORACLE_LOGIN_USER}/${ORACLE_LOGIN_PASSWORD}@//${ORACLE_SERVER_HOST}:${ORACLE_SERVER_PORT}/${ORACLE_CONNECT_WORD} @${EXECUTE_SQL_PATH%}
+sqlplus ${ORACLE_LOGIN_USER}/${ORACLE_LOGIN_PASSWORD}@//${ORACLE_SERVER_HOST}:${ORACLE_SERVER_PORT}/${ORACLE_CONNECT_WORD} @${EXECUTE_SQL_PATH%}
+
+# tnsnames.oraでネットサービス名が指定されている場合
+export ORACLE_NET_SERVICE_NAME=
+sqlplus ${ORACLE_LOGIN_USER}/${ORACLE_LOGIN_PASSWORD}@${ORACLE_NET_SERVICE_NAME}
 ```
 
-``` -s ``` オプションはWelcomeメッセージを表示しない設定。
+- Welcomeメッセージを削除したい場合は、-sオプションを指定する。
+- 接続文字列 = ネットサービス名
 
 ### 横幅を調整する
 
@@ -116,6 +129,41 @@ set pagesize <値>
 
 ``` sql
 set FEEDBACK off
+```
+
+## tnsnames.ora
+
+``` ora
+ネットサービス名= 
+    (DESCRIPTION =
+        (ADDRESS =
+            (PROTOCOL = TCP)
+            (HOST = ホスト名)
+            (PORT = 1521)
+        )
+        (CONNECT_DATA = 
+            (SERVICE_NAME = サービス名)
+        )
+    )
+```
+
+- SID
+    - データベースの識別子。
+    - マシン内でデータベースを識別するときに使う。
+    - ローカル接続するときにこれを指定する。
+- SERVICE_NAME
+    - 同一機能を提供するインスタンスの集合体の名前
+
+### SID確認
+
+``` sql
+SELECT DBID,NAME,DB_UNIQUE_NAME,CURRENT_SCN,LOG_MODE FROM V$DATABASE
+```
+
+### サービス名確認
+
+``` sql
+show parameter service_name
 ```
 
 ## ユーザ一覧
