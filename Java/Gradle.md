@@ -5,6 +5,7 @@
     - [参考](#参考)
   - [実行](#実行)
   - [VSCodeの補完が効かないとき](#vscodeの補完が効かないとき)
+  - [JUnit実行時にSystem.out.printlnが表示されない](#junit実行時にsystemoutprintlnが表示されない)
 
 ## init
 
@@ -77,3 +78,14 @@ gradle run
 
 - 拡張機能の再インストールを行う。
 
+## JUnit実行時にSystem.out.printlnが表示されない
+
+``` groovy
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+    }
+}
+```

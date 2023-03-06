@@ -47,6 +47,7 @@
   - [Mapのキーをあとから変更する](#mapのキーをあとから変更する)
   - [String.formatで「%」を出力する](#stringformatでを出力する)
   - [double -\> BigDecimalの誤差](#double---bigdecimalの誤差)
+  - [文字コードを取得する](#文字コードを取得する)
 
 ## Stream
 
@@ -525,3 +526,9 @@ $ java App
 2.2
 2.149999999999999911182158029987476766109466552734375
 ```
+
+## 文字コードを取得する
+
+juniversalchardetを使う。
+
+- [Use_juniversalchardet_Java:SampleUser0001:Github](https://sampleuser0001.github.io/Use_juniversalchardet_Java/)
