@@ -6,6 +6,7 @@
   - [実行](#実行)
   - [VSCodeの補完が効かないとき](#vscodeの補完が効かないとき)
   - [JUnit実行時にSystem.out.printlnが表示されない](#junit実行時にsystemoutprintlnが表示されない)
+  - [JUnitのNG内容が見たい](#junitのng内容が見たい)
 
 ## init
 
@@ -89,3 +90,8 @@ tasks.named('test') {
     }
 }
 ```
+
+## JUnitのNG内容が見たい
+
+- ```app/build/reports/tests/test/index.html```をブラウザで開く。
+    - VSCode拡張機能の[Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)をインストールしている場合は、対象のファイルを選択して、「Go Live」を押下する。
