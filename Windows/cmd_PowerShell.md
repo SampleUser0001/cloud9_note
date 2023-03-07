@@ -25,6 +25,8 @@
       - [findstr:オプション](#findstrオプション)
     - [ファイルサイズを取得する(where)](#ファイルサイズを取得するwhere)
       - [参考](#参考-1)
+    - [xcopy](#xcopy)
+      - [参考](#参考-2)
 
 
 ## PowerShell
@@ -171,3 +173,14 @@ where /R %検索対象パス% * /T > %実行結果出力パス%
 #### 参考
 
 - [【Windows10】コマンドプロンプトでファイルサイズ一覧を簡単に作成する方法(where):梅屋ラボ](https://umeyalabo.com/cmd_where)
+
+### xcopy 
+
+``` powershell
+xcopy /S /E /F /G /H /R /K /Y SOURCE DESTINATION
+```
+
+#### 参考
+
+- [XCOPY コマンドでディレクトリとファイルの再帰的なコピー:Landscape - エンジニアのメモ 2006-04-13](http://sonic64.com/2006-04-13.html)
+
