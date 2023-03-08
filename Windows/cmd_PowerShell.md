@@ -50,7 +50,7 @@ Select-String -Path ${ファイルパス} -Pattern ${検索文字列}
 #### 再帰grep
 
 ``` powershell
-dir -Recurse | Select-String -Pattern ${検索文字列}
+Get-ChildItem -Filter ${ファイル条件} -Recurse | Select-String -Pattern ${検索文字列}
 ```
 
 ### find
