@@ -48,6 +48,7 @@
   - [String.formatで「%」を出力する](#stringformatでを出力する)
   - [double -\> BigDecimalの誤差](#double---bigdecimalの誤差)
   - [文字コードを取得する](#文字コードを取得する)
+    - [nkfを使う](#nkfを使う)
 
 ## Stream
 
@@ -532,3 +533,56 @@ $ java App
 juniversalchardetを使う。
 
 - [Use_juniversalchardet_Java:SampleUser0001:Github](https://sampleuser0001.github.io/Use_juniversalchardet_Java/)
+
+### nkfを使う
+
+nkfコマンドを実行して、標準出力をInputStreamで取得する。  
+**エラーになる可能性がある。**[外部プロセス起動:ひしだま's 技術メモページ](https://www.ne.jp/asahi/hishidama/home/tech/java/process.html#Runtime)を参照。
+
+``` java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+
+public class App {
+
+    public void exec(String[] args) throws IOException, InterruptedException {
+        this.printCharsetNames(getCharset(args[0]));
+    }
+
+    public void printCharsetNames(Charset charset) {
+        charset.aliases().forEach(System.out::println);
+    }
+
+    private Charset getCharset(String filePath) throws IOException, InterruptedException {
+        ProcessBuilder pb = new ProcessBuilder("nkf", "-g", filePath);
+        Process process = pb.start();
+        process.waitFor();
+        return Charset.forName(convertToList(process.getInputStream()).get(0));
+    }
+
+    private List<String> convertToList(InputStream is) throws IOException {
+        List<String> returnList = new ArrayList<>();
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+			for (;;) {
+				String line = br.readLine();
+				if (line == null) {
+                    break;
+                } else {
+                    returnList.add(line);
+                }
+			}
+		}
+        return returnList;
+	}
+    
+    public static void main(String[] args) throws IOException, InterruptedException {
+        new App().exec(args);
+    }
+    
+}
+```
