@@ -285,11 +285,38 @@ sample_list[2] = c
 
 - [bash 配列まとめ:Qiita](https://qiita.com/b4b4r07/items/e56a8e3471fb45df2f59)
 
-## パスワードの自動入力(expect)
+## 対話式のコマンドを自動化する(expect)
 
-sshポートフォワードで試したが、うまく行かなかった。  
-別の機会に再挑戦する。  
-参考リンクだけ記載しておく。
+実行したいコマンドをダブルクオーテーションで囲んで、引数として渡す。  
+送信するコマンドもダブルクオーテーションで囲む（エスケープする）。
+
+``` bash
+    expect -c "
+    set timeout 5
+    
+    spawn sftp -r ${user}@${host}
+    
+    expect \"sftp>\"
+    send \"cd ${to}\r\"
+    expect \"sftp>\"
+    send \"put ${from}\r\"
+    
+    expect \"sftp>\"
+    send \"exit\"
+"
+```
+
+- spawn
+    - 別プロセスを起動する。
+- expect
+    - 条件分岐。標準出力でこれが表示されているかを確認する。
+- send 
+    - 実行したいコマンド。
+
+### 試してみた
+
+- [sftp_auto_exec_sample:SampleUser0001:Github](https://github.com/SampleUser0001/sftp_auto_exec_sample)
+    - sftp-putを自動化した。
 
 ### 参考
 
