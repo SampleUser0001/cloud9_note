@@ -2,13 +2,26 @@
 
 - [FTP](#ftp)
   - [Client](#client)
+    - [接続](#接続)
   - [Server](#server)
     - [vsftpd](#vsftpd)
       - [停止](#停止)
-    - [参考 : Docker](#参考--docker)
+    - [Docker](#docker)
+      - [参考](#参考)
 
 ## Client
 
+### 接続
+
+``` bash
+# 下記のどちらか
+# 1.
+ftp ${接続先ホスト} ${接続先ポート}
+
+# 2.
+ftp
+ftp> open ${接続先ホスト} ${接続先ポート}
+```
 
 ## Server
 
@@ -26,12 +39,23 @@ sudo systemctl restart vsftpd
 sudo systemctl disable vsftpd
 ```
 
-### 参考 : Docker
+### Docker
 
-試してみたがうまく動かなかった。  
-FTPサーバを構築することが目的ではないので、横に置いておく。  
+``` yaml
+version: '3'
 
-- [【Docker】FTPサーバコンテナ構築手順と使い方（Pure-ftpd Server）:インフラエンジニアの技術LOG](https://genchan.net/it/virtualization/docker/13815/)
-- [stilliard/docker-pure-ftpd:github](https://github.com/stilliard/docker-pure-ftpd)
-  - 公式
-- [FTP_Server_on_Docker:Github](https://github.com/SampleUser0001/FTP_Server_on_Docker)
+services:
+  sftp:
+    image: atmoz/sftp
+    container_name: sftp-test
+    # docker-compose.ymlがあるディレクトリに、コンテナとの共有ディレクトリを作る
+    volumes:
+        - ./data:/home/testuser/data
+    ports:
+        - "2222:22"
+    command: testuser:test123:::data
+```
+
+#### 参考
+
+- [dockerでSFTPサーバーを作成し、Pythonで作成した一時ファイルをアップロードしてみた:DevelopersIO](https://dev.classmethod.jp/articles/docker-sftp-python-paramiko-practice/)
