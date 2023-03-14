@@ -86,6 +86,21 @@ hoge
 piyo
 ```
 
+## 関数を宣言/使用する
+
+``` bash
+# 関数宣言
+# 引数が欲しい場合でも、カッコの中身は空にする。
+nanrakano_kansu() {
+    hikisuu1=$1
+    hikisuu2=$2
+}
+
+# 関数呼び出し
+# 呼び出し時にカッコは不要
+nanrakano_kansu 'aaa' 'bbb'
+```
+
 ## ディレクトリ/ファイルの存在チェック
 
 ``` sh
