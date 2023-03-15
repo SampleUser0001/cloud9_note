@@ -1129,3 +1129,27 @@ Defaulting ZAP install dir to /opt/ZAP_2.10.0
 - [Qiita:ubuntu18.04 + OWASP ZAP でWEB脆弱性診断](https://qiita.com/crash-boy/items/cb35eadaa4cf4d2cef3f)
 - [OWASP ZAP](https://owasp.org/www-project-zap/)
 - [OWASP Japan](https://owasp.org/www-chapter-japan/)
+- 
+## shunit2
+
+``` bash
+# ファイルパスは下記を確認。
+# https://github.com/kward/shunit2/releases/
+
+# shunit_version=2.1.8
+cd /tmp
+wget https://github.com/kward/shunit2/archive/refs/tags/v${shunit_version}.tar.gz
+tar -xvf v${shunit_version}.tar.gz
+sudo mv shunit2-${shunit_version} /opt
+
+rm v${shunit_version}.tar.gz
+
+sudo ln -s /opt/shunit2-${shunit_version} /opt/shunit2 
+
+echo '# shunit2 Home' >> ~/.bashrc
+echo 'export SHUNIT2_HOME=/opt/shunit2' >> ~/.bashrc
+
+source ~/.bashrc
+
+ls $SHUNIT2_HOME
+```
