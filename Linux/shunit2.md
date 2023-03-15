@@ -45,7 +45,6 @@ hello_world() {
 ``` bash
 #!/bin/bash
 
-. $SHUNIT2_HOME/shunit2
 . ./funcs.sh
 
 suite() {
@@ -55,6 +54,10 @@ suite() {
 hello_world_test() {
     assertEquals 'Hello World!' "`hello_world`"
 }
+
+# 実行
+. $SHUNIT2_HOME/shunit2
+
 ```
 
 ### 通常のシェル実行
@@ -67,9 +70,9 @@ Hello World!
 ### テスト実行
 
 ``` shell
-$ sh test.sh
+hello_world_test
 
-Ran 0 tests.
+Ran 1 test.
 
 OK
 ```
