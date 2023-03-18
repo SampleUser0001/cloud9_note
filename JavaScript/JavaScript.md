@@ -9,6 +9,10 @@
     - [map](#map)
     - [filter](#filter)
     - [find](#find)
+  - [import, require, export](#import-require-export)
+    - [export](#export)
+      - [module.exports](#moduleexports)
+    - [参考](#参考-2)
 
 ## ページ読み込み時に呼び出す
 
@@ -107,3 +111,41 @@ console.info(list.find((v, i, array) => {
 ``` txt
 2
 ```
+
+## import, require, export
+
+- import
+    - ESM方式
+    - ES6(ECMAScript)で定義されている文。
+        - ECMAScript : JavaScriptの仕様。
+        - ES6が動くブラウザでないと、動作しない。
+- require
+    - CJS(CommonJS)方式
+        - CommonJS : サーバサイド等、ブラウザ外でのJavaScript仕様を決めている。
+
+### export
+
+export or module.exportsを使う。共存できない。
+
+#### module.exports
+
+``` javascript
+// export
+// filename : sample.js
+const hoge = () => {
+    // pass
+}
+
+module.exports.hoge = hoge;
+```
+
+``` javascript
+// require
+const sample = require('./sample');
+sample.hoge();
+```
+
+### 参考
+
+- [jsのimportとrequireの違い:Qiita](https://qiita.com/minato-naka/items/39ecc285d1e37226a283)
+- [CommonJS:Wikipedia](https://ja.wikipedia.org/wiki/CommonJS)
