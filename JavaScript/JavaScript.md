@@ -12,6 +12,7 @@
   - [import, require, export](#import-require-export)
     - [export](#export)
       - [module.exports](#moduleexports)
+      - [module.exports.関数名](#moduleexports関数名)
     - [参考](#参考-2)
 
 ## ページ読み込み時に呼び出す
@@ -125,9 +126,32 @@ console.info(list.find((v, i, array) => {
 
 ### export
 
-export or module.exportsを使う。共存できない。
+- export
+    - ES6構文
+- module.exports
+    - CJS構文
+- exports
+    - module.exportsのコンテキスト
 
 #### module.exports
+
+``` javascript
+// export
+// filename : sample.js
+const hoge = () => {
+    // pass
+}
+
+module.exports = hoge;
+```
+
+``` javascript
+// require
+const sample = require('./sample');
+sample();
+```
+
+#### module.exports.関数名
 
 ``` javascript
 // export
