@@ -25,9 +25,11 @@
   - [配列](#配列)
     - [実行結果](#実行結果)
     - [参考](#参考-1)
+  - [連想配列](#連想配列)
+    - [参考](#参考-2)
   - [対話式のコマンドを自動化する(expect)](#対話式のコマンドを自動化するexpect)
     - [試してみた](#試してみた)
-    - [参考](#参考-2)
+    - [参考](#参考-3)
 
 ## ディレクトリ配下のファイルでループする
 
@@ -301,6 +303,29 @@ sample_list[2] = c
 ### 参考
 
 - [bash 配列まとめ:Qiita](https://qiita.com/b4b4r07/items/e56a8e3471fb45df2f59)
+
+## 連想配列
+
+要はMap。
+
+``` bash
+#!/bin/bash
+
+declare -A user=([id]=1 [name]=$(whoami))
+
+echo ${user[id]}
+echo ${user[name]}
+```
+
+``` txt
+$ sh app.sh 
+1
+ec2-user
+```
+
+### 参考
+
+- [bash 連想配列 メモ:個人的勉強メモ置き場:はてなブログ](https://zykbgame.hateblo.jp/entry/2022/04/05/195950)
 
 ## 対話式のコマンドを自動化する(expect)
 
