@@ -32,6 +32,8 @@
     - [参考](#参考)
   - [リモートリポジトリと紐づける](#リモートリポジトリと紐づける)
     - [Github](#github)
+  - [設定](#設定)
+    - [改行コード](#改行コード)
 
 ## .gitignoreについて
 
@@ -216,3 +218,18 @@ git remote add origin git@github.com:SampleUser0001/${プロジェクト名}.git
 git branch -M main
 git push -u origin main
 ```
+
+## 設定
+
+### 改行コード
+
+``` bash
+git config --global core.autocrlf ${value}
+```
+
+| 値 | checkout | commit |
+| :--: | :----: | :----: |
+| true | LF -> CRLF | CRLF -> LF |
+| input | 何もしない | CRLF -> LF |
+| false | 何もしない | 何もしない |
+
