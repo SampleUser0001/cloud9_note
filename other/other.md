@@ -38,6 +38,7 @@ jarファイルをexe化できる。
 - [MEGAMOJI - 簡単アニメ絵文字メーカー](https://zk-phi.github.io/MEGAMOJI/)
 - [icon-icons.com](https://icon-icons.com/ja/)
   - スペインのページらしい。
+- [Icons:Azure:Microsoft](https://azure.microsoft.com/en-us/patterns/styles/glyphs-icons/)
 
 ## サンプル動画
 
