@@ -6,6 +6,8 @@
     - [公開鍵登録](#公開鍵登録)
     - [~/.ssh/config](#sshconfig)
     - [参考](#参考)
+  - [プルリクエストのフォーマットファイル登録](#プルリクエストのフォーマットファイル登録)
+    - [参考](#参考-1)
 
 ## ssh-key登録
 
@@ -39,3 +41,9 @@ Host ssh.dev.azure.com
 ### 参考
 
 - [SSH キー認証を使用する:Azure DevOps:Microsoft](https://learn.microsoft.com/ja-jp/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops)
+
+## プルリクエストのフォーマットファイル登録
+
+### 参考
+
+- [テンプレートを使用して pull request の説明を改善する:Azure DevOps:Microsoft](https://learn.microsoft.com/ja-jp/azure/devops/repos/git/pull-request-templates?view=azure-devops)
