@@ -7,7 +7,10 @@
     - [vsftpd](#vsftpd)
       - [停止](#停止)
     - [Docker](#docker)
-      - [参考](#参考)
+      - [atmoz/sftp(1)](#atmozsftp1)
+        - [参考](#参考)
+      - [atmoz/sftp(2)](#atmozsftp2)
+        - [参考](#参考-1)
 
 ## Client
 
@@ -41,6 +44,8 @@ sudo systemctl disable vsftpd
 
 ### Docker
 
+#### atmoz/sftp(1)
+
 ``` yaml
 version: '3'
 
@@ -56,6 +61,31 @@ services:
     command: testuser:test123:::data
 ```
 
-#### 参考
+##### 参考
 
 - [dockerでSFTPサーバーを作成し、Pythonで作成した一時ファイルをアップロードしてみた:DevelopersIO](https://dev.classmethod.jp/articles/docker-sftp-python-paramiko-practice/)
+
+#### atmoz/sftp(2)
+
+鍵を使って接続する。
+
+1. 鍵作成する。
+2. 下記コマンドで起動。
+``` sh
+docker run \
+    -v <host-dir>/id_rsa.pub:/home/foo/.ssh/keys/id_rsa.pub:ro \
+    -v <host-dir>/id_other.pub:/home/foo/.ssh/keys/id_other.pub:ro \
+    -v <host-dir>/share:/home/foo/share \
+    -p 2222:22 -d atmoz/sftp \
+    foo::1001
+```
+    - ```.ssh/keys```配下に公開鍵を配置すると、authorized_keysに追記してくれる。
+    - dokcer-composeだとうまく行かない？
+3. Dockerホストから接続
+    ``` sh
+    sftp -i <host-dir>/id_rsa -P2222 foo@localhost
+    ```
+
+##### 参考
+
+- [atomz/sftp:Github](https://github.com/atmoz/sftp#logging-in-with-ssh-keys)
