@@ -6,10 +6,11 @@
   - [Server](#server)
     - [vsftpd](#vsftpd)
       - [停止](#停止)
-    - [Docker](#docker)
-      - [atmoz/sftp(1)](#atmozsftp1)
-        - [参考](#参考)
-      - [atmoz/sftp(2)](#atmozsftp2)
+    - [atmoz/sftp(1)](#atmozsftp1)
+      - [参考](#参考)
+    - [atmoz/sftp](#atmozsftp)
+      - [Dockerホストから接続](#dockerホストから接続)
+      - [クライアントDockerコンテナを作る](#クライアントdockerコンテナを作る)
         - [参考](#参考-1)
 
 ## Client
@@ -42,9 +43,7 @@ sudo systemctl restart vsftpd
 sudo systemctl disable vsftpd
 ```
 
-### Docker
-
-#### atmoz/sftp(1)
+### atmoz/sftp(1)
 
 ``` yaml
 version: '3'
@@ -61,11 +60,11 @@ services:
     command: testuser:test123:::data
 ```
 
-##### 参考
+#### 参考
 
 - [dockerでSFTPサーバーを作成し、Pythonで作成した一時ファイルをアップロードしてみた:DevelopersIO](https://dev.classmethod.jp/articles/docker-sftp-python-paramiko-practice/)
 
-#### atmoz/sftp(2)
+### atmoz/sftp
 
 鍵を使って接続する。
 
@@ -79,12 +78,61 @@ docker run \
     -p 2222:22 -d atmoz/sftp \
     foo::1001
 ```
-    - ```.ssh/keys```配下に公開鍵を配置すると、authorized_keysに追記してくれる。
-    - dokcer-composeだとうまく行かない？
-3. Dockerホストから接続
-    ``` sh
-    sftp -i <host-dir>/id_rsa -P2222 foo@localhost
-    ```
+
+コンテナ側の```${HOME}/.ssh/keys``` 配下に公開鍵を配置すると、authorized_keysに追記してくれる。  
+dokcer-composeだとうまく行かない？
+
+#### Dockerホストから接続
+``` sh
+sftp -i <host-dir>/id_rsa -P2222 foo@localhost
+```
+
+#### クライアントDockerコンテナを作る
+
+``` Dockerfile
+FROM ubuntu:latest
+
+RUN apt update && apt upgrade -y && apt install -y less nano openssh-client sudo
+
+ARG USERNAME=user
+ARG GROUPNAME=user
+ARG UID=1000
+ARG GID=1000
+ARG PASSWORD=user
+RUN groupadd -g $GID $GROUPNAME && \
+    useradd -m -s /bin/bash -u $UID -g $GID -G sudo $USERNAME && \
+    echo $USERNAME:$PASSWORD | chpasswd && \
+    echo "$USERNAME   ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+USER $USERNAME
+WORKDIR /home/$USERNAME/
+
+COPY .ssh/ /home/$USERNAME/.ssh/
+
+RUN sudo chown -R $USERNAME:$GROUPNAME /home/$USERNAME
+```
+
+```.ssh```配下に鍵ファイルがある想定。
+
+
+``` yml
+version: '3'
+
+services:
+  sftp_client:
+    build: ./docker/client
+    container_name: sftp_client
+    tty: true
+```
+
+鍵ファイルはvolumeで渡しても良さそうな気がするが、未確認。
+
+``` bash
+docker exec -it sftp_client /bin/bash
+```
+
+``` bash
+sftp -i ./.ssh/id_rsa -P2222 foo@${ホストローカルIP}
+```
 
 ##### 参考
 
