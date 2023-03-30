@@ -8,6 +8,7 @@
     - [起動コマンド](#起動コマンド-1)
     - [参照方法](#参照方法)
   - [docker login](#docker-login)
+  - [コンテナ内からホスト側のサービスを呼ぶ](#コンテナ内からホスト側のサービスを呼ぶ)
   - [shを実行する](#shを実行する)
     - [ディレクトリ構造](#ディレクトリ構造)
     - [Dockerfile](#dockerfile)
@@ -123,6 +124,15 @@ docker-compose up
 
 # serverは省略可能。省略した場合はhttps://hub.docker.com/にログイン。
 docker login -u ${username} -p ${password} ${server}
+```
+
+## コンテナ内からホスト側のサービスを呼ぶ
+
+localhostは使えない。ホスト側のIPを指定する。（プライベートIPでOK。）
+
+``` bash
+# 実行例
+sftp -i ./.ssh/id_rsa -P2222 foo@192.168.1.16
 ```
 
 ## shを実行する
