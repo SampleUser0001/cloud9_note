@@ -44,6 +44,12 @@ Host ssh.dev.azure.com
 
 ## プルリクエストのフォーマットファイル登録
 
+デフォルトブランチの下記ディレクトリにMarkdownファイルを配置する。  
+```.azuredevops/pull_request_template/${任意のファイル名}```
+
+PullRequest作成時、Descriptionの右に「Add a template」が出現する。  
+作成時しか選択できないので、選択せずにPullRequestを作成してしまった場合は、ファイルからコピペする。
+
 ### 参考
 
 - [テンプレートを使用して pull request の説明を改善する:Azure DevOps:Microsoft](https://learn.microsoft.com/ja-jp/azure/devops/repos/git/pull-request-templates?view=azure-devops)
