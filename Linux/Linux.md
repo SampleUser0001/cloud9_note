@@ -695,6 +695,25 @@ Host ホスト名
   IdentitiesOnly yes
 ```
 
+## 公開鍵削除
+
+```ssh-remove-id```というコマンドがあるらしいが、今回は使用しない。
+
+### クライアント
+
+``` bash
+# known_hostsから削除する
+ssh-keygen -R ${サーバ名}
+
+# ~/.ssh/configから削除。手動。
+# 公開鍵、秘密鍵を削除。rmコマンド実行。
+```
+
+### サーバ
+
+コマンドは見当たらない。  
+```~/.ssh/authorized_keys```から削除する必要があるが、```@revoked```をつけて無効化する。
+
 ## クリップボードに貼り付ける
 
 ### Ubuntu
