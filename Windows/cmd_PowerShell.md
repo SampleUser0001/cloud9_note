@@ -59,6 +59,10 @@ Get-ChildItem -Filter ${ファイル条件} -Recurse | Select-String -Pattern ${
 Get-ChildItem -r -Filter "条件" -Name
 ```
 
+``` powershell
+dir -Recurse | Get-ChildItem -Filter "条件" -Recurse
+```
+
 ### touch（新しいファイルを生成する）
 
 ``` powershell
