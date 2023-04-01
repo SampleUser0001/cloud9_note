@@ -4,8 +4,7 @@
   - [Tool](#tool)
     - [exewrap](#exewrap)
   - [MotionPro](#motionpro)
-  - [Slack](#slack)
-    - [スタンプ](#スタンプ)
+  - [アイコン](#アイコン)
   - [サンプル動画](#サンプル動画)
   - [ランダムで名言を取得できるサイト](#ランダムで名言を取得できるサイト)
   - [その他](#その他-1)
@@ -25,10 +24,10 @@ jarファイルをexe化できる。
 - [downloads](https://support.arraynetworks.net/prx/001/http/supportportal.arraynetworks.net/downloads/downloads.html)
 - [Installing the MotionPro Softlayer SSL VPN client on Ubuntu with systemd](https://faridrener.com/2018/04/10/Softlayer-SSL-VPN-Ubuntu.html)
 
-## Slack
+## アイコン
 
-### スタンプ
-
+- [Icons:Azure:Microsoft](https://azure.microsoft.com/en-us/patterns/styles/glyphs-icons/)
+- [icooom-mono](https://icooon-mono.com/about-icoon-mono/)
 - [Slackmojis](https://slackmojis.com/)
 - [SlackEmoji](https://slackemoji.com/)
 - [Slack Emoji Generator](https://slackemojigen.com/)
@@ -38,7 +37,6 @@ jarファイルをexe化できる。
 - [MEGAMOJI - 簡単アニメ絵文字メーカー](https://zk-phi.github.io/MEGAMOJI/)
 - [icon-icons.com](https://icon-icons.com/ja/)
   - スペインのページらしい。
-- [Icons:Azure:Microsoft](https://azure.microsoft.com/en-us/patterns/styles/glyphs-icons/)
 
 ## サンプル動画
 
