@@ -111,7 +111,7 @@ COPY .ssh/ /home/$USERNAME/.ssh/
 RUN sudo chown -R $USERNAME:$GROUPNAME /home/$USERNAME
 ```
 
-```\.ssh```配下に鍵ファイルがある想定。
+.ssh配下に鍵ファイルがある想定。
 
 ``` yml
 version: '3'
