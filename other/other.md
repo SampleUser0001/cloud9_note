@@ -7,9 +7,6 @@
   - [アイコン](#アイコン)
   - [サンプル動画](#サンプル動画)
   - [ランダムで名言を取得できるサイト](#ランダムで名言を取得できるサイト)
-  - [その他](#その他-1)
-    - [Content-Length](#content-length)
-    - [APAR(Authorized Program Analysis Report)](#aparauthorized-program-analysis-report)
   - [謎の表](#謎の表)
 
 ## Tool
@@ -46,20 +43,6 @@ jarファイルをexe化できる。
 ## ランダムで名言を取得できるサイト
 
 [https://meigen.doodlenote.net/api/json.php](https://meigen.doodlenote.net/api/json.php)
-
-## その他
-
-### Content-Length
-
-- HTTP要求ではオプション。
-- Get, Deleteでは0。
-- Postで値が指定されていて、メッセージ行と一致しない場合、
-  - 切り捨てられる。
-  - nullで埋められる
-
-### APAR(Authorized Program Analysis Report)
-
-IBMがユーザに対して、問題または障害の疑いのあるものとして通知する公式な報告書。
 
 ## 謎の表
 

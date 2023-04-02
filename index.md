@@ -181,8 +181,9 @@
 
 ## Other
 
-- [curl.md](./other/curl.md)
 - [other.md](./other/other.md)
+- [単語/用語/略語/類語](./other/words.md)
+- [curl.md](./other/curl.md)
 - [OWASP_ZAP.md](./other/OWASP_ZAP.md)
 - [Github.md](./other/Github.md)
 - [Github API](./other/GithubAPI.md)
@@ -194,7 +195,6 @@
 - [License.md](./other/License.md)
 - [Network](./other/Network.md)
 - [MQ](./other/IBM_MQ.md)
-- [類語](./other/Synonym_word.md)
 
 ### 外部へのリンク
 
