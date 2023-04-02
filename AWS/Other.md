@@ -1,6 +1,10 @@
 # その他
 
 - [その他](#その他)
+  - [VPC(Virtural Private Cloud)](#vpcvirtural-private-cloud)
+    - [参考](#参考)
+  - [セキュリティグループ](#セキュリティグループ)
+    - [セキュリティグループルール](#セキュリティグループルール)
   - [aws cli history](#aws-cli-history)
     - [CodeBuild](#codebuild)
       - [CodeBuild情報取得](#codebuild情報取得)
@@ -8,11 +12,35 @@
     - [CodePipeline](#codepipeline)
       - [パイプライン一覧取得](#パイプライン一覧取得)
       - [全パイプラインの情報出力](#全パイプラインの情報出力)
-      - [参考](#参考)
+      - [参考](#参考-1)
     - [ECS](#ecs)
       - [未整理](#未整理-1)
     - [SecretsManager](#secretsmanager)
   - [Github以外](#github以外)
+
+## VPC(Virtural Private Cloud)
+
+AWS内のネットワーク。  
+セキュリティグループを保持できる。  
+VPCとインスタンス/サービスを紐付けて使用できる。
+
+### 参考
+
+- [Amazon VPC とは?:AWS](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/what-is-amazon-vpc.html)
+- [[AWS] VPC、サブネット、セキュリティグループまとめ:Qiita](https://qiita.com/melonattacker/items/145dd8763883cb922400)
+
+## セキュリティグループ
+
+インスタンス単位の通信制御で使用する。  
+セキュリティグループルールの集合として使用する。
+
+### セキュリティグループルール
+
+下記を定義している。
+
+- インバウンド/アウトバウンド
+- IP
+- ポート
 
 ## aws cli history
 
