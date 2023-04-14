@@ -6,6 +6,7 @@
       - [log4j2.xml](#log4j2xml)
     - [java](#java)
     - [参考](#参考)
+  - [読み込み](#読み込み)
   - [XSSFとSXSSFの違い](#xssfとsxssfの違い)
   - [作成者を変更する](#作成者を変更する)
   - [プログラム名を変更する](#プログラム名を変更する)
@@ -195,6 +196,11 @@ public class App {
 ### 参考
 
 - [Poi_Sample_Java](https://github.com/SampleUser0001/Poi_Sample_Java)
+
+## 読み込み
+
+- [Read_Excel_Poi:SampleUser0001:Github](https://sampleuser0001.github.io/Read_Excel_Poi/)
+- [Poi_WriteReadAppend:SampleUser0001:Github](https://github.com/SampleUser0001/Poi_WriteReadAppend)
 
 ## XSSFとSXSSFの違い
 
