@@ -2,7 +2,8 @@
 
 - [git](#git)
   - [.gitignoreについて](#gitignoreについて)
-  - [親ブランチを取得する](#親ブランチを取得する)
+  - [ブランチ作成元のコミットIDを取得する](#ブランチ作成元のコミットidを取得する)
+    - [参考](#参考)
   - [ステージング解除](#ステージング解除)
     - [新規](#新規)
     - [変更](#変更)
@@ -33,7 +34,7 @@
     - [履歴を削除](#履歴を削除)
   - [他のブランチ/コミットのファイルを取得する(git show)](#他のブランチコミットのファイルを取得するgit-show)
   - [ファイルごとの最終更新日の取得](#ファイルごとの最終更新日の取得)
-    - [参考](#参考)
+    - [参考](#参考-1)
   - [リモートリポジトリと紐づける](#リモートリポジトリと紐づける)
     - [Github](#github)
   - [設定](#設定)
@@ -43,11 +44,15 @@
 
 [https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff](https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff)
 
-## 親ブランチを取得する
+## ブランチ作成元のコミットIDを取得する
 
-```
+``` bash
 git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 ```
+
+### 参考
+
+- [muumin/gist:55eaca26f0f73cf7cb1e983f8757765c](https://gist.github.com/muumin/55eaca26f0f73cf7cb1e983f8757765c)
 
 ## ステージング解除
 
