@@ -4,12 +4,16 @@
   - [init](#init)
     - [webpack.config.js](#webpackconfigjs)
     - [.babelrc](#babelrc)
+    - [.eslintrc.js](#eslintrcjs)
+    - [.eslintignore](#eslintignore)
+    - [.prettierrc](#prettierrc)
     - [index.html](#indexhtml)
     - [src/index.js](#srcindexjs)
     - [package.json](#packagejson)
     - [src/App.js](#srcappjs)
     - [実行](#実行)
     - [備考](#備考)
+      - [prettier実行](#prettier実行)
   - [useState](#usestate)
   - [Reactコンテキスト](#reactコンテキスト)
     - [コンテキストプロバイダー](#コンテキストプロバイダー)
@@ -36,6 +40,11 @@ npm install --save-dev babel-loader @babel/core
 
 # babelプリセット
 npm install @babel/preset-env @babel/preset-react --save-dev
+
+# プラグイン
+# eslint, prettier
+# prettierはフォーマッタ。任意でインストール。
+npm install eslint eslint-plugin-react-hooks eslint-plugin-jsx-a11y prettier eslint-config-prettier eslint-plugin-prettier
 ```
 
 ### webpack.config.js
@@ -65,6 +74,68 @@ module.exports = {
 ``` json
 {
     "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+```
+
+### .eslintrc.js
+
+`npx eslint --init`で生成できる。  
+必要に応じて編集。
+
+``` js
+module.exports = {
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:jsx-a11y/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "overrides": [
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "jsx-a11y",
+        "@typescript-eslint",
+        "prettier"
+    ],
+    "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "prettier/prettier": "error"
+    }
+}
+
+```
+
+### .eslintignore
+
+eslint対象外ファイルを記載する。
+
+``` 
+webpack.config.js
+.eslintrc.js
+```
+
+### .prettierrc
+
+``` json
+{
+    "semi": true,
+    "trailingComma": none,
+    "singleQuote": true,
+    "printWidth": 120,
+    "tabWidth": 4 
 }
 ```
 
@@ -106,7 +177,8 @@ createRoot(document.getElementById("root")).render(
     "clean": "rm -fR ./dist",
     "build": "npm run clean && mkdir ./dist && cp ./index.html ./dist/ && webpack --mode development",
     "start": "serve ./dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
   },
 ```
 
@@ -136,6 +208,14 @@ npm run start
 
 ``` bash
 npx create-react-app ${プロジェクト名}
+```
+
+#### prettier実行
+
+自動変換される。
+
+``` bash
+npx prettier --write ${ファイルパス or ディレクトリ}
 ```
 
 ## useState
