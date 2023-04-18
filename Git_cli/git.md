@@ -2,6 +2,7 @@
 
 - [git](#git)
   - [.gitignoreについて](#gitignoreについて)
+  - [ブランチ作成元のブランチ名を取得する](#ブランチ作成元のブランチ名を取得する)
   - [ブランチ作成元のコミットIDを取得する](#ブランチ作成元のコミットidを取得する)
     - [参考](#参考)
   - [ステージング解除](#ステージング解除)
@@ -44,10 +45,16 @@
 
 [https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff](https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff)
 
-## ブランチ作成元のコミットIDを取得する
+## ブランチ作成元のブランチ名を取得する
 
 ``` bash
 git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
+```
+
+## ブランチ作成元のコミットIDを取得する
+
+``` bash
+git show-branch --sha1-name | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | grep '+' | head -1 | awk -F'[]~^[]' '{print $2}'
 ```
 
 ### 参考
