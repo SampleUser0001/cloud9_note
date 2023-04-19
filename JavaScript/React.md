@@ -45,6 +45,13 @@ npm install @babel/preset-env @babel/preset-react --save-dev
 # eslint, prettier
 # prettierはフォーマッタ。任意でインストール。
 npm install eslint eslint-plugin-react-hooks eslint-plugin-jsx-a11y prettier eslint-config-prettier eslint-plugin-prettier
+
+# TypeScript
+# @typesがTypeScriptで使う型情報。
+npm install typescript @types/node @types/react @types/react-dom
+
+# Jest
+npm install jest @types/jest
 ```
 
 ### webpack.config.js
@@ -349,4 +356,4 @@ export default function App() {
 ## 参考ソース
 
 - [ReactSample:SampleUser0001:Github](https://github.com/SampleUser0001/React_Samples)
-
+- [React + TypeScript cheatsheet](https://github.com/typescript-cheatsheets/react)
