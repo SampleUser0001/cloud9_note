@@ -51,11 +51,15 @@
 git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 ```
 
+※作成元でsquashしていると取得できない？`git show-branch`で確認する。
+
 ## ブランチ作成元のコミットIDを取得する
 
 ``` bash
 git show-branch --sha1-name | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | grep '+' | head -1 | awk -F'[]~^[]' '{print $2}'
 ```
+
+※作成元でsquashしていると取得できない？`git show-branch`で確認する。
 
 ### 参考
 
