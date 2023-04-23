@@ -12,46 +12,48 @@ Cloud9を起動したときに行うことの備忘録。
     - [一時](#一時-1)
     - [永続](#永続-1)
     - [参考](#参考)
+  - [AWS SAM CLI](#aws-sam-cli)
+    - [参考](#参考-1)
   - [Java](#java)
     - [yumでJavaをインストール](#yumでjavaをインストール)
-      - [参考](#参考-1)
-    - [aptでJavaをインストール](#aptでjavaをインストール)
       - [参考](#参考-2)
+    - [aptでJavaをインストール](#aptでjavaをインストール)
+      - [参考](#参考-3)
   - [Gradle](#gradle)
   - [Maven](#maven)
     - [Maven(binary)](#mavenbinary)
-      - [参考](#参考-3)
-    - [Maven(yum)](#mavenyum)
       - [参考](#参考-4)
+    - [Maven(yum)](#mavenyum)
+      - [参考](#参考-5)
   - [jd-cli(jad)](#jd-clijad)
   - [ant](#ant)
     - [antインストール](#antインストール)
   - [Spring boot cli](#spring-boot-cli)
-    - [参考](#参考-5)
+    - [参考](#参考-6)
   - [telnet](#telnet)
     - [telnetインストール](#telnetインストール)
   - [docker](#docker)
     - [yum](#yum)
     - [apt](#apt)
     - [rootに紐付いていないとき](#rootに紐付いていないとき)
-      - [参考](#参考-6)
+      - [参考](#参考-7)
   - [docker-compose](#docker-compose)
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
   - [python](#python)
     - [pyenv](#pyenv)
     - [3.10.x以上](#310x以上)
-    - [参考](#参考-7)
+    - [参考](#参考-8)
   - [pip3](#pip3)
     - [apt](#apt-1)
   - [PHP](#php)
     - [amazon-linux-extras](#amazon-linux-extras)
-      - [参考](#参考-8)
+      - [参考](#参考-9)
     - [apt](#apt-2)
     - [ソースからコンパイル](#ソースからコンパイル)
       - [libxml2](#libxml2)
       - [krb5](#krb5)
-      - [参考](#参考-9)
+      - [参考](#参考-10)
   - [Composer](#composer)
     - [よく見るエラーの対応](#よく見るエラーの対応)
       - [mbstring](#mbstring)
@@ -61,12 +63,12 @@ Cloud9を起動したときに行うことの備忘録。
   - [goofys](#goofys)
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
-    - [参考](#参考-10)
+    - [参考](#参考-11)
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
-    - [参考](#参考-11)
-  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
     - [参考](#参考-12)
+  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
+    - [参考](#参考-13)
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
@@ -77,24 +79,24 @@ Cloud9を起動したときに行うことの備忘録。
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-13)
+    - [参考](#参考-14)
   - [Ruby](#ruby)
     - [rbenvを使う](#rbenvを使う)
       - [rbenvインストール](#rbenvインストール)
       - [rbenvでRubyインストール](#rbenvでrubyインストール)
-      - [参考](#参考-14)
-    - [ソースからビルドする](#ソースからビルドする)
       - [参考](#参考-15)
+    - [ソースからビルドする](#ソースからビルドする)
+      - [参考](#参考-16)
   - [sqlite](#sqlite)
     - [最新をインストールする](#最新をインストールする)
     - [外部キー制約を常にONにする](#外部キー制約を常にonにする)
-    - [参考](#参考-16)
-  - [Terraform](#terraform)
     - [参考](#参考-17)
+  - [Terraform](#terraform)
+    - [参考](#参考-18)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-18)
+    - [参考](#参考-19)
   - [shunit2](#shunit2)
 
 ## git
@@ -150,6 +152,28 @@ export AWS_SECRET_ACCESS_KEY=****5678
 - 永続
   - [Cloud9からIAM Roleの権限でAWS CLIを実行する:Developers:IO](https://dev.classmethod.jp/articles/execute-aws-cli-with-iam-role-on-cloud9/)
     - credentialsのチェックをoffにする。
+
+## AWS SAM CLI
+
+``` bash
+cd /tmp
+
+# 下記URLでダウンロードするバージョンを確認。
+# https://github.com/aws/aws-sam-cli/releases/tag/v1.81.0
+wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
+
+# 上記のページを見て、下記の実行結果と比較する。
+# sha256sum aws-sam-cli-linux-x86_64.zip
+
+unzip aws-sam-cli-linux-x86_64.zip -d sam-installation
+sudo ./sam-installation/install
+
+sam --version
+```
+
+### 参考
+
+- [AWS SAM CLI のインストール:AWS Docs](https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/install-sam-cli.html)
 
 ## Java
 
