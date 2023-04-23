@@ -14,46 +14,48 @@ Cloud9を起動したときに行うことの備忘録。
     - [参考](#参考)
   - [AWS SAM CLI](#aws-sam-cli)
     - [参考](#参考-1)
+  - [Homebrew](#homebrew)
+    - [参考](#参考-2)
   - [Java](#java)
     - [yumでJavaをインストール](#yumでjavaをインストール)
-      - [参考](#参考-2)
-    - [aptでJavaをインストール](#aptでjavaをインストール)
       - [参考](#参考-3)
+    - [aptでJavaをインストール](#aptでjavaをインストール)
+      - [参考](#参考-4)
   - [Gradle](#gradle)
   - [Maven](#maven)
     - [Maven(binary)](#mavenbinary)
-      - [参考](#参考-4)
-    - [Maven(yum)](#mavenyum)
       - [参考](#参考-5)
+    - [Maven(yum)](#mavenyum)
+      - [参考](#参考-6)
   - [jd-cli(jad)](#jd-clijad)
   - [ant](#ant)
     - [antインストール](#antインストール)
   - [Spring boot cli](#spring-boot-cli)
-    - [参考](#参考-6)
+    - [参考](#参考-7)
   - [telnet](#telnet)
     - [telnetインストール](#telnetインストール)
   - [docker](#docker)
     - [yum](#yum)
     - [apt](#apt)
     - [rootに紐付いていないとき](#rootに紐付いていないとき)
-      - [参考](#参考-7)
+      - [参考](#参考-8)
   - [docker-compose](#docker-compose)
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
   - [python](#python)
     - [pyenv](#pyenv)
     - [3.10.x以上](#310x以上)
-    - [参考](#参考-8)
+    - [参考](#参考-9)
   - [pip3](#pip3)
     - [apt](#apt-1)
   - [PHP](#php)
     - [amazon-linux-extras](#amazon-linux-extras)
-      - [参考](#参考-9)
+      - [参考](#参考-10)
     - [apt](#apt-2)
     - [ソースからコンパイル](#ソースからコンパイル)
       - [libxml2](#libxml2)
       - [krb5](#krb5)
-      - [参考](#参考-10)
+      - [参考](#参考-11)
   - [Composer](#composer)
     - [よく見るエラーの対応](#よく見るエラーの対応)
       - [mbstring](#mbstring)
@@ -63,12 +65,12 @@ Cloud9を起動したときに行うことの備忘録。
   - [goofys](#goofys)
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
-    - [参考](#参考-11)
+    - [参考](#参考-12)
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
-    - [参考](#参考-12)
-  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
     - [参考](#参考-13)
+  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
+    - [参考](#参考-14)
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
@@ -79,24 +81,24 @@ Cloud9を起動したときに行うことの備忘録。
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-14)
+    - [参考](#参考-15)
   - [Ruby](#ruby)
     - [rbenvを使う](#rbenvを使う)
       - [rbenvインストール](#rbenvインストール)
       - [rbenvでRubyインストール](#rbenvでrubyインストール)
-      - [参考](#参考-15)
-    - [ソースからビルドする](#ソースからビルドする)
       - [参考](#参考-16)
+    - [ソースからビルドする](#ソースからビルドする)
+      - [参考](#参考-17)
   - [sqlite](#sqlite)
     - [最新をインストールする](#最新をインストールする)
     - [外部キー制約を常にONにする](#外部キー制約を常にonにする)
-    - [参考](#参考-17)
-  - [Terraform](#terraform)
     - [参考](#参考-18)
+  - [Terraform](#terraform)
+    - [参考](#参考-19)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-19)
+    - [参考](#参考-20)
   - [shunit2](#shunit2)
 
 ## git
@@ -174,6 +176,30 @@ sam --version
 ### 参考
 
 - [AWS SAM CLI のインストール:AWS Docs](https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/install-sam-cli.html)
+
+## Homebrew
+
+AWS SAM CLIの前提条件。
+
+``` bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+~/.profile
+``` bash
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+```
+
+``` bash
+source ~/.profile
+sudo apt-get install build-essential
+```
+
+
+### 参考
+
+- [Homebrew](https://brew.sh/index_ja)
+    - 公式
 
 ## Java
 
