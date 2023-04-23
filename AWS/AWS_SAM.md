@@ -41,10 +41,12 @@ sam deploy --guided
 
 #### 権限
 
-- AWSCloudFormationFullAccess
-- AWSLambda_FullAccess
-- IAMFullAccess
-- AmazonAPIGatewayAdministrator
+- デフォルトで作成されるプロジェクトで必要なもの
+    - AWSCloudFormationFullAccess
+    - AWSLambda_FullAccess
+    - IAMFullAccess
+    - AmazonAPIGatewayAdministrator
+    - AmazonS3FullAccess
 
 ### 参考
 
