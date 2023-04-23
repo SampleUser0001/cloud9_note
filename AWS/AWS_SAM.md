@@ -9,6 +9,7 @@ AWS Serverless Application Model (AWS SAM) は、AWS でサーバーレスアプ
     - [ローカル実行](#ローカル実行)
     - [デプロイ](#デプロイ)
       - [権限](#権限)
+    - [削除](#削除)
     - [参考](#参考)
   - [公式](#公式)
 
@@ -47,6 +48,12 @@ sam deploy --guided
     - IAMFullAccess
     - AmazonAPIGatewayAdministrator
     - AmazonS3FullAccess
+
+### 削除
+
+```bash
+sam delete
+```
 
 ### 参考
 
