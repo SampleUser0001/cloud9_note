@@ -33,6 +33,7 @@
     - [Streamを結合する](#streamを結合する)
   - [Tempファイルを作成する / Javaでshを実行する](#tempファイルを作成する--javaでshを実行する)
     - [参考](#参考-1)
+  - [Tempディレクトリ作成](#tempディレクトリ作成)
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
@@ -454,6 +455,30 @@ TempFileClass.java
 
 - [一時ファイルを作成するサンプルコード:偏差値40プログラマー](https://hensa40.cutegirl.jp/archives/787)
 - [BashスクリプトをJavaで実行してみよう:Qiita](https://qiita.com/haniokasai/items/d345206d57dcc1a9373a)
+
+## Tempディレクトリ作成
+
+``` java
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class App {
+    public static void main(String[] args) throws IOException {
+        System.out.println(System.getProperty("java.io.tmpdir"));
+
+        Path tempDirectory = Files.createTempDirectory(null);
+        System.out.println(tempDirectory.toString());
+        tempDirectory.toFile().deleteOnExit();
+    }
+}
+```
+
+``` bash
+$ java App
+/tmp
+/tmp/6812748981744988023
+```
 
 ## 最小の実行環境を提供する(jdeps, jlink)
 
