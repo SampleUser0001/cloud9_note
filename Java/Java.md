@@ -31,10 +31,12 @@
   - [Listの結合](#listの結合)
   - [指定した文字列で結合する](#指定した文字列で結合する)
     - [Streamを結合する](#streamを結合する)
+  - [Tempファイルを作成する / Javaでshを実行する](#tempファイルを作成する--javaでshを実行する)
+    - [参考](#参考-1)
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
-    - [参考](#参考-1)
+    - [参考](#参考-2)
   - [jarの展開/圧縮](#jarの展開圧縮)
     - [展開](#展開)
     - [圧縮](#圧縮)
@@ -371,13 +373,87 @@ System.out.println(joiner.toString());
 import java.util.stream.Collectors;
 
 Stream<String> stream = // 任意の値
-String joined = stream.forEachOrdered(Collectors(joining(","));
+String joined = stream.forEachOrdered(Collectors(joining(",")));
 
 // String head = "head";
 // String tail = "tail";
 // stream.forEachOrdered(Collectors(joining(",", head, tail));
 
 ```
+
+## Tempファイルを作成する / Javaでshを実行する
+
+``` java
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.stream.Collectors;
+ 
+public class TempFileClass {
+
+    public void exec(String[] args) throws IOException, InterruptedException {
+        String bashFile = this.getBashFile();
+        try {
+            ProcessBuilder pb = new ProcessBuilder("bash", bashFile);
+            Process process = pb.start();
+            try (BufferedReader buffer = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                System.out.println(buffer.lines().collect(Collectors.joining("\n")));
+            }
+            process.waitFor();
+        } finally {
+            Files.delete(Paths.get(bashFile));
+        }
+    }
+
+    private String getBashFile() throws IOException {
+        // 一時ファイルが作成されるディレクトリを表示
+        String tmpDir = System.getProperty("java.io.tmpdir");
+        System.out.println("一時ディレクトリ： " + tmpDir);
+ 
+        try {
+            // 上記で示すディレクトリに一時ファイルを生成  
+            File tempFile = File.createTempFile("prefix", ".sh");
+
+            String tmpFilePath = tempFile.getPath();
+            System.out.println("一時ファイルパス： " + tmpFilePath);
+            try(BufferedWriter writer = Files.newBufferedWriter(Paths.get(tempFile.getPath()), Charset.forName("UTF-8"), StandardOpenOption.APPEND)) {
+                writer.write("#!/bin/bash\n");
+                writer.write("ls");
+            }
+ 
+            return tmpFilePath;
+        } catch(IOException e) {
+            System.err.println(e.getMessage());
+            throw e;
+        }
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        new TempFileClass().exec(args);
+    }
+}
+
+```
+
+``` bash
+$ ls
+TempFileClass.class  TempFileClass.java
+```
+
+``` bash
+$ java TempFileClass 
+一時ディレクトリ： /tmp
+一時ファイルパス： /tmp/prefix8243343864671051988.sh
+TempFileClass.class
+TempFileClass.java
+```
+
+### 参考
+
+- [一時ファイルを作成するサンプルコード:偏差値40プログラマー](https://hensa40.cutegirl.jp/archives/787)
+- [BashスクリプトをJavaで実行してみよう:Qiita](https://qiita.com/haniokasai/items/d345206d57dcc1a9373a)
 
 ## 最小の実行環境を提供する(jdeps, jlink)
 
