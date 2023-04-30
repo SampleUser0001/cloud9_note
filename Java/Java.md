@@ -52,6 +52,7 @@
   - [double -\> BigDecimalの誤差](#double---bigdecimalの誤差)
   - [文字コードを取得する](#文字コードを取得する)
     - [nkfを使う](#nkfを使う)
+  - [JGit](#jgit)
 
 ## Stream
 
@@ -687,3 +688,10 @@ public class App {
     
 }
 ```
+
+## JGit
+
+結論を書くと、ProcessBuilderを使ってgitコマンドを叩いたほうが楽。  
+`git clone`だけはJGitを使ったほうが楽なような気がするが、おそらく好みの問題。
+
+[Practice_JGit_AzureDevOps:SampleUser0001](https://github.com/SampleUser0001/Practice_JGit_AzureDevOps)
