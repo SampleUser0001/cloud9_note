@@ -43,6 +43,7 @@
   - [設定](#設定)
     - [改行コード](#改行コード)
   - [コンソールにブランチ名を表示する](#コンソールにブランチ名を表示する)
+  - [接続先URLを確認する](#接続先urlを確認する)
 
 ## .gitignoreについて
 
@@ -304,4 +305,10 @@ git config --global core.autocrlf ${value}
 
 ``` bash
 export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)" 2>/dev/null) $ '
+```
+
+## 接続先URLを確認する
+
+``` bash
+git remote -v
 ```
