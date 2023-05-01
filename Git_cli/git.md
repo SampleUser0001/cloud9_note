@@ -42,6 +42,7 @@
     - [Github](#github)
   - [設定](#設定)
     - [改行コード](#改行コード)
+  - [コンソールにブランチ名を表示する](#コンソールにブランチ名を表示する)
 
 ## .gitignoreについて
 
@@ -299,3 +300,8 @@ git config --global core.autocrlf ${value}
 | input | 何もしない | CRLF -> LF |
 | false | 何もしない | 何もしない |
 
+## コンソールにブランチ名を表示する
+
+``` bash
+export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)" 2>/dev/null) $ '
+```
