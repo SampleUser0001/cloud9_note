@@ -24,6 +24,7 @@
       - [Windows](#windows)
     - [デアクティベート](#デアクティベート)
     - [参考](#参考-2)
+  - [format](#format)
   - [for](#for)
   - [マルチプロセス](#マルチプロセス)
     - [配列をマルチプロセスで処理する](#配列をマルチプロセスで処理する)
@@ -253,6 +254,13 @@ deactivate
 ### 参考
 
 - [venv: Python 仮想環境管理:Qiita](https://qiita.com/fiftystorm36/items/b2fd47cf32c7694adc2e)
+
+## format
+
+``` python
+x = 1
+print(f"いまはこの表記が主流。 x = {x}")
+```
 
 ## for
 
