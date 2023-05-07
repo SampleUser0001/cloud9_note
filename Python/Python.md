@@ -8,6 +8,7 @@
       - [app.py](#apppy)
     - [実行結果](#実行結果)
     - [参考](#参考)
+  - [クラス宣言とコンストラクタ](#クラス宣言とコンストラクタ)
   - [配列の展開](#配列の展開)
     - [ソース](#ソース)
     - [実行結果](#実行結果-1)
@@ -96,6 +97,14 @@ hoge
 ### 参考
 
 - [.env ファイルで環境変数を設定する (python-dotenv):まくまくPythonノート](https://maku77.github.io/python/env/dotenv.html)
+
+## クラス宣言とコンストラクタ
+
+``` python
+class SampleClass:
+    def __init__(self, v):
+        self.v = v
+```
 
 ## 配列の展開
 
