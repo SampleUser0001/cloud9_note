@@ -1,15 +1,22 @@
 # Python
 
 - [Python](#python)
-  - [配列の展開](#配列の展開)
-    - [ソース](#ソース)
+  - [Enum/dotenv](#enumdotenv)
+    - [src](#src)
+      - [.env](#env)
+      - [config.py](#configpy)
+      - [app.py](#apppy)
     - [実行結果](#実行結果)
     - [参考](#参考)
+  - [配列の展開](#配列の展開)
+    - [ソース](#ソース)
+    - [実行結果](#実行結果-1)
+    - [参考](#参考-1)
   - [str -\> int -\> bool](#str---int---bool)
     - [実行例](#実行例)
   - [str -\> datetime](#str---datetime)
   - [型の判定](#型の判定)
-    - [参考](#参考-1)
+    - [参考](#参考-2)
   - [部分配列の取得](#部分配列の取得)
     - [先頭を取得する](#先頭を取得する)
     - [末尾を取得する](#末尾を取得する)
@@ -23,7 +30,7 @@
       - [Linux](#linux)
       - [Windows](#windows)
     - [デアクティベート](#デアクティベート)
-    - [参考](#参考-2)
+    - [参考](#参考-3)
   - [format](#format)
   - [for](#for)
   - [マルチプロセス](#マルチプロセス)
@@ -34,13 +41,61 @@
   - [pyenv](#pyenv)
     - [インストール可能なバージョン一覧](#インストール可能なバージョン一覧)
     - [特定バージョンのPythonインストール](#特定バージョンのpythonインストール)
-      - [参考](#参考-3)
+      - [参考](#参考-4)
     - [インストール済みバージョンの一覧](#インストール済みバージョンの一覧)
     - [切り替え](#切り替え)
     - [アンインストール](#アンインストール)
     - [切り替わらないとき](#切り替わらないとき)
       - [set by PYENV\_VERSION environment variable](#set-by-pyenv_version-environment-variable)
-        - [参考](#参考-4)
+        - [参考](#参考-5)
+
+## Enum/dotenv
+
+``` bash
+pip install python-dotenv
+```
+
+### src
+
+#### .env
+
+``` 
+HOGE=hoge
+```
+
+#### config.py
+
+``` python
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+from enum import Enum
+
+class SampleEnum(Enum):
+    HOGE = os.getenv("HOGE")
+```
+
+#### app.py
+
+``` python
+from config import SampleEnum
+
+print(SampleEnum.HOGE)
+print(SampleEnum.HOGE.value)
+```
+
+### 実行結果
+
+``` bash
+$ python app.py
+SampleEnum.HOGE
+hoge
+```
+
+### 参考
+
+- [.env ファイルで環境変数を設定する (python-dotenv):まくまくPythonノート](https://maku77.github.io/python/env/dotenv.html)
 
 ## 配列の展開
 
