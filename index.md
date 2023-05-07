@@ -63,8 +63,9 @@
   - [CodeBuild.md](./AWS/CodeBuild.md)
   - [Use_AWS_CodeBuild](https://github.com/SampleUser0001/Use_AWS_CodeBuild)
 - [AWS_CodeCommit.md](./AWS/CodeCommit.md)
-- [AWS_Lambda](./AWS/AWS_Lambda.md)
-- [AWS SAM](./AWS/AWS_SAM.md)
+- AWS Lambda
+  - [AWS_Lambda](./AWS/AWS_Lambda.md)
+  - [AWS SAM](./AWS/AWS_SAM.md)
 - [AWS_SQS](./AWS/AWS_SQS.md)
 - [ElastiCache.md](./AWS/ElastiCache.md)
 - [CodeGuru.md](./AWS/CodeGuru.md)
