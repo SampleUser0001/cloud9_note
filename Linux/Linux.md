@@ -86,6 +86,10 @@
   - [公開鍵削除](#公開鍵削除)
     - [クライアント](#クライアント)
     - [サーバ](#サーバ)
+  - [known\_hosts(ssh鍵用のファイル)を編集する](#known_hostsssh鍵用のファイルを編集する)
+    - [削除](#削除)
+    - [追加](#追加)
+    - [参考](#参考-12)
   - [クリップボードに貼り付ける](#クリップボードに貼り付ける)
     - [Ubuntu](#ubuntu)
   - [chmod](#chmod)
@@ -751,6 +755,28 @@ ssh-keygen -R ${サーバ名}
 
 コマンドは見当たらない。  
 `~/.ssh/authorized_keys`から削除する必要があるが、`@revoked`をつけて無効化する。
+
+## known_hosts(ssh鍵用のファイル)を編集する
+
+### 削除
+
+``` bash
+ssh-keygen -R $hostname
+ssh-keygen -R $ip_address
+ssh-keygen -R $hostname,$ip_address
+```
+
+### 追加
+
+``` bash
+ssh-keyscan -H $hostname,$ip_address >> ~/.ssh/known_hosts
+ssh-keyscan -H $ip_address >> ~/.ssh/known_hosts
+ssh-keyscan -H $hostname >> ~/.ssh/known_hosts
+```
+
+### 参考
+
+- [新しいホストをknown_hostsに追加する:Qiita](https://qiita.com/ntatsuya/items/cee0ed6eaeaf2aea19fc)
 
 ## クリップボードに貼り付ける
 
