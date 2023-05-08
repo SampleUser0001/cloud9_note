@@ -11,7 +11,8 @@
     - [atmoz/sftp](#atmozsftp)
       - [Dockerホストから接続](#dockerホストから接続)
       - [クライアントDockerコンテナを作る](#クライアントdockerコンテナを作る)
-        - [参考](#参考-1)
+        - [WSL2のIPアドレスの取得方法](#wsl2のipアドレスの取得方法)
+      - [参考](#参考-1)
 
 ## Client
 
@@ -133,6 +134,14 @@ docker exec -it sftp_client /bin/bash
 sftp -i ./.ssh/id_rsa -P2222 foo@${ホストローカルIP}
 ```
 
-##### 参考
+##### WSL2のIPアドレスの取得方法
+
+WSL2でコンテナ起動した場合に参照するIPは下記で取得する。
+
+``` bash
+ip a show dev eth0
+```
+
+#### 参考
 
 - [atomz/sftp:Github](https://github.com/atmoz/sftp#logging-in-with-ssh-keys)
