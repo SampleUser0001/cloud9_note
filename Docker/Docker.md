@@ -7,6 +7,8 @@
   - [nginxイメージを使用してhttpsとして公開する](#nginxイメージを使用してhttpsとして公開する)
     - [起動コマンド](#起動コマンド-1)
     - [参照方法](#参照方法)
+  - [Markdownファイルをブラウザから参照できるようにする](#markdownファイルをブラウザから参照できるようにする)
+    - [参考](#参考)
   - [docker login](#docker-login)
   - [コンテナ内からホスト側のサービスを呼ぶ](#コンテナ内からホスト側のサービスを呼ぶ)
   - [shを実行する](#shを実行する)
@@ -35,18 +37,18 @@
   - [ホストとコンテナで同じユーザを使用する（やってることは上と同じ）](#ホストとコンテナで同じユーザを使用するやってることは上と同じ)
     - [docker-compose.yml](#docker-composeyml-3)
     - [実行](#実行)
-    - [参考](#参考)
+    - [参考](#参考-1)
   - [ログ出力](#ログ出力)
     - [ログローテ](#ログローテ)
-    - [参考](#参考-1)
+    - [参考](#参考-2)
   - [docker psのオプション](#docker-psのオプション)
     - [Nameで検索](#nameで検索)
-    - [参考](#参考-2)
+    - [参考](#参考-3)
   - [fs.file-max](#fsfile-max)
   - [Dockerfile内で使用できるコマンド](#dockerfile内で使用できるコマンド)
     - [ARG](#arg)
       - [コマンド](#コマンド-1)
-      - [参考](#参考-3)
+      - [参考](#参考-4)
       - [例](#例)
       - [備考](#備考)
   - [ホストからコンテナの環境変数を設定する](#ホストからコンテナの環境変数を設定する)
@@ -114,6 +116,27 @@ docker-compose up
 3. Preview Running Application
 
 ※外部から参照する場合も同じURL。
+
+## Markdownファイルをブラウザから参照できるようにする
+
+``` yml
+version: '3'
+services:
+  pandoc:
+    image: kobucom/pandoc:local1
+    container_name: pandoc
+    ports: 
+      - "8080:80"
+    volumes:
+      - ./markdown:/usr/local/apache2/htdocs
+      - ./logs:/usr/local/apache2/logs
+```
+
+### 参考
+
+- [【その壱】Apache/PandocでMarkdownをHTMLで配信するDockerコンテナの作成:Qiita](https://qiita.com/abun-kobu/items/f390846cdb474777ca84)
+- [docker-pandoc:kobucom:Github](https://github.com/kobucom/docker-pandoc)
+- [pandoc:kobucom:Docker-Hub](https://hub.docker.com/r/kobucom/pandoc)
 
 ## docker login
 
