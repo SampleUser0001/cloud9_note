@@ -413,3 +413,28 @@ hoge
     - 指定したディレクトリをスタックに入れ、そのディレクトリに移動する。
 - popd
     - スタックからディレクトリを取り出し、そのディレクトリに移動する。
+
+### 実行例
+
+``` txt
+ec2-user:~/environment/tmp/shell/push_pop $ ls
+app.sh  directory
+ec2-user:~/environment/tmp/shell/push_pop $ tree .
+.
+├── app.sh
+└── directory
+    ├── file01
+    ├── file02
+    └── file03
+
+1 directory, 4 files
+ec2-user:~/environment/tmp/shell/push_pop $ bash app.sh 
+/home/ec2-user/environment/tmp/shell/push_pop
+~/environment/tmp/shell/push_pop/directory ~/environment/tmp/shell/push_pop
+file01
+file02
+file03
+~/environment/tmp/shell/push_pop
+/home/ec2-user/environment/tmp/shell/push_pop
+ec2-user:~/environment/tmp/shell/push_pop $ 
+```
