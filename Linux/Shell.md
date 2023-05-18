@@ -32,6 +32,7 @@
   - [対話式のコマンドを自動化する(expect)](#対話式のコマンドを自動化するexpect)
     - [試してみた](#試してみた)
     - [参考](#参考-3)
+  - [変数のスコープ](#変数のスコープ)
 
 ## ディレクトリ配下のファイルでループする
 
@@ -378,3 +379,27 @@ ec2-user
 ### 参考
 
 - [Linuxの対話がめんどくさい?そんな時こそ自動化だ！-expect編-:Qiita](https://qiita.com/ine1127/items/cd6bc91174635016db9b)
+
+## 変数のスコープ
+
+app.sh
+
+``` bash
+#!/bin/bash
+
+func() {
+    echo $HOGE
+}
+
+HOGE=hoge
+func
+echo $HOGE
+```
+
+実行結果
+
+``` bash
+sh app.sh 
+hoge
+hoge
+```
