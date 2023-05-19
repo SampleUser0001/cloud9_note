@@ -243,6 +243,13 @@ git merge ${ブランチ名} --no-commit
 #### コンフリクトの確認
 
 ``` sh
+# dry-runはない。実際にマージしてみる。
+git merge --no-commit ${source_branch}
+
+# もとに戻す
+git merge --abort
+
+# ???
 git status
 ```
 
