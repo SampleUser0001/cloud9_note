@@ -6,11 +6,13 @@
     - [起動コマンド](#起動コマンド)
   - [タイムゾーン設定](#タイムゾーン設定)
     - [参考](#参考)
+  - [コンテナ内に一般ユーザを作成する](#コンテナ内に一般ユーザを作成する)
+    - [参考](#参考-1)
   - [nginxイメージを使用してhttpsとして公開する](#nginxイメージを使用してhttpsとして公開する)
     - [起動コマンド](#起動コマンド-1)
     - [参照方法](#参照方法)
   - [Markdownファイルをブラウザから参照できるようにする](#markdownファイルをブラウザから参照できるようにする)
-    - [参考](#参考-1)
+    - [参考](#参考-2)
   - [docker login](#docker-login)
   - [コンテナ内からホスト側のサービスを呼ぶ](#コンテナ内からホスト側のサービスを呼ぶ)
   - [shを実行する](#shを実行する)
@@ -39,18 +41,18 @@
   - [ホストとコンテナで同じユーザを使用する（やってることは上と同じ）](#ホストとコンテナで同じユーザを使用するやってることは上と同じ)
     - [docker-compose.yml](#docker-composeyml-3)
     - [実行](#実行)
-    - [参考](#参考-2)
+    - [参考](#参考-3)
   - [ログ出力](#ログ出力)
     - [ログローテ](#ログローテ)
-    - [参考](#参考-3)
+    - [参考](#参考-4)
   - [docker psのオプション](#docker-psのオプション)
     - [Nameで検索](#nameで検索)
-    - [参考](#参考-4)
+    - [参考](#参考-5)
   - [fs.file-max](#fsfile-max)
   - [Dockerfile内で使用できるコマンド](#dockerfile内で使用できるコマンド)
     - [ARG](#arg)
       - [コマンド](#コマンド-1)
-      - [参考](#参考-5)
+      - [参考](#参考-6)
       - [例](#例)
       - [備考](#備考)
   - [ホストからコンテナの環境変数を設定する](#ホストからコンテナの環境変数を設定する)
@@ -98,6 +100,30 @@ ENV LC_ALL ja_JP.UTF-8
 ### 参考
 
 - [UbuntuベースのDockerでタイムゾーンを設定する:Qiita](https://qiita.com/apollo_program/items/2495a109ce7afec21f25)
+
+## コンテナ内に一般ユーザを作成する
+
+``` Dockerfile
+FROM ubuntu:latest
+
+RUN apt update && apt -y upgrade && apt -y install sudo
+
+# ユーザーを作成
+ARG DOCKER_UID=1001
+ARG DOCKER_USER=user
+ARG DOCKER_PASSWORD=pass
+
+RUN useradd -m --uid ${DOCKER_UID} --groups sudo ${DOCKER_USER} \
+  && echo ${DOCKER_USER}:${DOCKER_PASSWORD} | chpasswd
+
+# 作成したユーザーに切り替える
+USER ${DOCKER_USER}
+WORKDIR /home/${DOCKER_USER}
+```
+
+### 参考
+
+- [Linux環境でDockerコンテナ内にuserで入る:Zenn](https://zukucode.com/2019/06/docker-user.html)
 
 ## nginxイメージを使用してhttpsとして公開する
 
