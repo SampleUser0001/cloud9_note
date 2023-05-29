@@ -4,11 +4,13 @@
   - [nginxイメージを使用して公開する](#nginxイメージを使用して公開する)
     - [docker-compose.yml](#docker-composeyml)
     - [起動コマンド](#起動コマンド)
+  - [タイムゾーン設定](#タイムゾーン設定)
+    - [参考](#参考)
   - [nginxイメージを使用してhttpsとして公開する](#nginxイメージを使用してhttpsとして公開する)
     - [起動コマンド](#起動コマンド-1)
     - [参照方法](#参照方法)
   - [Markdownファイルをブラウザから参照できるようにする](#markdownファイルをブラウザから参照できるようにする)
-    - [参考](#参考)
+    - [参考](#参考-1)
   - [docker login](#docker-login)
   - [コンテナ内からホスト側のサービスを呼ぶ](#コンテナ内からホスト側のサービスを呼ぶ)
   - [shを実行する](#shを実行する)
@@ -37,18 +39,18 @@
   - [ホストとコンテナで同じユーザを使用する（やってることは上と同じ）](#ホストとコンテナで同じユーザを使用するやってることは上と同じ)
     - [docker-compose.yml](#docker-composeyml-3)
     - [実行](#実行)
-    - [参考](#参考-1)
+    - [参考](#参考-2)
   - [ログ出力](#ログ出力)
     - [ログローテ](#ログローテ)
-    - [参考](#参考-2)
+    - [参考](#参考-3)
   - [docker psのオプション](#docker-psのオプション)
     - [Nameで検索](#nameで検索)
-    - [参考](#参考-3)
+    - [参考](#参考-4)
   - [fs.file-max](#fsfile-max)
   - [Dockerfile内で使用できるコマンド](#dockerfile内で使用できるコマンド)
     - [ARG](#arg)
       - [コマンド](#コマンド-1)
-      - [参考](#参考-4)
+      - [参考](#参考-5)
       - [例](#例)
       - [備考](#備考)
   - [ホストからコンテナの環境変数を設定する](#ホストからコンテナの環境変数を設定する)
@@ -75,6 +77,27 @@ services:
 ```
 docker-compose up
 ```
+
+## タイムゾーン設定
+
+``` Dockerfile
+FROM ubuntu:latest
+
+# Shift timezone to Asia/Tokyo.
+RUN apt-get update && apt-get install -y tzdata && apt-get clean && rm -rf /var/lib/apt/lists/*
+ENV TZ Asia/Tokyo
+
+# Set local to jp.
+RUN apt-get update && apt-get install -y language-pack-ja && \
+    update-locale LANG=ja_JP.UTF-8 && rm -rf /var/lib/apt/lists/*
+ENV LANG ja_JP.UTF-8
+ENV LANGUAGE ja_JP:ja
+ENV LC_ALL ja_JP.UTF-8
+```
+
+### 参考
+
+- [UbuntuベースのDockerでタイムゾーンを設定する:Qiita](https://qiita.com/apollo_program/items/2495a109ce7afec21f25)
 
 ## nginxイメージを使用してhttpsとして公開する
 
