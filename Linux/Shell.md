@@ -220,6 +220,38 @@ ittimfn@penguin:~/cloud9_note/tmp/tmp2$ sh ../test.sh
 export $(cat .env | grep -v ^# | xargs)
 ```
 
+## 異なる値のenvファイルを読み込む
+
+app.sh
+``` bash
+# !/bin/bash
+
+source $1
+
+echo ${env_value}
+
+```
+
+1.env
+``` sh
+env_value="1"
+```
+
+2.env
+``` sh
+env_value="2"
+```
+
+### 実行結果
+
+``` bash
+ec2-user:~/environment/tmp/shell/env $ bash app.sh 1.env
+1
+ec2-user:~/environment/tmp/shell/env $ bash app.sh 2.env
+2
+ec2-user:~/environment/tmp/shell/env $ 
+```
+
 ## ランダムな文字列を取得する
 
 ``` bash
