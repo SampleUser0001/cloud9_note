@@ -94,6 +94,9 @@
     - [Ubuntu](#ubuntu)
   - [chmod](#chmod)
     - [シンボルモード](#シンボルモード)
+  - [所属しているグループを確認する](#所属しているグループを確認する)
+    - [例](#例)
+    - [参考](#参考-13)
 
 ## 圧縮解凍(tar, gunzip)
 
@@ -808,3 +811,24 @@ cat ${ファイルパス} | xsel --clipboard --input
 | r | 読み込み |
 | w | 書き込み |
 | x | 実行 |
+
+## 所属しているグループを確認する
+
+``` bash
+less /etc/group
+```
+
+### 例
+
+``` txt
+docker:x:999:ubuntuuser
+```
+
+- グループ : docker 
+- 暗号化されたパスワード
+- グループID : 999
+- 所属ユーザ : ubuntuuser
+
+### 参考
+
+- [Linux グループ一覧の確認と/etc/group ファイル:kazmax Linuxで自宅サーバー](https://kazmax.zpp.jp/linux_beginner/etc_group.html)
