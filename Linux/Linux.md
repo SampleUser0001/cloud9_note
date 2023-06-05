@@ -368,7 +368,7 @@ iconv --f sjis -t utf8 ${変換対象ファイル}
 
 ### 参考
 
-- [atmarkit:【 iconv 】コマンド――文字コードを変換する](https://www.atmarkit.co.jp/ait/articles/1609/12/news019.html)
+- [atmarkit:【 iconv 】コマンド——文字コードを変換する](https://www.atmarkit.co.jp/ait/articles/1609/12/news019.html)
 
 ## xargs
 
@@ -459,7 +459,7 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 
 - [プログラミングを学ぶ:【Linux】CPUとメモリの負荷と使用率をタイムスタンプ付きでログに残す](https://pg.echo-s.net/%E3%80%90linux%E3%80%91cpu%E3%81%A8%E3%83%A1%E3%83%A2%E3%83%AA%E3%81%AE%E8%B2%A0%E8%8D%B7%E3%81%A8%E4%BD%BF%E7%94%A8%E7%8E%87%E3%82%92%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%97/)
 - [atmarkit:
-【 vmstat 】コマンド――仮想メモリやディスクI/Oの統計情報を表示する](https://www.atmarkit.co.jp/ait/articles/1707/13/news015.html)
+【 vmstat 】コマンド——仮想メモリやディスクI/Oの統計情報を表示する](https://www.atmarkit.co.jp/ait/articles/1707/13/news015.html)
   - vmstatのオプションについて
 
 ## 標準出力/エラー出力を捨てる
