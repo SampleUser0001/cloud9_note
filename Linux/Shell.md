@@ -15,6 +15,8 @@
     - [部分文字列の取得：参考](#部分文字列の取得参考)
   - [シェルの実行ディレクトリを取得する](#シェルの実行ディレクトリを取得する)
     - [例：シェルの実行ディレクトリを取得する](#例シェルの実行ディレクトリを取得する)
+  - [ファイルパスからファイル名のみ取得](#ファイルパスからファイル名のみ取得)
+  - [ファイルパスからディレクトリ名のみ取得](#ファイルパスからディレクトリ名のみ取得)
   - [.envファイルの読み込み方](#envファイルの読み込み方)
   - [ランダムな文字列を取得する](#ランダムな文字列を取得する)
   - [実行年月日時分秒を取得する](#実行年月日時分秒を取得する)
@@ -39,6 +41,7 @@
     - [参考](#参考-4)
   - [BOMがついているUTF-8ファイルを作成する](#bomがついているutf-8ファイルを作成する)
   - [属性を維持してコピーする](#属性を維持してコピーする)
+  - [環境変数を指定する](#環境変数を指定する)
 
 ## ディレクトリ配下のファイルでループする
 
@@ -193,7 +196,7 @@ echo `dirname $0`
 ```
 
 ファイルパス
-```
+``` bash
 ittimfn@penguin:~/cloud9_note/tmp$ pwd
 /home/ittimfn/cloud9_note/tmp
 ittimfn@penguin:~/cloud9_note/tmp$ ls
@@ -201,21 +204,33 @@ test.sh
 ```
 
 shがあるディレクトリで実行
-```
+``` bash
 ittimfn@penguin:~/cloud9_note/tmp$ sh test.sh 
 .
 ```
 
 shより上のディレクトリで実行
-```
+``` bash
 ittimfn@penguin:~$ sh ./cloud9_note/tmp/test.sh 
 ./cloud9_note/tmp
 ```
 
 shより下のディレクトリで実行
-```
+``` bash
 ittimfn@penguin:~/cloud9_note/tmp/tmp2$ sh ../test.sh 
 ..
+```
+
+## ファイルパスからファイル名のみ取得
+
+``` bash
+basename ${filepath}
+```
+
+## ファイルパスからディレクトリ名のみ取得
+
+``` bash
+dirname ${filepath}
 ```
 
 ## .envファイルの読み込み方
@@ -474,3 +489,7 @@ nkf --oc=UTF-8-BOM ${filepath} > ${new_filepath}
 ``` bash
 cp -p ${original} ${target}
 ```
+
+## 環境変数を指定する
+
+`.bash_profile`にexport付きで宣言する。
