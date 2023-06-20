@@ -35,6 +35,10 @@
   - [変数のスコープ](#変数のスコープ)
   - [pushd/popd](#pushdpopd)
     - [実行例](#実行例)
+  - [インデントをつける](#インデントをつける)
+    - [参考](#参考-4)
+  - [BOMがついているUTF-8ファイルを作成する](#bomがついているutf-8ファイルを作成する)
+  - [属性を維持してコピーする](#属性を維持してコピーする)
 
 ## ディレクトリ配下のファイルでループする
 
@@ -438,4 +442,35 @@ file03
 ~/environment/tmp/shell/push_pop
 /home/ec2-user/environment/tmp/shell/push_pop
 ec2-user:~/environment/tmp/shell/push_pop $ 
+```
+
+## インデントをつける
+
+1. フォーマッタ（拡張機能）をインストール
+    - shell-format
+2. 下記キー入力。
+
+| OS | Command |
+| :-- | :---- |
+| Linux | `Shift + Ctrl + I` |
+| Windows | `Shift + Alt + F` |
+
+### 参考
+
+- [【時短！】VSCodeでインデントを一瞬で自動整形する方法をわかりやすく解説します！ : エンジニアブログ](https://programming-engineer.com/vscode-indentation/)
+
+## BOMがついているUTF-8ファイルを作成する
+
+``` bash
+# 上書きされる。
+nkf --overrite --oc=UTF-8-BOM ${filepath}
+
+# 上書きされない
+nkf --oc=UTF-8-BOM ${filepath} > ${new_filepath}
+```
+
+## 属性を維持してコピーする
+
+``` bash
+cp -p ${original} ${target}
 ```
