@@ -99,6 +99,9 @@
   - [所属しているグループを確認する](#所属しているグループを確認する)
     - [例](#例)
     - [参考](#参考-13)
+  - [tmpの自動削除](#tmpの自動削除)
+    - [Ubuntu](#ubuntu-1)
+      - [参考](#参考-14)
 
 ## 圧縮解凍(tar, gunzip)
 
@@ -850,3 +853,28 @@ docker:x:999:ubuntuuser
 ### 参考
 
 - [Linux グループ一覧の確認と/etc/group ファイル:kazmax Linuxで自宅サーバー](https://kazmax.zpp.jp/linux_beginner/etc_group.html)
+
+## tmpの自動削除
+
+### Ubuntu
+
+``` bash
+# systemd-tmpfiles-clean.timerで削除する。
+sudo systemctl cat systemd-tmpfiles-clean.timer
+```
+
+``` sh
+...
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=1d
+```
+
+``` bash
+# 削除対象ディレクトリ
+cat /usr/lib/tmpfiles.d/tmp.conf
+```
+
+#### 参考
+
+- [[Amazon linux 2] /tmp配下の自動削除:Qiita](https://qiita.com/yoshii0110/items/248c828ca0284d826006)
