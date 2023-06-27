@@ -36,8 +36,10 @@
     - [実行](#実行)
   - [Timestamp型 -\> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
     - [参考](#参考-5)
-  - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
+  - [ユーザオブジェクトの削除](#ユーザオブジェクトの削除)
     - [参考](#参考-6)
+  - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
+    - [参考](#参考-7)
   - [ライセンス](#ライセンス)
     - [OTN](#otn)
   - [用語](#用語)
@@ -462,6 +464,20 @@ sqlldr <接続情報> <ctlファイルパス>
 ### 参考
 
 - [DockerでOracle動かしたついでに、公式サンプルデータを突っ込んでから、ER図を自動生成してみようぜ:Zenn](https://zenn.dev/angelica/articles/9e2411db5fc1b7)
+
+## ユーザオブジェクトの削除
+
+Table, View, Index, Sequence... 等を削除する。
+
+``` sql
+-- 重複が発生する。事前に通常のSelectを実行して確認する。
+SELECT 'DROP ' || OBJECT_TYPE ||' '|| OBJECT_NAME || ';'
+FROM USER_OBJECTS;
+```
+
+### 参考
+
+- [オラクルのオブジェクトを全部削除したいけど、一つずつ書くのが面倒くさい。って場合。:zero0nine](https://zero0nine.com/archives/414)
 
 ## Oracle Database アーキテクチャ
 

@@ -21,6 +21,7 @@
   - [文字列を編集する(sedコマンド)](#文字列を編集するsedコマンド)
     - [先頭に追記する](#先頭に追記する)
     - [指定した個所を別のファイルの内容に置換する](#指定した個所を別のファイルの内容に置換する)
+    - [元のファイルの文字列を置換する](#元のファイルの文字列を置換する)
   - [scpコマンド](#scpコマンド)
     - [scp 参考](#scp-参考)
   - [ファイル名にDateを使う](#ファイル名にdateを使う)
@@ -56,6 +57,7 @@
   - [cat json - jq - lessを色付きにする](#cat-json---jq---lessを色付きにする)
   - [改行コード確認](#改行コード確認)
   - [改行コード変換](#改行コード変換)
+    - [nkfを使う](#nkfを使う)
   - [tab -\> スペース変換(expand)](#tab---スペース変換expand)
   - [diff](#diff)
     - [差分の行数を取得する](#差分の行数を取得する)
@@ -94,6 +96,12 @@
     - [Ubuntu](#ubuntu)
   - [chmod](#chmod)
     - [シンボルモード](#シンボルモード)
+  - [所属しているグループを確認する](#所属しているグループを確認する)
+    - [例](#例)
+    - [参考](#参考-13)
+  - [tmpの自動削除](#tmpの自動削除)
+    - [Ubuntu](#ubuntu-1)
+      - [参考](#参考-14)
 
 ## 圧縮解凍(tar, gunzip)
 
@@ -228,6 +236,12 @@ $ sed -e '/${basicauth}/r basicauth' file1 -e '/${basicauth}/d'
     fuga
 ```
 
+### 元のファイルの文字列を置換する
+
+``` sh
+sed -i 's/${変換前}/${変換後}/g' ${ファイルパス}
+```
+
 ## scpコマンド
 
 ```
@@ -357,7 +371,7 @@ iconv --f sjis -t utf8 ${変換対象ファイル}
 
 ### 参考
 
-- [atmarkit:【 iconv 】コマンド――文字コードを変換する](https://www.atmarkit.co.jp/ait/articles/1609/12/news019.html)
+- [atmarkit:【 iconv 】コマンド——文字コードを変換する](https://www.atmarkit.co.jp/ait/articles/1609/12/news019.html)
 
 ## xargs
 
@@ -448,7 +462,7 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 
 - [プログラミングを学ぶ:【Linux】CPUとメモリの負荷と使用率をタイムスタンプ付きでログに残す](https://pg.echo-s.net/%E3%80%90linux%E3%80%91cpu%E3%81%A8%E3%83%A1%E3%83%A2%E3%83%AA%E3%81%AE%E8%B2%A0%E8%8D%B7%E3%81%A8%E4%BD%BF%E7%94%A8%E7%8E%87%E3%82%92%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%97/)
 - [atmarkit:
-【 vmstat 】コマンド――仮想メモリやディスクI/Oの統計情報を表示する](https://www.atmarkit.co.jp/ait/articles/1707/13/news015.html)
+【 vmstat 】コマンド——仮想メモリやディスクI/Oの統計情報を表示する](https://www.atmarkit.co.jp/ait/articles/1707/13/news015.html)
   - vmstatのオプションについて
 
 ## 標準出力/エラー出力を捨てる
@@ -510,6 +524,16 @@ nkf --guess ${対象ファイル}
 
 ``` sh
 tr '変換元改行コード' '変換先改行コード' < 変換元ファイルパス > 変換先ファイルパス
+```
+
+### nkfを使う
+
+``` sh
+# UTF-8に変換して上書きする
+nkf -w --overwrite ${ファイルパス}
+
+# 改行コードをLFに変換して上書きする
+nkf -Lu --overwrite ${ファイルパス}
 ```
 
 ## tab -> スペース変換(expand)
@@ -808,3 +832,49 @@ cat ${ファイルパス} | xsel --clipboard --input
 | r | 読み込み |
 | w | 書き込み |
 | x | 実行 |
+
+## 所属しているグループを確認する
+
+``` bash
+less /etc/group
+```
+
+### 例
+
+``` txt
+docker:x:999:ubuntuuser
+```
+
+- グループ : docker 
+- 暗号化されたパスワード
+- グループID : 999
+- 所属ユーザ : ubuntuuser
+
+### 参考
+
+- [Linux グループ一覧の確認と/etc/group ファイル:kazmax Linuxで自宅サーバー](https://kazmax.zpp.jp/linux_beginner/etc_group.html)
+
+## tmpの自動削除
+
+### Ubuntu
+
+``` bash
+# systemd-tmpfiles-clean.timerで削除する。
+sudo systemctl cat systemd-tmpfiles-clean.timer
+```
+
+``` sh
+...
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=1d
+```
+
+``` bash
+# 削除対象ディレクトリ
+cat /usr/lib/tmpfiles.d/tmp.conf
+```
+
+#### 参考
+
+- [[Amazon linux 2] /tmp配下の自動削除:Qiita](https://qiita.com/yoshii0110/items/248c828ca0284d826006)

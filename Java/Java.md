@@ -579,11 +579,11 @@ format.format(new Date());
 ## String.formatで「%」を出力する
 
 ``` java
-System.out.println(String.format("%%ｺｽﾄ"));
+System.out.println(String.format("%%コスト"));
 ```
 
 ``` txt
-%ｺｽﾄ
+%コスト
 ```
 
 ## double -> BigDecimalの誤差
