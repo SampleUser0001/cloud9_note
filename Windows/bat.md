@@ -20,6 +20,7 @@
   - [置換](#置換)
     - [実装例](#実装例)
     - [参考](#参考-3)
+  - [現在のディレクトリ取得](#現在のディレクトリ取得)
 
 ## 起動引数
 
@@ -239,3 +240,12 @@ c:\work2\copies\hoge\piyo\piyo.txt
 ### 参考
 
 - [Windowsバッチでファイル内の特定文字を置換する方法:Qiita](https://qiita.com/yacchi1123/items/97e75c6784b5b507f701)
+
+## 現在のディレクトリ取得
+
+``` bat 
+@echo off
+@REM どちらでもOK。
+echo %~dp0
+echo %~d0%~p0
+```
