@@ -21,6 +21,7 @@
     - [実装例](#実装例)
     - [参考](#参考-3)
   - [現在のディレクトリ取得](#現在のディレクトリ取得)
+  - [標準出力に表示されるコマンド結果を変数に代入する](#標準出力に表示されるコマンド結果を変数に代入する)
 
 ## 起動引数
 
@@ -248,4 +249,12 @@ c:\work2\copies\hoge\piyo\piyo.txt
 @REM どちらでもOK。
 echo %~dp0
 echo %~d0%~p0
+```
+
+## 標準出力に表示されるコマンド結果を変数に代入する
+
+``` bat
+@echo off
+@REM 「Hello, World!」をresultに代入する。
+for /f "delims=" %%i in ('echo Hello, World!') do set "result=%%i"
 ```
