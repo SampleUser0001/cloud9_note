@@ -2,10 +2,14 @@
 
 - [Taiga](#taiga)
   - [init](#init)
+    - [起動](#起動)
     - [URL](#url)
+    - [日本語化](#日本語化)
     - [参考](#参考)
 
 ## init 
+
+### 起動
 
 Docker前提。
 
@@ -24,7 +28,13 @@ git checkout -b stable origin/stable
 
 ### URL
 
-(http://localhost:9000)[http://localhost:9000]
+[http://localhost:9000](http://localhost:9000)
+
+### 日本語化
+
+1. 右上 -> Account Settings -> USERSETTINGS
+2. Language -> 日本語
+3. Save
 
 ### 参考
 
