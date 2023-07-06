@@ -24,6 +24,7 @@
   - [Microsoft Office](#microsoft-office)
   - [Logic](#logic)
   - [Security](#security)
+  - [Project Management Tool](#project-management-tool)
   - [Other](#other)
     - [外部へのリンク](#外部へのリンク)
 
@@ -184,6 +185,14 @@
 
 - [脆弱性](./Security/Vulnerability.md)
 
+## Project Management Tool
+
+- [Redmine](./Project_Management_Tool/Redmine.md)
+    - 使えるようにするまでがつらい
+- [Taiga](./Project_Management_Tool/Taiga.md)
+    - クラウドサービスや自動ホスティングサービスもあるが、セルフマネージメント型（Docker）もあり、これは無料。
+    - [公式](https://taiga.io/)
+
 ## Other
 
 - [other.md](./other/other.md)
@@ -194,9 +203,8 @@
 - [Github API](./other/GithubAPI.md)
 - [cloud9_on-premiss.md](./other/cloud9_on-premiss.md)
 - [StressTestTool.md](./other/StressTestTool.md)
-  - 負荷テストツール
+    - 負荷テストツール
 - [Gitlab.md](./other/Gitlab.md)
-- [Redmine.md](./other/Redmine.md)
 - [License.md](./other/License.md)
 - [Network](./other/Network.md)
 - [MQ](./other/IBM_MQ.md)
