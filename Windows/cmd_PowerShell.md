@@ -30,6 +30,7 @@
       - [参考](#参考-1)
     - [xcopy](#xcopy)
       - [参考](#参考-2)
+    - [サービスの停止/起動](#サービスの停止起動)
 
 
 ## PowerShell
@@ -205,3 +206,12 @@ xcopy /S /E /F /G /H /R /K /Y SOURCE DESTINATION
 
 - [XCOPY コマンドでディレクトリとファイルの再帰的なコピー:Landscape - エンジニアのメモ 2006-04-13](http://sonic64.com/2006-04-13.html)
 
+### サービスの停止/起動
+
+``` bat
+@REM 停止
+net stop %service_name%
+
+@REM 起動
+net start %service_name%
+```
