@@ -11,6 +11,7 @@
     - [参考](#参考-1)
   - [リフレクション](#リフレクション)
     - [Method](#method)
+  - [配列のテスト](#配列のテスト)
   - [一部のメソッドをMock化する。](#一部のメソッドをmock化する)
     - [テスト対象](#テスト対象)
     - [テストクラス](#テストクラス)
@@ -186,6 +187,15 @@ method.setAccessible(true);
 Object args = new Object();
 App app = new App();
 String returnValue = method.invoke(app, args);
+```
+
+## 配列のテスト
+
+``` java
+assertArrayEquals(
+    new int[]{0,1},
+    actual
+);
 ```
 
 ## 一部のメソッドをMock化する。
