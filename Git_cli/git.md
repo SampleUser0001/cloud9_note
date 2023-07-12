@@ -15,6 +15,7 @@
   - [追跡していないファイルの削除](#追跡していないファイルの削除)
     - [git cleanのオプション](#git-cleanのオプション)
   - [作成元ブランチの変更を取り込む](#作成元ブランチの変更を取り込む)
+  - [git rebaseを使って複数コミットをsquashする](#git-rebaseを使って複数コミットをsquashする)
   - [ログをCSVに変換する](#ログをcsvに変換する)
     - [フォーマット](#フォーマット)
   - [git stash](#git-stash)
@@ -135,6 +136,64 @@ git clean <オプション>
 
 ``` bash
 git rebase ${branch}
+```
+
+## git rebaseを使って複数コミットをsquashする
+
+1. file1,file2作成
+2. file3作成
+3. file1削除  
+
+3つまとめて、file1をなかったことにしたい。
+
+``` txt
+commit 4623fd071700a748b645afb84f9bb226eb65559f (HEAD -> main)
+Author: SampleUser0001 <ittimfn+github@gmail.com>
+Date:   Thu Jul 13 00:45:18 2023 +0900
+
+    rm file1
+
+D       file1
+
+commit b4ebab3559c365c024df48521ecda95ed22f073f
+Author: SampleUser0001 <ittimfn+github@gmail.com>
+Date:   Thu Jul 13 00:44:48 2023 +0900
+
+    second
+
+A       file3
+
+commit fb08e045a624168dde9efd71e744e26b1ec35583
+Author: SampleUser0001 <ittimfn+github@gmail.com>
+Date:   Thu Jul 13 00:44:29 2023 +0900
+
+    first
+
+A       file1
+A       file2
+
+```
+
+``` bash
+git log --oneline
+4623fd0 (HEAD -> main) rm file1
+b4ebab3 second
+fb08e04 first
+```
+
+``` bash
+git rebase -i fb08e04
+```
+
+``` bash
+pick b4ebab3 second
+pick 4623fd0 rm file1
+
+# Rebase fb08e04..4623fd0 onto fb08e04 (2 commands)
+#
+# Commands:
+# (省略)
+# pickをsquashにするとまとめられる。すべてをsquashにはできない。
 ```
 
 ## ログをCSVに変換する
