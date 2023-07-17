@@ -20,6 +20,7 @@
   - [getter,setterを作成しない](#gettersetterを作成しない)
     - [参考](#参考-2)
   - [依存ライブラリを取り込む](#依存ライブラリを取り込む)
+  - [jarをローカルリポジトリに登録する](#jarをローカルリポジトリに登録する)
 
 ## 公式
 
@@ -188,4 +189,20 @@ java -classpath target/${jarファイルパス} ${mainメソッドクラスフ�
 
 ``` sh
 mvn dependency:copy-dependencies
+```
+
+## jarをローカルリポジトリに登録する
+
+``` bash
+jar_path=
+groupId=
+artifactId=
+version=
+mvn install:install-file
+    -Dfile=${jar_path} \
+    -DgroupId=${groupId} \
+    -DartifactId=${artifactId} \
+    -Dversion=${version} \
+    -Dpackaging=jar \
+    -DgeneratePom=true
 ```
