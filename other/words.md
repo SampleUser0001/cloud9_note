@@ -4,6 +4,8 @@
   - [Content-Length](#content-length)
   - [APAR(Authorized Program Analysis Report)](#aparauthorized-program-analysis-report)
   - [動作確認](#動作確認)
+  - [DRY原則(Don't Repeat Yourself)](#dry原則dont-repeat-yourself)
+    - [参考](#参考)
   - [類語](#類語)
     - [チュートリアル](#チュートリアル)
     - [変換する](#変換する)
@@ -24,6 +26,16 @@ IBMがユーザに対して、問題または障害の疑いのあるものと�
 ## 動作確認
 
 Operational acceptance testing(OAT)?
+
+## DRY原則(Don't Repeat Yourself)
+
+```txt
+参考：DRY原則とは、ソフトウェアの構成や構築手法についての原則の一つで、同じ意味や機能を持つ情報を複数の場所に重複して置くことをなるべく避けるべきとする考え方。
+```
+
+### 参考
+
+- [DRY原則 【Don't Repeat Yourself】:IT用語辞典 e-Words](https://e-words.jp/w/DRY%E5%8E%9F%E5%89%87.html)
 
 ## 類語
 
