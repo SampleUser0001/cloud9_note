@@ -6,9 +6,14 @@
   - [動作確認](#動作確認)
   - [DRY原則(Don't Repeat Yourself)](#dry原則dont-repeat-yourself)
     - [参考](#参考)
+  - [イミュータブル](#イミュータブル)
+  - [JSX](#jsx)
+  - [EDI : Electronic Data Interchange(電子データ交換)](#edi--electronic-data-interchange電子データ交換)
+  - [Ajax : Asynchronous JavaScript + XML](#ajax--asynchronous-javascript--xml)
   - [類語](#類語)
     - [チュートリアル](#チュートリアル)
     - [変換する](#変換する)
+    - [申請](#申請)
   - [AWS](#aws)
 
 ## Content-Length
@@ -37,6 +42,22 @@ Operational acceptance testing(OAT)?
 
 - [DRY原則 【Don't Repeat Yourself】:IT用語辞典 e-Words](https://e-words.jp/w/DRY%E5%8E%9F%E5%89%87.html)
 
+## イミュータブル
+
+状態を変えられない。
+
+## JSX
+
+JavaScript構文の拡張。Reactでよく見る。
+
+## EDI : Electronic Data Interchange(電子データ交換)
+
+商取引に関する文章を専用回線、通信回線でやり取りする。
+
+## Ajax : Asynchronous JavaScript + XML
+
+JavaScriptとXMLで非同期通信を行う。
+
 ## 類語
 
 ### チュートリアル
@@ -57,6 +78,11 @@ Operational acceptance testing(OAT)?
     - 翻訳する。
 - change
     - 上記のどれでも。
+
+### 申請
+
+- application
+- request
 
 ## AWS
 
