@@ -22,6 +22,8 @@
     - [先頭を取得する](#先頭を取得する)
     - [末尾を取得する](#末尾を取得する)
     - [間を取得する](#間を取得する)
+  - [@staticmethodと@classmethodの違い](#staticmethodとclassmethodの違い)
+    - [回答](#回答)
   - [依存モジュールの一覧化](#依存モジュールの一覧化)
     - [取得](#取得)
     - [導入](#導入)
@@ -267,6 +269,56 @@ print(part)
 ``` txt
 [2, 3]
 ```
+
+## @staticmethodと@classmethodの違い
+
+ChatGPT-3.5に下記の質問をした。
+
+``` txt
+Pythonで@staticmethodと@classmethodの違いを教えてください。
+```
+
+### 回答
+
+`@staticmethod`と`@classmethod`は、Pythonにおけるクラスメソッドの異なる種類を示すデコレータです。両者は、クラス自体から呼び出すことができるメソッドを定義するために使用されますが、異なる動作を持っています。
+
+1. `@staticmethod`（静的メソッド）:
+   - クラスのインスタンスとは関係なく、クラス自体から呼び出すことができるメソッドです。
+   - インスタンス変数やクラス変数へのアクセスは直接行えません。そのため、通常の関数として使用されることがあります。
+   - 引数に `self` や `cls` を含まないため、メソッド内でこれらのキーワードを使用することはありません。
+
+```python
+class MyClass:
+    @staticmethod
+    def static_method():
+        print("This is a static method.")
+
+# クラスから直接呼び出し
+MyClass.static_method()
+```
+
+2. `@classmethod`（クラスメソッド）:
+   - クラス自体と関連がありますが、クラス変数へのアクセスが可能です。
+   - 引数の1つ目に `cls`（クラス自体）が渡され、クラス変数やメソッドにアクセスするために使用されます。
+   - サブクラスからも継承されるため、オーバーライドすることもできます。
+
+```python
+class MyClass:
+    class_variable = 10
+    
+    @classmethod
+    def class_method(cls):
+        print(f"This is a class method. Class variable: {cls.class_variable}")
+
+# クラスから呼び出し
+MyClass.class_method()
+```
+
+使い分け:
+- `@staticmethod`は、クラスと密接な関係がなく、単に名前空間を提供するためのメソッドに適しています。
+- `@classmethod`は、クラスのコンテキストを必要とするメソッド（例えば、ファクトリーメソッド）や、クラス変数にアクセスが必要なメソッドに適しています。
+
+どちらのデコレータも、クラスのインスタンスを作成せずに直接クラスから呼び出せる点が共通しています。
 
 ## 依存モジュールの一覧化
 
