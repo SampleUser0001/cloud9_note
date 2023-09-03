@@ -11,6 +11,7 @@
     - [プロジェクト作成](#プロジェクト作成)
     - [参考](#参考)
   - [アノテーション](#アノテーション)
+  - [SpringBoot + React.js](#springboot--reactjs)
 
 ## Spring Initializer
 
@@ -126,3 +127,9 @@ spring init --dependencies=${依存関係},${依存関係} --group-id=~${グル�
 | :----------- | :------- | :--- | :--- |
 | @Bean | org.springframework.context.annotation.Bean | メソッドが Spring コンテナーによって管理される Bean を生成することを示します。 | [SpringBoot:Javadoc](https://spring.pleiades.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html) |
 | @Entity | javax.persistence.Entity | JPAで使う。エンティティとテーブルのマッピングをする。 | [JPA (Java Persistence API)のアノテーション:SE学院](https://segakuin.com/java/jpa/annotation.html) |
+
+## SpringBoot + React.js
+
+- [SpringBoot_and_React.js](https://github.com/SampleUser0001/SpringBoot_and_React)
+    - [React.js と Spring Data REST](https://spring.pleiades.io/guides/tutorials/react-and-spring-data-rest/)の実装。上記のソースの大半を含んでいるため、Privateリポジトリに設定。READMEだけ公開。
+        - [README.md](./SpringBoot_and_React/README.md)
