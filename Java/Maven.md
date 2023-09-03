@@ -198,7 +198,7 @@ jar_path=
 groupId=
 artifactId=
 version=
-mvn install:install-file
+mvn install:install-file \
     -Dfile=${jar_path} \
     -DgroupId=${groupId} \
     -DartifactId=${artifactId} \
