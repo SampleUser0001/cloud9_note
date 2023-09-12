@@ -15,6 +15,7 @@
   - [SpringBoot + log4j2](#springboot--log4j2)
     - [概要](#概要)
     - [pom.xml](#pomxml-1)
+    - [設定ファイル](#設定ファイル)
 
 ## Spring Initializer
 
@@ -183,4 +184,15 @@ SpringBootは標準でSLF4J + Logbackを使用している。Logbackではなく
 </dependency>
 
 
+```
+
+### 設定ファイル
+
+- ファイル名は`log4j2-spring.xml`にしておく。
+- いつもどおりにしておくと、SpringBootのログが大量に出るため、抑制する。
+
+``` xml
+<Loggers>
+    <logger name="org.springframework" level="FATAL"/>
+</Loggers>
 ```
