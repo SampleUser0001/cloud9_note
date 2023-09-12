@@ -12,6 +12,9 @@
     - [参考](#参考)
   - [アノテーション](#アノテーション)
   - [SpringBoot + React.js](#springboot--reactjs)
+  - [SpringBoot + log4j2](#springboot--log4j2)
+    - [概要](#概要)
+    - [pom.xml](#pomxml-1)
 
 ## Spring Initializer
 
@@ -133,3 +136,51 @@ spring init --dependencies=${依存関係},${依存関係} --group-id=~${グル�
 - [SpringBoot_and_React.js](https://github.com/SampleUser0001/SpringBoot_and_React)
     - [React.js と Spring Data REST](https://spring.pleiades.io/guides/tutorials/react-and-spring-data-rest/)の実装。上記のソースの大半を含んでいるため、Privateリポジトリに設定。READMEだけ公開。
         - [README.md](./SpringBoot_and_React/README.md)
+
+## SpringBoot + log4j2
+
+SpringBootは標準でSLF4J + Logbackを使用している。Logbackではなく、log4j2を使いたい場合の設定例。
+
+### 概要
+
+1. `spring-boot-starter-log4j2`を追加する。
+2. `spring-boot-starter-logging`がある場合は削除する。
+3. SpringBootのライブラリでLogbackを含んでいるものがある場合は、`<exclusion>`を使用して除外する。
+    - `mvn dependency:tree`コマンドで確認する。
+
+### pom.xml
+
+設定例。
+
+``` xml
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-jdbc</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-log4j2</artifactId>
+</dependency>
+
+
+```
