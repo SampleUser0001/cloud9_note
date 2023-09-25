@@ -14,6 +14,8 @@
   - [squashコミットとプルリクエストのCherry-pick](#squashコミットとプルリクエストのcherry-pick)
   - [Branch Security](#branch-security)
   - [Branch Policy](#branch-policy)
+  - [プルリクエストApprove後にpushした場合](#プルリクエストapprove後にpushした場合)
+    - [実行結果](#実行結果)
 
 ## ssh-key登録
 
@@ -87,3 +89,18 @@ PullRequest作成時、Descriptionの右に「Add a template」が出現する�
 1. Project Setting(左下) -> Repositories -> リポジトリクリック
 2. Policiesタブ -> Branch Policy -> ブランチクリック
 3. Build Validation -> ハンバーガーメニュー -> Edit/View
+
+## プルリクエストApprove後にpushした場合
+
+下記の操作を行ったときの挙動を記載する。
+
+1. プルリクエストを作成する。
+2. Approve設定する。
+3. targetブランチにpushする。
+
+### 実行結果
+
+- Approveは解除されない。
+- targetブランチが更新されたことはプルリクエストのログに出力される。
+    - Approve設定したこともログに出力されるため、Approve後にpushされた場合は確認できる。
+
