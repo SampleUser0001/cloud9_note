@@ -32,30 +32,32 @@ Cloud9を起動したときに行うことの備忘録。
     - [antインストール](#antインストール)
   - [Spring boot cli](#spring-boot-cli)
     - [参考](#参考-7)
+  - [Flutter](#flutter)
+    - [参考](#参考-8)
   - [telnet](#telnet)
     - [telnetインストール](#telnetインストール)
   - [docker](#docker)
     - [yum](#yum)
     - [apt](#apt)
     - [rootに紐付いていないとき](#rootに紐付いていないとき)
-      - [参考](#参考-8)
+      - [参考](#参考-9)
   - [docker-compose](#docker-compose)
     - [docker-composeインストール](#docker-composeインストール)
     - [参考サイト](#参考サイト)
   - [python](#python)
     - [pyenv](#pyenv)
     - [3.10.x以上](#310x以上)
-    - [参考](#参考-9)
+    - [参考](#参考-10)
   - [pip3](#pip3)
     - [apt](#apt-1)
   - [PHP](#php)
     - [amazon-linux-extras](#amazon-linux-extras)
-      - [参考](#参考-10)
+      - [参考](#参考-11)
     - [apt](#apt-2)
     - [ソースからコンパイル](#ソースからコンパイル)
       - [libxml2](#libxml2)
       - [krb5](#krb5)
-      - [参考](#参考-11)
+      - [参考](#参考-12)
   - [Composer](#composer)
     - [よく見るエラーの対応](#よく見るエラーの対応)
       - [mbstring](#mbstring)
@@ -65,12 +67,12 @@ Cloud9を起動したときに行うことの備忘録。
   - [goofys](#goofys)
     - [goofysインストール](#goofysインストール)
     - [自動マウント設定](#自動マウント設定)
-    - [参考](#参考-12)
+    - [参考](#参考-13)
   - [Node.js](#nodejs)
     - [動作確認](#動作確認)
-    - [参考](#参考-13)
-  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
     - [参考](#参考-14)
+  - [PHPコンテナに特定バージョンのNode.jsをインストールする](#phpコンテナに特定バージョンのnodejsをインストールする)
+    - [参考](#参考-15)
   - [webpack](#webpack)
   - [TypeScript](#typescript)
   - [forever](#forever)
@@ -81,24 +83,24 @@ Cloud9を起動したときに行うことの備忘録。
     - [インストール](#インストール)
     - [init](#init)
     - [init 別パターン](#init-別パターン)
-    - [参考](#参考-15)
+    - [参考](#参考-16)
   - [Ruby](#ruby)
     - [rbenvを使う](#rbenvを使う)
       - [rbenvインストール](#rbenvインストール)
       - [rbenvでRubyインストール](#rbenvでrubyインストール)
-      - [参考](#参考-16)
-    - [ソースからビルドする](#ソースからビルドする)
       - [参考](#参考-17)
+    - [ソースからビルドする](#ソースからビルドする)
+      - [参考](#参考-18)
   - [sqlite](#sqlite)
     - [最新をインストールする](#最新をインストールする)
     - [外部キー制約を常にONにする](#外部キー制約を常にonにする)
-    - [参考](#参考-18)
-  - [Terraform](#terraform)
     - [参考](#参考-19)
+  - [Terraform](#terraform)
+    - [参考](#参考-20)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-20)
+    - [参考](#参考-21)
   - [shunit2](#shunit2)
 
 ## git
@@ -415,6 +417,42 @@ sudo rm spring-boot-cli-${SPRING_BOOT_CLI_INSTALL_VERSION}-bin.tar.gz
 ### 参考
 
 - [インストールマニュアル:spring](https://spring.pleiades.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started.installing.cli.manual-installation)
+
+## Flutter
+
+snapコマンドでインストールできるが、ここでは手動で導入する。
+
+``` bash
+mkdir /tmp/flutter-install
+cd /tmp/flutter-install
+
+# ファイルパスを参考Webページから取得する。
+# flutter-url=
+wget ${flutter-url}
+
+# flutter_version=
+tar xf flutter_linux_${flutter_version}-stable.tar.xz 
+
+cp -r flutter $HOME/.local/flutter-${flutter_version}-stable
+sudo ln -s $HOME/.local/flutter-${flutter_version}-stable /usr/local/bin/flutter
+```
+
+~/.bashrc
+``` bash
+# Flutter
+export FLUTTER_HOME="/usr/local/bin/flutter"
+export PATH="$PATH:$FLUTTER_HOME/bin"
+```
+
+``` bash
+source ~/.bashrc
+flutter doctor
+# 不足しているものが出力される。開発したいものと比較して不足があればインストールする。
+```
+
+### 参考
+
+- [Linux install : Flutter](https://docs.flutter.dev/get-started/install/linux)
 
 ## telnet 
 
