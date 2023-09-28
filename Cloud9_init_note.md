@@ -33,6 +33,7 @@ Cloud9を起動したときに行うことの備忘録。
   - [Spring boot cli](#spring-boot-cli)
     - [参考](#参考-7)
   - [Flutter](#flutter)
+    - [Android command-line tool](#android-command-line-tool)
     - [参考](#参考-8)
   - [telnet](#telnet)
     - [telnetインストール](#telnetインストール)
@@ -438,6 +439,7 @@ sudo ln -s $HOME/.local/flutter-${flutter_version}-stable /usr/local/bin/flutter
 ```
 
 ~/.bashrc
+
 ``` bash
 # Flutter
 export FLUTTER_HOME="/usr/local/bin/flutter"
@@ -448,13 +450,38 @@ export PATH="$PATH:$FLUTTER_HOME/bin"
 source ~/.bashrc
 flutter doctor
 # 不足しているものが出力される。開発したいものと比較して不足があればインストールする。
+
+# flutterコマンドで使うものをまとめてインストール
+sudo apt install clang curl pkg-config ninja-build cmake libgtk-3-dev libblkid-dev liblzma-dev unzip
 ```
+
+### Android command-line tool
+
+1. https://developer.android.com/studio
+2. Command line tools onlyのリンクをクリックする。
+3. 承認 -> ダウンロード
+4. ダウンロードしたファイルを解凍する。(cmdline-toolsフォルダ配下に解凍される。)
+5. `mkdir -p $HOME/Android/Sdk/cmdline-tools/latest`
+6. `cp cmdline-tools/* $HOME/Android/Sdk/cmdline-tools/latest`
+7. ~/.bashrc更新
+    ``` bash
+    # Android commandline tool
+    export ANDROID_HOME="/home/ubuntuuser/Android/Sdk"
+    export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+    ```
+8. `source ~/.bashrc`
+9. `sdkmanager --help`
+    - 設定が正しいか確認する。
+10. `flutter doctor`
+    - Flutterに取り込む。コマンドが表示されるので実行する。
 
 ### 参考
 
 - [Linux install : Flutter](https://docs.flutter.dev/get-started/install/linux)
+- [Flutter デスクトップ 環境構築 for Linux:Qiita](https://qiita.com/kurun_pan/items/47c25a4b2425725bc199)
+- [Command-line tools:Android Studio](https://developer.android.com/tools#tools-sdk)
 
-## telnet 
+## telnet
 
 ### telnetインストール
 ```
