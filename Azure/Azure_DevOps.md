@@ -16,6 +16,7 @@
   - [Branch Policy](#branch-policy)
   - [プルリクエストApprove後にpushした場合](#プルリクエストapprove後にpushした場合)
     - [実行結果](#実行結果)
+  - [Timezoneの設定](#timezoneの設定)
 
 ## ssh-key登録
 
@@ -104,3 +105,11 @@ PullRequest作成時、Descriptionの右に「Add a template」が出現する�
 - targetブランチが更新されたことはプルリクエストのログに出力される。
     - Approve設定したこともログに出力されるため、Approve後にpushされた場合は確認できる。
 
+## Timezoneの設定
+
+プルリクエストのマージ時のタイムゾーンはデフォルトだとUTCになる。  
+設定変更を行う。
+
+1. Organization Homeを開く。
+2. Organization Settings（左下）をクリックする。
+3. Overview -> Time zoneを変更する。
