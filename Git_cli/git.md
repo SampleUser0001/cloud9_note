@@ -50,6 +50,7 @@
   - [gitコマンドを実行するディレクトリを指定する](#gitコマンドを実行するディレクトリを指定する)
   - [tagをつける](#tagをつける)
   - [コミットログのタイムゾーン設定](#コミットログのタイムゾーン設定)
+  - [git diff since時にタイムゾーンを意識する](#git-diff-since時にタイムゾーンを意識する)
 
 ## .gitignoreについて
 
@@ -427,4 +428,10 @@ git tag -a ${tag} -m ${message}
 
 ``` bash
 git config --global log.date local
+```
+
+## git diff since時にタイムゾーンを意識する
+
+``` bash
+git diff --since="2023-10-05T00:00:00+00:00"
 ```
