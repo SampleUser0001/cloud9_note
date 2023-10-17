@@ -196,6 +196,9 @@
 - [Open Project](./Project_Management_Tool/OpenProject.md)
 - WeKan
 - Jira
+- [FocalBoard](./Project_Management_Tool/FocalBoard.md)
+    - Mattermostから分離されたプロジェクト管理ツール。
+    - Notionライクなインターフェースを持っている。
 
 ## Other
 
