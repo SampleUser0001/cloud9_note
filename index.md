@@ -199,6 +199,9 @@
 - [FocalBoard](./Project_Management_Tool/FocalBoard.md)
     - Mattermostから分離されたプロジェクト管理ツール。
     - Notionライクなインターフェースを持っている。
+    - メモ欄にMarkdownが使えるが、エディタとしてはしんどい。
+        - Teamsリンクを貼り付けるとURLが貼り付けできない。
+        - Markdown形式のテキストを貼り付けると、フォーマットが剥がれてしまう。
 
 ## Other
 
