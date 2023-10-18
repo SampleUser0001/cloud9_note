@@ -194,7 +194,7 @@
     - クラウドサービスや自動ホスティングサービスもあるが、セルフマネージメント型（Docker）もあり、これは無料。
     - [公式](https://taiga.io/)
 - [Open Project](./Project_Management_Tool/OpenProject.md)
-- WeKan
+- [WeKan](./Project_Management_Tool/WeKan.md)
 - Jira
 - [FocalBoard](./Project_Management_Tool/FocalBoard.md)
     - Mattermostから分離されたプロジェクト管理ツール。
