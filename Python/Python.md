@@ -4,6 +4,7 @@
   - [CSV読み込み](#csv読み込み)
     - [実行結果](#実行結果)
     - [Util.py](#utilpy)
+    - [ヘッダ行を読み飛ばす](#ヘッダ行を読み飛ばす)
   - [Enum/dotenv](#enumdotenv)
     - [src](#src)
       - [.env](#env)
@@ -155,6 +156,13 @@ class Util:
         return_list.sort()
         return return_list
 
+```
+
+### ヘッダ行を読み飛ばす
+
+``` python
+csvreader = csv.reader(f, quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
+next(csvreader)
 ```
 
 ## Enum/dotenv
