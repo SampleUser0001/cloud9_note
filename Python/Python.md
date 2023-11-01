@@ -1,17 +1,20 @@
 # Python
 
 - [Python](#python)
+  - [CSV読み込み](#csv読み込み)
+    - [実行結果](#実行結果)
+    - [Util.py](#utilpy)
   - [Enum/dotenv](#enumdotenv)
     - [src](#src)
       - [.env](#env)
       - [config.py](#configpy)
       - [app.py](#apppy)
-    - [実行結果](#実行結果)
+    - [実行結果](#実行結果-1)
     - [参考](#参考)
   - [クラス宣言とコンストラクタ](#クラス宣言とコンストラクタ)
   - [配列の展開](#配列の展開)
     - [ソース](#ソース)
-    - [実行結果](#実行結果-1)
+    - [実行結果](#実行結果-2)
     - [参考](#参考-1)
   - [str -\> int -\> bool](#str---int---bool)
     - [実行例](#実行例)
@@ -36,6 +39,7 @@
     - [参考](#参考-3)
   - [format](#format)
   - [for](#for)
+  - [重複排除(list -\> set)](#重複排除list---set)
   - [マルチプロセス](#マルチプロセス)
     - [配列をマルチプロセスで処理する](#配列をマルチプロセスで処理する)
     - [配列ではないがマルチプロセスで処理する](#配列ではないがマルチプロセスで処理する)
@@ -51,6 +55,107 @@
     - [切り替わらないとき](#切り替わらないとき)
       - [set by PYENV\_VERSION environment variable](#set-by-pyenv_version-environment-variable)
         - [参考](#参考-5)
+
+## CSV読み込み
+
+```python 
+# -*- coding: utf-8 -*-
+import csv
+import sys
+from model import ReleaseModel
+from util import Util
+
+if __name__ == '__main__':
+    args = sys.argv
+    filepath = args[1]
+    
+    release_list = []
+    with open(filepath, encoding='utf8', newline='\n') as f:
+        csvreader = csv.reader(f, quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
+        for row in csvreader:
+            model = ReleaseModel(row)
+            release_list.append(model)
+            print(model)
+            
+    for job in Util.get_deploy_job(release_list):
+        print(f'- {job}')
+    
+```
+
+``` python
+# -*- coding: utf-8 -*-
+
+from dataclasses import dataclass
+
+@dataclass
+class ReleaseModel:
+    title: str
+    repository: str
+    deploy: set
+    def __init__(self, line: list):
+        index = 0
+        self.title = line[index]; index += 1
+        self.repository = line[index]; index += 1
+        self.deploy = line[index].split('|'); index += 1
+```
+
+``` csv
+"title1","batch","ST0|IKR01|IKR03"
+"title2","print","ST0|IKR01|IKR03"
+"title3","batch","ST0|IKR01|SIT01"
+"title4","webapps","ST0|IKR01|SIT01|ST101"
+```
+
+### 実行結果
+
+``` txt
+ReleaseModel(title='title1', repository='batch', deploy=['ST0', 'IKR01', 'IKR03'])
+ReleaseModel(title='title2', repository='print', deploy=['ST0', 'IKR01', 'IKR03'])
+ReleaseModel(title='title3', repository='batch', deploy=['ST0', 'IKR01', 'SIT01'])
+ReleaseModel(title='title4', repository='webapps', deploy=['ST0', 'IKR01', 'SIT01', 'ST101'])
+- batch-IKR01
+- batch-IKR03
+- batch-SIT01
+- batch-ST0
+- print-IKR01
+- print-IKR03
+- print-ST0
+- webapps-IKR01
+- webapps-SIT01
+- webapps-ST0
+- webapps-ST101
+- webapps-eob-IKR01
+- webapps-eob-SIT01
+- webapps-eob-ST0
+- webapps-eob-ST101
+```
+
+### Util.py
+
+``` python
+# -*- coding: utf-8 -*-
+
+# from model import ReleaseModel
+
+class Util:
+    @staticmethod
+    def get_deploy_job(relase_list: list):
+        job_list = []
+
+        for release in relase_list:
+            for env in release.deploy:
+                job_list.append((release.repository, env))
+                if release.repository == 'webapps':
+                    job_list.append((release.repository + '-eob', env))
+
+        return_list = []
+        for job in set(job_list):
+            return_list.append(job[0] + '-' + job[1])
+        
+        return_list.sort()
+        return return_list
+
+```
 
 ## Enum/dotenv
 
@@ -405,6 +510,18 @@ v : hoge
 v : piyo
 k : 0 , v : hoge
 k : 1 , v : piyo
+```
+
+## 重複排除(list -> set)
+
+``` python
+deploy_jobs = []
+
+deploy_jobs.append(('batch','ST0'))
+deploy_jobs.append(('batch','IKR01'))
+deploy_jobs.append(('batch','ST0'))
+
+print(set(deploy_jobs))
 ```
 
 ## マルチプロセス
