@@ -57,6 +57,8 @@
     - [切り替わらないとき](#切り替わらないとき)
       - [set by PYENV\_VERSION environment variable](#set-by-pyenv_version-environment-variable)
         - [参考](#参考-5)
+  - [ラムダ式](#ラムダ式)
+    - [配列から特定要素を削除する](#配列から特定要素を削除する)
 
 ## CSV読み込み
 
@@ -654,3 +656,12 @@ pyenv shell --unset
 ##### 参考
 
 - [[Sy] 「pyenv local」が効かない（バージョンがうまく切り替わってくれない）場合の対処 : Syntax Error.](https://utano.jp/entry/2019/02/pyenv-local-does-not-work/)
+
+## ラムダ式
+
+### 配列から特定要素を削除する
+
+```python
+# 空文字を削除
+result_list = list(filter(lambda s: s != '', origin_list))
+```
