@@ -5,6 +5,7 @@
     - [実行結果](#実行結果)
     - [Util.py](#utilpy)
     - [ヘッダ行を読み飛ばす](#ヘッダ行を読み飛ばす)
+  - [Enumの実装例](#enumの実装例)
   - [Enum/dotenv](#enumdotenv)
     - [src](#src)
       - [.env](#env)
@@ -164,6 +165,10 @@ class Util:
 csvreader = csv.reader(f, quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 next(csvreader)
 ```
+
+## Enumの実装例
+
+- [Enum_inPython : SampleUser0001 : Github](https://github.com/SampleUser0001/Enum_inPython)
 
 ## Enum/dotenv
 
