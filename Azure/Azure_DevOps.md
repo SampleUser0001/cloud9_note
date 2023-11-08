@@ -15,6 +15,7 @@
   - [Branch Security](#branch-security)
     - [画面遷移](#画面遷移)
   - [Branch Policy](#branch-policy)
+  - [Branch Control](#branch-control)
   - [プルリクエストApprove後にpushした場合](#プルリクエストapprove後にpushした場合)
     - [実行結果](#実行結果)
   - [Timezoneの設定](#timezoneの設定)
@@ -98,6 +99,14 @@ PullRequest作成時、Descriptionの右に「Add a template」が出現する�
 1. Project Setting(左下) -> Repositories -> リポジトリクリック
 2. Policiesタブ -> Branch Policy -> ブランチクリック
 3. Build Validation -> ハンバーガーメニュー -> Edit/View
+
+## Branch Control
+
+Azure PipelineでAgentサーバにビルド結果を配置することを認めるかどうかの設定。
+
+1. Project Setting -> Pipelines -> Service Connections
+2. 対象のサービスを選択
+3. Approvals and checks
 
 ## プルリクエストApprove後にpushした場合
 
