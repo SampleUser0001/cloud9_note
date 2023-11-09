@@ -16,6 +16,7 @@
     - [画面遷移](#画面遷移)
   - [Branch Policy](#branch-policy)
   - [Branch Control](#branch-control)
+  - [Pipeline Permission](#pipeline-permission)
   - [プルリクエストApprove後にpushした場合](#プルリクエストapprove後にpushした場合)
     - [実行結果](#実行結果)
   - [Timezoneの設定](#timezoneの設定)
@@ -107,6 +108,15 @@ Azure PipelineでAgentサーバにビルド結果を配置することを認め�
 1. Project Setting -> Pipelines -> Service Connections
 2. 対象のサービスを選択
 3. Approvals and checks
+
+## Pipeline Permission
+
+AgentサーバでPipelineの実行を認めるか。
+
+1. Project Settings -> Pipelines -> Agent Pools
+2. 対象のAgent Poolを選択
+3. Securityタブクリック
+4. Pipeline PermissionにPipelineを追加
 
 ## プルリクエストApprove後にpushした場合
 
