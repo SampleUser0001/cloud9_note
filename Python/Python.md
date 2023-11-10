@@ -5,6 +5,12 @@
     - [実行結果](#実行結果)
     - [Util.py](#utilpy)
     - [ヘッダ行を読み飛ばす](#ヘッダ行を読み飛ばす)
+  - [普通のファイル読み込み](#普通のファイル読み込み)
+  - [jsonを読み込む](#jsonを読み込む)
+    - [dict](#dict)
+    - [dataclass](#dataclass)
+      - [Simple](#simple)
+      - [List](#list)
   - [Enumの実装例](#enumの実装例)
   - [Enum/dotenv](#enumdotenv)
     - [src](#src)
@@ -167,6 +173,118 @@ class Util:
 ``` python
 csvreader = csv.reader(f, quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 next(csvreader)
+```
+
+## 普通のファイル読み込み
+
+``` python
+def import_format():
+     return_list = []
+    with open(FORMAT_PATH, 'r') as f:
+        for line in f.read().splitlines():
+            return_list.append(line)
+    return return_list
+
+```
+
+## jsonを読み込む
+
+### dict
+
+``` python
+import json
+
+with open(REPLACE_DICT_PATH, 'r') as d:
+    replace_dict = json.load(d)
+```
+
+### dataclass
+
+#### Simple
+
+``` json
+{
+    "id" : 1,
+    "name" : "hogehoge"
+}
+```
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class SimpleModel:
+    id: int
+    name: str
+```
+
+``` python
+from model SimpleModel
+import json
+
+with open("simple.json", "r") as fp:
+    json_data = json.load(fp)
+    print(SimpleModel(**json_data))
+```
+
+#### List
+
+``` json
+[
+    {
+        "id" : 1,
+        "name" : "top",
+        "sub" : [
+            {
+                "id" : "A1",
+                "name" : "sub_A1"
+            },
+            {
+                "id" : "A2",
+                "name" : "sub_A2"
+            }
+        ]
+    },
+    {
+        "id" : 2,
+        "name" : "second",
+        "sub" : [
+            {
+                "id" : "B1",
+                "name" : "sub_B1"
+            },
+            {
+                "id" : "B2",
+                "name" : "sub_B2"
+            }
+        ]
+    }
+]
+```
+
+``` python
+from dataclasses import dataclass
+
+@dataclass
+class SubModel:
+    id: str
+    name: str
+    value: str
+    
+@dataclass
+class JsonModel:
+    id: int 
+    name: str
+    sub: [SubModel]
+```
+
+``` python
+from model import JsonModel
+import json
+
+with open("sample.json", "r") as fp:
+    json_data = json.load(fp=fp)
+    print([JsonModel(**model) for model in json_data])
 ```
 
 ## Enumの実装例
