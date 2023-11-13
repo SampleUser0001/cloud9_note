@@ -24,6 +24,7 @@
     - [ソース](#ソース)
     - [実行結果](#実行結果-2)
     - [参考](#参考-1)
+  - [文字列の配列を何らかの文字列で連結する](#文字列の配列を何らかの文字列で連結する)
   - [str -\> int -\> bool](#str---int---bool)
     - [実行例](#実行例)
   - [str -\> datetime](#str---datetime)
@@ -388,6 +389,12 @@ if __name__ == '__main__':
 ### 参考
 
 - [Python > list > 二重listを一重listに変換する](https://qiita.com/7of9/items/84dcb552668a8a3bdcd3)
+
+## 文字列の配列を何らかの文字列で連結する
+
+```python
+','.join(str_list)
+```
 
 ## str -> int -> bool
 
