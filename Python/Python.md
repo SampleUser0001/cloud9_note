@@ -31,6 +31,8 @@
   - [str -\> datetime](#str---datetime)
   - [型の判定](#型の判定)
     - [参考](#参考-2)
+  - [APIを実行する](#apiを実行する)
+    - [参考](#参考-3)
   - [部分配列の取得](#部分配列の取得)
     - [先頭を取得する](#先頭を取得する)
     - [末尾を取得する](#末尾を取得する)
@@ -46,7 +48,7 @@
       - [Linux](#linux)
       - [Windows](#windows)
     - [デアクティベート](#デアクティベート)
-    - [参考](#参考-3)
+    - [参考](#参考-4)
   - [format](#format)
   - [for](#for)
   - [重複排除(list -\> set)](#重複排除list---set)
@@ -58,13 +60,13 @@
   - [pyenv](#pyenv)
     - [インストール可能なバージョン一覧](#インストール可能なバージョン一覧)
     - [特定バージョンのPythonインストール](#特定バージョンのpythonインストール)
-      - [参考](#参考-4)
+      - [参考](#参考-5)
     - [インストール済みバージョンの一覧](#インストール済みバージョンの一覧)
     - [切り替え](#切り替え)
     - [アンインストール](#アンインストール)
     - [切り替わらないとき](#切り替わらないとき)
       - [set by PYENV\_VERSION environment variable](#set-by-pyenv_version-environment-variable)
-        - [参考](#参考-5)
+        - [参考](#参考-6)
   - [ラムダ式](#ラムダ式)
     - [配列から特定要素を削除する](#配列から特定要素を削除する)
   - [ssh接続する](#ssh接続する)
@@ -489,6 +491,40 @@ if type(value) is str:
 ### 参考
 
 - [Pythonで型を取得・判定するtype関数, isinstance関数:note.nkmk.me](https://note.nkmk.me/python-type-isinstance/)
+
+## APIを実行する
+
+- `requests`をinstallする。
+- Azure DevOpsのリポジトリIDを取得するサンプル。
+
+``` python
+import requests
+
+def getURL(organization:str, project:str) -> str:
+    return f'https://dev.azure.com/{organization}/{project}/_apis/git/repositories?api-version=7.0'
+
+if __name__ == '__main__':
+    # 起動引数の取得
+    # args = sys.argv
+    # args[0]はpythonのファイル名。
+    # 実際の引数はargs[1]から。
+
+    result = requests.get(
+        getURL(
+            ImportEnvKeyEnum.ORGANIZATION.value,
+            ImportEnvKeyEnum.PROJECT.value),
+        auth=('git', ImportEnvKeyEnum.Token.value)).json()
+    
+    logger.info(result)
+    
+    for repo in result['value']:
+        print(repo['id'])
+
+```
+
+### 参考
+
+- [requests : pypi](https://pypi.org/project/requests/)
 
 ## 部分配列の取得
 
