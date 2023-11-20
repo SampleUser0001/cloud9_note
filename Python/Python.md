@@ -19,6 +19,7 @@
       - [app.py](#apppy)
     - [実行結果](#実行結果-1)
     - [参考](#参考)
+  - [dataclassのsort](#dataclassのsort)
   - [クラス宣言とコンストラクタ](#クラス宣言とコンストラクタ)
   - [配列の展開](#配列の展開)
     - [ソース](#ソース)
@@ -264,7 +265,9 @@ with open("simple.json", "r") as fp:
 ```
 
 ``` python
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from dataclasses_json import dataclass_json
+from typing import List
 
 @dataclass
 class SubModel:
@@ -276,7 +279,7 @@ class SubModel:
 class JsonModel:
     id: int 
     name: str
-    sub: [SubModel]
+    sub: List[SubModel]  = field(default_factory=list)
 ```
 
 ``` python
@@ -285,7 +288,7 @@ import json
 
 with open("sample.json", "r") as fp:
     json_data = json.load(fp=fp)
-    print([JsonModel(**model) for model in json_data])
+    print([JsonModel.from_dict(model) for model in json_data])
 ```
 
 ## Enumの実装例
@@ -339,6 +342,15 @@ hoge
 ### 参考
 
 - [.env ファイルで環境変数を設定する (python-dotenv):まくまくPythonノート](https://maku77.github.io/python/env/dotenv.html)
+
+## dataclassのsort
+
+``` python
+from operator import attrgetter
+
+# ageはdataclassのメンバ変数名。
+sorted(person_list, key=attrgetter('age'))
+```
 
 ## クラス宣言とコンストラクタ
 
