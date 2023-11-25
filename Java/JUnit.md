@@ -8,7 +8,9 @@
       - [全部](#全部)
       - [参考](#参考)
     - [テストプログラム](#テストプログラム)
-    - [参考](#参考-1)
+      - [Ver.4](#ver4)
+      - [参考](#参考-1)
+      - [Ver.5](#ver5)
   - [リフレクション](#リフレクション)
     - [Method](#method)
   - [配列のテスト](#配列のテスト)
@@ -145,6 +147,8 @@
 
 ### テストプログラム
 
+#### Ver.4
+
 ``` java
 import org.junit.Test;
 import org.junit.Before;
@@ -170,9 +174,25 @@ public class AppTest {
 
 ```
 
-### 参考
+#### 参考
 
 - [HamcrestのMatchersに定義されているメソッドの使い方メモ:Qiita](https://qiita.com/opengl-8080/items/e57dab6e1fa5940850a3)
+
+#### Ver.5
+
+```java
+import org.junit.jupiter.api.Test;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest {
+    @Test
+    public void seleniumTest() {
+        
+    }
+}
+```
 
 
 ## リフレクション
