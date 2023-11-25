@@ -125,6 +125,7 @@
 - [Poi](./Java/Apache_POI.md)
 - [SpringFramework](./Java/SpringFramework.md)
 - [Servlet/JSP](./Java/Servlet_JSP.md)
+- [Selenium(Java)](./Java/Selenium.md)
 
 ### Middleware
 
