@@ -21,6 +21,7 @@
     - [参考](#参考-2)
   - [依存ライブラリを取り込む](#依存ライブラリを取り込む)
   - [jarをローカルリポジトリに登録する](#jarをローカルリポジトリに登録する)
+  - [依存するライブラリを除去する](#依存するライブラリを除去する)
 
 ## 公式
 
@@ -205,4 +206,22 @@ mvn install:install-file \
     -Dversion=${version} \
     -Dpackaging=jar \
     -DgeneratePom=true
+```
+
+## 依存するライブラリを除去する
+
+含まれているライブラリのバージョンが合わないので除去したいときに使う。
+
+``` xml
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-chrome-driver</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 ```
