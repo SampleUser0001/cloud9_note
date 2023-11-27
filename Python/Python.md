@@ -11,6 +11,7 @@
     - [dataclass](#dataclass)
       - [Simple](#simple)
       - [List](#list)
+  - [\_\_init\_\_をオーバーロードする](#__init__をオーバーロードする)
   - [Enumの実装例](#enumの実装例)
   - [Enum/dotenv](#enumdotenv)
     - [src](#src)
@@ -291,6 +292,25 @@ import json
 with open("sample.json", "r") as fp:
     json_data = json.load(fp=fp)
     print([JsonModel.from_dict(model) for model in json_data])
+```
+
+## __init__をオーバーロードする
+
+Pythonの場合、__init__は１クラスに1つだが、オーバーロードしたい場合は、Noneをデフォルト引数に渡す。
+
+``` python
+
+from dataclasses import dataclass
+
+@dataclass
+class SampleDataClass:
+    hoge:str
+
+    def __init__(self, hoge:str):
+        self.hoge = hoge
+
+    def __init(self, hoge=None):
+        pass
 ```
 
 ## Enumの実装例
