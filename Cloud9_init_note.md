@@ -1208,14 +1208,17 @@ cd Download
 wget https://github.com/zaproxy/zaproxy/releases/download/v2.10.0/ZAP_2.10.0_Linux.tar.gz
 tar xvfz ZAP_2.10.0_Linux.tar.gz
 sudo mv ZAP_2.10.0/ /opt/
-```
 
+sudo ln -s /opt/ZAP_2.10.0/ /opt/owaspzap
+sudo ln -s /opt/ZAP_2.10.0/zap-2.10.0.jar /opt/owaspzap/zap.jar
+
+```
 エイリアスの設定  
-${HOME}/.bashrc
+`${HOME}/.bashrc`
 
 ``` sh 
 # OWASP ZAP
-alias owaspzap='java -jar /opt/ZAP_2.10.0/zap-2.10.0.jar'
+alias owaspzap='java -jar /opt/owaspzap/zap.jar'
 ```
 
 起動確認。
