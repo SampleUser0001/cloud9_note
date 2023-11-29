@@ -22,6 +22,7 @@
   - [Timezoneの設定](#timezoneの設定)
   - [プルリクエストマージの際にブランチが削除されないように設定する](#プルリクエストマージの際にブランチが削除されないように設定する)
     - [参考](#参考-2)
+  - [マニュアルURL](#マニュアルurl)
 
 ## ssh-key登録
 
@@ -149,3 +150,7 @@ ForcePushをDenyにすればOK。
 ### 参考
 
 - [ブランチ ポリシーと設定 : Azure DevOps](https://learn.microsoft.com/ja-jp/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser)
+
+## マニュアルURL
+
+- [https://learn.microsoft.com/ja-jp/azure/devops/?view=azure-devops](https://learn.microsoft.com/ja-jp/azure/devops/?view=azure-devops)
