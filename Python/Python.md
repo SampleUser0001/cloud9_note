@@ -296,7 +296,8 @@ with open("sample.json", "r") as fp:
 
 ## __init__をオーバーロードする
 
-Pythonの場合、__init__は１クラスに1つだが、オーバーロードしたい場合は、Noneをデフォルト引数に渡す。
+Pythonの場合、__init__は１クラスに1つしか作れないため、オーバーロードできない。  
+`@dataclass`をつけた場合、`__init__`メソッドがせいせいされるが、CSV -> dataclassしたい場合は、listで渡したい場合もある。
 
 ``` python
 
@@ -304,13 +305,13 @@ from dataclasses import dataclass
 
 @dataclass
 class SampleDataClass:
+    id:str
     hoge:str
 
-    def __init__(self, hoge:str):
-        self.hoge = hoge
-
-    def __init(self, hoge=None):
-        pass
+    def sets(self, line: list):
+        index = 0
+        self.id = list[index]; index += 1
+        self.hoge = list[index]; index += 1
 ```
 
 ## Enumの実装例
