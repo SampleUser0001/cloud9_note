@@ -6,6 +6,7 @@
   - [全体を拡大or縮小表示する](#全体を拡大or縮小表示する)
   - [XML整形](#xml整形)
     - [参考](#参考-1)
+  - [SQL整形](#sql整形)
   - [プラグイン](#プラグイン)
     - [Markdown PDF](#markdown-pdf)
   - [オフライン環境にプラグインをインストールする](#オフライン環境にプラグインをインストールする)
@@ -49,6 +50,13 @@
 ### 参考
 
 - [らくがきちょう:Visual Studio Code で整形機能を使う](https://sig9.hatenablog.com/entry/2020/01/03/000000)
+
+## SQL整形
+
+プラグインをインストールする。
+[SQL Formatter Mod](https://marketplace.visualstudio.com/items?itemName=nmrmsys.vscode-sql-formatter-mod)
+
+`Ctrl` + `Shift` + `P`で`Format SQL`を選ぶ。
 
 ## プラグイン
 
