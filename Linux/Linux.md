@@ -102,6 +102,8 @@
   - [tmpの自動削除](#tmpの自動削除)
     - [Ubuntu](#ubuntu-1)
       - [参考](#参考-14)
+  - [設定ファイルの読み込み順](#設定ファイルの読み込み順)
+    - [参考](#参考-15)
 
 ## 圧縮解凍(tar, gunzip)
 
@@ -878,3 +880,17 @@ cat /usr/lib/tmpfiles.d/tmp.conf
 #### 参考
 
 - [[Amazon linux 2] /tmp配下の自動削除:Qiita](https://qiita.com/yoshii0110/items/248c828ca0284d826006)
+
+## 設定ファイルの読み込み順
+
+1. `/etc/profile`
+2. 下記のいずれか
+    1. `~/.bash_profile`
+    2. `~/.bash_login`
+    3. `~/.profile`
+3. `~/.bashrc`
+4. `/etc/bashrc`
+
+### 参考
+
+- [環境変数の設定(~/.bash_profile, ~/.bashrc):わくわくBank](https://www.wakuwakubank.com/posts/389-linux-bashrc/)

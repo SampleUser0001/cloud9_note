@@ -772,13 +772,17 @@ tar zxvf go${go_install_version}.linux-amd64.tar.gz
 sudo cp -r go /usr/local/go_${go_install_version}
 sudo ln -s /usr/local/go_${go_install_version} /usr/local/go
 
+# go installコマンドで$GOPATH/bin配下にインストールされる。
+sudo chmod go+w /usr/local/go/bin
+sudo chmod go+w /usr/local/go/pkg
 ```
 
 `$HOME/.profile`
 
 ``` bash
 # go
-export PATH=$PATH:/usr/local/go/bin
+export GOPATH=/usr/local/go
+export PATH=$PATH:$GOPATH/bin
 ```
 
 ``` bash
