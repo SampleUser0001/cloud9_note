@@ -224,21 +224,21 @@ javac 11.0.10
 
 ### yumでJavaをインストール
 
-```
+``` bash
 sudo yum -y update
 sudo yum -y install java-1.8.0-openjdk-devel
 ```
 
-```
+``` bash
 sudo update-alternatives --config java
 ```
 
-```
+``` bash
 sudo update-alternatives --config javac
 ```
 
-
 #### 参考
+
 [https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html](https://docs.aws.amazon.com/ja_jp/cloud9/latest/user-guide/sample-java.html)
 
 ### aptでJavaをインストール
@@ -612,7 +612,7 @@ sudo apt update && sudo apt -y upgrade
 sudo apt install -y python3-pip
 ```
 
-${HOME}/.bashrc
+`${HOME}/.bashrc`
 
 ``` sh
 alias pip=pip3
@@ -757,10 +757,32 @@ sudo yum -y install php-xml
 
 ## go
 
-Ubuntu版
+一応aptもあるが・・・
 
-``` sh
-sudo apt install golang
+``` bash
+mkdir /tmp/go_install
+cd /tmp/go_install
+
+# https://go.dev/dl/
+go_install_version=
+# 自分の環境を確認
+wget https://go.dev/dl/go${go_install_version}.linux-amd64.tar.gz
+tar zxvf go${go_install_version}.linux-amd64.tar.gz
+
+sudo cp -r go /usr/local/go_${go_install_version}
+sudo ln -s /usr/local/go_${go_install_version} /usr/local/go
+
+```
+
+`$HOME/.profile`
+
+``` bash
+# go
+export PATH=$PATH:/usr/local/go/bin
+```
+
+``` bash
+source $HOME/.profile
 ```
 
 ### go(参考)
@@ -777,19 +799,22 @@ S3バケットをEC2のストレージとしてマウントすることができ
 S3バケットは作成済み、AWS CLIは設定済みの前提。
 
 go, fuseインストール
-```
+
+``` bash
 sudo yum install golang fuse
 ```
 
 goofysインストール
-```
+
+``` bash
 export GOPATH=$HOME/go
 go get github.com/kahing/goofys
 go install github.com/kahing/goofys
 ```
 
 S3マウント
-```
+
+``` bash
 mkdir ~/mount-goofys
 ./go/bin/goofys kohei-goofys ~/mount-goofys
 ```
