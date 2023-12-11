@@ -13,6 +13,7 @@
       - [クライアントDockerコンテナを作る](#クライアントdockerコンテナを作る)
         - [WSL2のIPアドレスの取得方法](#wsl2のipアドレスの取得方法)
       - [参考](#参考-1)
+  - [パスワードを保存する](#パスワードを保存する)
 
 ## Client
 
@@ -145,3 +146,7 @@ ip a show dev eth0
 #### 参考
 
 - [atomz/sftp:Github](https://github.com/atmoz/sftp#logging-in-with-ssh-keys)
+
+## パスワードを保存する
+
+- [Linux#パスワードを保存する(.netrc)](./Linux.md#パスワードを保存する(.netrc))

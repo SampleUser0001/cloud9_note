@@ -52,6 +52,7 @@
   - [tagをつける](#tagをつける)
   - [コミットログのタイムゾーン設定](#コミットログのタイムゾーン設定)
   - [git log since時にタイムゾーンを意識する](#git-log-since時にタイムゾーンを意識する)
+  - [パスワードを保存する](#パスワードを保存する)
 
 ## .gitignoreについて
 
@@ -444,3 +445,7 @@ git config --global log.date local
 ``` bash
 git log --since="2023-10-05T00:00:00+09:00"
 ```
+
+## パスワードを保存する
+
+- [Linux#パスワードを保存する(.netrc)](../Linux/Linux.md#パスワードを保存する(.netrc))

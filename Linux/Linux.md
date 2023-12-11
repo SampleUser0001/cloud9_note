@@ -104,6 +104,7 @@
       - [参考](#参考-14)
   - [設定ファイルの読み込み順](#設定ファイルの読み込み順)
     - [参考](#参考-15)
+  - [パスワードを保存する(.netrc)](#パスワードを保存するnetrc)
 
 ## 圧縮解凍(tar, gunzip)
 
@@ -894,3 +895,20 @@ cat /usr/lib/tmpfiles.d/tmp.conf
 ### 参考
 
 - [環境変数の設定(~/.bash_profile, ~/.bashrc):わくわくBank](https://www.wakuwakubank.com/posts/389-linux-bashrc/)
+
+## パスワードを保存する(.netrc)
+
+`${HOME}/.netrc`ファイルを作成する。  
+もとはFTPのためのユーザ設定ファイルだが、gitもこのファイルを参照する。
+
+``` bash
+# ファイル作成
+touch ${HOME}/.netrc
+chmod 600 ${HOME}/.netrc
+```
+
+``` txt
+machine ${ドメイン名}
+login ${id}
+password ${password}
+```
