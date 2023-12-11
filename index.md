@@ -218,7 +218,7 @@
 - [StressTestTool.md](./other/StressTestTool.md)
     - 負荷テストツール
 - [Gitlab.md](./other/Gitlab.md)
-- [License.md](./other/License.md)
+- [License.md](./other/License_.md)
 - [Network](./other/Network.md)
 - [MQ](./other/IBM_MQ.md)
 - [形態素解析](./other/MorphologicalAnalysis.md)
