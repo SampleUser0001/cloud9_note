@@ -59,8 +59,8 @@
            %nは改行
         -->
         <Property name="format1">%d{yyyy/MM/dd HH:mm:ss.SSS} [%t] %-6p %c{10} line:%L %m%n</Property>
-        <Property name="logfile">./logs/testlog.log</Property>
-        <Property name="logfile-archive">./logs/testlog_%d{yyyy-MM-dd-HH-mm}.tar.gz</Property>
+        <Property name="logfile">./logs/app.log</Property>
+        <Property name="logfile-archive">./logs/app_%d{yyyy-MM-dd-HH-mm}.tar.gz</Property>
     </Properties>
     
     <Appenders>
@@ -93,6 +93,12 @@
         <!-- LoggerでRootとは別にpackageごとに指定できる。
         <Logger name="sample.log4j2" level="debug" additivity="false">
             <AppenderRef ref="Test" />
+        </Logger>
+        -->
+        <!-- 同一packageで出力先によってログレベルを変えたい場合は、AppenderRefにlevelをつける。
+        <Logger name="ittimfn.sample" level="debug" additivity="false">
+            <AppenderRef level="debug" ref="logfile001" />
+            <AppenderRef level="info" ref="Console" />
         </Logger>
         -->
     </Loggers>
