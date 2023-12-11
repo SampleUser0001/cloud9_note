@@ -1,6 +1,6 @@
-# Go
+# Golang
 
-- [Go](#go)
+- [Golang](#golang)
   - [モジュールの作成](#モジュールの作成)
   - [go install](#go-install)
   - [フォーマッタ](#フォーマッタ)
