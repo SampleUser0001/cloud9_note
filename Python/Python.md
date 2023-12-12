@@ -29,7 +29,10 @@
   - [文字列の配列を何らかの文字列で連結する](#文字列の配列を何らかの文字列で連結する)
   - [str -\> int -\> bool](#str---int---bool)
     - [実行例](#実行例)
-  - [str -\> datetime](#str---datetime)
+  - [datetime](#datetime)
+    - [str -\> datetime , timezone](#str---datetime--timezone)
+    - [datetime -\> str](#datetime---str)
+    - [日付計算](#日付計算)
   - [型の判定](#型の判定)
     - [参考](#参考-2)
   - [APIを実行する](#apiを実行する)
@@ -477,7 +480,9 @@ $ python app.py -1
 True
 ```
 
-## str -> datetime
+## datetime
+
+### str -> datetime , timezone
 
 ``` python
 from datetime import datetime, timezone, timedelta
@@ -500,6 +505,36 @@ print(jst.tzinfo)
 UTC
 2021-09-11 21:45:18.448117+09:00
 UTC+09:00
+```
+
+### datetime -> str
+
+``` python
+import datetime
+
+now = datetime.datetime.now()
+print(now)
+print(now.strftime("%Y%m%d"))
+```
+
+``` txt
+2023-12-12 23:49:39.010985
+20231212
+```
+
+### 日付計算
+
+```python
+import datetime
+
+now = datetime.datetime.now()
+print(now)
+print(now + datetime.timedelta(days=1))
+```
+
+```txt
+2023-12-12 23:48:52.882272
+2023-12-13 23:48:52.882272
 ```
 
 ## 型の判定
