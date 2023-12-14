@@ -5,6 +5,8 @@
   - [go install](#go-install)
   - [フォーマッタ](#フォーマッタ)
   - [lint(staticcheck)](#lintstaticcheck)
+  - [package mainでエラーになる](#package-mainでエラーになる)
+    - [参考](#参考)
 
 ## モジュールの作成
 
@@ -49,3 +51,15 @@ staticcheck
 go vet
 ```
 
+## package mainでエラーになる
+
+とりあえずこれだけでエラーが消える。  
+プロジェクトのHOMEで実行すること。
+
+``` bash
+go work init
+```
+
+### 参考
+
+- [gopls was not able to find modules in your workspace. への対処:Qiita](https://qiita.com/39shin52/items/84301f4ccb0b7f5a1a92)
