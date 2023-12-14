@@ -21,7 +21,7 @@ go mod tidy
 go build
 
 # 実行
-go ${module_name}
+./${module_name}
 ```
 
 ## go install
