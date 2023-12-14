@@ -169,7 +169,7 @@
 
 ## Golang
 
-- [Golang](./Go/Go.md)
+- [Golang](./Golang/Golang.md)
 
 ## Ruby
 
