@@ -7,6 +7,9 @@
   - [lint(staticcheck)](#lintstaticcheck)
   - [package mainでエラーになる](#package-mainでエラーになる)
     - [参考](#参考)
+  - [スライス](#スライス)
+    - [copy](#copy)
+  - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
 
@@ -63,3 +66,31 @@ go work use ${エラーを吐いているgoファイルがあるディレクト�
 ### 参考
 
 - [gopls was not able to find modules in your workspace. への対処:Qiita](https://qiita.com/39shin52/items/84301f4ccb0b7f5a1a92)
+
+## スライス
+
+Javaで言うList。（配列もあるが、サイズが固定化される。）
+
+### copy
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := []int{1, 2, 3, 4}
+    z := make([]int, len(x))
+    length := copy(z, x)
+    z[1] = 10
+    fmt.Printf("z : %d , length : %d, x : %d\n", z, length, x)
+}
+```
+
+```txt
+z : [1 10 3 4] , length : 4, x : [1 2 3 4]
+```
+
+## 初めてのGo言語
+
+- [mushahiroyuki:lgo:Github](https://github.com/mushahiroyuki/lgo)
