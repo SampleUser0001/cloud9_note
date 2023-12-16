@@ -9,6 +9,7 @@
     - [参考](#参考)
   - [スライス](#スライス)
     - [copy](#copy)
+  - [map](#map)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -89,6 +90,50 @@ func main() {
 
 ```txt
 z : [1 10 3 4] , length : 4, x : [1 2 3 4]
+```
+
+## map
+
+```golang
+package main
+
+import "fmt"
+
+func printFound(hashMap map[int]string, key int) bool {
+	value, have := hashMap[key]
+	if have {
+		fmt.Println("value :", value)
+	} else {
+		fmt.Println("Not Found :", key)
+	}
+	return have
+}
+
+func main() {
+	// LinkedHashMapはない。
+	hashMap := map[int]string{
+		2: "piyo",
+		3: "fuga",
+		1: "hoge",
+	}
+	fmt.Println(hashMap)
+
+	for k := range hashMap {
+		fmt.Printf("key : %d , value : %s\n", k, hashMap[k])
+	}
+
+	printFound(hashMap, 1)
+	printFound(hashMap, 4)
+}
+```
+
+``` txt
+map[1:hoge 2:piyo 3:fuga]
+key : 3 , value : fuga
+key : 1 , value : hoge
+key : 2 , value : piyo
+value : hoge
+Not Found : 4
 ```
 
 ## 初めてのGo言語
