@@ -8,8 +8,11 @@
   - [package mainでエラーになる](#package-mainでエラーになる)
     - [参考](#参考)
   - [スライス](#スライス)
+    - [append](#append)
     - [copy](#copy)
   - [map](#map)
+  - [for](#for)
+    - [range](#range)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -71,6 +74,15 @@ go work use ${エラーを吐いているgoファイルがあるディレクト�
 ## スライス
 
 Javaで言うList。（配列もあるが、サイズが固定化される。）
+
+### append
+
+``` golang
+	evenValues := []int{}
+	for i := 0; i < 10; i++ {
+		evenValues = append(evenValues, i*2)
+	}
+```
 
 ### copy
 
@@ -134,6 +146,35 @@ key : 1 , value : hoge
 key : 2 , value : piyo
 value : hoge
 Not Found : 4
+```
+
+## for
+
+### range
+
+``` golang
+package main
+
+import "fmt"
+
+func main() {
+	evenValues := []int{}
+	for i := 0; i < 10; i++ {
+		evenValues = append(evenValues, i*2)
+	}
+
+	for i, v := range evenValues {
+		fmt.Println("i :", i, " v :", v)
+	}
+}
+```
+
+``` txt
+i : 0  v : 0
+i : 1  v : 2
+i : 2  v : 4
+i : 3  v : 6
+i : 4  v : 8
 ```
 
 ## 初めてのGo言語
