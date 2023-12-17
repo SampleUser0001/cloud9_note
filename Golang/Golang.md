@@ -13,6 +13,7 @@
   - [map](#map)
   - [for](#for)
     - [range](#range)
+  - [switch](#switch)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -175,6 +176,32 @@ i : 1  v : 2
 i : 2  v : 4
 i : 3  v : 6
 i : 4  v : 8
+```
+
+## switch
+
+goのswitchはbreak不要。
+
+```golang
+package main
+
+import "fmt"
+
+func main() {
+	n := 0
+	switch n {
+	case 0:
+		fmt.Println(n)
+	case 1:
+		fmt.Println(n)
+	default:
+		fmt.Println(n)
+	}
+}
+```
+
+``` txt
+0
 ```
 
 ## 初めてのGo言語
