@@ -12,6 +12,7 @@
       - [Simple](#simple)
       - [List](#list)
   - [\_\_init\_\_をオーバーロードする](#__init__をオーバーロードする)
+  - [dataclassの初期化](#dataclassの初期化)
   - [Enumの実装例](#enumの実装例)
   - [Enum/dotenv](#enumdotenv)
     - [src](#src)
@@ -300,7 +301,7 @@ with open("sample.json", "r") as fp:
 ## __init__をオーバーロードする
 
 Pythonの場合、__init__は１クラスに1つしか作れないため、オーバーロードできない。  
-`@dataclass`をつけた場合、`__init__`メソッドがせいせいされるが、CSV -> dataclassしたい場合は、listで渡したい場合もある。
+`@dataclass`をつけた場合、`__init__`メソッドが生成されるが、CSV -> dataclassしたい場合は、listで渡したい場合もある。
 
 ``` python
 
@@ -308,13 +309,27 @@ from dataclasses import dataclass
 
 @dataclass
 class SampleDataClass:
-    id:str
-    hoge:str
+    id: str
+    hoge: str
 
     def sets(self, line: list):
         index = 0
         self.id = list[index]; index += 1
         self.hoge = list[index]; index += 1
+```
+
+## dataclassの初期化
+
+`dataclass`は初期値がない場合は、引数なしでコンストラクタを呼び出せない。  
+なるべく初期値は設定したほうが良い。
+
+``` python
+from dataclasses import dataclass
+
+@dataclass
+class HogeModel():
+    id: int = 0
+    v: str = None
 ```
 
 ## Enumの実装例
