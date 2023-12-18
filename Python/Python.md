@@ -803,7 +803,9 @@ if __name__ == '__main__':
     print(f'int_list : {int_list}')
     
     with Pool(4) as pool:
-        print(pool.map(square, int_list))
+        result = pool.map(square, int_list)
+        
+    print(result)
 ```
 
 ``` txt
