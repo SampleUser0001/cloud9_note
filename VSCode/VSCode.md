@@ -11,6 +11,9 @@
     - [Markdown PDF](#markdown-pdf)
   - [オフライン環境にプラグインをインストールする](#オフライン環境にプラグインをインストールする)
     - [参考:オフライン環境にプラグインをインストールする](#参考オフライン環境にプラグインをインストールする)
+  - [markdownlint](#markdownlint)
+    - [MD007](#md007)
+    - [公式](#公式)
 
 ## タブの入力
 
@@ -78,3 +81,21 @@ Markdown All in Oneとは別に入れておく。
 ### 参考:オフライン環境にプラグインをインストールする
 
 - [Qiita:VSCode拡張機能をオフライン環境でインストールする方法](https://qiita.com/ss_tom_jp/items/5977e4f16d78b8ca7cc8)
+
+## markdownlint
+
+### MD007
+
+項目の深さのlint。TOC(Markdown All in One)とそれ以外で深さが異なるので、無効にする。
+
+```settings.json```に下記を記載する。
+
+``` json
+    "markdownlint.config": {
+        "MD007": false
+    }, 
+```
+
+### 公式
+
+- [markdownlint](https://github.com/DavidAnson/markdownlint/blob/v0.19.0/doc/Rules.md)
