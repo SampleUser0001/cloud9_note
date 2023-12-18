@@ -798,11 +798,16 @@ def square(i):
     return i*i
 
 if __name__ == '__main__':
+    int_list = list(range(SQUARE_COUNT))
+    
+    print(f'int_list : {int_list}')
+    
     with Pool(4) as pool:
-        print(pool.map(square, range(SQUARE_COUNT)))
+        print(pool.map(square, int_list))
 ```
 
 ``` txt
+int_list : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 ```
 
