@@ -22,6 +22,7 @@
   - [Timezoneの設定](#timezoneの設定)
   - [プルリクエストマージの際にブランチが削除されないように設定する](#プルリクエストマージの際にブランチが削除されないように設定する)
     - [参考](#参考-2)
+  - [ロールにユーザを登録する](#ロールにユーザを登録する)
   - [マニュアルURL](#マニュアルurl)
 
 ## ssh-key登録
@@ -150,6 +151,14 @@ ForcePushをDenyにすればOK。
 ### 参考
 
 - [ブランチ ポリシーと設定 : Azure DevOps](https://learn.microsoft.com/ja-jp/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser)
+
+## ロールにユーザを登録する
+
+1. Azure DevOps Top
+2. Organization Setting
+3. Security - Permissions
+4. Users タブ
+5. ユーザ選択 -> Member ofタブ
 
 ## マニュアルURL
 
