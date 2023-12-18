@@ -410,25 +410,33 @@ class SampleClass:
 import itertools
 
 def unpack_01(original):
-  """ もっといい書き方があると思うんだけど・・・"""
-  unpacked = []
-  for l in original:
-    for i in l:
-      unpacked.append(i)
-  return unpacked
+    """ もっといい書き方があると思うんだけど・・・"""
+    unpacked = []
+    for l in original:
+        for i in l:
+            unpacked.append(i)
+    return unpacked
 
 def unpack_02(original):
-  return list(itertools.chain(*original))
-  
-def main():
-  original = [[1,2],[3,4],[5,6]]
+    return list(itertools.chain(*original))
 
-  print(original)
-  print(unpack_01(original))
-  print(unpack_02(original))
-  
+def unpack_03(original):
+    """あとから展開したものを追加するだけならこれでOK。"""
+    return_list = []
+    for l in original:
+        return_list.extend(l)
+    return return_list
+
+def main():
+    original = [[1,2],[3,4],[5,6]]
+
+    print(original)
+    print(unpack_01(original))
+    print(unpack_02(original))
+    print(unpack_03(original))
+    
 if __name__ == '__main__':
-  main()
+    main()
 ```
 
 ### 実行結果
