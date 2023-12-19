@@ -15,6 +15,7 @@
     - [range](#range)
   - [switch](#switch)
   - [関数型](#関数型)
+    - [関数を返す関数](#関数を返す関数)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -222,6 +223,19 @@ func main() {
 	var e funcType = echo
 	e("hoge")
 }
+```
+
+### 関数を返す関数
+
+- [ex0512.go:mushahiroyuki:lgo:Github](https://github.com/mushahiroyuki/lgo/blob/main/example/ch05/ex0512.go)
+
+``` txt
+0: 0, 0
+1: 2, 3
+2: 4, 6
+3: 6, 9
+4: 8, 12
+5: 10, 15
 ```
 
 ## 初めてのGo言語
