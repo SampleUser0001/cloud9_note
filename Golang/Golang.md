@@ -14,6 +14,7 @@
   - [for](#for)
     - [range](#range)
   - [switch](#switch)
+  - [関数型](#関数型)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -202,6 +203,25 @@ func main() {
 
 ``` txt
 0
+```
+
+## 関数型
+
+``` golang
+package main
+
+import "fmt"
+
+func echo(v string) {
+	fmt.Println(v)
+}
+
+type funcType func(string)
+
+func main() {
+	var e funcType = echo
+	e("hoge")
+}
 ```
 
 ## 初めてのGo言語
