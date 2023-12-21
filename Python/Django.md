@@ -203,7 +203,7 @@ def index(request):
 
 #### 参考
 
-- [はじめての Django アプリ作成、その 3:Django ドキュメント](https://docs.project.com/ja/4.1/intro/tutorial03/)
+- [はじめての Django アプリ作成、その 3:Django ドキュメント](https://docs.project.com/ja/5.0/intro/tutorial03/)
 
 ## テンプレートの作成例(listの表示)
 
