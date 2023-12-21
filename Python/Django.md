@@ -101,6 +101,16 @@ django-admin startproject project
 pip freeze > requirements.txt
 ```
 
+``` bash
+# プロジェクトとして、projectとproject配下に管理アプリとして、projectが作成される。
+ls
+django_venv  project  requirements.txt
+(django_venv) ubuntuuser@ubuntuuser-B660M:~/environment/tmp_django $ ls project
+manage.py  project
+(django_venv) ubuntuuser@ubuntuuser-B660M:~/environment/tmp_django $ 
+
+```
+
 ### 参考
 
 - [さぁ始めましょう:django ドキュメント](https://docs.project.com/ja/4.1/intro/)
@@ -130,7 +140,7 @@ python manage.py startapp app
 ### ビュー作成(仮)
 
 ``` python
-# app/view.py 
+# app/views.py 
 
 from django.http import HttpResponse
 
@@ -158,6 +168,7 @@ urlpatterns = [
 
 ``` python
 # project/urls.py
+# プロジェクト管理用のファイルに、新しく作成したアプリを登録する。
 
 # 追記
 from django.urls import include, path
@@ -173,8 +184,10 @@ urlpatterns = [
 
 ``` python
 # 下記を追加
+# 作成したアプリの名前を追加する。
+# ChatGPTの回答なので、間違っている可能性はあるが、必要に応じて、app.ファイル名.クラス名を記載すれば良い。
 INSTALLED_APPS = [
-    'アプリケーション名.apps.クラス名'
+    'app'
 ]
 ```
 
