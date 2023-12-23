@@ -16,6 +16,7 @@
   - [switch](#switch)
   - [関数型](#関数型)
     - [関数を返す関数](#関数を返す関数)
+  - [型メソッド](#型メソッド)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -236,6 +237,39 @@ func main() {
 3: 6, 9
 4: 8, 12
 5: 10, 15
+```
+
+## 型メソッド
+
+構造体にメソッドを追加する。
+
+``` golang
+package main
+
+import "fmt"
+
+type Model struct {
+	id    int
+	value string
+}
+
+func (m Model) toString() string {
+	return fmt.Sprintf("Model[id:%d, value:%s]", m.id, m.value)
+}
+
+func main() {
+	model := Model{
+		id:    1,
+		value: "hoge",
+	}
+
+	fmt.Println(model.toString())
+}
+
+```
+
+``` txt
+Model[id:1, value:hoge]
 ```
 
 ## 初めてのGo言語
