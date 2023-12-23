@@ -251,25 +251,44 @@ import "fmt"
 type Model struct {
 	id    int
 	value string
+	count int
 }
 
+// Modelで保持している値を返す
 func (m Model) toString() string {
-	return fmt.Sprintf("Model[id:%d, value:%s]", m.id, m.value)
+	return fmt.Sprintf("Model[id:%d, value:%s, count:%d]", m.id, m.value, m.count)
+}
+
+// countを加算する。
+// 構造体の中で持っている値を直接更新する場合は、引数をポインタにする。
+func (m *Model) countUp() {
+	m.count = m.count + 1
+}
+
+// countを加算する。（実装ミス）
+func (m Model) notCountUp() {
+	m.count = m.count + 1
 }
 
 func main() {
 	model := Model{
 		id:    1,
 		value: "hoge",
+		count: 0,
 	}
 
 	fmt.Println(model.toString())
+	model.countUp()
+	fmt.Println(model.toString())
+	model.notCountUp()
+	fmt.Println(model.toString())
 }
-
 ```
 
 ``` txt
-Model[id:1, value:hoge]
+Model[id:1, value:hoge, count:0]
+Model[id:1, value:hoge, count:1]
+Model[id:1, value:hoge, count:1]
 ```
 
 ## 初めてのGo言語
