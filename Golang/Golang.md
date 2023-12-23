@@ -17,6 +17,7 @@
   - [関数型](#関数型)
     - [関数を返す関数](#関数を返す関数)
   - [型メソッド](#型メソッド)
+  - [iota](#iota)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -289,6 +290,36 @@ func main() {
 Model[id:1, value:hoge, count:0]
 Model[id:1, value:hoge, count:1]
 Model[id:1, value:hoge, count:1]
+```
+
+## iota
+
+enum（もどき）で使う。
+
+``` golang
+package main
+
+import "fmt"
+
+type Category int
+
+const (
+	A Category = iota
+	B
+	C
+)
+
+func main() {
+	fmt.Printf("A : %d\n", A)
+	fmt.Printf("B : %d\n", B)
+	fmt.Printf("C : %d\n", C)
+}
+```
+
+``` txt
+A : 0
+B : 1
+C : 2
 ```
 
 ## 初めてのGo言語
