@@ -20,11 +20,10 @@
     - [List\<ModelA\>をModelA内のListごとに展開する。](#listmodelaをmodela内のlistごとに展開する)
     - [List\<List\<Model\>\> -\> List\<Model\>](#listlistmodel---listmodel)
     - [Streamの連結](#streamの連結)
-  - [PropertiesEnum](#propertiesenum)
+  - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
-  - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
   - [Mapのループ](#mapのループ)
   - [Mapをほかの型のMapに変換する](#mapをほかの型のmapに変換する)
   - [ディレクトリを再帰的にたどる](#ディレクトリを再帰的にたどる)
@@ -208,43 +207,9 @@ Stream.of(stream1, stream2)
 
 ```
 
-## PropertiesEnum
+## propertiesファイルの読み込み
 
-``` java
-package hogehoge.enums;
-
-import java.util.Properties;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.charset.StandardCharsets;
-import java.io.IOException;
-
-public enum PropertiesEnum {
-    HOGE("hoge"),
-    PIYO("piyo");
-
-    private static Properties properties;
-    
-    private final String key;
-
-    private PropertiesEnum(String key) {
-        this.key = key;
-    }
-    
-    public static void load(Path propertiesPath) throws IOException {
-        properties = new Properties();
-        properties.load(
-            Files.newBufferedReader(propertiesPath, StandardCharsets.UTF_8)
-        );
-    }
-    
-    public String getPropertiesValue() {
-        return properties.getProperty(this.key);
-    }
-    
-    
-}
-```
+[ReadExternalProperties_Maven : SampleUser0001 : Github](https://github.com/SampleUser0001/ReadExternalProperties_Maven)
 
 ## 実行可能jarファイルの実行
 
@@ -269,34 +234,6 @@ try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("書き込みフ�
 ### ファイルの書き込み：参考
 
 [https://docs.oracle.com/javase/jp/8/docs/api/java/nio/file/Files.html#newBufferedWriter-java.nio.file.Path-java.nio.charset.Charset-java.nio.file.OpenOption...-](https://docs.oracle.com/javase/jp/8/docs/api/java/nio/file/Files.html#newBufferedWriter-java.nio.file.Path-java.nio.charset.Charset-java.nio.file.OpenOption...-)
-
-## propertiesファイルの読み込み
-
-``` java
-import java.util.Properties;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.charset.StandardCharsets;
-import java.io.IOException;
-
-// (省略)
-
-  try {
-    Properties prop = new Properties();
-    String propFilePath = "propertiesファイルのパス";
-
-    prop.load(
-      Files.newBufferedReader(
-        Paths.get(propFilePath),
-        StandardCharsets.UTF_8
-      )
-    );
-    String value = prop.getProperty("propertiesのキー");
-  } catch(IOException e){
-    e.printStackTrace();
-  }
-
-```
 
 ## Mapのループ
 
