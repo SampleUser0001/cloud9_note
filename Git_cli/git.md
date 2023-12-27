@@ -53,6 +53,10 @@
   - [コミットログのタイムゾーン設定](#コミットログのタイムゾーン設定)
   - [git log since時にタイムゾーンを意識する](#git-log-since時にタイムゾーンを意識する)
   - [パスワードを保存する](#パスワードを保存する)
+  - [git bashのファイルパス \<-\> Linuxファイルパス変換](#git-bashのファイルパス---linuxファイルパス変換)
+    - [Windows -\> Linux](#windows---linux)
+    - [Linux -\> Windows](#linux---windows)
+    - [参考](#参考-3)
 
 ## .gitignoreについて
 
@@ -449,3 +453,21 @@ git log --since="2023-10-05T00:00:00+09:00"
 ## パスワードを保存する
 
 - [Linux#パスワードを保存する(.netrc)](../Linux/Linux.md#パスワードを保存する(.netrc))
+
+## git bashのファイルパス <-> Linuxファイルパス変換
+
+### Windows -> Linux
+
+```bash
+linux_path=$(echo ${win_path} | sed 's@^\([a-zA-Z]\):@/\L\1@' | sed 's@\\@/@g'
+```
+
+### Linux -> Windows
+
+```bash
+win_path=$(echo ${linux_path} | sed 's@^/\([a-zA-z]\)@\U\1:@' | sed 's@/@\\@g'
+```
+
+### 参考
+
+- [Windows GitBash でパスを Windows 形式と Linux 形式とで相互変換する : Neo's World](https://neos21.net/blog/2020/04/07-01.html#google_vignette)

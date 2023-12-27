@@ -54,6 +54,7 @@
   - [DBにSelectを投げた結果、メモリに保持しきれない量が抽出される場合(JDBC)](#dbにselectを投げた結果メモリに保持しきれない量が抽出される場合jdbc)
     - [Chat-GPT(3.5)に聞いてみた結果](#chat-gpt35に聞いてみた結果)
   - [JGit](#jgit)
+  - [Windows + git bashとLinuxのファイルパス問題](#windows--git-bashとlinuxのファイルパス問題)
 
 ## Stream
 
@@ -681,3 +682,9 @@ Javaで大量のデータをDBから取得する際に、メモリに保持し�
 `git clone`だけはJGitを使ったほうが楽なような気がするが、おそらく好みの問題。
 
 [Practice_JGit_AzureDevOps:SampleUser0001](https://github.com/SampleUser0001/Practice_JGit_AzureDevOps)
+
+## Windows + git bashとLinuxのファイルパス問題
+
+WindowsとLinuxの間で同じプログラムが使えるが、ファイルパスを引数でもらう場合、表現が異なるため、（見た目が同じでも）そのままでは使用できない。ファイルパスの形式を変換する必要がある。
+
+[git bashのファイルパス <-> Linuxファイルパス変換](../Git_cli/git.md)
