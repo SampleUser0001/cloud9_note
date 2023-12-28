@@ -220,12 +220,32 @@ func echo(v string) {
 	fmt.Println(v)
 }
 
-type funcType func(string)
+func double(i int) int {
+	return i * 2
+}
+
+func triple(i int) int {
+	return i * 3
+}
+
+type strFuncType func(string)
+type intFuncType func(int) int
 
 func main() {
-	var e funcType = echo
+	var e strFuncType = echo
+	var df intFuncType = double
+	var tf intFuncType = triple
 	e("hoge")
+	fmt.Println("double :", df(5))
+	fmt.Println("triple :", tf(5))
 }
+
+```
+
+``` txt
+hoge
+double : 10
+triple : 15
 ```
 
 ### 関数を返す関数
