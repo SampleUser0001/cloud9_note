@@ -18,6 +18,7 @@
     - [関数を返す関数](#関数を返す関数)
   - [型メソッド](#型メソッド)
   - [iota](#iota)
+  - [jsonファイルの読み込み](#jsonファイルの読み込み)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -321,6 +322,10 @@ A : 0
 B : 1
 C : 2
 ```
+
+## jsonファイルの読み込み
+
+- [ex0712e.go : mushahiroyuki:lgo:Github](https://github.com/mushahiroyuki/lgo/blob/main/example/ch07/ex0712e.go)
 
 ## 初めてのGo言語
 
