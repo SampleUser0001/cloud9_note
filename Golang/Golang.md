@@ -18,6 +18,8 @@
     - [関数を返す関数](#関数を返す関数)
   - [型メソッド](#型メソッド)
   - [iota](#iota)
+  - [interface](#interface)
+    - [関数をリストアップする](#関数をリストアップする)
   - [jsonファイルの読み込み](#jsonファイルの読み込み)
   - [初めてのGo言語](#初めてのgo言語)
 
@@ -341,6 +343,48 @@ func main() {
 A : 0
 B : 1
 C : 2
+```
+
+## interface
+
+### 関数をリストアップする
+
+``` golang
+package main
+
+import "fmt"
+
+// TestInterface は3つのメソッドを持つインターフェースです
+type TestInterface interface {
+	func1()
+	func2()
+	func3()
+}
+
+// StructA は TestInterface を満たす構造体です
+type StructA struct{}
+
+func (a StructA) func1() { fmt.Println("StructA func1") }
+func (a StructA) func2() { fmt.Println("StructA func2") }
+func (a StructA) func3() { fmt.Println("StructA func3") }
+
+// StructB は TestInterface を満たさない構造体です
+type StructB struct{}
+
+func (b StructB) func1() { fmt.Println("StructB func1") }
+func (b StructB) func2() { fmt.Println("StructB func2") }
+
+func main() {
+	var test TestInterface
+	test = StructA{} //OK
+	test.func1()
+	test.func2()
+	test.func3()
+
+	// 以下のコードはコンパイルエラーになります
+	// test = StructB{} //NG
+}
+
 ```
 
 ## jsonファイルの読み込み
