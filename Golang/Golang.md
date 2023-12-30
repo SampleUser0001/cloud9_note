@@ -21,6 +21,8 @@
   - [interface](#interface)
     - [関数をリストアップする](#関数をリストアップする)
   - [jsonファイルの読み込み](#jsonファイルの読み込み)
+  - [起動引数を取得する](#起動引数を取得する)
+  - [例外の扱い](#例外の扱い)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -390,6 +392,55 @@ func main() {
 ## jsonファイルの読み込み
 
 - [ex0712e.go : mushahiroyuki:lgo:Github](https://github.com/mushahiroyuki/lgo/blob/main/example/ch07/ex0712e.go)
+
+## 起動引数を取得する
+
+``` golang
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
+func main() { //liststart2
+    if len(os.Args) != 3 {
+		fmt.Println("引数の数が間違っています。")
+		fmt.Println("使い方：ex0801 <被除数> <除数>")
+		os.Exit(1)
+	}
+	var argsIndex int = 1
+
+    // strconv.Atoiは文字列 -> 数値変換。
+	numerator, _ := strconv.Atoi(os.Args[argsIndex])
+	argsIndex++
+	denominator, _ := strconv.Atoi(os.Args[argsIndex])
+	argsIndex++
+}
+```
+
+## 例外の扱い
+
+``` golang
+package main
+
+import (
+	"errors"
+	"fmt"
+	"os"
+)
+
+func main() {
+	_, error := hogehoge()
+	if error != nil {
+		fmt.Println(error)
+		os.Exit(1)
+	}
+}
+
+func hogehoge() (int, error) {
+	return 0, errors.New("なんかのエラーが発生しました。")
+}
+```
 
 ## 初めてのGo言語
 
