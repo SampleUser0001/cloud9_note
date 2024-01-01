@@ -308,8 +308,8 @@ STATICFILES_DIRS = [
 <!-- rawとendrawはJekyllのエスケープタグ。Djangoで使用する場合は記載不要。 -->
 {% raw %}
 {% load static %}
-{% endraw %}
 <link href="{% static 'app/css/app.css' %}" rel="stylesheet">
+{% endraw %}
 ```
 
 
