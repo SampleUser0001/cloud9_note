@@ -15,6 +15,7 @@
   - [テンプレートの作成例(listの表示)](#テンプレートの作成例listの表示)
     - [テンプレート](#テンプレート)
     - [app/views.py](#appviewspy-1)
+  - [staticファイル配置](#staticファイル配置)
   - [ファイルアップロード](#ファイルアップロード)
     - [app/forms.py](#appformspy)
     - [project/urls.py](#projecturlspy)
@@ -273,6 +274,37 @@ def index(request):
 def add_message(request):
     return render(request, 'usemodel/add_message.html')
 
+```
+
+## staticファイル配置
+
+cssなどの配置方法。  
+
+- プロジェクト名
+    - app
+- css配置パス
+    - `./project/app/static/app/css/app.css`
+
+`project/project/settingspy`
+
+``` python
+# settings.py
+
+# 静的ファイルの基本パスを設定
+STATIC_URL = '/static/'
+
+# 静的ファイルを格納するディレクトリを指定
+STATICFILES_DIRS = [
+    BASE_DIR / 'app/static',  # ここをプロジェクトの構成に合わせて変更
+]
+```
+
+テンプレートファイル
+
+``` django
+<!-- 例: Djangoテンプレート内でのCSSリンク -->
+{% load static %}
+<link href="{% static 'app/css/app.css' %}" rel="stylesheet">
 ```
 
 ## ファイルアップロード
