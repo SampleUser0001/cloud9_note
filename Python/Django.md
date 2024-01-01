@@ -302,6 +302,12 @@ STATICFILES_DIRS = [
 
 テンプレートファイル
 
+``` html
+<!-- 例: Djangoテンプレート内でのCSSリンク -->
+{% load static %}
+<link href="{% static 'app/css/app.css' %}" rel="stylesheet">
+```
+
 
 ## ファイルアップロード
 
