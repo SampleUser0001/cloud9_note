@@ -23,6 +23,7 @@
   - [jsonファイルの読み込み](#jsonファイルの読み込み)
   - [起動引数を取得する](#起動引数を取得する)
   - [例外の扱い](#例外の扱い)
+    - [センチネルエラー](#センチネルエラー)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -439,6 +440,52 @@ func main() {
 
 func hogehoge() (int, error) {
 	return 0, errors.New("なんかのエラーが発生しました。")
+}
+```
+
+### センチネルエラー
+
+`mod/mod.go`
+
+```golang
+package sentinelerror
+
+import (
+	"errors"
+)
+
+var SampleError = errors.New("なんかのエラーが発生しました。")
+
+func SampleFunc() (int, error) {
+	return 0, SampleError
+}
+
+```
+
+``` golang
+package main
+
+import (
+	"errors"
+	"fmt"
+	"os"
+	"sentinelerror"
+)
+
+func main() {
+	_, err := sentinelerror.SampleFunc()
+	if err != nil {
+		if errors.Is(err, sentinelerror.SampleError) {
+			fmt.Println("SampleErrorが発生しました。")
+			os.Exit(1)
+		} else {
+			fmt.Println("その他のエラーが発生しました。")
+			os.Exit(1)
+		}
+	} else {
+		fmt.Println("エラーは発生しませんでした。")
+		os.Exit(0)
+	}
 }
 ```
 
