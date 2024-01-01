@@ -285,7 +285,8 @@ cssなどの配置方法。
 - css配置パス
     - `./project/app/static/app/css/app.css`
 
-`project/project/settingspy`
+
+`./project/project/settings.py`
 
 ``` python
 # settings.py
@@ -301,11 +302,6 @@ STATICFILES_DIRS = [
 
 テンプレートファイル
 
-``` html
-<!-- 例: Djangoテンプレート内でのCSSリンク -->
-{% load static %}
-<link href="{% static 'app/css/app.css' %}" rel="stylesheet">
-```
 
 ## ファイルアップロード
 
