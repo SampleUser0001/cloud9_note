@@ -302,7 +302,6 @@ STATICFILES_DIRS = [
 
 テンプレートファイル
 
-
 ``` html
 <!-- 例: Djangoテンプレート内でのCSSリンク -->
 <!-- rawとendrawはJekyllのエスケープタグ。Djangoで使用する場合は記載不要。 -->
@@ -311,7 +310,6 @@ STATICFILES_DIRS = [
 <link href="{% static 'app/css/app.css' %}" rel="stylesheet">
 {% endraw %}
 ```
-
 
 ## ファイルアップロード
 

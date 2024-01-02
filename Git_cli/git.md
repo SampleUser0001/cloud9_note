@@ -7,6 +7,7 @@
     - [参考](#参考)
   - [マージ時に発生する差分の取得](#マージ時に発生する差分の取得)
     - [参考](#参考-1)
+  - [cloneやpullせずに git diffを取得する](#cloneやpullせずに-git-diffを取得する)
   - [ステージング解除](#ステージング解除)
     - [新規](#新規)
     - [変更](#変更)
@@ -93,6 +94,41 @@ git diff --name-status ${target_branch}...${source_branch}
 ### 参考
 
 - [git 差分を見る:Qiita](https://qiita.com/ikenji/items/42248085c4f4b55660d6)
+
+## cloneやpullせずに git diffを取得する
+
+リモートブランチだけを取得する。
+
+``` bash
+diff_path=/tmp/`uuidgen`
+git_dir=/tmp/`uuidgen`
+
+mkdir $git_dir
+
+pushd $git_dir > /dev/null
+
+# 対象リポジトリのURL
+git_url=
+
+git init
+git remote add origin $git_url
+git fetch origin
+
+# 比較対象のブランチ
+source_branch=
+target_branch=
+
+# オプションは任意
+git diff --name-status origin/$target_branch...origin/$source_branch > $diff_path
+
+popd > /dev/null
+rm -rf $git_dir
+
+cat $diff_path
+
+# ファイルの後始末
+rm $diff_path
+```
 
 ## ステージング解除
 
