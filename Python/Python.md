@@ -33,6 +33,7 @@
   - [datetime](#datetime)
     - [str -\> datetime , timezone](#str---datetime--timezone)
     - [datetime -\> str](#datetime---str)
+    - [int -\> datetime -\> str](#int---datetime---str)
     - [日付計算](#日付計算)
   - [型の判定](#型の判定)
     - [参考](#参考-2)
@@ -543,6 +544,33 @@ print(now.strftime("%Y%m%d"))
 ``` txt
 2023-12-12 23:49:39.010985
 20231212
+```
+
+### int -> datetime -> str
+
+```python
+import sys
+import datetime
+
+def convert_unixtime_to_hhmm(unixtime):
+    time = datetime.datetime.fromtimestamp(unixtime)
+    print(time)
+    formatted_time = time.strftime("%H:%M")
+    return formatted_time
+
+if __name__ == '__main__':
+    args = sys.argv
+
+    print(convert_unixtime_to_hhmm(int(args[1])/1000000))
+    
+    # 正しくはないが下記でも動く。
+    # print(convert_unixtime_to_hhmm(int(str(args[1][0:10]))))
+```
+
+``` bash
+$ python app.py 1704206837620459
+2024-01-02 23:47:17.620459
+23:47
 ```
 
 ### 日付計算
