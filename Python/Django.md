@@ -37,6 +37,7 @@
     - [DBに登録されているデータを取得する](#dbに登録されているデータを取得する)
     - [選択肢を登録/全部取得/選択/削除する](#選択肢を登録全部取得選択削除する)
       - [参考](#参考-4)
+  - [レイアウト（ビュー）を共通化する](#レイアウトビューを共通化する)
   - [404を送出する](#404を送出する)
   - [Django admin](#django-admin)
   - [AdminにModelを追加する](#adminにmodelを追加する)
@@ -50,6 +51,9 @@
     - [参考](#参考-6)
   - [manage.py](#managepy)
     - [参考](#参考-7)
+
+<!-- rawとendrawはJekyllのエスケープタグ。Djangoで使用する場合は記載不要。 -->
+{% raw %}
 
 ## 前提
 
@@ -304,11 +308,8 @@ STATICFILES_DIRS = [
 
 ``` html
 <!-- 例: Djangoテンプレート内でのCSSリンク -->
-<!-- rawとendrawはJekyllのエスケープタグ。Djangoで使用する場合は記載不要。 -->
-{% raw %}
 {% load static %}
 <link href="{% static 'app/css/app.css' %}" rel="stylesheet">
-{% endraw %}
 ```
 
 ## ファイルアップロード
@@ -454,7 +455,7 @@ urlpatterns = [
 
 ### 参考
 
-- [](https://docs.djangoproject.com/ja/4.1/intro/tutorial03/)
+- [チュートリアル](https://docs.djangoproject.com/ja/4.1/intro/tutorial03/)
 
 ## Modelを使う
 
@@ -595,6 +596,124 @@ c.delete()
 
 - [はじめての Django アプリ作成、その2:Django](https://docs.djangoproject.com/ja/4.1/intro/tutorial02/)
 
+## レイアウト（ビュー）を共通化する
+
+「継承」できる。
+
+`base.html`
+
+``` html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}デフォルトタイトル{% endblock %}</title>
+    <!-- Tailwind CSSの場合 -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrapの場合、以下の行をコメントアウトし、上の行を削除してください -->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+</head>
+<body>
+    <nav class="bg-gray-800 p-4 text-white">
+        <div class="container mx-auto">
+            <a href="/app/list" class="font-semibold mr-4">ホーム</a>
+            <a href="/app/register" class="font-semibold">登録</a>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
+
+```
+
+
+
+``` html
+{% extends "app/base.html" %}
+
+{% block title %}一覧{% endblock %}
+
+{% block content %}
+
+{% load static %}
+<link href="{% static 'app/css/app.css' %}" rel="stylesheet">
+
+<div class="container mx-auto mt-10">
+    <form action="/app/register" method="post">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">リポジトリ:</label>
+            <input type="text" id="repository" name="repository" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" disabled>
+        </div>
+        <div class="mb-4">
+            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">タイトル:</label>
+            <input type="text" id="title" name="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" disabled>
+        </div>
+        <div class="mb-4">
+            <label for="st_pull_request_url" class="block text-gray-700 text-sm font-bold mb-2">STプルリクエストURL:</label>
+            <input type="text" id="st_pull_request_url" name="st_pull_request_url" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" oninput="updateInputState()">
+        </div>
+        <div class="mb-4">
+            <label for="e2e_uat_pull_request_url" class="block text-gray-700 text-sm font-bold mb-2">E2E UATプルリクエストURL:</label>
+            <input type="text" id="e2e_uat_pull_request_url" name="e2e_uat_pull_request_url" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" disabled oninput="updateInputState()">
+        </div>
+        <div class="mb-4">
+            <label for="main_pull_request_url" class="block text-gray-700 text-sm font-bold mb-2">メインプルリクエストURL:</label>
+            <input type="text" id="main_pull_request_url" name="main_pull_request_url" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" disabled>
+        </div>
+        <div class="flex mb-4">
+            <div class="w-1/2 pr-2">
+                <label for="source_branch" class="block text-gray-700 text-sm font-bold mb-2">ソースブランチ:</label>
+                <input type="text" id="source_branch" name="source_branch" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline input-disabled" readonly>
+            </div>
+            <div class="w-1/2 pl-2">
+                <label for="target_branch" class="block text-gray-700 text-sm font-bold mb-2">ターゲットブランチ:</label>
+                <input type="text" id="target_branch" name="target_branch" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline input-disabled" readonly>
+            </div>
+        </div>
+        <div class="mb-4">
+            <input type="submit" value="登録" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        </div>
+    </form>
+</div>
+
+<script>
+    function updateInputState() {
+        // STプルリクエストURLに値が入力された
+        const stUrl = document.getElementById('st_pull_request_url').value;
+        document.getElementById('e2e_uat_pull_request_url').disabled = !stUrl;
+
+        // E2E UATプルリクエストURLに値が入力された
+        const e2eUrl = document.getElementById('e2e_uat_pull_request_url').value;
+        document.getElementById('main_pull_request_url').disabled = !e2eUrl;
+
+        // メインプルリクエストURLに値が入力された
+        const mainUrl = document.getElementById('main_pull_request_url').value;
+
+        const url = mainUrl || e2eUrl || stUrl;
+        const repository = getRepositoryName(url);
+        const pullRequestId = getPullRequestId(url);
+
+        document.getElementById('repository').value = repository;
+        console.info(repository, pullRequestId);
+
+    }
+    function getRepositoryName(url) {
+        // TODO : 後で書く
+        return 'SampleRepository'
+    }
+
+    function getPullRequestId(url) {
+        // TODO : 後で書く
+        const removeWord = "https://dev.azure.com/ittimfn/SampleProject/_git/SampleProject/pullrequest/"
+        return url.replace(removeWord, '')
+    }
+</script>
+{% endblock %}
+```
+
 ## 404を送出する
 
 ``` python
@@ -692,3 +811,5 @@ CSRF_TRUSTED_ORIGINS = ['https://3a5caa305fbe48f8b96fbf040031a010.vfs.cloud9.ap-
 ### 参考
 
 - [django-admin と manage.py:django](https://docs.djangoproject.com/ja/4.1/ref/django-admin/)
+
+{% endraw %}
