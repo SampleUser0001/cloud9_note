@@ -600,7 +600,7 @@ c.delete()
 
 「継承」できる。
 
-`base.html`
+`project/app/templates/app/base.html`
 
 ``` html
 <!DOCTYPE html>
@@ -628,12 +628,12 @@ c.delete()
 
 ```
 
-
+`project/app/templates/app/register.html`
 
 ``` html
 {% extends "app/base.html" %}
 
-{% block title %}一覧{% endblock %}
+{% block title %}登録{% endblock %}
 
 {% block content %}
 
