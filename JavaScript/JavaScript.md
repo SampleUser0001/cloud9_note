@@ -2,6 +2,7 @@
 - [JavaScript](#javascript)
   - [ページ読み込み時に呼び出す](#ページ読み込み時に呼び出す)
     - [参考](#参考)
+  - [変更が発生したときに呼び出す](#変更が発生したときに呼び出す)
   - [イベントループ](#イベントループ)
     - [イメージ](#イメージ)
     - [参考](#参考-1)
@@ -26,6 +27,12 @@ window.onload = function(){
 ### 参考
 
 - [ページ読み込み時に実行するjavascriptについてのTips:TIPS NOTE by TAM](https://www.tam-tam.co.jp/tipsnote/javascript/post601.html)
+
+## 変更が発生したときに呼び出す
+
+``` html
+<input type="text" name="main_pull_request_url" id="id_main_pull_request_url" oninput="updateInputState()"/>
+```
 
 ## イベントループ
 
