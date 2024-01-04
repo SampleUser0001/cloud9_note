@@ -38,6 +38,7 @@
     - [DBに登録されているデータを取得する](#dbに登録されているデータを取得する)
     - [選択肢を登録/全部取得/選択/削除する](#選択肢を登録全部取得選択削除する)
       - [参考](#参考-4)
+  - [一覧を表示する](#一覧を表示する)
   - [レイアウト（ビュー）を共通化する](#レイアウトビューを共通化する)
   - [404を送出する](#404を送出する)
   - [Django admin](#django-admin)
@@ -814,6 +815,132 @@ c.delete()
 #### 参考
 
 - [はじめての Django アプリ作成、その2:Django](https://docs.djangoproject.com/ja/4.1/intro/tutorial02/)
+
+## 一覧を表示する
+
+`models.py`
+
+``` python
+from django.db import models
+
+from .forms import PullRequestForm
+
+class PullRequestModel(models.Model):
+    '''PR情報を管理するモデル'''
+    repository = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    st_pull_request_url = models.CharField(max_length=1000)
+    e2e_uat_pull_request_url = models.CharField(max_length=1000)
+    main_pull_request_url = models.CharField(max_length=1000)
+    
+    source_branch = models.CharField(max_length=255)
+    target_branch = models.CharField(max_length=255)
+    
+    pull_request_id = models.IntegerField()
+
+    def set_Form(self, form: PullRequestForm):
+        '''FormからModelに値を設定する'''
+        self.repository = form.cleaned_data['repository']
+        self.title = form.cleaned_data['title']
+        self.st_pull_request_url = form.cleaned_data['st_pull_request_url']
+        self.e2e_uat_pull_request_url = form.cleaned_data['e2e_uat_pull_request_url']
+        self.main_pull_request_url = form.cleaned_data['main_pull_request_url']
+        self.source_branch = form.cleaned_data['source_branch']
+        self.target_branch = form.cleaned_data['target_branch']
+        try:
+            self.pull_request_id = form.get_id_from_pull_request_url()
+        except (KeyError, ValueError):
+            self.pull_request_id = 0
+        
+
+    def __str__(self):
+        '''Adminページに表示する文言を設定する'''
+        return self.message
+
+```
+
+`views.py`
+
+```python
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+
+from .models import PullRequestModel
+
+from .forms import PullRequestForm
+# from django.http import HttpResponse
+
+# Create your views here.
+
+def index(request):
+    return render(request, 'app/index.html')
+
+def list_view(request):
+    pull_requests = PullRequestModel.objects.all()
+    context = {
+        'pull_requests': pull_requests
+    }
+    return render(context=context, request=request, template_name='app/list.html')
+
+def register(request):
+    if request.method == 'POST':
+        form = PullRequestForm(request.POST)
+        if form.is_valid():
+            model = PullRequestModel()
+            model.set_Form(form)
+            model.save()
+        else:
+            print(form.errors)
+        return HttpResponseRedirect('list')
+    else:
+        # getとして扱う
+        form = PullRequestForm()
+        return render(request, 'app/register.html', {'form': form})
+
+```
+
+`app/list.html`
+
+``` html
+{% extends "app/base.html" %}
+
+{% block title %}一覧{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">リポジトリ</th>
+                <th class="px-4 py-2">タイトル</th>
+                <th class="px-4 py-2">STプルリクエストURL</th>
+                <th class="px-4 py-2">E2E UATプルリクエストURL</th>
+                <th class="px-4 py-2">メインプルリクエストURL</th>
+                <th class="px-4 py-2">ソースブランチ</th>
+                <th class="px-4 py-2">ターゲットブランチ</th>
+                <th class="px-4 py-2">プルリクエストID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- ここにデータを動的に表示 -->
+            {% for pr in pull_requests %}
+            <tr>
+                <td class="border px-4 py-2">{{ pr.repository }}</td>
+                <td class="border px-4 py-2">{{ pr.title }}</td>
+                <td class="border px-4 py-2">{{ pr.st_pull_request_url }}</td>
+                <td class="border px-4 py-2">{{ pr.e2e_uat_pull_request_url }}</td>
+                <td class="border px-4 py-2">{{ pr.main_pull_request_url }}</td>
+                <td class="border px-4 py-2">{{ pr.source_branch }}</td>
+                <td class="border px-4 py-2">{{ pr.target_branch }}</td>
+                <td class="border px-4 py-2">{{ pr.pull_request_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+```
 
 ## レイアウト（ビュー）を共通化する
 
