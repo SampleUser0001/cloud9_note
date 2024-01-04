@@ -28,6 +28,7 @@
     - [app/views.py](#appviewspy-2)
     - [app/urls.py](#appurlspy)
     - [参考](#参考-3)
+  - [POST(form)](#postform)
   - [Modelを使う](#modelを使う)
     - [DB設定](#db設定)
       - [project/settings.py](#projectsettingspy-1)
@@ -456,6 +457,224 @@ urlpatterns = [
 ### 参考
 
 - [チュートリアル](https://docs.djangoproject.com/ja/4.1/intro/tutorial03/)
+
+## POST(form)
+
+1. `forms.py`に記載する
+2. GET時にPython側でFormオブジェクトを作成する。
+3. htmlのclassはFormで定義する。
+4. `{{ form.value }}`
+5. idは`id_value`で作成される。(`getElementById`の引数にはこの値を渡す)
+
+`views.py`
+
+```python
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+
+from .forms import PullRequestForm
+# from django.http import HttpResponse
+
+# Create your views here.
+
+def index(request):
+    return render(request, 'app/index.html')
+
+def list_view(request):
+    return render(request, 'app/list.html')
+
+def register(request):
+    if request.method == 'POST':
+        form = PullRequestForm(request.POST)
+        if form.is_valid():
+        
+            st_pull_request_url = form.cleaned_data['st_pull_request_url']
+            print(st_pull_request_url)
+            print('target_branch' in form.cleaned_data)
+        else:
+            print(form.errors)
+        return HttpResponseRedirect('list')
+    else:
+        # getとして扱う
+        form = PullRequestForm()
+        return render(request, 'app/register.html', {'form': form})
+
+```
+
+`forms.py`
+
+```python
+from django import forms
+
+from dataclasses import dataclass
+
+class PullRequestForm(forms.Form):
+    repository = forms.CharField(
+        label='repository',
+        max_length=255,
+        widget=forms.TextInput(attrs={
+            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+            'readonly': True            
+        }))
+    title = forms.CharField(
+        label='title',
+        max_length=255,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+            'readonly': True            
+        }))
+    st_pull_request_url = forms.CharField(
+        label='st_pull_request_url',
+        max_length=1000,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+            'oninput': 'updateInputState()'
+        }))
+    e2e_uat_pull_request_url = forms.CharField(
+        label='e2e_uat_pull_request_url',
+        max_length=1000,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+            'readonly': True,
+            'oninput': 'updateInputState()'
+            }))
+    main_pull_request_url = forms.CharField(
+        label='main_pull_request_url',
+        max_length=1000,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+            'readonly': True,
+            'oninput': 'updateInputState()'
+        }))
+    source_branch = forms.CharField(
+        label='source_branch',
+        max_length=255,
+        widget=forms.TextInput(attrs={
+            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+            'readonly': True
+        }))
+    target_branch = forms.CharField(
+        label='target_branch',
+        max_length=255,
+        widget=forms.TextInput(attrs={
+            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+            'readonly': True
+        }))
+
+    pull_request_id: int
+```
+
+`regist.html`テンプレート
+
+```html
+{% extends "app/base.html" %}
+
+{% block title %}登録{% endblock %}
+
+{% block content %}
+
+{% load static %}
+<link href="{% static 'app/css/app.css' %}" rel="stylesheet">
+
+<div class="container mx-auto mt-10">
+    <form action="/app/register" method="post">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="repository" class="block text-gray-700 text-sm font-bold mb-2">リポジトリ:</label>
+            {{ form.repository }}
+        </div>
+        <div class="mb-4">
+            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">タイトル:</label>
+            {{ form.title }}
+        </div>
+        <div class="mb-4">
+            <label for="st_pull_request_url" class="block text-gray-700 text-sm font-bold mb-2">STプルリクエストURL:</label>
+            {{ form.st_pull_request_url }}
+        </div>
+        <div class="mb-4">
+            <label for="e2e_uat_pull_request_url" class="block text-gray-700 text-sm font-bold mb-2">E2E UATプルリクエストURL:</label>
+            {{ form.e2e_uat_pull_request_url }}
+        </div>
+        <div class="mb-4">
+            <label for="main_pull_request_url" class="block text-gray-700 text-sm font-bold mb-2">メインプルリクエストURL:</label>
+            {{ form.main_pull_request_url }}
+        </div>
+        <div class="flex mb-4">
+            <div class="w-1/2 pr-2">
+                <label for="source_branch" class="block text-gray-700 text-sm font-bold mb-2">ソースブランチ:</label>
+                {{ form.source_branch }}
+            </div>
+            <div class="w-1/2 pl-2">
+                <label for="target_branch" class="block text-gray-700 text-sm font-bold mb-2">ターゲットブランチ:</label>
+                {{ form.target_branch }}
+            </div>
+        </div>
+        <div class="mb-4">
+            <input type="submit" value="登録" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        </div>
+    </form>
+</div>
+
+<script>
+    function updateInputState() {
+        // STプルリクエストURLに値が入力された
+        const stUrl = document.getElementById('id_st_pull_request_url').value;
+        setDisable('id_e2e_uat_pull_request_url', stUrl);
+
+        // E2E UATプルリクエストURLに値が入力された
+        const e2eUrl = document.getElementById('id_e2e_uat_pull_request_url').value;
+        setDisable('id_main_pull_request_url', e2eUrl);
+
+        // メインプルリクエストURLに値が入力された
+        const mainUrl = document.getElementById('id_main_pull_request_url').value;
+
+        const url = mainUrl || e2eUrl || stUrl;
+        const repository = getRepositoryName(url);
+        const pullRequestId = getPullRequestId(url);
+
+        document.getElementById('id_repository').value = repository;
+
+        const branches = getBranches(url);
+        document.getElementById('id_target_branch').value = branches.target;
+        document.getElementById('id_source_branch').value = branches.source;
+
+    }
+    function getRepositoryName(url) {
+        // TODO : 後で書く
+        return 'SampleRepository'
+    }
+
+    function getPullRequestId(url) {
+        // TODO : 後で書く
+        const removeWord = "https://dev.azure.com/ittimfn/SampleProject/_git/SampleProject/pullrequest/"
+        return url.replace(removeWord, '')
+    }
+
+    function getBranches(url) {
+        // TODO : 後で書く
+        return {'source': 'develop', 'target': 'master'}
+    }
+    function setDisable(id, baseValue) {
+        console.info(id , baseValue)
+        const state = !baseValue;
+        console.info(state);
+
+        const element = document.getElementById(id);
+        console.info(element.value)
+        element.disabled = state;
+        element.readOnly = state;
+        if (state) {
+            element.value = "";
+        }
+    }
+
+</script>
+{% endblock %}
+```
 
 ## Modelを使う
 
