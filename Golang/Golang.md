@@ -492,3 +492,15 @@ func main() {
 ## 初めてのGo言語
 
 - [mushahiroyuki:lgo:Github](https://github.com/mushahiroyuki/lgo)
+    - インタフェース
+        - インターフェースを受け取り、構造体を返す
+        - [空インタフェース](https://github.com/mushahiroyuki/lgo/blob/main/example/ch07/ex0712b.go)
+            - any型のこと
+        - 暗黙のインタフェースによる依存性注入
+        - 依存性注入コードの生成(Wire)
+    - エラー処理
+        - [エラーと値](https://github.com/mushahiroyuki/lgo/blob/main/example/ch08/ex0805.go)
+        - [エラーのラップ](https://github.com/mushahiroyuki/lgo/blob/main/example/ch08/ex0806.go)
+        - [IsとAs](https://github.com/mushahiroyuki/lgo/blob/main/example/ch08/ex0807.go)
+        - [パニックとリカバー](https://github.com/mushahiroyuki/lgo/blob/main/example/ch08/ex0809.go)
+        - スタックトレース
