@@ -112,6 +112,7 @@
 - [bat.md](./Windows/bat.md)
 - [Shortcut](./Windows/Shortcut.md)
 - [Windows](./Windows/Windows.md)
+- [git bash](./Windows/git_bash.md)
 
 ## Java
 
