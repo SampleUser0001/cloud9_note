@@ -24,6 +24,8 @@
   - [起動引数を取得する](#起動引数を取得する)
   - [例外の扱い](#例外の扱い)
     - [センチネルエラー](#センチネルエラー)
+  - [パッケージのインポート](#パッケージのインポート)
+    - [例](#例)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -487,6 +489,56 @@ func main() {
 		os.Exit(0)
 	}
 }
+```
+
+## パッケージのインポート
+
+``` bash
+go mod init ${package}
+
+# ダウンロードするものがある場合実行
+go mod tidy
+```
+
+### 例
+
+`main.go`
+
+``` golang
+package main
+
+import "ittimfn/hoge"
+
+func main() {
+	hoge.PrintHoge()
+}
+```
+
+`hoge/hoge.go`
+
+``` golang
+package hoge
+
+func PrintHoge() {
+	println("hoge")
+}
+```
+
+``` bash
+go mod init ittimfn
+
+# 今回はローカルなので不要
+# go mod tidy
+
+go run main.go
+```
+
+`go.mod`
+
+``` bash
+module ittimfn
+
+go 1.21.5
 ```
 
 ## 初めてのGo言語
