@@ -6,6 +6,8 @@
   - [API\_KEYの払い出し](#api_keyの払い出し)
   - [API](#api)
     - [認証](#認証)
+    - [タスクの登録](#タスクの登録)
+    - [API一覧](#api一覧)
 
 ## 参考
 
@@ -43,3 +45,49 @@ services:
 ``` bash
 curl -u apikey:${OpenProject_API_KEY} ${API}
 ```
+
+### タスクの登録
+
+``` python
+import requests
+import json
+
+# APIエンドポイント
+url = "http://localhost:8080/api/v3/work_packages"
+
+# ヘッダー情報
+headers = {
+    "Content-Type": "application/json"
+}
+
+# 生成したAPI_KEY
+API_KEY='hogehoge'
+auth = ('apikey' , API_KEY)
+
+# タスクの詳細
+task = {
+    "subject": "新しいタスク",
+    "description": {
+        "raw": "タスクの詳細"
+    },
+    "_links": {
+        "project": {
+            "href": "/api/v3/projects/3"
+        },
+        "type": {
+            "href": "/api/v3/types/1"
+        }
+    }
+}
+
+# リクエストの送信
+response = requests.post(url, headers=headers, data=json.dumps(task), auth=auth)
+
+# レスポンスの表示
+print(response.json())
+
+```
+
+### API一覧
+
+- [API Endpoints : OpenProject](https://www.openproject.org/docs/api/endpoints/)
