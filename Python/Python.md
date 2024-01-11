@@ -75,6 +75,7 @@
         - [参考](#参考-6)
   - [ラムダ式](#ラムダ式)
     - [配列から特定要素を削除する](#配列から特定要素を削除する)
+  - [フォーマットを読み込んで置換する](#フォーマットを読み込んで置換する)
   - [ssh接続する](#ssh接続する)
 
 ## CSV読み込み
@@ -952,6 +953,40 @@ pyenv shell --unset
 ```python
 # 空文字を削除
 result_list = list(filter(lambda s: s != '', origin_list))
+```
+
+## フォーマットを読み込んで置換する
+
+至って普通。
+
+`config.json`
+
+```json
+{
+    "format" : "$hoge$"
+}
+```
+
+`app.py`
+
+```python
+import json
+
+# ファイルパス
+file_path = "config.json"
+
+# ファイルを読み込む
+with open(file_path, "r") as file:
+    config_data = json.load(file)
+
+# 読み込んだデータを表示する
+print(config_data)
+print(config_data["format"].replace("$hoge$", "fuga"))
+```
+
+```txt
+{'format': '$hoge$'}
+fuga
 ```
 
 ## ssh接続する
