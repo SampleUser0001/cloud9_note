@@ -9,6 +9,7 @@
     - [その2](#その2)
       - [注意点](#注意点)
   - [起動引数を使う](#起動引数を使う)
+  - [任意の引数を取得する](#任意の引数を取得する)
   - [関数を宣言/使用する](#関数を宣言使用する)
   - [ディレクトリ/ファイルの存在チェック](#ディレクトリファイルの存在チェック)
   - [部分文字列の取得](#部分文字列の取得)
@@ -103,6 +104,43 @@ echo $2
 ittimfn@DESKTOP-N4JLN1S:~/cloud9_note/tmp$ sh start.sh hoge piyo
 hoge
 piyo
+```
+
+## 任意の引数を取得する
+
+``` bash
+#!/bin/bash
+
+# オプションなしの場合の初期値
+aflag=0
+bflag=0
+bvalue=""
+
+while getopts 'ab:' OPTION; do
+  case "$OPTION" in
+    a)
+      aflag=1
+      ;;
+    b)
+      bflag=1
+      bvalue="$OPTARG"
+      ;;
+    ?)
+      echo "スクリプトの使い方: $(basename $0) [-a] [-b value]" >&2
+      exit 1
+      ;;
+  esac
+done
+
+# オプション -a が指定された場合のアクション
+if [ "$aflag" -eq 1 ]; then
+  echo "-a が指定されました。"
+fi
+
+# オプション -b が指定され、値が与えられた場合のアクション
+if [ "$bflag" -eq 1 ]; then
+  echo "-b が指定されました。値は ${bvalue} です。"
+fi
 ```
 
 ## 関数を宣言/使用する
@@ -534,4 +572,3 @@ cp -p ${original} ${target}
 ## 環境変数を指定する
 
 `.bash_profile`にexport付きで宣言する。
-
