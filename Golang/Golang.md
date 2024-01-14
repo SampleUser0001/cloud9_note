@@ -2,6 +2,8 @@
 
 - [Golang](#golang)
   - [モジュールの作成](#モジュールの作成)
+    - [Githubに登録する場合](#githubに登録する場合)
+    - [Githubに登録されているモジュールを使用する場合](#githubに登録されているモジュールを使用する場合)
   - [go install](#go-install)
   - [フォーマッタ](#フォーマッタ)
   - [lint(staticcheck)](#lintstaticcheck)
@@ -42,6 +44,19 @@ go build
 
 # 実行
 ./${module_name}
+```
+
+### Githubに登録する場合
+
+``` bash
+go mod init github.com/SampleUser0001/${reponame}
+```
+
+### Githubに登録されているモジュールを使用する場合
+
+``` bash
+go mod init ${project_name}
+go get github.com/SampleUser0001/${reponame}
 ```
 
 ## go install
