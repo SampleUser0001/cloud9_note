@@ -73,6 +73,8 @@
     - [切り替わらないとき](#切り替わらないとき)
       - [set by PYENV\_VERSION environment variable](#set-by-pyenv_version-environment-variable)
         - [参考](#参考-6)
+  - [sqlite3](#sqlite3)
+    - [バインドする](#バインドする)
   - [ラムダ式](#ラムダ式)
     - [配列から特定要素を削除する](#配列から特定要素を削除する)
   - [フォーマットを読み込んで置換する](#フォーマットを読み込んで置換する)
@@ -945,6 +947,15 @@ pyenv shell --unset
 ##### 参考
 
 - [[Sy] 「pyenv local」が効かない（バージョンがうまく切り替わってくれない）場合の対処 : Syntax Error.](https://utano.jp/entry/2019/02/pyenv-local-does-not-work/)
+
+## sqlite3
+
+### バインドする
+
+``` python
+cur.execute("select * from hoge_table where id = ?",(id))
+cur.execute("select * from hoge_table where id = :id",({"id": id}))
+```
 
 ## ラムダ式
 
