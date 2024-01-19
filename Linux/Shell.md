@@ -46,6 +46,7 @@
   - [BOMがついているUTF-8ファイルを作成する](#bomがついているutf-8ファイルを作成する)
   - [属性を維持してコピーする](#属性を維持してコピーする)
   - [環境変数を指定する](#環境変数を指定する)
+  - [コマンドの戻り値を取る](#コマンドの戻り値を取る)
 
 ## ディレクトリ配下のファイルでループする
 
@@ -572,3 +573,18 @@ cp -p ${original} ${target}
 ## 環境変数を指定する
 
 `.bash_profile`にexport付きで宣言する。
+
+## コマンドの戻り値を取る
+
+``` sh
+#!/bin/bash
+
+python app.py $1 $2
+retval=$?
+
+if [ $retval -eq 0 ]; then
+    echo "Success"
+else
+    echo "Failure"
+fi
+```
