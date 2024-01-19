@@ -20,6 +20,7 @@
     - [コンテキストコンシューマー](#コンテキストコンシューマー)
     - [参考](#参考)
   - [useEffect](#useeffect)
+  - [Tailwindを導入する](#tailwindを導入する)
   - [勉強用リポジトリ](#勉強用リポジトリ)
     - [Checkbox](#checkbox)
   - [参考ソース](#参考ソース)
@@ -344,6 +345,39 @@ export default function App() {
         </>
     );
 }
+```
+
+## Tailwindを導入する
+
+``` bash
+npm install tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+`tailwind.config.js`
+
+``` javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}", // Reactコンポーネントのパス
+    // 他のファイルパスもここに追加できます
+  ],
+  // その他の設定...
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+`src/index.css`
+1行目に書く。
+``` css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 ```
 
 ## 勉強用リポジトリ
