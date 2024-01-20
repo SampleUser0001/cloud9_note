@@ -616,3 +616,4 @@ func main() {
         - スタックトレース
     - ゴルーチン
         - [select](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1002.go)
+        - [キャンセレーション関数](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1008.go)
