@@ -29,6 +29,7 @@
   - [パッケージのインポート](#パッケージのインポート)
     - [例](#例)
   - [ゴルーチン](#ゴルーチン)
+    - [doneチャネルパターン](#doneチャネルパターン)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -561,6 +562,43 @@ go 1.21.5
 
 - [ex1000.go](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1000.go)
 
+### doneチャネルパターン
+
+``` golang
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func doSomething(i int, done <-chan bool) {
+	for {
+		select {
+		case <-done:
+			fmt.Printf("処理 %d を終了\n", i)
+			return
+		default:
+			// 通常の処理
+			fmt.Printf("処理 %d 実行中\n", i)
+			time.Sleep(time.Second) // 何かの処理を想定
+		}
+	}
+}
+
+func main() {
+	done := make(chan bool)
+	for i := 0; i < 3; i++ {
+		go doSomething(i, done)
+	}
+
+	time.Sleep(3 * time.Second) // 何かの処理を想定
+	close(done)                 // すべてのゴルーチンに終了を通知
+	time.Sleep(time.Second)     // ゴルーチンの終了を待機
+}
+
+```
+
 ## 初めてのGo言語
 
 - [mushahiroyuki:lgo:Github](https://github.com/mushahiroyuki/lgo)
@@ -576,3 +614,5 @@ go 1.21.5
         - [IsとAs](https://github.com/mushahiroyuki/lgo/blob/main/example/ch08/ex0807.go)
         - [パニックとリカバー](https://github.com/mushahiroyuki/lgo/blob/main/example/ch08/ex0809.go)
         - スタックトレース
+    - ゴルーチン
+        - [select](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1002.go)
