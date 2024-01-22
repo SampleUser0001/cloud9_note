@@ -235,6 +235,7 @@
 - [MQ](./other/IBM_MQ.md)
 - [形態素解析](./other/MorphologicalAnalysis.md)
 - [Android](./other/Android.md)
+- [SystemWalker OperationManager](./other/SystemWalker_OperationManager.md)
 
 ### 外部へのリンク
 
