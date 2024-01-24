@@ -538,3 +538,23 @@ git ls-files | while read file; do
     echo -e "$file\t$(git log -1 --format=$'%ai\t%s' -- "$file")"
 done
 ```
+
+別解
+
+``` bash
+git ls-tree -r master --name-only | while read file; do
+    # 各ファイルに対する最後のコミットの情報を取得
+    commit_info=$(git log -1 --format="%ai|%s" -- "$file")
+    
+    # コミット日時とメッセージを分割
+    commit_date=$(echo $commit_info | cut -d'|' -f1)
+    commit_message=$(echo $commit_info | cut -d'|' -f2)
+    
+    # コミット日時を +0900 タイムゾーンに変換
+    commit_date_converted=$(date -d "$commit_date" '+%Y-%m-%d %H:%M:%S %z' -d '+9 hours')
+    
+    # ファイルパス、変換後のコミット日時、コミットメッセージを出力
+    echo "$file $commit_date_converted \"$commit_message\""
+done
+
+```
