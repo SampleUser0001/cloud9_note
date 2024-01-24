@@ -61,6 +61,7 @@
     - [Windows -\> Linux](#windows---linux)
     - [Linux -\> Windows](#linux---windows)
     - [参考](#参考-3)
+  - [各ファイルの直近のコミット日とコミットコメントを取得する](#各ファイルの直近のコミット日とコミットコメントを取得する)
 
 ## .gitignoreについて
 
@@ -529,3 +530,11 @@ win_path=$(echo ${linux_path} | sed 's@^/\([a-zA-z]\)@\U\1:@' | sed 's@/@\\@g'
 ### 参考
 
 - [Windows GitBash でパスを Windows 形式と Linux 形式とで相互変換する : Neo's World](https://neos21.net/blog/2020/04/07-01.html#google_vignette)
+
+## 各ファイルの直近のコミット日とコミットコメントを取得する
+
+``` bash
+git ls-files | while read file; do
+    echo -e "$file\t$(git log -1 --format=$'%ai\t%s' -- "$file")"
+done
+```
