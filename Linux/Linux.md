@@ -22,6 +22,7 @@
     - [先頭に追記する](#先頭に追記する)
     - [指定した個所を別のファイルの内容に置換する](#指定した個所を別のファイルの内容に置換する)
     - [元のファイルの文字列を置換する](#元のファイルの文字列を置換する)
+  - [列単位で編集する(awk)](#列単位で編集するawk)
   - [scpコマンド](#scpコマンド)
     - [scp 参考](#scp-参考)
   - [ファイル名にDateを使う](#ファイル名にdateを使う)
@@ -246,6 +247,21 @@ $ sed -e '/${basicauth}/r basicauth' file1 -e '/${basicauth}/d'
 ``` sh
 sed -i 's/${変換前}/${変換後}/g' ${ファイルパス}
 ```
+
+## 列単位で編集する(awk)
+
+```bash
+#!/bin/bash
+
+input_file="file"
+output_file="output.csv"
+
+awk -F' ' '{ print $1 "," toupper($2) "," $3 }' "$input_file" > "$output_file"
+```
+
+- -Fで区切り文字を指定。
+- printで出力する。$1, $2, $3 ...で項目を選択。
+- toupperはawkの関数。
 
 ## scpコマンド
 
