@@ -385,6 +385,14 @@ iconv --f sjis -t utf8 ${変換対象ファイル}
 find . -type f | xargs -I{} bash -c "iconv --f sjis -t utf8 {} > iconv_utf8_{}
 ```
 
+別解
+
+``` bash
+find . -type f | while read file; do
+    echo $file
+done
+```
+
 ## サービスの登録(systemd)(Ubuntu)
 
 ### 登録方法
