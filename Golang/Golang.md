@@ -30,6 +30,7 @@
     - [例](#例)
   - [ゴルーチン](#ゴルーチン)
     - [doneチャネルパターン](#doneチャネルパターン)
+  - [tsv読み込み](#tsv読み込み)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -597,6 +598,63 @@ func main() {
 	time.Sleep(time.Second)     // ゴルーチンの終了を待機
 }
 
+```
+
+## tsv読み込み
+
+```golang
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+type Item struct {
+	id    int
+	value string
+}
+
+func main() {
+	argsIndex := 1
+	filePath := os.Args[argsIndex]
+	argsIndex++
+
+	fp, err := os.Open(filePath)
+	if err != nil {
+		fmt.Println("ファイルの読み込みエラー:", err)
+	}
+	defer fp.Close()
+
+	scanner := bufio.NewScanner(fp) // 1行ずつ読み込む
+	var itemList []Item
+	for scanner.Scan() {
+		splited := strings.Split(scanner.Text(), "\t")
+		id, _ := strconv.Atoi(splited[0])
+		item := Item{
+			id:    id,
+			value: splited[1],
+		}
+		itemList = append(itemList, item)
+	}
+
+	fmt.Println(itemList)
+}
+```
+
+```txt
+$ cat file.tsv
+1       hoge
+2       piyo
+3       fuga
+```
+
+``` bash
+$ go run app.go file.tsv
+[{1 hoge} {2 piyo} {3 fuga}]
 ```
 
 ## 初めてのGo言語
