@@ -542,7 +542,7 @@ done
 別解
 
 ``` bash
-git ls-tree -r master --name-only | while read file; do
+git ls-tree -r main --name-only | while read file; do
     # 各ファイルに対する最後のコミットの情報を取得
     commit_info=$(git log -1 --format="%ai|%s" -- "$file")
     
@@ -550,11 +550,11 @@ git ls-tree -r master --name-only | while read file; do
     commit_date=$(echo $commit_info | cut -d'|' -f1)
     commit_message=$(echo $commit_info | cut -d'|' -f2)
     
-    # コミット日時を +0900 タイムゾーンに変換
-    commit_date_converted=$(date -d "$commit_date" '+%Y-%m-%d %H:%M:%S %z' -d '+9 hours')
+    # コミット日時を システムのタイムゾーンに変換
+    commit_date_converted=$(date -d "$commit_date" '+%Y-%m-%d %H:%M:%S %z')
     
     # ファイルパス、変換後のコミット日時、コミットメッセージを出力
-    echo "$file $commit_date_converted \"$commit_message\""
+    echo "$file\t$commit_date_converted\t\"$commit_message\""
 done
 
 ```
