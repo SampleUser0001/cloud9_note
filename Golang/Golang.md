@@ -23,6 +23,7 @@
   - [interface](#interface)
     - [関数をリストアップする](#関数をリストアップする)
   - [jsonファイルの読み込み](#jsonファイルの読み込み)
+    - [構造体に変換する](#構造体に変換する)
   - [起動引数を取得する](#起動引数を取得する)
   - [例外の扱い](#例外の扱い)
     - [センチネルエラー](#センチネルエラー)
@@ -416,6 +417,75 @@ func main() {
 ## jsonファイルの読み込み
 
 - [ex0712e.go : mushahiroyuki:lgo:Github](https://github.com/mushahiroyuki/lgo/blob/main/example/ch07/ex0712e.go)
+
+### 構造体に変換する
+
+``` golang
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"os"
+)
+
+type Data struct {
+	Id        string
+	Name      string
+	Image     Detail
+	Thumbnail Detail
+	// jsonと同じ項目を定義する。ただし、変数名は大文字。
+}
+type Detail struct {
+	Url    string
+	Width  int
+	Height int
+}
+
+func main() {
+	filePath := "data.json"
+
+	// Read the JSON file
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Unmarshal the JSON data into a struct
+	var jsonData Data
+	err = json.Unmarshal(data, &jsonData)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Print the data
+	fmt.Println(jsonData)
+}
+```
+
+`data.json`
+
+``` json
+{
+    "id": "0001",
+    "name": "Cake",
+    "image": {
+        "url": "images/pict0001.jpg",
+        "width": 640,
+        "height": 480
+    },
+    "thumbnail": {
+        "url": "thumb/pict0001.jpg",
+        "width": 64,
+        "height": 64
+    }
+}
+```
+
+``` txt
+{0001 Cake {images/pict0001.jpg 640 480} {thumb/pict0001.jpg 64 64}}
+```
 
 ## 起動引数を取得する
 
