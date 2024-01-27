@@ -31,6 +31,9 @@
   - [ゴルーチン](#ゴルーチン)
     - [doneチャネルパターン](#doneチャネルパターン)
   - [tsv読み込み](#tsv読み込み)
+  - [時間](#時間)
+    - [time.Now()](#timenow)
+    - [文字列 -\> Time](#文字列---time)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -655,6 +658,56 @@ $ cat file.tsv
 ``` bash
 $ go run app.go file.tsv
 [{1 hoge} {2 piyo} {3 fuga}]
+```
+
+## 時間
+
+### time.Now()
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	currentTime := time.Now()
+	// 2006-01-02 15:04:05でフォーマットする。
+	fmt.Println(currentTime.Format("2006-01-02 15:04:05"))
+}
+```
+
+```
+2024-01-27 22:34:30
+```
+
+### 文字列 -> Time
+
+```golang
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	// TimeZoneがないと、変換時にUTCとして扱われる。
+	str := "2024/01/27 22:27:30 +0900"
+	t, err := time.Parse("2006/01/02 15:04:05 -0700", str)
+	if err != nil {
+		fmt.Println("Error parsing time:", err)
+		return
+	}
+	fmt.Println("Parsed time:", t)
+}
+
+```
+
+```txt
+Parsed time: 2024-01-27 22:27:30 +0900 JST
 ```
 
 ## 初めてのGo言語
