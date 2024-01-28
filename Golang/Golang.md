@@ -24,6 +24,7 @@
     - [関数をリストアップする](#関数をリストアップする)
   - [jsonファイルの読み込み](#jsonファイルの読み込み)
     - [構造体に変換する](#構造体に変換する)
+    - [配列の場合](#配列の場合)
   - [起動引数を取得する](#起動引数を取得する)
   - [例外の扱い](#例外の扱い)
     - [センチネルエラー](#センチネルエラー)
@@ -485,6 +486,24 @@ func main() {
 
 ``` txt
 {0001 Cake {images/pict0001.jpg 640 480} {thumb/pict0001.jpg 64 64}}
+```
+
+### 配列の場合
+
+``` golang
+	jsonData := []Data{}
+
+	err = json.Unmarshal(data, &jsonData)
+	if err != nil {
+		fmt.Println("JSONデータのパースエラー:", err)
+		return
+	}
+
+	// // データを表示する
+	for _, item := range jsonData {
+		fmt.Println(item.Id, item.Value)
+	}
+
 ```
 
 ## 起動引数を取得する
