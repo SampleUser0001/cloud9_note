@@ -37,6 +37,7 @@
   - [時間](#時間)
     - [time.Now()](#timenow)
     - [文字列 -\> Time](#文字列---time)
+    - [文字列 -\> Duration](#文字列---duration)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -854,6 +855,45 @@ func main() {
 
 ```txt
 Parsed time: 2024-01-27 22:27:30 +0900 JST
+```
+
+### 文字列 -> Duration
+
+``` golang
+func convertToDuration(timeString string) (time.Duration, error) {
+	splited := strings.Split(timeString, ":")
+	var hour, minute, second int = 0, 0, 0
+	var err error
+	if len(splited) == 2 {
+		// 分秒
+		hour = 0
+		minute, err = strconv.Atoi(splited[0])
+		if err != nil {
+			return 0, fmt.Errorf("minute is not number")
+		}
+		second, err = strconv.Atoi(splited[1])
+		if err != nil {
+			return 0, fmt.Errorf("second is not number")
+		}
+	} else if len(splited) == 3 {
+		// 時分秒
+		hour, err = strconv.Atoi(splited[0])
+		if err != nil {
+			return 0, fmt.Errorf("hour is not number")
+		}
+		minute, err = strconv.Atoi(splited[1])
+		if err != nil {
+			return 0, fmt.Errorf("minute is not number")
+		}
+		second, err = strconv.Atoi(splited[2])
+		if err != nil {
+			return 0, fmt.Errorf("second is not number")
+		}
+	}
+
+	duration := time.Duration(hour)*time.Hour + time.Duration(minute)*time.Minute + time.Duration(second)*time.Second
+	return duration, nil
+}
 ```
 
 ## 初めてのGo言語
