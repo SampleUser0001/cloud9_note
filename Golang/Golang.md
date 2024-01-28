@@ -33,6 +33,7 @@
   - [ゴルーチン](#ゴルーチン)
     - [doneチャネルパターン](#doneチャネルパターン)
   - [tsv読み込み](#tsv読み込み)
+    - [別解](#別解)
   - [時間](#時間)
     - [time.Now()](#timenow)
     - [文字列 -\> Time](#文字列---time)
@@ -747,6 +748,62 @@ $ cat file.tsv
 ``` bash
 $ go run app.go file.tsv
 [{1 hoge} {2 piyo} {3 fuga}]
+```
+
+### 別解
+
+```golang
+package main
+
+import (
+	"encoding/csv"
+	"fmt"
+	"os"
+)
+
+type Comment struct {
+	Time    string
+	Content string
+}
+
+func main() {
+	// Open the comments.tsv file
+	file, err := os.Open("comments.tsv")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer file.Close()
+
+	// Read the file as a CSV
+	reader := csv.NewReader(file)
+	reader.Comma = '\t'
+
+	// Read all the records
+	records, err := reader.ReadAll()
+	if err != nil {
+		fmt.Println("Error reading file:", err)
+		return
+	}
+
+	// Create a slice to store the comments
+	comments := make([]Comment, 0)
+
+	// Iterate over the records and create Comment objects
+	for _, record := range records {
+		comment := Comment{
+			Time:    record[0],
+			Content: record[1],
+		}
+		comments = append(comments, comment)
+	}
+
+	// Print the comments
+	for _, comment := range comments {
+		fmt.Println(comment)
+	}
+}
+
 ```
 
 ## 時間
