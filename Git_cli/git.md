@@ -47,6 +47,7 @@
     - [参考](#参考-2)
   - [リモートリポジトリと紐づける](#リモートリポジトリと紐づける)
     - [Github](#github)
+  - [行単位でコミットする](#行単位でコミットする)
   - [設定](#設定)
     - [改行コード](#改行コード)
   - [コンソールにブランチ名を表示する](#コンソールにブランチ名を表示する)
@@ -449,6 +450,15 @@ git ls-files . | xargs -I@ bash -c 'echo "$(git log -1 --format="%cd" --date=for
 git remote add origin git@github.com:SampleUser0001/${プロジェクト名}.git
 git branch -M main
 git push -u origin main
+```
+
+## 行単位でコミットする
+
+実際には行単位ではなく、差分単位だが……  
+
+``` bash
+# 実行すると、差分をステージングするか順番に聞かれる。
+git add -p
 ```
 
 ## 設定
