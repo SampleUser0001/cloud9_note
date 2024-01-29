@@ -38,6 +38,8 @@
     - [time.Now()](#timenow)
     - [文字列 -\> Time](#文字列---time)
     - [文字列 -\> Duration](#文字列---duration)
+  - [http](#http)
+    - [Client](#client)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -894,6 +896,72 @@ func convertToDuration(timeString string) (time.Duration, error) {
 	duration := time.Duration(hour)*time.Hour + time.Duration(minute)*time.Minute + time.Duration(second)*time.Second
 	return duration, nil
 }
+```
+
+## http
+
+### Client
+
+``` golang
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"net/http"
+	"time"
+)
+
+type User struct {
+	UserId    int    `json:"userId"`
+	Id        int    `json:"id"`
+	Title     string `json:"title"`
+	Completed bool   `json:"completed"`
+}
+
+func (u User) String() string {
+	return fmt.Sprintf("User{UserId: %d, Id: %d, Title: %s, Completed: %t}", u.UserId, u.Id, u.Title, u.Completed)
+}
+
+func main() {
+	client := http.Client{
+		Timeout: 10 * time.Second,
+	}
+
+	url := "https://jsonplaceholder.typicode.com/todos/1"
+	req, err := http.NewRequestWithContext(
+		context.Background(),
+		http.MethodGet,
+		url,
+		nil,
+	)
+
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+
+	defer res.Body.Close()
+
+	if res.StatusCode != http.StatusOK {
+		panic(fmt.Sprintf("status : %v", res.Status))
+	}
+
+	fmt.Println("status : ", res.Status)
+	var data User
+	err = json.NewDecoder(res.Body).Decode(&data)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("data : ", data)
+}
+
 ```
 
 ## 初めてのGo言語
