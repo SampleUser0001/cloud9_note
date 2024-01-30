@@ -42,6 +42,7 @@
   - [http.Client](#httpclient)
   - [http.Server](#httpserver)
     - [ルーティング](#ルーティング)
+    - [jsonを返す](#jsonを返す)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -1068,6 +1069,37 @@ func main() {
 
 	// http://localhost:8080/person/greet
 	// http://localhost:8080/cat/greet
+}
+```
+
+### jsonを返す
+
+``` golang
+func generateMux(message string) (*http.ServeMux, error) {
+
+	greeting := Greeting{Message: message}
+	jsonData, err := json.Marshal(greeting)
+	if err != nil {
+		fmt.Println("JSON encoding error:", err)
+		return nil, err
+	}
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/greet",
+		func(w http.ResponseWriter, r *http.Request) {
+			w.Write([]byte(jsonData))
+		})
+	return mux, nil
+}
+```
+
+```json
+ $ curl http://localhost:8080/cat/greet | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    25  100    25    0     0  97276      0 --:--:-- --:--:-- --:--:-- 25000
+{
+  "message": "Hello Cat!!"
 }
 ```
 
