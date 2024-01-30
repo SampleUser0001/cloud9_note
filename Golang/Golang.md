@@ -38,8 +38,9 @@
     - [time.Now()](#timenow)
     - [文字列 -\> Time](#文字列---time)
     - [文字列 -\> Duration](#文字列---duration)
-  - [http](#http)
-    - [Client](#client)
+  - [http.Client](#httpclient)
+  - [http.Server](#httpserver)
+    - [ルーティング](#ルーティング)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -898,9 +899,7 @@ func convertToDuration(timeString string) (time.Duration, error) {
 }
 ```
 
-## http
-
-### Client
+## http.Client
 
 ``` golang
 package main
@@ -964,6 +963,74 @@ func main() {
 
 ```
 
+## http.Server
+
+```golang
+package main
+
+import (
+	"net/http"
+	"time"
+)
+
+type HelloHandler struct{}
+
+func (handler HelloHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hello World"))
+}
+
+func main() {
+	server := http.Server{
+		Addr:         ":8080",
+		ReadTimeout:  30 * time.Second,
+		WriteTimeout: 30 * time.Second,
+		IdleTimeout:  30 * time.Second,
+		Handler:      HelloHandler{},
+	}
+
+	err := server.ListenAndServe()
+	if err != nil {
+		if err == http.ErrServerClosed {
+			panic(err)
+		}
+	}
+}
+```
+
+### ルーティング
+
+``` golang
+package main
+
+import (
+	"log"
+	"net/http"
+)
+
+func generateMux(message string) (*http.ServeMux, error) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/greet",
+		func(w http.ResponseWriter, r *http.Request) {
+			w.Write([]byte(message + "\n"))
+		})
+	return mux, nil
+}
+
+func main() {
+	person, _ := generateMux("Hello Person")
+	cat, _ := generateMux("Hello Cat!!")
+
+	mux := http.NewServeMux()
+	mux.Handle("/person/", http.StripPrefix("/person", person))
+	mux.Handle("/cat/", http.StripPrefix("/cat", cat))
+
+	log.Fatal(http.ListenAndServe(":8080", mux))
+
+	// http://localhost:8080/person/greet
+	// http://localhost:8080/cat/greet
+}
+```
+
 ## 初めてのGo言語
 
 - [mushahiroyuki:lgo:Github](https://github.com/mushahiroyuki/lgo)
@@ -984,6 +1051,8 @@ func main() {
         - [キャンセレーション関数](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1008.go)
         - [バックプレッシャ](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1010.go)
         - [selectにおけるcaseの無効化](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1010.5.go)
-        - [タイムアウト]((https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1011.go))
+        - [タイムアウト](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1011.go)
         - [WaitGroupの利用](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1012.go)
         - [コードを一度だけ実行](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1014.go)
+    - Server
+        - [ミドルウェア](https://github.com/mushahiroyuki/lgo/blob/main/example/ch11/4http/http04.go)
