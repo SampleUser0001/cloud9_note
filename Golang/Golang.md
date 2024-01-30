@@ -25,6 +25,7 @@
   - [jsonファイルの読み込み](#jsonファイルの読み込み)
     - [構造体に変換する](#構造体に変換する)
     - [配列の場合](#配列の場合)
+  - [構造体をjsonに変換する](#構造体をjsonに変換する)
   - [起動引数を取得する](#起動引数を取得する)
   - [例外の扱い](#例外の扱い)
     - [センチネルエラー](#センチネルエラー)
@@ -509,6 +510,45 @@ func main() {
 		fmt.Println(item.Id, item.Value)
 	}
 
+```
+
+## 構造体をjsonに変換する
+
+``` golang
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type Person struct {
+	Id   int    `json:"id"`
+	Name string `json:"name"`
+}
+
+func main() {
+	person := Person{
+		Id:   1,
+		Name: "John Doe",
+	}
+
+	jsonData, err := json.Marshal(person)
+	if err != nil {
+		fmt.Println("JSON encoding error:", err)
+		return
+	}
+
+	fmt.Println(string(jsonData))
+}
+```
+
+``` json
+$ go run app.go | jq
+{
+  "id": 1,
+  "name": "John Doe"
+}
 ```
 
 ## 起動引数を取得する
