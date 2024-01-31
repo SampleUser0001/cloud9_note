@@ -18,6 +18,7 @@
     - [テスト対象](#テスト対象)
     - [テストクラス](#テストクラス)
     - [参考](#参考-2)
+  - [メソッドが呼ばれた回数を確認する](#メソッドが呼ばれた回数を確認する)
 
 ## 基本
 
@@ -308,3 +309,10 @@ public class SampleControllerTest {
 ### 参考
 
 - [GetPowerMock:SampleUser0001:Github](https://github.com/SampleUser0001/GetPowerMock)
+
+## メソッドが呼ばれた回数を確認する
+
+`Mockito.spy`を使用して、インスタンスを生成する。  
+生成したインスタンスを使ってメソッドを実行することで、回数がカウントできるようになる。
+
+- [ControllerTest.java:JUnit_Verify:SampleUser0001](https://github.com/SampleUser0001/JUnit_Verify/blob/main/src/test/java/ittimfn/sample/junit/controller/ControllerTest.java)
