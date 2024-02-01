@@ -15,6 +15,8 @@
   - [Branch Security](#branch-security)
     - [画面遷移](#画面遷移)
   - [Branch Policy](#branch-policy)
+    - [概要](#概要)
+    - [画面遷移](#画面遷移-1)
   - [Branch Control](#branch-control)
   - [Pipeline Permission](#pipeline-permission)
   - [プルリクエストApprove後にpushした場合](#プルリクエストapprove後にpushした場合)
@@ -98,6 +100,30 @@ PullRequest作成時、Descriptionの右に「Add a template」が出現する�
 2. Allタブ -> ブランチ右ハンバーガー -> Branch Security
 
 ## Branch Policy
+
+### 概要
+
+**Q. Branch Policyは何を設定するメニューですか？**
+
+ChatGPT 4による回答。
+
+Azure DevOpsの「Branch Policy」は、特定のブランチに対して適用される一連のルールや要件を設定するためのメニューです。これらのポリシーは、コード品質の保持、コードレビューの強制、コードの統合プロセスの管理など、開発プロセスの一貫性と品質を確保するために使用されます。主なBranch Policyの設定項目には以下のようなものがあります：
+
+1. **Require a Minimum Number of Reviewers**: このポリシーを有効にすると、プルリクエストが完了する前に特定の数のレビューアによる承認が必要になります。これにより、コードレビューの品質を保証します。
+
+2. **Check for Linked Work Items**: このポリシーでは、プルリクエストが完了する前に、関連するワークアイテムへのリンクが必要になります。これにより、コードの変更とワークアイテムの追跡を関連付けることができます。
+
+3. **Check for Comment Resolution**: このポリシーを有効にすると、プルリクエスト内のすべてのコメントが解決されるまでマージができなくなります。
+
+4. **Enforce a Merge Strategy**: 特定のマージ戦略（例：スクワッシュマージ、リベースマージ）を強制します。これにより、コードベースの整合性と履歴の清潔さを保つことができます。
+
+5. **Build Validation**: プルリクエストがマージされる前に、自動ビルドとテストが成功することを要求します。これにより、新たにマージされるコードが既存のコードベースと互換性があり、問題を引き起こさないことを保証します。
+
+6. **Require Branch to be Up to Date**: プルリクエストがマージされる前に、対象のブランチが最新の状態に保たれていることを要求します。
+
+これらのポリシーは、チームやプロジェクトのニーズに応じてカスタマイズし、プルリクエストのプロセスを効果的に管理するために設定されます。Branch Policyは、コードの品質を維持し、開発プロセスを標準化するための重要なツールです。
+
+### 画面遷移
 
 1. Project Setting(左下) -> Repositories -> リポジトリクリック
 2. Policiesタブ -> Branch Policy -> ブランチクリック
