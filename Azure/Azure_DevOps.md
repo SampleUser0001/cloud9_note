@@ -145,7 +145,8 @@ Azure DevOpsの「Branch Policy」は、特定のブランチに対して適用�
 
 ## Branch Control
 
-Azure PipelineでAgentサーバにビルド結果を配置することを認めるかどうかの設定。
+Azure Pipeline実行時に、どの環境の何を許可するかを設定する。  
+(VMにSSH接続を許可する等。)
 
 1. Project Setting -> Pipelines -> Service Connections
 2. 対象のサービスを選択
