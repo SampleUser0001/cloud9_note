@@ -11,6 +11,7 @@
     - [dataclass](#dataclass)
       - [Simple](#simple)
       - [List](#list)
+  - [ディレクトリ配下を再帰的に検索する](#ディレクトリ配下を再帰的に検索する)
   - [\_\_init\_\_をオーバーロードする](#__init__をオーバーロードする)
   - [dataclassの初期化](#dataclassの初期化)
   - [Enumの実装例](#enumの実装例)
@@ -301,6 +302,16 @@ import json
 with open("sample.json", "r") as fp:
     json_data = json.load(fp=fp)
     print([JsonModel.from_dict(model) for model in json_data])
+```
+
+## ディレクトリ配下を再帰的に検索する
+
+```python 
+import glob
+
+files = glob.glob("./**/*.py", recursive=True)
+for file in files:
+    print(file)
 ```
 
 ## __init__をオーバーロードする
