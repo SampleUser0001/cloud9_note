@@ -7,6 +7,7 @@
     - [ヘッダ行を読み飛ばす](#ヘッダ行を読み飛ばす)
   - [普通のファイル読み込み](#普通のファイル読み込み)
   - [csv -\> json](#csv---json)
+    - [csvもどきを読み込む](#csvもどきを読み込む)
   - [jsonを読み込む](#jsonを読み込む)
     - [dict](#dict)
     - [dataclass](#dataclass)
@@ -227,6 +228,25 @@ df_data.to_json('data.json', orient='records')
 
 ```json
 [{"a":"hoge","b":"piyo","b.1":1,"c":"fuga"},{"a":"aaa","b":"bb","b.1":2,"c":"ccc"}]
+```
+
+### csvもどきを読み込む
+
+[FakeCSV_convert_to_Json](https://github.com/SampleUser0001/FakeCSV_convert_to_Json)
+
+こういうやつだが・・・  
+**こんなファイルを作ってはいけない！！**  
+**これはCSVではない！！**  
+作りたいのであれば別ファイルに分けるべき。
+
+``` csv
+PATTERN_A
+a,b,b,c
+hoge,piyo,1,fuga
+aaa,bb,2,ccc
+PATTERN_B
+a,a,b,c,c
+hoge,1,piyo,fuga,2
 ```
 
 ## jsonを読み込む
