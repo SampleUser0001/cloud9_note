@@ -6,6 +6,7 @@
     - [Util.py](#utilpy)
     - [ヘッダ行を読み飛ばす](#ヘッダ行を読み飛ばす)
   - [普通のファイル読み込み](#普通のファイル読み込み)
+  - [csv -\> json](#csv---json)
   - [jsonを読み込む](#jsonを読み込む)
     - [dict](#dict)
     - [dataclass](#dataclass)
@@ -200,6 +201,32 @@ def import_format():
             return_list.append(line)
     return return_list
 
+```
+
+## csv -> json
+
+pandasを使用する。  
+（当初はcsvに重複する項目があった場合、json側はリストにするつもりだったが未確認。）
+
+`data.csv`
+
+``` csv
+a,b,b,c
+hoge,piyo,1,fuga
+aaa,bb,2,ccc
+```
+
+```python
+import pandas as pd
+
+df_data = pd.read_csv('data.csv')
+df_data.to_json('data.json', orient='records')
+```
+
+`data.json`
+
+```json
+[{"a":"hoge","b":"piyo","b.1":1,"c":"fuga"},{"a":"aaa","b":"bb","b.1":2,"c":"ccc"}]
 ```
 
 ## jsonを読み込む
