@@ -4,6 +4,7 @@
   - [リクエストヘッダを付与する](#リクエストヘッダを付与する)
   - [ログイン情報を渡す](#ログイン情報を渡す)
   - [進捗を非表示にする](#進捗を非表示にする)
+  - [POST](#post)
 
 
 ## リクエストヘッダを付与する
@@ -22,4 +23,10 @@ curl ${user}:${token} ${url}
 
 ``` bash
 curl -s ${url}
+```
+
+## POST
+
+``` bash
+curl -X POST -H "Content-Type: application/json" -d '{"key":"Person", "level":1}' http://localhost:8080/person/greet 
 ```
