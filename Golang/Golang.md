@@ -1075,6 +1075,19 @@ func main() {
 ### jsonを返す
 
 ``` golang
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+)
+
+type Greeting struct {
+	Message string
+}
+
 func generateMux(message string) (*http.ServeMux, error) {
 
 	greeting := Greeting{Message: message}
@@ -1090,6 +1103,19 @@ func generateMux(message string) (*http.ServeMux, error) {
 			w.Write([]byte(jsonData))
 		})
 	return mux, nil
+}
+func main() {
+	person, _ := generateMux("Hello Person")
+	cat, _ := generateMux("Hello Cat!!")
+
+	mux := http.NewServeMux()
+	mux.Handle("/person/", http.StripPrefix("/person", person))
+	mux.Handle("/cat/", http.StripPrefix("/cat", cat))
+
+	log.Fatal(http.ListenAndServe(":8080", mux))
+
+	// http://localhost:8080/person/greet
+	// http://localhost:8080/cat/greet
 }
 ```
 
