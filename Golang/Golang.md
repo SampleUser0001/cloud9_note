@@ -43,6 +43,7 @@
   - [http.Server](#httpserver)
     - [ルーティング](#ルーティング)
     - [jsonを返す](#jsonを返す)
+    - [POST](#post)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -1072,6 +1073,8 @@ func main() {
 }
 ```
 
+- [ch11/4http/http03.go](https://github.com/mushahiroyuki/lgo/blob/main/example/ch11/4http/http03.go)
+
 ### jsonを返す
 
 ``` golang
@@ -1126,6 +1129,150 @@ func main() {
 100    25  100    25    0     0  97276      0 --:--:-- --:--:-- --:--:-- 25000
 {
   "message": "Hello Cat!!"
+}
+```
+
+### POST
+
+``` golang
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+)
+
+type Greeting struct {
+	Message string
+}
+
+type Tension struct {
+	Message string
+	Level   int
+}
+
+var tensionMap map[string]Tension
+
+func (t Tension) getMessage(key string) string {
+	message := "Hello " + t.Message
+	for i := 0; i < t.Level; i++ {
+		message += "!"
+	}
+	return message
+}
+
+func tensionMapSetUp(name string, level int) {
+	if tensionMap == nil {
+		tensionMap = make(map[string]Tension)
+	}
+	if _, ok := tensionMap[name]; ok {
+		return // already set up
+	} else {
+		tensionMap[name] = Tension{Message: name, Level: level}
+	}
+
+}
+
+func httpGet(w http.ResponseWriter, key string) {
+	tension := tensionMap[key]
+	greeting := Greeting{Message: tension.getMessage(key)}
+	jsonData, err := json.Marshal(greeting)
+	if err != nil {
+		fmt.Println("JSON encoding error:", err)
+	}
+	w.Write([]byte(jsonData))
+}
+
+func httpPost(w http.ResponseWriter, r *http.Request, key string) {
+	type PostTension struct {
+		Level int `json:"level"`
+	}
+
+	var postTension PostTension
+
+	// POSTで渡ってきた形式が変換できるかチェック
+	if err := json.NewDecoder(r.Body).Decode(&postTension); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// 変換
+	response, err := json.Marshal(postTension)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// 更新
+	tension := tensionMap[key]
+	tension.Level = postTension.Level
+	tensionMap[key] = tension
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(response)
+}
+
+func generateMux(name string, initLevel int) (*http.ServeMux, error) {
+
+	// 普通は事前にDBとかを準備しておくもの。今回はmapなので、初期化処理を行う
+	tensionMapSetUp(name, initLevel)
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/greet",
+		func(w http.ResponseWriter, r *http.Request) {
+			if r.Method == "GET" {
+				httpGet(w, name)
+			} else if r.Method == "POST" {
+				httpPost(w, r, name)
+			}
+		})
+	return mux, nil
+}
+func main() {
+	person, _ := generateMux("Person", 0)
+	cat, _ := generateMux("Cat", 2)
+
+	mux := http.NewServeMux()
+	mux.Handle("/person/", http.StripPrefix("/person", person))
+	mux.Handle("/cat/", http.StripPrefix("/cat", cat))
+
+	log.Fatal(http.ListenAndServe(":8080", mux))
+
+	// http://localhost:8080/person/greet
+	// http://localhost:8080/cat/greet
+}
+```
+
+
+``` bash
+# 実行してみる
+#!/bin/bash
+
+curl -s http://localhost:8080/person/greet | jq '.'
+curl -s http://localhost:8080/cat/greet | jq '.'
+
+curl -X POST -H "Content-Type: application/json" -d '{"level":100}' http://localhost:8080/cat/greet 
+
+curl -s http://localhost:8080/person/greet | jq '.'
+curl -s http://localhost:8080/cat/greet | jq '.'
+
+```
+
+``` json
+{
+  "Message": "Hello Person"
+}
+{
+  "Message": "Hello Cat!!"
+}
+{"level":100}{
+  "Message": "Hello Person"
+}
+{
+  "Message": "Hello Cat!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 }
 ```
 
