@@ -44,6 +44,8 @@
     - [ルーティング](#ルーティング)
     - [jsonを返す](#jsonを返す)
     - [POST](#post)
+  - [test](#test)
+    - [テスト用データを保存する](#テスト用データを保存する)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -1274,6 +1276,59 @@ curl -s http://localhost:8080/cat/greet | jq '.'
 }
 ```
 
+## test
+
+- ファイル名は`*_test.go`にする
+- テスト関数は`Test*`にする
+    - エクスポートされていない関数の場合は`Test_*`にする
+- テスト関数の引数は`t *testing.T`にする
+- NGの場合は`t.Errorf`を使って標準出力する
+    - 後続のテストを留めたい場合は、`Fatal`か`Fatalf`を使う
+
+``` golang
+package main
+
+func main() {
+
+}
+
+func greeting(name string) string {
+	return "Hello, a " + name
+}
+
+```
+
+``` golang
+package main
+
+import "testing"
+
+func Test_greeting(t *testing.T) {
+    // テーブルテストの実装例
+	tests := []struct {
+		name string
+		want string
+	}{
+		{"Alice", "Hello, Alice"},
+		{"Bob", "Hello, Bob"},
+		{"", "Hello, "},
+	}
+	for _, tt := range tests {
+		if got := greeting(tt.name); got != tt.want {
+			t.Errorf("greeting(%v) = %v; want %v", tt.name, got, tt.want)
+		}
+	}
+}
+```
+
+``` bash
+go test
+```
+
+### テスト用データを保存する
+
+`testdata`ディレクトリ配下に配置する。
+
 ## 初めてのGo言語
 
 - [mushahiroyuki:lgo:Github](https://github.com/mushahiroyuki/lgo)
@@ -1299,3 +1354,16 @@ curl -s http://localhost:8080/cat/greet | jq '.'
         - [コードを一度だけ実行](https://github.com/mushahiroyuki/lgo/blob/main/example/ch10/ex1014.go)
     - Server
         - [ミドルウェア](https://github.com/mushahiroyuki/lgo/blob/main/example/ch11/4http/http04.go)
+    - テスト
+        - テスト関数ごとの初期化
+            - 存在しない。
+        - テスト結果のキャッシング
+        - 公開APIのテスト
+        - go-cmpによるテスト結果の比較
+        - ベンチマーク
+        - スタブ
+        - httptest
+        - 統合テストとビルドタグ
+        - 並列実行に関する問題とレースチェック
+    - リフレクション
+    - ジェネリクス
