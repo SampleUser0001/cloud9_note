@@ -9,6 +9,11 @@
   - [lint(staticcheck)](#lintstaticcheck)
   - [package mainでエラーになる](#package-mainでエラーになる)
     - [参考](#参考)
+  - [リポジトリ、モジュール、パッケージ](#リポジトリモジュールパッケージ)
+    - [モジュール](#モジュール)
+    - [パッケージ](#パッケージ)
+      - [ローカルパッケージを使用する](#ローカルパッケージを使用する)
+      - [外部パッケージを使用する](#外部パッケージを使用する)
   - [スライス](#スライス)
     - [append](#append)
     - [copy](#copy)
@@ -119,6 +124,42 @@ go work use ${エラーを吐いているgoファイルがあるディレクト�
 ### 参考
 
 - [gopls was not able to find modules in your workspace. への対処:Qiita](https://qiita.com/39shin52/items/84301f4ccb0b7f5a1a92)
+
+## リポジトリ、モジュール、パッケージ
+
+- リポジトリ -> モジュール -> パッケージ
+- モジュールはリポジトリルートに配置、リポジトリとモジュールは原則1対1。
+
+### モジュール
+
+Goのソースコードの集合がモジュール。  
+ルートディレクトリに`go.mod`が配置されている。  
+下記のコマンドで生成する。
+
+``` bash
+go mod init $MODULE_PATH
+```
+
+### パッケージ
+
+`package`句で指定する。ディレクトリ名とパッケージ名は一致させるのが一般的。
+
+#### ローカルパッケージを使用する
+
+下記でインポートする。
+
+``` golang
+import $MODULE_PATH/$package名
+```
+
+#### 外部パッケージを使用する
+
+- 別の項で扱っている。
+    - [githubに登録されているモジュールを使用する場合](#githubに登録されているモジュールを使用する場合)
+
+``` golang
+import github.com/$user/$repo
+```
 
 ## スライス
 
@@ -1338,7 +1379,7 @@ go test
 
 ``` bash
 go mod init ${dirname}
-go install github.com/sirupsen/logrus
+go get github.com/sirupsen/logrus
 mkdir log
 ```
 
