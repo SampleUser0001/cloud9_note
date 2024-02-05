@@ -46,6 +46,9 @@
     - [POST](#post)
   - [test](#test)
     - [テスト用データを保存する](#テスト用データを保存する)
+  - [logrus(logging)](#logruslogging)
+    - [準備](#準備)
+    - [実装](#実装)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -1328,6 +1331,77 @@ go test
 ### テスト用データを保存する
 
 `testdata`ディレクトリ配下に配置する。
+
+## logrus(logging)
+
+### 準備
+
+``` bash
+go mod init ${dirname}
+go install github.com/sirupsen/logrus
+mkdir log
+```
+
+### 実装
+
+`logconf/logconf.go`
+
+``` golang
+package logconf
+
+import (
+	"os"
+
+	"github.com/sirupsen/logrus"
+)
+
+// ログインスタンス生成
+var Log = logrus.New()
+
+func LogConf() {
+	//
+	Log.SetReportCaller(true)
+
+	// ファイル出力の場合の例
+	file, err := os.OpenFile("./log/app.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err == nil {
+		Log.Out = file
+	} else {
+		Log.Info("Failed to log to file, using default stderr")
+	}
+
+}
+```
+
+`app.go`
+
+``` golang
+package main
+
+import (
+	"logging/logconf"
+
+	"github.com/sirupsen/logrus"
+)
+
+func main() {
+	logconf.LogConf()
+
+	// ログ出力例
+	logconf.Log.WithFields(logrus.Fields{
+		"animal": "walrus",
+		"size":   10,
+	}).Info("A group of walrus emerges from the ocean")
+
+}
+
+```
+
+`log/app.log`
+
+``` log
+time="2024-02-05T00:25:15+09:00" level=info msg="A group of walrus emerges from the ocean" func=main.main file="/home/ubuntuuser/environment/Practice_go/logging/app.go:16" animal=walrus size=10
+```
 
 ## 初めてのGo言語
 
