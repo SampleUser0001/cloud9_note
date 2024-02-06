@@ -55,6 +55,7 @@
   - [logrus(logging)](#logruslogging)
     - [準備](#準備)
     - [実装](#実装)
+  - [sqlite3に接続する](#sqlite3に接続する)
   - [初めてのGo言語](#初めてのgo言語)
 
 ## モジュールの作成
@@ -1448,6 +1449,10 @@ func main() {
 ``` log
 time="2024-02-05T00:25:15+09:00" level=info msg="A group of walrus emerges from the ocean" func=main.main file="/home/ubuntuuser/environment/Practice_go/logging/app.go:16" animal=walrus size=10
 ```
+
+## sqlite3に接続する
+
+- [Use_sqlite3_Golang:SampleUser0001:Github](https://github.com/SampleUser0001/Use_sqlite3_Golang)
 
 ## 初めてのGo言語
 
