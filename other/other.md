@@ -7,6 +7,12 @@
   - [アイコン](#アイコン)
   - [サンプル動画](#サンプル動画)
   - [ランダムで名言を取得できるサイト](#ランダムで名言を取得できるサイト)
+  - [ジョブネットグラフ作成フレームワーク例](#ジョブネットグラフ作成フレームワーク例)
+    - [JavaScript](#javascript)
+    - [Python](#python)
+    - [Java](#java)
+    - [.NET](#net)
+    - [クロスプラットフォーム](#クロスプラットフォーム)
   - [謎の表](#謎の表)
 
 ## Tool
@@ -43,6 +49,40 @@ jarファイルをexe化できる。
 ## ランダムで名言を取得できるサイト
 
 [https://meigen.doodlenote.net/api/json.php](https://meigen.doodlenote.net/api/json.php)
+
+## ジョブネットグラフ作成フレームワーク例
+
+ChatGPT 4による回答。
+
+ジョブネットの実行順序や依存関係を表示するのに適したフレームワークやライブラリはいくつかあります。使用するプログラミング言語やプロジェクトのニーズに応じて、以下のオプションが考えられます：
+
+### JavaScript
+
+- [D3.js](https://d3js.org/): 強力なビジュアライゼーションとデータ駆動型のドキュメントを作成するためのライブラリです。複雑なデータの可視化、特に依存関係グラフやフローチャートの作成に適しています。
+- [Vis.js](https://visjs.org/): ダイナミックなデータ可視化を簡単に実装できるライブラリです。特にネットワークグラフの表示に強く、依存関係を視覚化するのに適しています。
+
+### Python
+
+- [Matplotlib](https://matplotlib.org/): Pythonでのグラフ描画に広く使用されるライブラリです。基本的なライングラフから複雑な可視化まで、幅広いニーズに対応しています。
+- [Graphviz](https://graphviz.org/): グラフ構造を視覚化するためのツールキットです。Pythonから利用できるGraphvizのバインディングを使って、複雑なネットワークや依存関係グラフを簡単に作成できます。
+
+### Java
+
+- [JGraphX](https://github.com/jgraph/jgraphx): Javaでのグラフ描画ライブラリです。インタラクティブなグラフとダイアグラムを簡単に作成でき、依存関係を示すのに適しています。
+    - [JGraphX (JGraph 6) User Manual
+](https://jgraph.github.io/mxgraph/docs/manual_javavis.html)
+    - [https://twitter.com/kis/status/1644365466629206016](https://twitter.com/kis/status/1644365466629206016)
+
+### .NET
+
+- **MSAGL (Microsoft Automatic Graph Layout)**: Microsoftが開発した.NET用のグラフレイアウトと可視化ライブラリです。複雑なグラフ構造の可視化に適しており、依存関係グラフの表示に利用できます。
+
+### クロスプラットフォーム
+
+- [Mermaid](https://mermaid.js.org/): Markdown形式でグラフを記述し、それを視覚的なダイアグラムに変換する軽量なツールです。設定や依存関係をコードのように書き、自動的にグラフに変換されます。ドキュメンテーションに組み込むのに特に適しています。
+    - [Mermaid記法の書き方（Markdownテキストでチャート・グラフが描ける）:NotePM](https://notepm.jp/help/mermaid)
+
+プロジェクトの要件や既存の技術スタックに応じて、これらの中から最適なフレームワークを選択することが重要です。
 
 ## 謎の表
 
