@@ -81,6 +81,7 @@
   - [ラムダ式](#ラムダ式)
     - [配列から特定要素を削除する](#配列から特定要素を削除する)
   - [フォーマットを読み込んで置換する](#フォーマットを読み込んで置換する)
+  - [グラフを生成する](#グラフを生成する)
   - [ssh接続する](#ssh接続する)
   - [mainの戻り値を指定する](#mainの戻り値を指定する)
 
@@ -1058,6 +1059,10 @@ print(config_data["format"].replace("$hoge$", "fuga"))
 {'format': '$hoge$'}
 fuga
 ```
+
+## グラフを生成する
+
+- [Use_graphviz](https://github.com/SampleUser0001/Use_graphviz)
 
 ## ssh接続する
 
