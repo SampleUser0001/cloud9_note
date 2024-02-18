@@ -18,7 +18,8 @@
   - [Reactコンテキスト](#reactコンテキスト)
     - [コンテキストプロバイダー](#コンテキストプロバイダー)
     - [コンテキストコンシューマー](#コンテキストコンシューマー)
-    - [参考](#参考)
+    - [実装例](#実装例)
+    - [その他の参考](#その他の参考)
   - [useEffect](#useeffect)
   - [Tailwindを導入する](#tailwindを導入する)
   - [勉強用リポジトリ](#勉強用リポジトリ)
@@ -266,52 +267,62 @@ useStateを呼ぶ箇所と戻り値を使用する箇所が離れている場合
 ### コンテキストプロバイダー
 
 ``` javascript
-import React, { createContext, useState, useContext } from "react";
-import messageDatas from "../static/messages.json";
+import React from 'react';
 
-const ItemContext = createContext();
-export const useItems = () => useContext(ItemContext);
+const UserProfileContext = React.createContext({});
 
-export default function ItemProvider({ children }) {
-    const [items, setMessages] = useState(messageDatas);
-    
-    const onChange = (id) => {
-        items.map(item => item.id === id ? item.checked = !item.checked : item);
-        setMessages([...items]);
-    }
-
-    return (
-        <ItemContext.Provider value={{ items, onChange }}>
-            {children}
-        </ItemContext.Provider>
-    );
-    
-}
+export default UserProfileContext;
 ```
 
 ### コンテキストコンシューマー
 
 ``` javascript
-import React from "react";
-import Item from "./Item";
-import { useItems } from "../provider/ItemProvider";
+import React, {useContext} from "react";
+import UserProfileContext from "./UserProfileContext";
 
-export default function ItemList() {
-    const { items } = useItems();
-
-    // items.map(item => console.info(item.id));
+function UserProfile() {
+    const userProfile = useContext(UserProfileContext);
 
     return (
         <div>
-            {items.map(item => (
-                <Item key={item.id} {...item} />
-            ))}
+            <h2>User Profile</h2>
+            <p>Username: {userProfile.username}</p>
+            <p>Email: {userProfile.email}</p>
         </div>
-    );
+    )
 }
+
+export default UserProfile;
 ```
 
-### 参考
+### 実装例
+
+``` javascript
+import { useState } from 'react';
+import './App.css';
+import UserProfileContext from './UserProfileContext'; 
+import UserProfile from './UserProfile';
+
+function App() {
+  const [userProfile, setUserProfile] = useState({
+    username: "SampleUser0001",
+    email: "ittimfn+github@gmail.com"
+  })
+  return (
+    <UserProfileContext.Provider value={userProfile}>
+      <div>
+        <h1>User Profile</h1>
+        <UserProfile />
+      </div>
+    </UserProfileContext.Provider>
+  );
+}
+
+export default App;
+
+```
+
+### その他の参考
 
 - [List_React:SampleUser0001:Github](https://github.com/SampleUser0001/List_React)
 
