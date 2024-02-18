@@ -395,5 +395,5 @@ module.exports = {
 
 ## Document
 
-- [チュートリアル](https://ja.legacy.reactjs.org/tutorial/tutorial.html)
+- [クイックスタート](https://ja.react.dev/learn)
 - [Hello world](https://ja.legacy.reactjs.org/docs/hello-world.html)
