@@ -233,11 +233,23 @@ Reactが管理するstateと、stateを更新するための関数を返す。
 stateを変更する場合は、必ずuseStateの戻り値として渡される関数を使う必要がある。
 
 ``` javascript
-import React, { useState } from 'react';
+import {useState} from 'react';
 
-export default function Sample() {
-    const [status, setStatus] = useState(0);
+const ClickCounter = () => {
+    const [count, setCount] = useState(0);
+    function handleClick() {
+        setCount(count + 1);
+    }
+
+    return (
+        <>
+            <p>Clicked {count} times</p>
+            <button onClick={handleClick}>Count up</button>
+        </>
+    )
 }
+
+export default ClickCounter;
 ```
 
 ## Reactコンテキスト
