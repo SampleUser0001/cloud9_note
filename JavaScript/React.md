@@ -21,7 +21,11 @@
     - [実装例](#実装例)
     - [その他の参考](#その他の参考)
   - [useEffect](#useeffect)
+  - [URLによって生成するコンテキストを変更する](#urlによって生成するコンテキストを変更する)
+  - [実装](#実装)
+    - [プロジェクト例](#プロジェクト例)
   - [Tailwindを導入する](#tailwindを導入する)
+  - [注意点](#注意点)
   - [勉強用リポジトリ](#勉強用リポジトリ)
     - [Checkbox](#checkbox)
   - [参考ソース](#参考ソース)
@@ -370,6 +374,120 @@ export default function App() {
 }
 ```
 
+## URLによって生成するコンテキストを変更する
+
+React Routerを使う。
+
+``` bash
+npm install react-router react-router-dom
+```
+
+## 実装
+
+`index.js`
+
+`BrowserRouter.Router`でアプリケーション全体を囲む必要がある。
+
+``` javascript
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from "react-router-dom";
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Router>
+      <App />
+    </Router >
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+```
+
+`App.js`
+
+``` javascript
+import React from 'react';
+import './index.css';
+import Nav from './nav';
+import Contents from './Contents';
+
+function App() {
+    return (
+        <>
+            <Nav />
+            <Contents />
+        </>
+    );
+}
+
+export default App;
+```
+
+`nav.js`
+
+`Link`を使用する。
+
+``` javascript
+import React from 'react';
+import {
+    Link,
+} from "react-router-dom";
+import './index.css';
+
+const Nav = () => {
+    return (
+        <nav className="bg-gray-800 p-4 text-white">
+            <div className="container mx-auto">
+                <Link to="/" className="font-semibold mr-4">ホーム</Link>
+                <Link to="page_a" className="font-semibold mr-4">PageA</Link>
+                <Link to="page_b" className="font-semibold mr-4">PageB</Link>
+            </div>
+        </nav>
+    );
+}
+
+export default Nav;
+```
+
+`Contents.js`
+
+`useRoutes`でURLのパスと要素を紐付ける。
+
+```javascript
+import React from "react";
+import { useRoutes } from "react-router-dom";
+
+import PageA from "./PageA";
+import PageB from "./PageB";
+
+function Contents() {
+    let element = useRoutes([
+        { path: "/", element: <PageA /> },
+        { path: "page_a", element: <PageA /> },
+        { path: "page_b", element: <PageB /> },
+    ]);
+    return element;
+}
+
+export default Contents;
+```
+
+### プロジェクト例
+
+- [React_Router](https://github.com/SampleUser0001/React_Router)
+- [Reactハンズオンラーニング 第2版:11.1](https://github.com/oreilly-japan/learning-react-2e-ja/tree/master/chapter-11/11.1)
+    - `pages.js`を参照。
+    - `<Outlet />`タグで任意の位置の表示を切り替える。
+
 ## Tailwindを導入する
 
 ``` bash
@@ -402,6 +520,13 @@ module.exports = {
 @tailwind utilities;
 
 ```
+
+## 注意点
+
+- `class`は使えない。`className`を使う。
+- `h`タグが聞かない
+    - Reactの問題ではない。CSSフレームワークの問題。cssファイルに記載する。
+        - [Tailwind CSS Headings - Flowbite](https://flowbite.com/docs/typography/headings/)
 
 ## 勉強用リポジトリ
 
