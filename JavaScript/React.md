@@ -458,6 +458,9 @@ const Nav = () => {
 }
 
 export default Nav;
+
+// フォーマット確認
+{{"message" : "hoge"}}
 ```
 
 `Contents.js`
