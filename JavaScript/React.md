@@ -458,7 +458,6 @@ const Nav = () => {
 }
 
 export default Nav;
-
 ```
 
 `Contents.js`
