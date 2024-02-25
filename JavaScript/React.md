@@ -444,18 +444,21 @@ import {
 import './index.css';
 
 const Nav = () => {
+    // stateで遷移先に値を渡す。
     return (
         <nav className="bg-gray-800 p-4 text-white">
             <div className="container mx-auto">
                 <Link to="/" className="font-semibold mr-4">ホーム</Link>
                 <Link to="page_a" className="font-semibold mr-4">PageA</Link>
                 <Link to="page_b" className="font-semibold mr-4">PageB</Link>
+                <Link to="page_c" className="font-semibold mr-4" state={{"message" : "hoge"}}>PageC</Link>
             </div>
         </nav>
     );
 }
 
 export default Nav;
+
 ```
 
 `Contents.js`
@@ -468,17 +471,40 @@ import { useRoutes } from "react-router-dom";
 
 import PageA from "./PageA";
 import PageB from "./PageB";
+import PageC from "./PageC";
 
 function Contents() {
     let element = useRoutes([
         { path: "/", element: <PageA /> },
         { path: "page_a", element: <PageA /> },
         { path: "page_b", element: <PageB /> },
+        { path: "page_c", element: <PageC /> },
     ]);
     return element;
 }
 
 export default Contents;
+```
+
+`PageC.js`
+
+```javascript
+import React from "react";
+import { useLocation } from "react-router-dom";
+import './index.css';
+
+function PageC() {
+    // 遷移元(nav.js)で渡されたstateを取得する
+    const message = useLocation().state.message;
+    return (
+        <div className="container mx-auto mt-10">
+            <h1>Page C</h1>
+            <p>{message}</p>
+        </div>
+    );
+}
+
+export default PageC;
 ```
 
 ### プロジェクト例
