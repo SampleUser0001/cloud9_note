@@ -3,6 +3,7 @@
 - [その他](#その他)
   - [Tool](#tool)
     - [exewrap](#exewrap)
+  - [Github Pagesのエスケープ](#github-pagesのエスケープ)
   - [MotionPro](#motionpro)
   - [アイコン](#アイコン)
   - [サンプル動画](#サンプル動画)
@@ -21,6 +22,16 @@
 
 jarファイルをexe化できる。  
 [窓の杜:exewrap](https://forest.watch.impress.co.jp/library/software/exewrap/)
+
+## Github Pagesのエスケープ
+
+``` ruby
+{% raw %}
+{{"message" : "直接ファイルを見てください。"}}
+{% endraw %}
+```
+
+[https://github.com/SampleUser0001/cloud9_note/blob/master/other/other.md#github-pagesのエスケープ](https://github.com/SampleUser0001/cloud9_note/blob/master/other/other.md#github-pagesのエスケープ)
 
 ## MotionPro
 
