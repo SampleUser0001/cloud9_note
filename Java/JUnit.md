@@ -182,12 +182,19 @@ public class AppTest {
 #### Ver.5
 
 ```java
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
+
+    @BeforeEach
+    public void setUp() {
+        
+    }
+
     @Test
     public void seleniumTest() {
         
