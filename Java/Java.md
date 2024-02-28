@@ -20,6 +20,7 @@
     - [List\<ModelA\>をModelA内のListごとに展開する。](#listmodelaをmodela内のlistごとに展開する)
     - [List\<List\<Model\>\> -\> List\<Model\>](#listlistmodel---listmodel)
     - [Streamの連結](#streamの連結)
+  - [配列 -\> List](#配列---list)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
@@ -206,6 +207,13 @@ Stream.of(stream1, stream2)
       .flatMap(s -> s)
       .forEach(System.out::println);
 
+```
+
+## 配列 -> List
+
+``` java
+// 確か特定の型でしか使えなかった気が・・・
+Arrays.asList(releaseEnvironment.split("\\|"));
 ```
 
 ## propertiesファイルの読み込み
