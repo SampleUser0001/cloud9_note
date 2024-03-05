@@ -21,6 +21,7 @@
     - [List\<List\<Model\>\> -\> List\<Model\>](#listlistmodel---listmodel)
     - [Streamの連結](#streamの連結)
   - [配列 -\> List](#配列---list)
+  - [重複排除(Set)](#重複排除set)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
@@ -214,6 +215,16 @@ Stream.of(stream1, stream2)
 ``` java
 // 確か特定の型でしか使えなかった気が・・・
 Arrays.asList(releaseEnvironment.split("\\|"));
+```
+
+## 重複排除(Set)
+
+``` java
+// 使い方はListと同じ。
+Set<String> strSet = new HashSet<String>();
+
+// 自動でソートするTreeSetクラス
+SortedSet<String> sortedStrSet = new TreeSet<String>();
 ```
 
 ## propertiesファイルの読み込み
