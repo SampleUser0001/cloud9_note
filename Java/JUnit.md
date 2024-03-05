@@ -11,13 +11,15 @@
       - [Ver.4](#ver4)
       - [参考](#参考-1)
       - [Ver.5](#ver5)
+  - [BeforeEach, BeforeAllが動かない](#beforeeach-beforeallが動かない)
+    - [参考](#参考-2)
   - [リフレクション](#リフレクション)
     - [Method](#method)
   - [配列のテスト](#配列のテスト)
   - [一部のメソッドをMock化する。](#一部のメソッドをmock化する)
     - [テスト対象](#テスト対象)
     - [テストクラス](#テストクラス)
-    - [参考](#参考-2)
+    - [参考](#参考-3)
   - [メソッドが呼ばれた回数を確認する](#メソッドが呼ばれた回数を確認する)
 
 ## 基本
@@ -202,6 +204,33 @@ public class AppTest {
 }
 ```
 
+## BeforeEach, BeforeAllが動かない
+
+下記を追加する。
+
+``` xml
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.19.1</version>
+            <dependencies>
+                <dependency>
+                    <groupId>org.junit.platform</groupId>
+                    <artifactId>junit-platform-surefire-provider</artifactId>
+                    <version>1.1.0</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+</build>
+
+```
+
+### 参考
+
+- [JUnit5の@BeforeEachと@AfterEachが実行されない:Qiita](https://qiita.com/k17trpsynth/items/c988105dbb12a25e6a7e)
+- [JUnit 5 does not execute method annotated with BeforeEach:stackoverflow](https://stackoverflow.com/questions/49441049/junit-5-does-not-execute-method-annotated-with-beforeeach)
 
 ## リフレクション
 
