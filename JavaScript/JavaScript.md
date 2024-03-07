@@ -15,6 +15,10 @@
       - [module.exports](#moduleexports)
       - [module.exports.関数名](#moduleexports関数名)
     - [参考](#参考-2)
+  - [ブラウザでファイルを読み込む](#ブラウザでファイルを読み込む)
+    - [前提](#前提)
+    - [HTML](#html)
+    - [JavaScript](#javascript-1)
 
 ## ページ読み込み時に呼び出す
 
@@ -180,3 +184,45 @@ sample.hoge();
 
 - [jsのimportとrequireの違い:Qiita](https://qiita.com/minato-naka/items/39ecc285d1e37226a283)
 - [CommonJS:Wikipedia](https://ja.wikipedia.org/wiki/CommonJS)
+
+## ブラウザでファイルを読み込む
+
+### 前提
+
+自動読み込みはできない。必ずユーザ操作が必要。
+
+### HTML
+
+``` html
+<input type="file" id="job_list_load" />
+<button id="job_list_load_button" onclick="load()">Load</button>
+```
+
+### JavaScript
+
+``` javascript
+let jobList = [];
+function load() {
+    const input = document.getElementById('job_list_load');
+    const filepath = input.files[0];
+    console.info("filepath: ", filepath);
+    if (filepath) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                jobList = JSON.parse(e.target.result);
+                console.info(jobList);
+            } catch (e) {
+                alert('Jobデータファイルの読み込みに失敗しました。' + e);
+                console.error(e);
+            }
+        }
+        reader.readAsText(filepath);
+    } else {
+        const errorMessage = 'ファイルが選択されていません。';
+        alert(errorMessage);
+        console.error(errorMessage);
+    }
+}
+
+```
