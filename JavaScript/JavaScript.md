@@ -19,6 +19,7 @@
     - [前提](#前提)
     - [HTML](#html)
     - [JavaScript](#javascript-1)
+    - [コールバックで共通化する](#コールバックで共通化する)
 
 ## ページ読み込み時に呼び出す
 
@@ -225,4 +226,75 @@ function load() {
     }
 }
 
+```
+
+### コールバックで共通化する
+
+``` javascript
+    function loadData(id, onSucess, onError) {
+        const input = document.getElementById(id);
+        const filepath = input.files[0];
+        console.info("filepath: ", filepath);
+        if (filepath) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    console.info(data);
+                    onSucess(data);
+                } catch (e) {
+                    alert(onError + e);
+                    console.error(e);
+                }
+            }
+            reader.readAsText(filepath);
+        } else {
+            const errorMessage = 'ファイルが選択されていません。';
+            alert(errorMessage);
+            console.error(errorMessage);
+            return;
+        }
+    }
+
+    let dependencyList = [];
+    function loadDependencies() {
+        const id = 'dependencies_load';
+        const message = 'ジョブ依存ファイルの読み込み'
+        const errorMessage = 'ジョブ依存の読み込みに失敗しました。'
+
+        loadData(id, (data) => {
+            dependencyList = data;
+            console.info(message + " finished.")
+            document.getElementById('load_schedule').style.visibility = 'visible';
+        }, errorMessage);
+    }
+
+    let scheduledList = [];
+    function loadScheduleList() {
+        const id = 'load_schedule_list';
+        const message = 'Jobスケジュールファイルの読み込み'
+        const errorMessage = 'Jobスケジュールファイルの読み込みに失敗しました。'
+
+        loadData(id, (data) => {
+            scheduledList = data;
+            console.info(message + " finished.");
+            document.getElementById('load_job').style.visibility = 'visible';
+        }, errorMessage);
+    }
+
+    function loadJobList() {
+        const id = 'load_job_list';
+        const message = 'Jobデータファイルの読み込み'
+        const errorMessage = 'Jobデータファイルの読み込みに失敗しました。'
+
+        loadData(id, (data) => {
+            jobList = data;
+            (async function() {
+                await addDependencies();
+                await addScheduled();
+                await drawChart();
+            })();
+            console.info(message + " finished.")
+        }, errorMessage);
+    }
 ```
