@@ -15,6 +15,7 @@
       - [module.exports](#moduleexports)
       - [module.exports.関数名](#moduleexports関数名)
     - [参考](#参考-2)
+  - [Mapオブジェクト](#mapオブジェクト)
   - [ブラウザでファイルを読み込む](#ブラウザでファイルを読み込む)
     - [前提](#前提)
     - [HTML](#html)
@@ -185,6 +186,20 @@ sample.hoge();
 
 - [jsのimportとrequireの違い:Qiita](https://qiita.com/minato-naka/items/39ecc285d1e37226a283)
 - [CommonJS:Wikipedia](https://ja.wikipedia.org/wiki/CommonJS)
+
+## Mapオブジェクト
+
+Javaとだいたい同じだが、forの書き方が違う。
+
+``` javascript
+// なにかMapオブジェクトを返す関数。
+const map = getMap();
+
+// map.entries()でも、mapでも同様。
+for (const [key, value] of map.entries()) {
+    console.log(`${key}: ${value}`);
+}
+```
 
 ## ブラウザでファイルを読み込む
 
