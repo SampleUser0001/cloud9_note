@@ -82,6 +82,7 @@
 
 - [Azure DevOps](./Azure/Azure_DevOps.md)
 - [Azure DevOps API](./Azure/Azure_DevOps_API.md)
+- [Pipeline](./Azure/Pipeline.md)
 
 ## Docker
 
