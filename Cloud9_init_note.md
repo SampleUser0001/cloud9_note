@@ -89,6 +89,7 @@ Cloud9を起動したときに行うことの備忘録。
     - [rbenvを使う](#rbenvを使う)
       - [rbenvインストール](#rbenvインストール)
       - [rbenvでRubyインストール](#rbenvでrubyインストール)
+      - [psychでエラー](#psychでエラー)
       - [参考](#参考-17)
     - [ソースからビルドする](#ソースからビルドする)
       - [参考](#参考-18)
@@ -1075,6 +1076,23 @@ rbenv global ${RUBY_INStALL_VERSION}
 # 切り替わったことを確認
 ruby -v
 ```
+
+#### psychでエラー
+
+``` txt
+*** Following extensions are not compiled:
+psych:
+	Could not be configured. It will not be installed.
+	Check /tmp/ruby-build.20240317155445.53115.EZ0AGq/ruby-3.3.0/ext/psych/mkmf.log for more details.
+
+BUILD FAILED (Ubuntu 22.04 on x86_64 using ruby-build 20240221)
+```
+
+``` bash
+sudo apt-get install libyaml-dev
+```
+
+
 
 #### 参考
 

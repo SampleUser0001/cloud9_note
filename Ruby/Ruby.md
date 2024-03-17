@@ -31,6 +31,7 @@
   - [既存のライブラリを読み込む(require)](#既存のライブラリを読み込むrequire)
   - [自作のライブラリを読み込む(require\_relative)](#自作のライブラリを読み込むrequire_relative)
   - [自動テスト(Minitest)](#自動テストminitest)
+  - [rbenvを更新する](#rbenvを更新する)
 
 ## チュートリアル
 
@@ -527,4 +528,14 @@ class FizzBuzzTest < Minitest::Test
         
     end
 end
+```
+
+## rbenvを更新する
+
+``` bash
+ cd ~/.rbenv
+git pull
+
+cd ~/.rbenv/plugins/ruby-build
+git pull
 ```
