@@ -1071,7 +1071,7 @@ rbenv install ${RUBY_INSTALL_VERSION}
 rbenv versions
 
 # バージョン切り替え
-rbenv global ${RUBY_INStALL_VERSION}
+rbenv global ${RUBY_INSTALL_VERSION}
 
 # 切り替わったことを確認
 ruby -v
