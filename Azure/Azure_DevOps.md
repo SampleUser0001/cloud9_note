@@ -20,6 +20,8 @@
     - [概要](#概要)
     - [画面遷移](#画面遷移-1)
   - [Branch Control](#branch-control)
+    - [新規作成の場合](#新規作成の場合)
+    - [既存に対する更新](#既存に対する更新)
   - [Pipeline Permission](#pipeline-permission)
   - [プルリクエストApprove後にpushした場合](#プルリクエストapprove後にpushした場合)
     - [実行結果](#実行結果)
@@ -149,8 +151,26 @@ Azure Pipeline実行時に、どの環境の何を許可するかを設定する
 (VMにSSH接続を許可する等。)
 
 1. Project Setting -> Pipelines -> Service Connections
-2. 対象のサービスを選択
-3. Approvals and checks
+
+### 新規作成の場合
+
+1. 右上の「New service connection」をクリック
+2. 作成するサービスを選択 -> Nextクリック
+3. 認証情報を入力
+
+### 既存に対する更新
+
+対象のサービスを選択する。
+以降項目別に記載。
+
+- Approvals and checks
+    - Branch control
+        - 実行可能なブランチを設定する。
+- 右上ハンバーガ -> Security
+    - User permission
+        - どの権限で接続するか？
+    - Pipeline permissions
+        - どのPipelineで実行を許可するか
 
 ## Pipeline Permission
 
