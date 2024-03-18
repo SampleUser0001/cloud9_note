@@ -1,12 +1,14 @@
 # git
 
 - [git](#git)
+  - [Githubとssh接続する](#githubとssh接続する)
+    - [参考](#参考)
   - [.gitignoreについて](#gitignoreについて)
   - [ブランチ作成元のブランチ名を取得する](#ブランチ作成元のブランチ名を取得する)
   - [ブランチ作成元のコミットIDを取得する](#ブランチ作成元のコミットidを取得する)
-    - [参考](#参考)
-  - [マージ時に発生する差分の取得](#マージ時に発生する差分の取得)
     - [参考](#参考-1)
+  - [マージ時に発生する差分の取得](#マージ時に発生する差分の取得)
+    - [参考](#参考-2)
   - [cloneやpullせずに git diffを取得する](#cloneやpullせずに-git-diffを取得する)
   - [リモートブランチからローカルブランチを作成する](#リモートブランチからローカルブランチを作成する)
   - [サーバにローカルブランチをpushする](#サーバにローカルブランチをpushする)
@@ -44,7 +46,7 @@
     - [履歴を削除](#履歴を削除)
   - [他のブランチ/コミットのファイルを取得する(git show)](#他のブランチコミットのファイルを取得するgit-show)
   - [ファイルごとの最終更新日の取得](#ファイルごとの最終更新日の取得)
-    - [参考](#参考-2)
+    - [参考](#参考-3)
   - [リモートリポジトリと紐づける](#リモートリポジトリと紐づける)
     - [Github](#github)
   - [行単位でコミットする](#行単位でコミットする)
@@ -61,8 +63,29 @@
   - [git bashのファイルパス \<-\> Linuxファイルパス変換](#git-bashのファイルパス---linuxファイルパス変換)
     - [Windows -\> Linux](#windows---linux)
     - [Linux -\> Windows](#linux---windows)
-    - [参考](#参考-3)
+    - [参考](#参考-4)
   - [各ファイルの直近のコミット日とコミットコメントを取得する](#各ファイルの直近のコミット日とコミットコメントを取得する)
+
+## Githubとssh接続する
+
+- [公開鍵生成](https://sampleuser0001.github.io/cloud9_note/Linux/Linux.html#%E5%85%AC%E9%96%8B%E9%8D%B5%E4%BD%9C%E6%88%90)
+
+``` bash
+# 接続確認
+ssh -T git@github.com
+```
+
+``` bash
+# sshがつながらない場合は、.ssh/configに下記を記載
+Host github github.com
+  HostName github.com
+  IdentityFile ~/.ssh/github_rsa
+  User git
+```
+
+### 参考
+
+- [.ssh/config](https://sampleuser0001.github.io/cloud9_note/Linux/Linux.html#sshconfig)
 
 ## .gitignoreについて
 
