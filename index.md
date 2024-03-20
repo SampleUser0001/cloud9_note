@@ -223,6 +223,7 @@
 
 ## Other
 
+- [GPT](./other/GPT.md)
 - [other.md](./other/other.md)
 - [単語/用語/略語/類語](./other/words.md)
 - [curl.md](./other/curl.md)
