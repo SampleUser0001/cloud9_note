@@ -16,6 +16,7 @@
     - [モデル](#モデル)
     - [追加されるルート](#追加されるルート)
     - [マイグレーション](#マイグレーション)
+  - [erbファイルの編集例](#erbファイルの編集例)
 
 ## install
 
@@ -159,4 +160,42 @@ DB作成を行う。
 
 ``` bash
 ruby db:migrate
+```
+
+## erbファイルの編集例
+
+``` html
+{% raw %}
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Books</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th calspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @books.each do |book| %>
+    <tr>
+      <td><%= book.title %></td>
+      <td><%= book.description %></td>
+      <td><%= link_to 'Show', book %></td>
+      <td><%= link_to 'Edit', edit_book_path(book) %></td>
+      <td><%= link_to 'Destroy', book, method: :destroy, data: {confirm: 'Are you sure?'} %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<p>
+<%= link_to "New book", new_book_path %>
+</p>
+
+{% endraw %}
 ```
