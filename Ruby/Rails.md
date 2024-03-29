@@ -12,6 +12,10 @@
     - [コントローラー](#コントローラー)
     - [ビューテンプレート](#ビューテンプレート)
     - [ルーター](#ルーター)
+  - [アプリケーションの作成(Scaffold)](#アプリケーションの作成scaffold)
+    - [モデル](#モデル)
+    - [追加されるルート](#追加されるルート)
+    - [マイグレーション](#マイグレーション)
 
 ## install
 
@@ -111,4 +115,48 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 end
+```
+
+## アプリケーションの作成(Scaffold)
+
+コントローラだけではなく、ModelやDB定義もまとめて生成してくれる。
+
+``` bash
+rails g scaffold book title:string description:text
+```
+
+- book : アプリケーション名
+- Model定義
+    - title:string
+    - description:text
+
+### モデル
+
+`app/models/book.rb`
+
+``` ruby
+class Book < ApplicationRecord
+end
+```
+
+### 追加されるルート
+
+``` txt
+       books GET    /books(.:format)             books#index
+             POST   /books(.:format)             books#create
+    new_book GET    /books/new(.:format)         books#new
+   edit_book GET    /books/:id/edit(.:format)    books#edit
+        book GET    /books/:id(.:format)         books#show
+             PATCH  /books/:id(.:format)         books#update
+             PUT    /books/:id(.:format)         books#update
+             DELETE /books/:id(.:format)         books#destroy
+```
+
+### マイグレーション
+
+DB作成を行う。  
+`db`ディレクトリ配下のrbが実行される。
+
+``` bash
+ruby db:migrate
 ```
