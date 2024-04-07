@@ -77,6 +77,8 @@
 - [EFS.md](./AWS/EFS.md)
 - [Amazon_EventBridge.md](./AWS/Amazon_EventBridge.md)
 - [Other.md](./AWS/Other.md)
+- Use case
+  - [S3に配置したhtmlファイルからAWS Lambdaを呼ぶ](./AWS/Usecase/S3_call_Lambda.md)
 
 ## Microsoft Azure
 

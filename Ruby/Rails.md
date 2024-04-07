@@ -17,6 +17,9 @@
     - [追加されるルート](#追加されるルート)
     - [マイグレーション](#マイグレーション)
   - [erbファイルの編集例](#erbファイルの編集例)
+  - [部分テンプレート](#部分テンプレート)
+    - [呼ぶ側](#呼ぶ側)
+    - [呼ばれる側](#呼ばれる側)
 
 ## install
 
@@ -197,5 +200,53 @@ ruby db:migrate
 <%= link_to "New book", new_book_path %>
 </p>
 
+{% endraw %}
+```
+
+## 部分テンプレート
+
+### 呼ぶ側
+
+``` txt
+{% raw %}
+<p style="color: green"><%= notice %></p>
+
+<h1>Books</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th calspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!-- この1行だけで呼べる。@books.eachは配列 -->
+    <%= render partial: "item", collection: @books.each , as: :book %>
+  </tbody>
+</table>
+</div>
+<p>
+<%= link_to "New book", new_book_path %>
+</p>
+{% endraw %}
+```
+
+### 呼ばれる側
+
+`app/views/books/_item.html.erb`  
+ファイル名に`_`が必要。
+
+``` html
+{% raw %}
+<tr>
+  <td><%= book.title %></td>
+  <td><%= book.description %></td>
+  <td><%= link_to 'Show', book %></td>
+  <td><%= link_to 'Edit', edit_book_path(book) %></td>
+  <td><%= link_to 'Destroy', book, method: :destroy, data: {confirm: 'Are you sure?'} %></td>
+</tr>
 {% endraw %}
 ```
