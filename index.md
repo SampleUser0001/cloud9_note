@@ -62,6 +62,7 @@
 - [ElementalMediaConvert.md](./AWS/ElementalMediaConvert.md)
 - [EC2](./AWS/EC2/EC2.md)
   - [メモリ使用量とストレージ容量の監視](./AWS/EC2/Surveillance_Memory_and_Strage.md)
+- [S3](./AWS/S3.md)
 - [Use_AWS_Secrets_Manager](https://github.com/SampleUser0001/Use_AWS_Secrets_Manager)
 - AWS CodeBuild
   - [CodeBuild.md](./AWS/CodeBuild.md)
@@ -206,6 +207,7 @@
 ## Security
 
 - [脆弱性](./Security/Vulnerability.md)
+- [CORS設定](./Security/CORS.md)
 
 ## Project Management Tool
 
