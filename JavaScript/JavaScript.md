@@ -10,6 +10,7 @@
     - [map](#map)
     - [filter](#filter)
     - [find](#find)
+  - [slice](#slice)
   - [import, require, export](#import-require-export)
     - [export](#export)
       - [module.exports](#moduleexports)
@@ -125,6 +126,12 @@ console.info(list.find((v, i, array) => {
 ``` txt
 2
 ```
+
+## slice
+
+部分配列を返す
+
+- [Array slice : mozila](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
 
 ## import, require, export
 
