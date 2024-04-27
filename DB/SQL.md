@@ -13,12 +13,19 @@ SQLのテクニック全般
     - [joinにしかないレコードも抽出する](#joinにしかないレコードも抽出する)
     - [どちらでもいいから片方にあるレコードを抽出する](#どちらでもいいから片方にあるレコードを抽出する)
     - [どちらかにしかないレコードをorder byで使う](#どちらかにしかないレコードをorder-byで使う)
-  - [Timestamp型 -> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
+  - [Timestamp型 -\> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
     - [参考](#参考)
   - [外部キー](#外部キー)
     - [役割](#役割)
     - [設定時の制約](#設定時の制約)
     - [参考](#参考-1)
+  - [OVER](#over)
+    - [例](#例)
+    - [PARTITION BY](#partition-by)
+    - [ORDER BY](#order-by)
+      - [例1](#例1)
+      - [例2](#例2)
+    - [参考](#参考-2)
   - [便利に使える環境](#便利に使える環境)
 
 ## case-when-then
@@ -194,6 +201,82 @@ select extract( day from diff )*24*60*60*1000 +
 
 - [sqlite3で外部キーを有効にする:プロサバメモ](https://sym.me/page/p/26)
 - [外部キーとは？〜概要から変数や処理の書き方を解説〜:SI Object Browser](https://products.sint.co.jp/siob/blog/what-is-foreign-key)
+
+## OVER
+
+`COUNT()`などの集合関数の結果を他の行に展開する。
+
+``` sql
+sqlite> select * from test_orders;
+1001|Apple|4|2018-1-10
+1005|Banana|8|2018-1-20
+1010|Banana|2|2018-2-1
+1021|Apple|10|2018-2-15
+1025|Apple|6|2018-2-22
+1026|Apple|5|2018-2-23
+
+```
+
+### 例
+
+``` sql
+sqlite> SELECT order_id, item, COUNT(*) OVER () FROM test_orders;
+1001|Apple|6
+1005|Banana|6
+1010|Banana|6
+1021|Apple|6
+1025|Apple|6
+1026|Apple|6
+
+```
+
+### PARTITION BY
+
+区切り位置を変える。  
+count(*)の単位が全体の行数ではなく、itemの行数になる。
+
+``` sql
+sqlite> SELECT order_id, item, COUNT(*) OVER (PARTITION BY item) FROM test_orders ORDER BY order_id;
+1001|Apple|4
+1005|Banana|2
+1010|Banana|2
+1021|Apple|4
+1025|Apple|4
+1026|Apple|4
+
+```
+
+### ORDER BY
+
+行番号を振り直す。
+
+#### 例1
+
+``` sql
+sqlite> select order_id, item, count(*) over (order by order_id) from test_orders;
+1001|Apple|1
+1005|Banana|2
+1010|Banana|3
+1021|Apple|4
+1025|Apple|5
+1026|Apple|6
+```
+
+#### 例2
+
+``` sql
+sqlite> select order_id, item, qty, sum(qty) over (order by order_id) from test_orders;
+1001|Apple|4|4
+1005|Banana|8|12
+1010|Banana|2|14
+1021|Apple|10|24
+1025|Apple|6|30
+1026|Apple|5|35
+```
+
+### 参考
+
+[分析関数（ウインドウ関数）をわかりやすく説明してみた:Qiita](https://qiita.com/tlokweng/items/fc13dc30cc1aa28231c5)
 
 ## 便利に使える環境
 
