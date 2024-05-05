@@ -20,6 +20,11 @@
   - [部分テンプレート](#部分テンプレート)
     - [呼ぶ側](#呼ぶ側)
     - [呼ばれる側](#呼ばれる側)
+  - [Active Recode](#active-recode)
+    - [Modelの作成(generate model)](#modelの作成generate-model)
+    - [DB定義](#db定義)
+  - [マイグレーション概要](#マイグレーション概要)
+  - [シード(seed)](#シードseed)
 
 ## install
 
@@ -250,3 +255,48 @@ ruby db:migrate
 </tr>
 {% endraw %}
 ```
+
+## Active Recode
+
+RailsのMVCモデルの「M」。  
+ORMの機能を持つ。  
+[アプリケーションの作成(Scaffold)](#アプリケーションの作成scaffold)の際にも作成される。
+
+``` mermaid
+classDiagram
+
+    class Book
+
+    class ApplicationRecord
+
+    class ActiveRecord 
+    class Base 
+        ActiveRecord *-- Base : Contains
+    
+    ApplicationRecord --|> Base
+    Book --|> ApplicationRecord
+```
+
+### Modelの作成(generate model)
+
+``` bash
+rails g model ${Model} ${変数名}:${型名} ...
+```
+
+rbファイルだけが生成される。DB定義の更新には[マイグレーション](#マイグレーション)が必要。
+
+### DB定義
+
+`db.schema.rb`に作成される。
+
+## マイグレーション概要
+
+`db/migrate`配下のファイルを実行する。  
+主なコマンドは`rails db:migreate`だが、`rails db:${その他のコマンド}`で色々できる。
+
+## シード(seed)
+
+予めDBに登録しておきたいマスタなどのデータ。  
+`db/seeds.rb`に記載する。
+
+
