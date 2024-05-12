@@ -15,6 +15,8 @@
     - [List -\> Stream](#list---stream)
     - [List\<ModelA\> -\> Map\<ModelA, List\<ModelB\>\>](#listmodela---mapmodela-listmodelb)
       - [List\<ModelA\> -\> LinkedHashMap\<ModelA, List\<ModelB\>\>](#listmodela---linkedhashmapmodela-listmodelb)
+    - [List\<Model\> -\> Map\<Key, List\<Model\>\>](#listmodel---mapkey-listmodel)
+      - [実行例](#実行例)
     - [配列 -\> Stream](#配列---stream)
     - [Path -\> List](#path---list)
     - [List\<ModelA\>をModelA内のListごとに展開する。](#listmodelaをmodela内のlistごとに展開する)
@@ -161,6 +163,118 @@ list.stream()
                  m -> m,
                  LinkedHashMap::new,
                  Collectors.mapping(modelA -> new ModelB(modelA), Collectors.toList())));
+```
+
+### List\<Model\> -> Map\<Key, List\<Model\>>
+
+groupingByを使う。
+
+``` java
+// Modelのメンバ変数がKeyクラス。
+Map<Key, List<Model>> map = list.stream().collect(Collectors.groupingBy(m -> m.key));
+```
+
+#### 実行例
+
+``` java
+import java.util.*;
+import java.util.stream.*;
+
+public class App {
+
+    public void exec(String[] args) {
+        Random random = new Random();
+
+        List<Model> list = new ArrayList<Model>();
+        for(int i=10 ; i>0 ; i--) {
+            Model model = new Model(random.nextInt(3), i);
+            System.out.println(model);
+            list.add(model);
+        }
+        
+        Map<Key, List<Model>> map = list.stream().collect(Collectors.groupingBy(m -> m.key));
+        
+        System.out.println(map.size());
+        for(Map.Entry<Key, List<Model>> entry : map.entrySet()){
+            System.out.println("key:" + entry.getKey().key);
+            entry.getValue().stream().forEach(System.out::println);
+        }
+
+    }
+
+    public static void main(String[] args) {
+        new App().exec(args);
+    }
+    
+    private class Key {
+        Key(int key) {
+            this.key = key;
+        }
+        int key;
+
+        @Override
+        public int hashCode() {
+            return this.key;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null) {
+                return false;
+            }
+            if (obj == this) {
+                return true;
+            }
+            if (obj.getClass() != this.getClass()) {
+                return false;
+            }
+            Key other = (Key)obj;
+            return this.key == other.key;
+        }
+    }
+    
+    private class Model {
+        Model(int key, int value) {
+            this.key = new Key(key);
+            this.value = value;
+        }
+        Key key;
+        int value;
+        
+        @Override
+        public String toString() {
+            return "key:" + this.key.key + ", value:" + this.value;
+        }
+    }
+    
+}
+```
+
+``` txt
+key:1, value:10
+key:2, value:9
+key:1, value:8
+key:0, value:7
+key:2, value:6
+key:2, value:5
+key:0, value:4
+key:1, value:3
+key:2, value:2
+key:1, value:1
+3
+key:0
+key:0, value:7
+key:0, value:4
+key:1
+key:1, value:10
+key:1, value:8
+key:1, value:3
+key:1, value:1
+key:2
+key:2, value:9
+key:2, value:6
+key:2, value:5
+key:2, value:2
 ```
 
 ### 配列 -> Stream
