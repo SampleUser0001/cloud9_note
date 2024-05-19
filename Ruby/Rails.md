@@ -25,6 +25,11 @@
     - [DB定義](#db定義)
   - [マイグレーション概要](#マイグレーション概要)
   - [シード(seed)](#シードseed)
+  - [バリデーション](#バリデーション)
+    - [実装例](#実装例)
+  - [railsコマンド](#railsコマンド)
+    - [パス一覧を取得する](#パス一覧を取得する)
+    - [Modelが持っている変数を表示する](#modelが持っている変数を表示する)
 
 ## install
 
@@ -299,4 +304,51 @@ rbファイルだけが生成される。DB定義の更新には[マイグレー
 予めDBに登録しておきたいマスタなどのデータ。  
 `db/seeds.rb`に記載する。
 
+## バリデーション
 
+Modelに追加する。
+
+### 実装例
+
+`app/models/${モデル名}.rb`
+
+``` ruby
+class Book < ApplicationRecord
+    # titleが空の場合、エラーとする。
+    validates :title, presence: true
+    # titleが重複している場合、エラーとする。
+    validates :title, uniqueness: true
+    # titleが空かつdescriptionが入力されている場合はエラーとする。
+    validates :description, absence: true , unless: :title?
+    # descriptionが100文字以上の場合、エラーとする。
+    validates :description, length: { maximum: 100 }
+end
+```
+
+## railsコマンド
+
+### パス一覧を取得する
+
+``` bash
+rails routes
+```
+
+### Modelが持っている変数を表示する
+
+railsコンソールを使用する。
+
+``` bash
+rails console
+```
+
+``` ruby
+# 名前だけほしい
+Book.column_names
+```
+
+``` ruby
+# 型もほしい
+${Model名}.columns.each do |column|
+    puts "#{column.name}: #{column.type}"
+end
+```
