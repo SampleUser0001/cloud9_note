@@ -24,6 +24,7 @@
     - [Streamの連結](#streamの連結)
   - [配列 -\> List](#配列---list)
   - [重複排除(Set)](#重複排除set)
+    - [配列 -\> Set](#配列---set)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
     - [PropertiesEnum](#propertiesenum)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
@@ -340,6 +341,18 @@ Set<String> strSet = new HashSet<String>();
 
 // 自動でソートするTreeSetクラス
 SortedSet<String> sortedStrSet = new TreeSet<String>();
+```
+
+### 配列 -> Set
+
+``` java
+import java.util.Collections;
+import java.util.Set;
+import java.util.HashSet;
+
+String[] strs = {"hoge", "piyo", "fuga"};
+Set<String> set = new HashSet<>();
+Collections.addAll(set, strs);
 ```
 
 ## propertiesファイルの読み込み
