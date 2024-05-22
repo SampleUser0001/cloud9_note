@@ -25,6 +25,7 @@
   - [配列 -\> List](#配列---list)
   - [重複排除(Set)](#重複排除set)
     - [配列 -\> Set](#配列---set)
+    - [Set同士を連結する](#set同士を連結する)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
     - [PropertiesEnum](#propertiesenum)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
@@ -353,6 +354,20 @@ import java.util.HashSet;
 String[] strs = {"hoge", "piyo", "fuga"};
 Set<String> set = new HashSet<>();
 Collections.addAll(set, strs);
+```
+
+### Set同士を連結する
+
+``` java
+import java.util.Set;
+import java.util.HashSet;
+
+Set<String> set = new HashSet<>();
+Set<String> set2 = new HashSet<>();
+
+// データ作成(省略)
+
+set.addAll(set2);
 ```
 
 ## propertiesファイルの読み込み
