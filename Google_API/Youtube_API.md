@@ -43,11 +43,11 @@ FUNCTION=search
 
 ### ドキュメントURL
 
-- [Search: list | Youtube Data API](https://developers.google.com/youtube/v3/docs/search/list?hl=ja)
+- [Search: list \| Youtube Data API](https://developers.google.com/youtube/v3/docs/search/list?hl=ja)
 
 ### 生配信予定の動画情報を取得する
 
-```eventType```に```upcoming```を指定する。
+`eventType`に`upcoming`を指定する。
 
 ``` bash
 CHANNEL_ID=${取得対象のチャンネルID}
@@ -56,7 +56,7 @@ curl -X GET ${YOUTUBE_API_URL}/${FUNCTION}?key=${YOUTUBE_API_KEY}\&channelId=${C
 
 ### 配信中の動画情報を取得する。
 
-```eventType```に```live```を指定する。
+`eventType`に`live`を指定する。
 
 ``` bash
 CHANNEL_ID=${取得対象のチャンネルID}
