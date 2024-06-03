@@ -8,6 +8,8 @@
     - [ドキュメントURL](#ドキュメントurl-1)
     - [生配信予定の動画情報を取得する](#生配信予定の動画情報を取得する)
     - [配信中の動画情報を取得する。](#配信中の動画情報を取得する)
+    - [動画を検索する](#動画を検索する)
+  - [チャンネルIDがわからない](#チャンネルidがわからない)
 
 ## 共通
 
@@ -62,3 +64,35 @@ curl -X GET ${YOUTUBE_API_URL}/${FUNCTION}?key=${YOUTUBE_API_KEY}\&channelId=${C
 CHANNEL_ID=${取得対象のチャンネルID}
 curl -X GET ${YOUTUBE_API_URL}/${FUNCTION}?key=${YOUTUBE_API_KEY}\&channelId=${CHANNEL_ID}\&part=id\&type=video\&eventType=live
 ```
+
+### 動画を検索する
+
+`q`オプションで検索する。
+
+``` bash
+YOUTUBE_API_KEY=${自分のAPI_KEY}
+YOUTUBE_API_URL=https://www.googleapis.com/youtube/v3
+FUNCTION=search
+KEYWORD=シレン
+CHANNEL_ID=${必要であれば指定する}
+
+API="${YOUTUBE_API_URL}/${FUNCTION}?key=${YOUTUBE_API_KEY}&q=${KEYWORD}&part=snippet&type=video&channelId=${CHANNEL_ID}"
+
+curl -X GET $API
+```
+
+## チャンネルIDがわからない
+
+YouTube Data APIで検索する。  
+`q`オプションと、`type=channel`で検索する。
+
+``` bash
+YOUTUBE_API_KEY=${自分のAPI_KEY}
+YOUTUBE_API_URL=https://www.googleapis.com/youtube/v3
+FUNCTION=search
+USER_NAME=${検索したいユーザ名}
+MAX_RESULTS=1
+
+curl -X GET ${YOUTUBE_API_URL}/${FUNCTION}?key=${YOUTUBE_API_KEY}\&q=${USER_NAME}\&part=snippet\&type=channel\&maxResults=${MAX_RESULTS}
+```
+
