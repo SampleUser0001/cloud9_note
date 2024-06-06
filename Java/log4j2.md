@@ -116,9 +116,10 @@ import org.apache.logging.log4j.Logger;
 
 public class App {
 
-    //getLoggerの引数はロガー名を指定する。
-    //log4j2では、ロガー名の指定が省略可能になった。
-    private Logger logger = LogManager.getLogger();
+    // getLoggerの引数はロガー名を指定する。
+    // log4j2では、ロガー名の指定が省略可能になった。
+    // なったが・・・実行可能jarファイルを実行時に書いておかないとエラーになる。
+    private Logger logger = LogManager.getLogger(App.class);
 
     public static void main( String[] args ) {
         App a = new App();
