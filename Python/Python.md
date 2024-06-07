@@ -58,6 +58,8 @@
       - [Windows](#windows)
     - [デアクティベート](#デアクティベート)
     - [参考](#参考-4)
+  - [virtualenv](#virtualenv)
+    - [参考](#参考-5)
   - [format](#format)
   - [for](#for)
   - [重複排除(list -\> set)](#重複排除list---set)
@@ -69,13 +71,13 @@
   - [pyenv](#pyenv)
     - [インストール可能なバージョン一覧](#インストール可能なバージョン一覧)
     - [特定バージョンのPythonインストール](#特定バージョンのpythonインストール)
-      - [参考](#参考-5)
+      - [参考](#参考-6)
     - [インストール済みバージョンの一覧](#インストール済みバージョンの一覧)
     - [切り替え](#切り替え)
     - [アンインストール](#アンインストール)
     - [切り替わらないとき](#切り替わらないとき)
       - [set by PYENV\_VERSION environment variable](#set-by-pyenv_version-environment-variable)
-        - [参考](#参考-6)
+        - [参考](#参考-7)
   - [sqlite3](#sqlite3)
     - [バインドする](#バインドする)
   - [ラムダ式](#ラムダ式)
@@ -834,6 +836,19 @@ deactivate
 ### 参考
 
 - [venv: Python 仮想環境管理:Qiita](https://qiita.com/fiftystorm36/items/b2fd47cf32c7694adc2e)
+
+## virtualenv
+
+``` bash
+pip install -U pip
+pip install --user --upgrade virtualenv
+virtualenv aip-env
+source aip-env/bin/activate
+```
+
+### 参考
+
+- [Python クライアント ライブラリの使用:Google](https://cloud.google.com/ai-platform/prediction/docs/python-client-library?hl=ja)
 
 ## format
 

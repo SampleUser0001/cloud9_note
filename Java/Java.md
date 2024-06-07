@@ -29,6 +29,7 @@
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
     - [PropertiesEnum](#propertiesenum)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
+    - [外部のライブラリを使用する](#外部のライブラリを使用する)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
   - [Mapのループ](#mapのループ)
@@ -414,6 +415,18 @@ public enum PropertiesEnum {
 
 ``` sh
 java -cp ${実行可能jarファイル}.jar ${mainメソッドを持っているクラス}
+```
+
+### 外部のライブラリを使用する
+
+``` sh
+# 実行可能jar配下で実行する
+mkdir libs
+cp ${使用するjarファイルパス} libs/
+
+# -cpは-classpathの略。
+# LinuxとWindowsで区切り文字が違う。Linuxは「:」。Windowsは「;」。
+java -cp ${実行可能jarファイル}.jar:libs/* ${mainメソッドを持っているクラス}
 ```
 
 ## 新規ファイルの書き込み
