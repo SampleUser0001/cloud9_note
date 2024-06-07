@@ -99,10 +99,12 @@ Cloud9を起動したときに行うことの備忘録。
     - [参考](#参考-19)
   - [Terraform](#terraform)
     - [参考](#参考-20)
+  - [gcloud](#gcloud)
+    - [参考](#参考-21)
   - [OWASP ZAP](#owasp-zap)
     - [メニュー日本語化](#メニュー日本語化)
     - [備考](#備考)
-    - [参考](#参考-21)
+    - [参考](#参考-22)
   - [shunit2](#shunit2)
 
 ## git
@@ -1241,6 +1243,26 @@ terraform -v
 
 - [5分で分かるTerraform（Infrastructure as Code）:LAC WATCH](https://www.lac.co.jp/lacwatch/service/20200903_002270.html)
 
+## gcloud
+
+``` bash
+# ${home}がおすすめだが・・・
+cd ~
+
+# コマンドは参考から取得
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-477.0.0-linux-x86_64.tar.gz
+tar -xf google-cloud-cli-477.0.0-linux-x86_64.tar.gz
+./google-cloud-sdk/install.sh
+
+source ~/.bashrc
+
+gcloud init
+```
+
+### 参考
+
+- [gcloud install](https://cloud.google.com/sdk/docs/install?hl=ja)
+
 ## OWASP ZAP
 
 - 事前にJREがインストールされていること。
@@ -1295,7 +1317,7 @@ Defaulting ZAP install dir to /opt/ZAP_2.10.0
 - [Qiita:ubuntu18.04 + OWASP ZAP でWEB脆弱性診断](https://qiita.com/crash-boy/items/cb35eadaa4cf4d2cef3f)
 - [OWASP ZAP](https://owasp.org/www-project-zap/)
 - [OWASP Japan](https://owasp.org/www-chapter-japan/)
-- 
+
 ## shunit2
 
 ``` bash
