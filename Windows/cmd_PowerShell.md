@@ -2,6 +2,7 @@
 
 - [コマンドプロンプト/PowerShell](#コマンドプロンプトpowershell)
   - [PowerShell](#powershell)
+    - [uuidgen](#uuidgen)
     - [tail](#tail)
       - [参考](#参考)
     - [grep](#grep)
@@ -34,6 +35,14 @@
 
 
 ## PowerShell
+
+### uuidgen
+
+``` powershell
+[Guid]::NewGuid().toString()
+```
+
+`toString()`は無くても動くが、余計なものがついてくる。
 
 ### tail
 
