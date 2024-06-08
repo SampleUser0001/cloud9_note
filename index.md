@@ -10,7 +10,7 @@
   - [git](#git)
   - [Google](#google)
     - [Google Analytics](#google-analytics)
-    - [API](#api)
+    - [Google Data API](#google-data-api)
   - [VSCode](#vscode)
   - [Windows](#windows)
   - [Java](#java)
@@ -101,9 +101,10 @@
 
 - [GoogleAnalytics.md](./GoogleAnalytics/GoogleAnalytics.md)
 
-### API
+### Google Data API
 
-- [Youtube_API.md](./Google_API/Youtube_API.md)
+- [Google Data API](./Google_Data_API/Google_Data_API.md)
+- [Youtube_API.md](./Google_Data_API/Youtube_API.md)
 
 ## VSCode
 
