@@ -13,6 +13,7 @@
     - [dataclass](#dataclass)
       - [Simple](#simple)
       - [List](#list)
+  - [dict -\> jsonファイル出力する](#dict---jsonファイル出力する)
   - [ディレクトリ配下を再帰的に検索する](#ディレクトリ配下を再帰的に検索する)
   - [\_\_init\_\_をオーバーロードする](#__init__をオーバーロードする)
   - [dataclassの初期化](#dataclassの初期化)
@@ -352,6 +353,17 @@ import json
 with open("sample.json", "r") as fp:
     json_data = json.load(fp=fp)
     print([JsonModel.from_dict(model) for model in json_data])
+```
+
+## dict -> jsonファイル出力する
+
+``` python
+import json
+dict_datas = {}
+# dict_datasに値を詰める（省略）
+with open('data.json', 'w') as f:
+    json.dump(dict_datas, f, ensure_ascii=False)
+    # ensure_asciiは文字をエスケープするかどうかの設定。Falseでしない。
 ```
 
 ## ディレクトリ配下を再帰的に検索する
