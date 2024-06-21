@@ -13,6 +13,7 @@
   - [プログラム名を変更する](#プログラム名を変更する)
   - [getCellValue](#getcellvalue)
     - [参考](#参考-1)
+  - [列を削除して詰める](#列を削除して詰める)
 
 ## 基本
 
@@ -322,3 +323,51 @@ public enum CellTypeEnum {
 ### 参考
 
 - [CellTypeEnum.java:Export_Excel_Width_Poi:SampleUser0001:Github](https://github.com/SampleUser0001/Export_Excel_Width_Poi/blob/main/src/main/java/ittimfn/tool/poi/enums/CellTypeEnum.java)
+
+## 列を削除して詰める
+
+``` java
+
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class DeleteColumn {
+
+    public static void main(String[] args) throws IOException {
+        FileInputStream fis = new FileInputStream("input.xlsx");
+        Workbook workbook = new XSSFWorkbook(fis);
+        Sheet sheet = workbook.getSheetAt(0);
+        int columnToDelete = 1; // 削除したい列のインデックス (0から始まる)
+
+        for (Row row : sheet) {
+            for (int colIndex = columnToDelete; colIndex < row.getLastCellNum() - 1; colIndex++) {
+                Cell oldCell = row.getCell(colIndex);
+                Cell newCell = row.getCell(colIndex + 1);
+                if (oldCell != null) {
+                    if (newCell != null) {
+                        oldCell.setCellValue(newCell.getStringCellValue());
+                    } else {
+                        row.removeCell(oldCell);
+                    }
+                }
+            }
+            // 最後の列を削除
+            Cell lastCell = row.getCell(row.getLastCellNum() - 1);
+            if (lastCell != null) {
+                row.removeCell(lastCell);
+            }
+        }
+
+        fis.close();
+
+        FileOutputStream fos = new FileOutputStream("output.xlsx");
+        workbook.write(fos);
+        fos.close();
+        workbook.close();
+    }
+}
+
+```
