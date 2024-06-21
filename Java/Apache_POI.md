@@ -8,6 +8,7 @@
     - [参考](#参考)
   - [読み込み](#読み込み)
   - [XSSFとSXSSFの違い](#xssfとsxssfの違い)
+  - [行数、列数を取得する](#行数列数を取得する)
   - [作成者を変更する](#作成者を変更する)
   - [プログラム名を変更する](#プログラム名を変更する)
   - [getCellValue](#getcellvalue)
@@ -205,6 +206,10 @@ public class App {
 ## XSSFとSXSSFの違い
 
 - [Apache POIでエクセル操作を作ってみて〜XSSFとSXSSFの違い:ハジカラ](https://kk90info.com/apache-poi%E3%81%A7%E3%82%A8%E3%82%AF%E3%82%BB%E3%83%AB%E6%93%8D%E4%BD%9C%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%A6%E3%80%9Cxssf%E3%81%A8sxssf%E3%81%AE%E9%81%95%E3%81%84/)
+
+## 行数、列数を取得する
+
+- [Poi_getRowLength_getCellLength](https://github.com/SampleUser0001/Poi_getRowLength_getCellLength)
 
 ## 作成者を変更する
 
