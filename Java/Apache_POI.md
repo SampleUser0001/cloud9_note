@@ -14,6 +14,7 @@
   - [getCellValue](#getcellvalue)
     - [参考](#参考-1)
   - [列を削除して詰める](#列を削除して詰める)
+  - [読み込み + 更新する](#読み込み--更新する)
 
 ## 基本
 
@@ -367,6 +368,81 @@ public class DeleteColumn {
         workbook.write(fos);
         fos.close();
         workbook.close();
+    }
+}
+
+```
+
+## 読み込み + 更新する
+
+読み込みと更新は同時にできない。
+
+1. 元ファイルをtmpディレクトリにコピー
+2. tmpファイルをFileInputStream + Workbookで読み込む
+3. Workbookを更新
+4. FileInputStream.close()
+5. tmpファイルをFileOutputStreamで開く
+6. Workbook.write(FileOutputStream)で書き込む
+7. FileOutputStream.close() + Workbook.close()
+8. tmpファイルを元ファイルにコピー
+
+``` java
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+public class ExcelFileCopyAndEdit {
+    public static void main(String[] args) {
+        // 入力ファイルのパス
+        String inputFilePath = "path/to/input/file.xls";
+        // 最終的にコピーするパス
+        String finalFilePath = "path/to/final/destination/file.xls";
+
+        try {
+            // 一時ディレクトリにファイルをコピー
+            Path tempDir = Files.createTempDirectory("tempDir");
+            Path tempFile = tempDir.resolve("tempFile.xls");
+            Files.copy(Paths.get(inputFilePath), tempFile, StandardCopyOption.REPLACE_EXISTING);
+
+            // Apache POIを使用してExcelファイルを読み込み
+            FileInputStream fis = new FileInputStream(tempFile.toFile());
+            HSSFWorkbook workbook = new HSSFWorkbook(fis);
+            HSSFSheet sheet = workbook.getSheetAt(0);
+
+            // ファイルを編集（例として、A1セルに"Hello, World!"と書き込む）
+            HSSFRow row = sheet.getRow(0);
+            if (row == null) {
+                row = sheet.createRow(0);
+            }
+            HSSFCell cell = row.getCell(0);
+            if (cell == null) {
+                cell = row.createCell(0);
+            }
+            cell.setCellValue("Hello, World!");
+
+            // 編集した内容を一時ファイルに上書き保存
+            fis.close();
+            FileOutputStream fos = new FileOutputStream(tempFile.toFile());
+            workbook.write(fos);
+            fos.close();
+            workbook.close();
+
+            // 編集完了後に、指定のパスにコピー
+            Files.copy(tempFile, Paths.get(finalFilePath), StandardCopyOption.REPLACE_EXISTING);
+
+            System.out.println("ファイルのコピーと編集が完了しました。");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
