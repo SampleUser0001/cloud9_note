@@ -327,54 +327,7 @@ public enum CellTypeEnum {
 
 ## 列を削除して詰める
 
-この実装だと、処理するセルがすべて文字列の場合にしか対応できない。  
-取得元の書式に合わせた取得メソッドと、書き込み先の書式に合わせた書き込みメソッドがあるため、取得元から値をコピー -> 書き込みする処理をenumで書いたほうが良い。(今の所用意していない。)
-
-``` java
-
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-public class DeleteColumn {
-
-    public static void main(String[] args) throws IOException {
-        FileInputStream fis = new FileInputStream("input.xlsx");
-        Workbook workbook = new XSSFWorkbook(fis);
-        Sheet sheet = workbook.getSheetAt(0);
-        int columnToDelete = 1; // 削除したい列のインデックス (0から始まる)
-
-        for (Row row : sheet) {
-            for (int colIndex = columnToDelete; colIndex < row.getLastCellNum() - 1; colIndex++) {
-                Cell oldCell = row.getCell(colIndex);
-                Cell newCell = row.getCell(colIndex + 1);
-                if (oldCell != null) {
-                    if (newCell != null) {
-                        oldCell.setCellValue(newCell.getStringCellValue());
-                    } else {
-                        row.removeCell(oldCell);
-                    }
-                }
-            }
-            // 最後の列を削除
-            Cell lastCell = row.getCell(row.getLastCellNum() - 1);
-            if (lastCell != null) {
-                row.removeCell(lastCell);
-            }
-        }
-
-        fis.close();
-
-        FileOutputStream fos = new FileOutputStream("output.xlsx");
-        workbook.write(fos);
-        fos.close();
-        workbook.close();
-    }
-}
-
-```
+- [CellTypeEnum.java:Poi_delete_and_close:SampleUser0001:Github](https://github.com/SampleUser0001/Poi_delete_and_close/blob/main/src/main/java/ittimfn/poi/enums/CellTypeEnum.java)
 
 ## 読み込み + 更新する
 
