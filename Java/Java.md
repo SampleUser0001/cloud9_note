@@ -22,6 +22,7 @@
     - [List\<ModelA\>をModelA内のListごとに展開する。](#listmodelaをmodela内のlistごとに展開する)
     - [List\<List\<Model\>\> -\> List\<Model\>](#listlistmodel---listmodel)
     - [Streamの連結](#streamの連結)
+    - [groupByする(List -\> List\<List\>)](#groupbyするlist---listlist)
   - [配列 -\> List](#配列---list)
   - [重複排除(Set)](#重複排除set)
     - [配列 -\> Set](#配列---set)
@@ -326,6 +327,16 @@ Stream.of(stream1, stream2)
       .flatMap(s -> s)
       .forEach(System.out::println);
 
+```
+
+### groupByする(List<Model> -> List<List<Model>>)
+
+``` java
+List<List<Model>> modelsLists = models.stream()
+        .collect(Collectors.groupingBy(Model::getGroup))
+        .values()
+        .stream()
+        .collect(Collectors.toList());
 ```
 
 ## 配列 -> List
