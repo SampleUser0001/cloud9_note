@@ -81,6 +81,7 @@
 - [Other.md](./AWS/Other.md)
 - Use case
   - [S3に配置したhtmlファイルからAWS Lambdaを呼ぶ](./AWS/Usecase/S3_call_Lambda.md)
+- [SageMaker Studio](./AWS/SageMaker_Studio.md)
 
 ## Microsoft Azure
 
