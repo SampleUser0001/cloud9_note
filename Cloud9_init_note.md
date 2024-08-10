@@ -524,18 +524,19 @@ docker ps
 - [Manage Docker as a non-root user:公式](https://docs.docker.com/engine/install/linux-postinstall/)
 
 ## docker-compose
+
 ### docker-composeインストール
-```
-# sudo curl -L https://github.com/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+``` bash
+# バージョンは https://github.com/docker/compose/releases/ で確認。
 export DOCKER_COMPOSE_VERSION=v2.3.0
 sudo curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 ```
 
-※バージョンは参考サイトから確認。
-
 ### 参考サイト
+
 - [https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af](https://qiita.com/youtangai/items/ff67ceff5497a0e0b1af)
 - [compose:docker:Github](https://github.com/docker/compose/releases)
 
