@@ -3,6 +3,7 @@
 - [VSCode](#vscode)
   - [タブの入力](#タブの入力)
     - [参考](#参考)
+  - [タブ/スペース切り替え](#タブスペース切り替え)
   - [全体を拡大or縮小表示する](#全体を拡大or縮小表示する)
   - [XML整形](#xml整形)
     - [参考](#参考-1)
@@ -38,6 +39,24 @@
 ### 参考
 
 - [コツコツと:Visual Studio Code でタブを入力する](https://kotsukotsu.work/tech/2020-10-15-visual-studio-code-%E3%81%A7%E3%82%BF%E3%83%96%E3%82%92%E5%85%A5%E5%8A%9B%E3%81%99%E3%82%8B/)
+
+## タブ/スペース切り替え
+
+1. ファイル -> ユーザ設定 -> 設定
+2. Insert Space
+3. 下記設定。
+    - True : スペース
+    - False : タブ
+
+settings.json
+
+``` json
+{
+    "editor.insertSpace": false
+}
+```
+
+falseがスペース。
 
 ## 全体を拡大or縮小表示する
 
