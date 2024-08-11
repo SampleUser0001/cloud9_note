@@ -37,9 +37,9 @@
     - [実行コマンド例](#実行コマンド例)
     - [実行結果例](#実行結果例)
     - [実行結果の読み方](#実行結果の読み方)
-      - [select_type](#select_type)
+      - [select\_type](#select_type)
       - [type](#type)
-      - [possible_keys](#possible_keys)
+      - [possible\_keys](#possible_keys)
       - [key](#key)
       - [ref](#ref)
       - [rows](#rows)
@@ -47,6 +47,8 @@
       - [Extra : 実行戦略](#extra--実行戦略)
       - [参考](#参考-7)
       - [実際に読んでみた](#実際に読んでみた)
+  - [テーブル定義取得](#テーブル定義取得)
+    - [参考](#参考-8)
 
 ## 起動/終了/生存確認
 
@@ -338,3 +340,12 @@ rowsの行がどこまで減るか。
 2. type = ALLの列に着目する。（ALLはよくない。）
 3. possible_keysを確認する。```MySQL がこのテーブル内の行の検索に使用するために選択できるインデックスを示します。```
 
+## テーブル定義取得
+
+``` SQL
+SHOW CREATE TABLE ${テーブル名}
+```
+
+### 参考
+
+- [MySQLでテーブル定義を調べる方法:Qiita](https://qiita.com/keb/items/39a2379b894d0489cb07)
