@@ -939,7 +939,7 @@ import java.time.format.DateTimeFormatter;
 // Strictモード。存在しない日付が指定されたときにDateTimeParseExceptionをthrowするようになる。
 DateTimeFormatter formatter 
     = DateTimeFormatter.ofPattern("uuuuMMdd")
-                        .withResolverStyle(ResolverStyle.STRICT);
+                       .withResolverStyle(ResolverStyle.STRICT);
 LocalDate date = LocalDate.parse("20230431", formatter);
 ```
 
