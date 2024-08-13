@@ -64,6 +64,10 @@
     - [Chat-GPT(3.5)に聞いてみた結果](#chat-gpt35に聞いてみた結果)
   - [JGit](#jgit)
   - [Windows + git bashとLinuxのファイルパス問題](#windows--git-bashとlinuxのファイルパス問題)
+  - [Java8以降の日付の扱い(LocalDate, LocalDateTime)](#java8以降の日付の扱いlocaldate-localdatetime)
+    - [インスタンス生成](#インスタンス生成)
+    - [文字列 -\> インスタンス](#文字列---インスタンス)
+    - [差分取得](#差分取得)
 
 ## Stream
 
@@ -898,6 +902,7 @@ Javaで大量のデータをDBから取得する際に、メモリに保持し�
    JPAやHibernateを使用する場合、クエリを設計し、適切なページングを設定してデータを取得できます。
 
 これらの方法を使用することで、大量のデータを効率的に取得し、メモリ使用量を最適化することができます。選択肢の中から、プロジェクトの要件に最適な方法を選んで実装してください。
+
 ## JGit
 
 結論を書くと、ProcessBuilderを使ってgitコマンドを叩いたほうが楽。  
@@ -910,3 +915,59 @@ Javaで大量のデータをDBから取得する際に、メモリに保持し�
 WindowsとLinuxの間で同じプログラムが使えるが、ファイルパスを引数でもらう場合、表現が異なるため、（見た目が同じでも）そのままでは使用できない。ファイルパスの形式を変換する必要がある。
 
 [git bashのファイルパス <-> Linuxファイルパス変換](../Git_cli/git.md)
+
+## Java8以降の日付の扱い(LocalDate, LocalDateTime)
+
+DateやCalenderクラスを使用しない方法。
+
+### インスタンス生成
+
+``` java
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+LocalDate date1 = LocalDate.of(2023, 4, 1);
+LocalDateTime dateTime1 = LocalDateTime.of(2023, 4, 1, 9, 0);
+```
+
+### 文字列 -> インスタンス
+
+``` java
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+// Strictモード。存在しない日付が指定されたときにDateTimeParseExceptionをthrowするようになる。
+DateTimeFormatter formatter 
+    = DateTimeFormatter.ofPattern("uuuuMMdd")
+                        .withResolverStyle(ResolverStyle.STRICT);
+LocalDate date = LocalDate.parse("20230431", formatter);
+```
+
+### 差分取得
+
+ChronoUnitクラスを使用する。
+
+``` java
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
+public class DateDiffTest {
+    public static void main(String[] args) {
+
+        //日付の差を求める
+        LocalDate date1 = LocalDate.of(2023, 4, 1);
+        LocalDate date2 = LocalDate.of(2023, 4, 8);
+
+        long daysBetween = ChronoUnit.DAYS.between(date1, date2);
+        System.out.println("日数は... " + daysBetween + "日");
+        
+        //時間の差を求める
+        LocalDateTime dateTime1 = LocalDateTime.of(2023, 4, 1, 9, 0);
+        LocalDateTime dateTime2 = LocalDateTime.of(2023, 4, 2, 10, 59);
+
+        long hoursBetween = ChronoUnit.HOURS.between(dateTime1, dateTime2);
+        System.out.println("時間は..." + hoursBetween + "時間");
+    }
+}
+```
