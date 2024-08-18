@@ -27,6 +27,8 @@
   - [重複排除(Set)](#重複排除set)
     - [配列 -\> Set](#配列---set)
     - [Set同士を連結する](#set同士を連結する)
+  - [Allowlist/Denylist(ホワイトリスト/ブラックリスト)](#allowlistdenylistホワイトリストブラックリスト)
+  - [Enumから特定の項目を抽出したListを作る](#enumから特定の項目を抽出したlistを作る)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
     - [PropertiesEnum](#propertiesenum)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
@@ -384,6 +386,29 @@ Set<String> set2 = new HashSet<>();
 // データ作成(省略)
 
 set.addAll(set2);
+```
+
+## Allowlist/Denylist(ホワイトリスト/ブラックリスト)
+
+``` java
+import java.util.List;
+import java.util.stream.Stream;
+
+List<String> allowList = List.of("hoge", "piyo");
+
+Stream.of("aaa", "bbb", "hogehoge", "pibbbyo", "piyopiyo", "ccc")
+        .filter(word -> allowList.stream().anyMatch(word::contains))
+        .forEach(System.out::println);
+```
+
+## Enumから特定の項目を抽出したListを作る
+
+``` java
+public static List<String> wordList() {
+    return Arrays.stream(TrimLineWordEnum.values())
+                    .map(TrimLineWordEnum::getWord)
+                    .toList();
+}   
 ```
 
 ## propertiesファイルの読み込み
