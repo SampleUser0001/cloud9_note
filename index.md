@@ -15,6 +15,7 @@
   - [Windows](#windows)
   - [Java](#java)
     - [Middleware](#middleware)
+    - [Minecraft](#minecraft)
   - [JavaScript/TypeScript](#javascripttypescript)
   - [HTML](#html)
   - [PHP](#php)
@@ -144,6 +145,10 @@
 
 - [WebSphere.md](./Java/Middleware/WebSphere.md)
 - [Tomcat.md](./Java/Middleware/Tomcat.md)
+
+### Minecraft
+
+- [Minecraft Mod](./Java/Minecraft/Minecraft_Mod.md)
 
 ## JavaScript/TypeScript
 
