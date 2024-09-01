@@ -70,6 +70,8 @@
     - [インスタンス生成](#インスタンス生成)
     - [文字列 -\> インスタンス](#文字列---インスタンス)
     - [差分取得](#差分取得)
+  - [コマンドラインでcheckstyleを実行する](#コマンドラインでcheckstyleを実行する)
+    - [参考](#参考-3)
 
 ## Stream
 
@@ -996,3 +998,23 @@ public class DateDiffTest {
     }
 }
 ```
+
+## コマンドラインでcheckstyleを実行する
+
+1. `checkstyle.jar`を入手する。
+    - [公式](https://github.com/checkstyle/checkstyle/releases)
+2. 設定ファイルを用意する。
+    - [google_checks.xml](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)等
+3. 下記実行。
+    ``` bash
+    config=${設定ファイルパス}
+    # xml、sarif、plain。
+    format=${出力フォーマット}
+    output_path=${出力パス}
+    src_path=${ソースファイルパス}
+    java -jar checkstyle.jar -c ${config} -f ${format} -o ${output_path} ${src_path}
+    ```
+
+### 参考
+
+- [checkstyleをコマンドラインから実行し、循環的複雑度のレポートをXML形式で作成する : Qiita](https://qiita.com/neko_the_shadow/items/90f3e73dbd7b190a1c67)
