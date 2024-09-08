@@ -1006,6 +1006,7 @@ public class DateDiffTest {
 2. 設定ファイルを用意する。
     - [google_checks.xml](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)等
 3. 下記実行。
+
     ``` bash
     config=${設定ファイルパス}
     # xml、sarif、plain。
