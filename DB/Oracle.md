@@ -39,6 +39,7 @@
   - [ユーザオブジェクトの削除](#ユーザオブジェクトの削除)
     - [参考](#参考-6)
   - [Dockerで環境構築する](#dockerで環境構築する)
+    - [docker-compose.yml](#docker-composeyml)
     - [参考](#参考-7)
   - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
     - [参考](#参考-8)
@@ -498,6 +499,20 @@ docker exec -it oracle-db bash
 
 # sqlplus起動
 sqlplus system/password@//localhost:1521/FREEPDB1
+```
+
+### docker-compose.yml
+
+``` yml
+version: '3'
+services:
+  oracle-db:
+    image: oracle/database:23.5.0-free
+    container_name: oracle-db
+    environment:
+      - ORACLE_PWD=password
+    volumes:
+      - ./plsql:/home/oracle/plsql
 ```
 
 ### 参考

@@ -50,6 +50,7 @@
 
 - [SQL.md](./DB/SQL.md)
 - [Oracle.md](./DB/Oracle.md)
+  - [PL/SQL](./DB/PL_SQL.md)
 - [MySQL.md](./DB/MySQL.md)
 - [SQLite](./DB/SQLite.md)
 - [Microsoft SQL Server](./DB/SQL_Server.md)
