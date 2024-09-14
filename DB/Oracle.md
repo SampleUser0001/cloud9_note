@@ -38,8 +38,10 @@
     - [参考](#参考-5)
   - [ユーザオブジェクトの削除](#ユーザオブジェクトの削除)
     - [参考](#参考-6)
-  - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
+  - [Dockerで環境構築する](#dockerで環境構築する)
     - [参考](#参考-7)
+  - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
+    - [参考](#参考-8)
   - [ライセンス](#ライセンス)
     - [OTN](#otn)
   - [用語](#用語)
@@ -478,6 +480,29 @@ FROM USER_OBJECTS;
 ### 参考
 
 - [オラクルのオブジェクトを全部削除したいけど、一つずつ書くのが面倒くさい。って場合。:zero0nine](https://zero0nine.com/archives/414)
+
+## Dockerで環境構築する
+
+``` bash
+git clone https://github.com/oracle/docker-images.git
+cd docker-images/OracleDatabase/SingleInstance/dockerfiles/
+# 任意のバージョンを選択する。lsして確認。
+ORACLE_VERSION=23.5.0
+./buildContainerImage.sh -v $ORACLE_VERSION -f
+
+# コンテナ起動
+docker run --name oracle-db -e ORACLE_PWD=password oracle/database:$ORACLE_VERSION-free
+
+# コンテナログイン
+docker exec -it oracle-db bash
+
+# sqlplus起動
+sqlplus system/password@//localhost:1521/FREEPDB1
+```
+
+### 参考
+
+- [DockerでOracle Databaseを構築してみる:Qiita](https://qiita.com/h-i-ist/items/a67acbce0e7c6bdebd69)
 
 ## Oracle Database アーキテクチャ
 

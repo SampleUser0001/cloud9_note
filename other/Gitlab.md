@@ -16,6 +16,7 @@
     ``` bash
     sudo mkdir -p /srv/gitlab
     ```
+
 3. 環境変数設定
 
     ``` bash
