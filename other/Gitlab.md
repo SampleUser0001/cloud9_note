@@ -51,7 +51,9 @@
         ```
 
 5. `docker compose up -d`
-6. [http://localhost:8929/](http://localhost:8929/)
+6. rootパスワードファイルを取得する。24時間後の最初の再設定実行時に自動的に削除される。
+    - `sudo docker cp ${container_id} cp:/etc/gitlab/initial_root_password .`
+7. [http://localhost:8929/](http://localhost:8929/)
 
 ### 参考
 
