@@ -4,6 +4,7 @@
   - [docker-composeを使用して構築する](#docker-composeを使用して構築する)
     - [参考](#参考)
   - [コミット時の表示時刻をJSTにする](#コミット時の表示時刻をjstにする)
+  - [バックアップ例](#バックアップ例)
 
 ## docker-composeを使用して構築する
 
@@ -79,4 +80,22 @@ gitlab_rails['time_zone'] = 'Asia/Tokyo'
 
 ``` sh
 gitlab-ctl reconfigure
+```
+
+## バックアップ例
+
+Dockerで起動したGitlabのバックアップ例。  
+関係ファイルは`/srv/gitlab`配下にある想定。  
+`sudo`をつけて実行すること。(つけない場合、`/srv/gitlab`にアクセスできない。)
+
+``` bash
+#!/bin/bash
+
+tmpdir=$(mktemp -d)
+
+cp -r /srv/gitlab/config $tmpdir
+cp -r /srv/gitlab/data $tmpdir
+
+now=`date '+%Y%m%d_%H%M%S'`
+zip -r gitlab-$now.zip $tmpdir 
 ```
