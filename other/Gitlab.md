@@ -3,6 +3,8 @@
 - [Gitlab](#gitlab)
   - [docker-composeを使用して構築する](#docker-composeを使用して構築する)
     - [参考](#参考)
+  - [CI/CDを動かす場合](#cicdを動かす場合)
+    - [Java + Maven](#java--maven)
   - [コミット時の表示時刻をJSTにする](#コミット時の表示時刻をjstにする)
   - [バックアップ例](#バックアップ例)
 
@@ -59,6 +61,78 @@
 ### 参考
 
 - [Install GitLab in a Docker container:Gitlab](https://docs.gitlab.com/ee/install/docker/installation.html)
+
+## CI/CDを動かす場合
+
+Gitlab環境にビルドできる環境が必要。
+
+### Java + Maven
+
+``` Dockerfile
+# Use the GitLab Enterprise Edition base image
+FROM gitlab/gitlab-ee:17.1.6-ee.0
+
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y wget gnupg2 openjdk-17-jdk
+
+# Install Maven
+WORKDIR /tmp
+ARG MAVEN_VERSION="3.9.9"
+RUN wget https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    tar -xzvf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /opt && \
+    ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/apache-maven
+
+ENV MAVEN_HOME=/opt/apache-maven
+ENV MVN_HOME=/opt/apache-maven
+ENV PATH=$PATH:$MVN_HOME/bin
+
+# RUN echo '# Maven'
+# MVN_HOME=/opt/apache-maven
+# PATH=$PATH:$MVN_HOME/bin' >> /etc/profile
+
+# Set environment variables
+# ENV JAVA_HOME=/usr/lib/jvm/adoptopenjdk-17-hotspot
+
+# Verify installations
+RUN java -version && mvn -version
+
+# Expose necessary ports (if any)
+EXPOSE 80 443 22
+
+# Define entrypoint
+ENTRYPOINT ["/assets/wrapper"]
+```
+
+``` yml
+version: '3.6'
+services:
+  gitlab:
+    build: .
+    container_name: gitlab
+    restart: always
+    hostname: 'gitlab.example.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.example.com:8929'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2424
+    ports:
+      - '8929:8929'
+      - '443:443'
+      - '2424:22'
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+    shm_size: '256m'
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    volumes:
+     - '/srv/gitlab-runner/config:/etc/gitlab-runner'
+     - '/var/run/docker.sock:/var/run/docker.sock'
+    depends_on:
+      - gitlab
+```
 
 ## コミット時の表示時刻をJSTにする
 
