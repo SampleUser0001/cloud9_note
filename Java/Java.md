@@ -9,6 +9,7 @@
     - [1行目を読み飛ばす](#1行目を読み飛ばす)
     - [String -\> Model](#string---model)
     - [Stream -\> List](#stream---list)
+      - [Collectors.toList()とStream.toList()の違い](#collectorstolistとstreamtolistの違い)
     - [Stream -\> Map](#stream---map)
       - [順番を保持する](#順番を保持する)
     - [合計値算出](#合計値算出)
@@ -128,6 +129,17 @@ import java.util.stream.Collectors;
 
 .collect(Collectors.toList())
 ```
+
+#### Collectors.toList()とStream.toList()の違い
+
+- Stream.toList()
+    - Java16以降。
+    - 順序は保証される。
+    - Listの変更はできない。
+    - Listの型、シリアライズ性は保証されない。
+- Collectors.toList()
+    - 新しいListに入れる。
+    - Listの型、可変性、シリアライズ性、スレッドの安全性は保証されない、とされているが、実装はArrayListらしい。
 
 ### Stream -> Map
 
