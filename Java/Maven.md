@@ -17,6 +17,7 @@
   - [package, javaコマンドで実行する](#package-javaコマンドで実行する)
   - [dependencyタグのjarをまとめてjarにする](#dependencyタグのjarをまとめてjarにする)
     - [参考](#参考-1)
+  - [package,install時にテストをスキップする](#packageinstall時にテストをスキップする)
   - [getter,setterを作成しない](#gettersetterを作成しない)
     - [参考](#参考-2)
   - [依存ライブラリを取り込む](#依存ライブラリを取り込む)
@@ -168,6 +169,16 @@ java -classpath target/${jarファイルパス} ${mainメソッドクラスフ�
 ### 参考
 
 [https://qiita.com/hide/items/0c8795054219d04e5e98](https://qiita.com/hide/items/0c8795054219d04e5e98)
+
+## package,install時にテストをスキップする
+
+``` bash
+# 実行のみスキップ
+mvn install -DskipTests=true
+
+# コンパイルをスキップ
+mvn install -Dmaven.test.skip=true
+```
 
 ## getter,setterを作成しない
 
