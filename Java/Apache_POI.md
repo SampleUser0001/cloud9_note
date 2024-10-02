@@ -328,6 +328,8 @@ public enum CellTypeEnum {
 ## 列を削除して詰める
 
 - [CellTypeEnum.java:Poi_delete_and_close:SampleUser0001:Github](https://github.com/SampleUser0001/Poi_delete_and_close/blob/main/src/main/java/ittimfn/poi/enums/CellTypeEnum.java)
+    - 実際には残すセルの値を、削除するセルにコピーする。
+    - 値コピーは取得 -> 書き込みだが、取得はセルの書式によって呼び出すメソッド変える必要がある点に注意が必要。
 
 ## 読み込み + 更新する
 
