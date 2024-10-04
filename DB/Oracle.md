@@ -44,6 +44,9 @@
     - [注意点](#注意点)
     - [参考](#参考-7)
   - [権限を確認する](#権限を確認する)
+  - [expdp/impdp(エクスポート/インポート)](#expdpimpdpエクスポートインポート)
+    - [expdp](#expdp)
+    - [impdp](#impdp)
   - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
     - [参考](#参考-8)
   - [ライセンス](#ライセンス)
@@ -551,6 +554,30 @@ chmod 777 ${dir_path}
 
 ``` sql
 SELECT * FROM SYS.DBA_SYS_PRIVS;
+```
+
+## expdp/impdp(エクスポート/インポート)
+
+### expdp
+
+``` bash
+sqlplus system/password@//localhost:1521/FREEPDB1
+```
+
+``` sql
+create or replace directory BACKUP_DIR as '/home/oracle/datas';
+commit;
+exit
+```
+
+``` bash
+expdp system/password@//localhost:1521/FREEPDB1 directory=backup_dir dumpfile=test.dmp;
+```
+
+### impdp
+
+``` bash
+impdp system/password@//localhost:1521/FREEPDB1 directory=backup_dir dumpfile=test.dmp;
 ```
 
 ## Oracle Database アーキテクチャ
