@@ -40,6 +40,7 @@
     - [参考](#参考-6)
   - [Dockerで環境構築する](#dockerで環境構築する)
     - [docker-compose.yml](#docker-composeyml)
+    - [コンテナ外からの接続](#コンテナ外からの接続)
     - [参考](#参考-7)
   - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
     - [参考](#参考-8)
@@ -509,11 +510,28 @@ services:
   oracle-db:
     image: oracle/database:23.5.0-free
     container_name: oracle-db
+    port:
+      - 1521:1521
     environment:
       - ORACLE_PWD=password
     volumes:
       - ./plsql:/home/oracle/plsql
 ```
+
+### コンテナ外からの接続
+
+接続できるようになるまで、少し時間がかかる。
+
+| 項目名 | 値 |
+| :----- | :-- |
+| 認証タイプ | デフォルト |
+| ロール | デフォルト |
+| ユーザ名 | system |
+| パスワード | 環境変数:ORACLE_PWDの値 |
+| ホスト名 | localhost |
+| ポート | 1521 |
+| タイプ | サービス名 |
+| サービス名 | FREEPDB1 |
 
 ### 参考
 
