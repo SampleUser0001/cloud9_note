@@ -41,7 +41,9 @@
   - [Dockerで環境構築する](#dockerで環境構築する)
     - [docker-compose.yml](#docker-composeyml)
     - [コンテナ外からの接続](#コンテナ外からの接続)
+    - [注意点](#注意点)
     - [参考](#参考-7)
+  - [権限を確認する](#権限を確認する)
   - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
     - [参考](#参考-8)
   - [ライセンス](#ライセンス)
@@ -533,9 +535,23 @@ services:
 | タイプ | サービス名 |
 | サービス名 | FREEPDB1 |
 
+### 注意点
+
+Oracleに限らないが、コンテナ内でディレクトリに対してファイル作成を行う場合は、ホスト側のディレクトリに書き込み権限をつけること。
+
+``` bash
+chmod 777 ${dir_path}
+```
+
 ### 参考
 
 - [DockerでOracle Databaseを構築してみる:Qiita](https://qiita.com/h-i-ist/items/a67acbce0e7c6bdebd69)
+
+## 権限を確認する
+
+``` sql
+SELECT * FROM SYS.DBA_SYS_PRIVS;
+```
 
 ## Oracle Database アーキテクチャ
 
