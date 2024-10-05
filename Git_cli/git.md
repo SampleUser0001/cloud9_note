@@ -68,6 +68,7 @@
     - [Linux -\> Windows](#linux---windows)
     - [参考](#参考-4)
   - [各ファイルの直近のコミット日とコミットコメントを取得する](#各ファイルの直近のコミット日とコミットコメントを取得する)
+  - [ローカルにclone可能なリポジトリを作成する](#ローカルにclone可能なリポジトリを作成する)
 
 ## Githubとssh接続する
 
@@ -624,4 +625,11 @@ git ls-tree -r main --name-only | while read file; do
     echo "$file\t$commit_date_converted\t\"$commit_message\""
 done
 
+```
+
+## ローカルにclone可能なリポジトリを作成する
+
+``` bash
+git init --bare --share=true ${repository_name}
+# git clone ${dir_path}でcloneできる。
 ```
