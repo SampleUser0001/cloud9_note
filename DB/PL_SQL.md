@@ -3,6 +3,8 @@
 - [PL/SQL](#plsql)
   - [実行](#実行)
   - [PL/SQLファイルをsqlplusの引数として渡す](#plsqlファイルをsqlplusの引数として渡す)
+  - [EXIT WHEN](#exit-when)
+  - [FOR LOOP](#for-loop)
 
 ## 実行
 
@@ -37,3 +39,44 @@ SET SERVEROUTPUT ON
 sqlplus ${認証情報} @${file_path}
 ```
 
+## EXIT WHEN
+
+条件を満たしたらループを抜ける。
+
+``` sql
+SET SERVEROUTPUT ON
+
+DECLARE
+  c_count NUMBER := 0;
+BEGIN
+  LOOP
+    c_count := c_count + 1;
+    DBMS_OUTPUT.PUT_LINE('c_count = ' || c_count);
+    EXIT WHEN c_count = 5;
+  END LOOP;
+END;
+/
+exit;
+```
+
+## FOR LOOP
+
+``` sql
+SET SERVEROUTPUT ON
+DECLARE
+BEGIN
+    FOR c_count IN 1..5 LOOP
+        DBMS_OUTPUT.PUT_LINE('c_count = ' || c_count);
+    END LOOP;
+END;
+/
+exit;
+```
+
+``` txt
+c_count = 1
+c_count = 2
+c_count = 3
+c_count = 4
+c_count = 5
+```
