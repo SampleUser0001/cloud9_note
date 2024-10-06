@@ -3,6 +3,9 @@
 - [PL/SQL](#plsql)
   - [実行](#実行)
   - [PL/SQLファイルをsqlplusの引数として渡す](#plsqlファイルをsqlplusの引数として渡す)
+  - [%TYPE](#type)
+  - [%ROWTYPE](#rowtype)
+  - [定数](#定数)
   - [EXIT WHEN](#exit-when)
   - [FOR LOOP](#for-loop)
 
@@ -37,6 +40,29 @@ SET SERVEROUTPUT ON
 
 ``` bash
 sqlplus ${認証情報} @${file_path}
+```
+
+## %TYPE
+
+既存のテーブルの列の型と同じ定義を使う。
+
+``` sql
+hoge table1.row1%TYPE
+```
+
+## %ROWTYPE
+
+既存のテーブルの定義を型として使う。
+
+``` sql
+hoge table1%ROWTYPE
+```
+
+## 定数
+
+``` sql
+HOGE CONSTANT VARCHAR2 NOT NULL DEFAULT "HOGE"
+PIYO CONSTANT VARCHAR2 NOT NULL := "PIYO"
 ```
 
 ## EXIT WHEN
