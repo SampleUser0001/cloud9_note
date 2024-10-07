@@ -73,6 +73,7 @@
     - [差分取得](#差分取得)
   - [コマンドラインでcheckstyleを実行する](#コマンドラインでcheckstyleを実行する)
     - [参考](#参考-3)
+  - [縦と横を入れ替える](#縦と横を入れ替える)
 
 ## Stream
 
@@ -1031,3 +1032,63 @@ public class DateDiffTest {
 ### 参考
 
 - [checkstyleをコマンドラインから実行し、循環的複雑度のレポートをXML形式で作成する : Qiita](https://qiita.com/neko_the_shadow/items/90f3e73dbd7b190a1c67)
+
+## 縦と横を入れ替える
+
+``` java
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.ArrayList;
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        List<List<String>> list
+            = Files.lines(Paths.get("Sample.tsv"))
+                   .map(line -> List.of(line.split("\t")))
+                   .toList();
+        
+        // 行数
+        int rowCount = list.size();
+        // 列数の最大値
+        int maxRowLength = list.stream()
+                               .mapToInt(List::size)
+                               .max()
+                               .orElse(0);
+        
+        List<List<String>> transposed = new ArrayList<>();
+        for (int i = 0; i < maxRowLength; i++) {
+            List<String> column = new ArrayList<>();
+            for (int j = 0; j < rowCount; j++) {
+                if (i < list.get(j).size()) {
+                    column.add(list.get(j).get(i));
+                } else {
+                    column.add(""); // 空のセルを追加
+                }
+            }
+            transposed.add(column);
+        }
+
+        // 結果を表示
+        for (List<String> row : transposed) {
+            System.out.println(String.join("\t", row));
+        }
+    }
+}
+```
+
+Sample.tsv
+``` tsv : Sample.tsv
+hoge1		hoge3	
+	piyo2	piyo3	piyo4
+fuga1	fuga2		
+```
+
+実行結果
+``` tsv
+hoge1		fuga1
+	piyo2	fuga2
+hoge3	piyo3	
+	piyo4	
+
+```
