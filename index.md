@@ -238,6 +238,7 @@
 
 ## Other
 
+- [Charset : 文字コード](./other/Charset.md)
 - [GPT](./other/GPT.md)
 - [other.md](./other/other.md)
 - [Teraterm](./other/Teraterm.md)
