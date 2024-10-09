@@ -24,6 +24,7 @@
     - [ディレクトリごとコピーする(robocopy)](#ディレクトリごとコピーするrobocopy)
       - [オプション](#オプション)
     - [再帰削除](#再帰削除)
+    - [find(grep)](#findgrep)
     - [パイプ](#パイプ)
     - [findstr](#findstr)
       - [findstr:オプション](#findstrオプション)
@@ -176,6 +177,19 @@ robocopy %ORIGIN% %TARGET% /s /e
 rem rm -rfの代替
 rm /s /q %対象ディレクトリ%
 rmdir /s /q %対象ディレクトリ%
+```
+
+### find(grep)
+
+``` bat
+rem 通常の検索
+find %word% %filepath%
+
+rem 件数のみ
+find /s %word% %filepath%
+
+rem 指定した単語が引っかからない行
+find /v %word% %filepath%
 ```
 
 ### パイプ
