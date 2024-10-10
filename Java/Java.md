@@ -74,6 +74,7 @@
   - [コマンドラインでcheckstyleを実行する](#コマンドラインでcheckstyleを実行する)
     - [参考](#参考-3)
   - [縦と横を入れ替える](#縦と横を入れ替える)
+  - [文字コードと改行コードの変換を行う](#文字コードと改行コードの変換を行う)
 
 ## Stream
 
@@ -1090,4 +1091,71 @@ hoge1		fuga1
 	piyo2	fuga2
 hoge3	piyo3	
 	piyo4	
+```
+
+## 文字コードと改行コードの変換を行う
+
+``` java
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+
+public class NkfLike {
+
+    public static void main(String[] args) {
+        if (args.length < 6) {
+            System.out.println("Usage: java Nkf <encoding>");
+            return;
+        }
+
+        int argsIndex = 0;
+        String inputFilepath = args[argsIndex++];
+        Charset inputCharset = Charset.forName(args[argsIndex++]);
+        LineSeparator inputLineSeparator = LineSeparator.valueOf(args[argsIndex++]);
+
+        String outputFilepath = args[argsIndex++];
+        Charset outputCharset = Charset.forName(args[argsIndex++]);
+        LineSeparator outputLineSeparator = LineSeparator.valueOf(args[argsIndex++]);
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                new FileInputStream(inputFilepath), inputCharset))) {
+
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(outputFilepath), outputCharset));
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
+                writer.write(outputLineSeparator.getLineSeparator());
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private enum LineSeparator {
+        CR("\r"),
+        CRLF("\r\n"),
+        LF("\n");
+
+        private final String lineSeparator;
+
+        private LineSeparator(String lineSeparator) {
+            this.lineSeparator = lineSeparator;
+        }
+
+        public String getLineSeparator() {
+            return lineSeparator;
+        }
+
+    }
+}
 ```
