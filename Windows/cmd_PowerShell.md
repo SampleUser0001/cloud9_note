@@ -33,6 +33,7 @@
     - [xcopy](#xcopy)
       - [参考](#参考-2)
     - [サービスの停止/起動](#サービスの停止起動)
+  - [MD5ハッシュ値取得](#md5ハッシュ値取得)
 
 
 ## PowerShell
@@ -238,3 +239,10 @@ net stop %service_name%
 @REM 起動
 net start %service_name%
 ```
+
+## MD5ハッシュ値取得
+
+``` bat
+certutil -hashfile %filepath% MD5
+```
+
