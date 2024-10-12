@@ -116,6 +116,8 @@
     - [オプション](#オプション)
     - [参考](#参考-16)
   - [相対パス -\> 絶対パス(フルパス)変換](#相対パス---絶対パスフルパス変換)
+  - [Shift-JISのファイルに対してgrepする](#shift-jisのファイルに対してgrepする)
+    - [git bashでやる](#git-bashでやる)
   - [プロンプトを設定する](#プロンプトを設定する)
     - [設定例](#設定例)
       - [ChatGPTによる解説](#chatgptによる解説)
@@ -1016,6 +1018,16 @@ pwgen -c -n -y -1 12
 echo ${filepath} | xargs readlink -f
 ```
 
+## Shift-JISのファイルに対してgrepする
+
+``` bash
+find . -type f -exec bash -c 'nkf -Sw {} | grep -n "${grep_word}" && echo {};' \;
+```
+
+### git bashでやる
+
+[Shift-JISのファイルに対してgrepする : git bash版](../Windows/git_bash.md#shift-jisのファイルに対してgrepする)
+
 ## プロンプトを設定する
 
 ### 設定例
@@ -1072,3 +1084,4 @@ ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m
 ``` bash
 echo ${word} | tr [:upper:] [:lower:]
 ```
+
