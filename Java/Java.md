@@ -75,6 +75,7 @@
     - [参考](#参考-3)
   - [縦と横を入れ替える](#縦と横を入れ替える)
   - [文字コードと改行コードの変換を行う](#文字コードと改行コードの変換を行う)
+  - [SQLの実行結果をExcelに出力する](#sqlの実行結果をexcelに出力する)
 
 ## Stream
 
@@ -1158,4 +1159,110 @@ public class NkfLike {
 
     }
 }
+```
+
+## SQLの実行結果をExcelに出力する
+
+Chat-GPTに聞いた。動作確認していない。
+
+``` xml
+<dependencies>
+    <!-- Apache POI for Excel -->
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>5.2.2</version>
+    </dependency>
+    <!-- Oracle JDBC Driver -->
+    <dependency>
+        <groupId>com.oracle.database.jdbc</groupId>
+        <artifactId>ojdbc8</artifactId>
+        <version>19.8.0.0</version>
+    </dependency>
+</dependencies>
+
+```
+
+``` java
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.*;
+import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
+
+public class SQLToExcelExporter {
+    public static void main(String[] args) {
+        // Oracleデータベースへの接続情報
+        String jdbcUrl = "jdbc:oracle:thin:@hostname:1521:dbname";
+        String username = "your_username";
+        String password = "your_password";
+
+        List<String> sqlFiles = List.of("query1.sql", "query2.sql", "query3.sql");  // SQLファイルのリスト
+        String excelFilePath = "output.xlsx";  // 出力するExcelファイルのパス
+
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            Workbook workbook = new XSSFWorkbook();
+            
+            for (String sqlFile : sqlFiles) {
+                // SQLファイルを読み込む
+                String query = readSQLFromFile(sqlFile);
+                // クエリを実行
+                try (Statement stmt = connection.createStatement();
+                     ResultSet rs = stmt.executeQuery(query)) {
+                    // 結果をExcelのシートに書き込む
+                    String sheetName = sqlFile.replace(".sql", "");
+                    writeResultSetToSheet(rs, workbook, sheetName);
+                }
+            }
+            
+            // Excelファイルに保存
+            try (FileOutputStream fileOut = new FileOutputStream(excelFilePath)) {
+                workbook.write(fileOut);
+            }
+            workbook.close();
+            System.out.println("Excelファイルに出力完了: " + excelFilePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // SQLファイルを読み込むメソッド
+    private static String readSQLFromFile(String filePath) throws IOException {
+        StringBuilder query = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                query.append(line).append("\n");
+            }
+        }
+        return query.toString();
+    }
+
+    // ResultSetをExcelシートに書き込むメソッド
+    private static void writeResultSetToSheet(ResultSet rs, Workbook workbook, String sheetName) throws SQLException {
+        Sheet sheet = workbook.createSheet(sheetName);
+        Row headerRow = sheet.createRow(0);
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+
+        // ヘッダー行を作成
+        for (int i = 1; i <= columnCount; i++) {
+            Cell cell = headerRow.createCell(i - 1);
+            cell.setCellValue(rsmd.getColumnName(i));
+        }
+
+        // データ行を作成
+        int rowIndex = 1;
+        while (rs.next()) {
+            Row row = sheet.createRow(rowIndex++);
+            for (int i = 1; i <= columnCount; i++) {
+                Cell cell = row.createCell(i - 1);
+                cell.setCellValue(rs.getString(i));
+            }
+        }
+    }
+}
+
 ```
