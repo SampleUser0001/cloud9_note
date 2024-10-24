@@ -20,6 +20,15 @@
     - [ファイル書き込み](#ファイル書き込み)
     - [ファイルに追記](#ファイルに追記)
     - [Map(ハッシュテーブル)](#mapハッシュテーブル)
+    - [Excel -\> TSV](#excel---tsv)
+      - [PowerShellスクリプトの修正版](#powershellスクリプトの修正版)
+      - [スクリプトの使い方](#スクリプトの使い方)
+      - [変更点の説明](#変更点の説明)
+    - [tsv -\> Excel](#tsv---excel)
+      - [PowerShellスクリプト例：TSVからExcelへの変換](#powershellスクリプト例tsvからexcelへの変換)
+      - [スクリプトの使い方](#スクリプトの使い方-1)
+      - [変更点の説明](#変更点の説明-1)
+      - [注意点](#注意点)
   - [コマンドプロンプト](#コマンドプロンプト)
     - [ディレクトリごとコピーする(robocopy)](#ディレクトリごとコピーするrobocopy)
       - [オプション](#オプション)
@@ -158,6 +167,202 @@ foreach($key in $hash_table.Keys) {
     Write-Host $hash_table[$key]
 }
 ```
+
+### Excel -> TSV
+
+ChatGPTによる生成。まだ試せていない。
+
+はい、PowerShellのスクリプトを修正して、起動引数で対象のシートを指定できるようにすることが可能です。これにより、シート名またはシート番号をスクリプトの引数として渡し、指定されたシートからTSVファイルを出力することができます。
+
+以下に、対象のシートを起動引数で指定するようにしたPowerShellスクリプトの例を示します。
+
+#### PowerShellスクリプトの修正版
+
+```powershell
+# 起動引数の確認
+param (
+    [string]$excelFilePath,
+    [string]$outputTsvPath,
+    [string]$sheetNameOrIndex
+)
+
+if (-not $excelFilePath -or -not $outputTsvPath -or -not $sheetNameOrIndex) {
+    Write-Error "Usage: .\ExportExcelToTsv.ps1 -excelFilePath <ExcelFilePath> -outputTsvPath <OutputTsvPath> -sheetNameOrIndex <SheetName or SheetIndex>"
+    exit 1
+}
+
+# Excel COMオブジェクトを作成
+$excel = New-Object -ComObject Excel.Application
+$excel.Visible = $false
+
+# Excelファイルを開く
+$workbook = $excel.Workbooks.Open($excelFilePath)
+
+# 指定されたシートを選択
+if ($sheetNameOrIndex -as [int]) {
+    $sheetIndex = [int]$sheetNameOrIndex
+    $sheet = $workbook.Sheets.Item($sheetIndex)
+} else {
+    $sheet = $workbook.Sheets.Item($sheetNameOrIndex)
+}
+
+# 全データを取得
+$range = $sheet.UsedRange
+$data = $range.Value2
+
+# データをTSVに変換して保存
+$tsvContent = ""
+for ($i = 1; $i -le $data.GetLength(0); $i++) {
+    $line = ""
+    for ($j = 1; $j -le $data.GetLength(1); $j++) {
+        if ($j -eq 1) {
+            $line += $data[$i, $j]
+        } else {
+            $line += "`t" + $data[$i, $j]
+        }
+    }
+    $tsvContent += $line + "`n"
+}
+
+# TSVファイルに書き込み
+Set-Content -Path $outputTsvPath -Value $tsvContent -Encoding UTF8
+
+# Excelを閉じてリソースを解放
+$workbook.Close($false)
+$excel.Quit()
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($sheet) | Out-Null
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($workbook) | Out-Null
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
+
+Write-Output "TSVファイルへの出力が完了しました: $outputTsvPath"
+```
+
+#### スクリプトの使い方
+
+このスクリプトを実行するには、起動引数として以下の情報を渡す必要があります：
+1. **Excelファイルのパス** (`-excelFilePath`)。
+2. **出力するTSVファイルのパス** (`-outputTsvPath`)。
+3. **シート名またはシート番号** (`-sheetNameOrIndex`)。
+
+例えば、次のように実行します。
+
+```powershell
+.\ExportExcelToTsv.ps1 -excelFilePath "C:\path\to\your\file.xlsx" -outputTsvPath "C:\path\to\your\output.tsv" -sheetNameOrIndex "Sheet1"
+```
+
+または、シート番号を指定する場合：
+
+```powershell
+.\ExportExcelToTsv.ps1 -excelFilePath "C:\path\to\your\file.xlsx" -outputTsvPath "C:\path\to\your\output.tsv" -sheetNameOrIndex 2
+```
+
+#### 変更点の説明
+
+1. **起動引数の定義**：
+   - `param` ブロックでスクリプトの起動引数を受け取るようにしました。
+   - `$excelFilePath`, `$outputTsvPath`, `$sheetNameOrIndex` の3つの引数を受け取ります。
+
+2. **シートの指定**：
+   - `$sheetNameOrIndex` が整数として解釈できる場合、シートのインデックス番号として扱います。
+   - 文字列の場合はシート名として扱います。
+
+この変更により、スクリプトを実行するときに対象のシートを柔軟に指定することができ、複数のシートを持つExcelファイルから必要なシートのみをTSVに出力することが可能になります。
+
+### tsv -> Excel
+
+ChatGPTによる生成。まだ試していない。
+
+PowerShellを使って、TSVファイルの内容をExcelファイルに変換するスクリプトも作成することができます。このスクリプトでは、Excel COMオブジェクトを利用して、TSVファイルを読み込み、それを新しいExcelワークブックに書き込みます。
+
+以下に、TSVからExcelに変換するPowerShellスクリプトの例を示します。
+
+#### PowerShellスクリプト例：TSVからExcelへの変換
+
+```powershell
+# 起動引数の確認
+param (
+    [string]$tsvFilePath,
+    [string]$outputExcelPath,
+    [string]$sheetName = "Sheet1"
+)
+
+if (-not $tsvFilePath -or -not $outputExcelPath) {
+    Write-Error "Usage: .\TsvToExcel.ps1 -tsvFilePath <TsvFilePath> -outputExcelPath <OutputExcelPath> [-sheetName <SheetName>]"
+    exit 1
+}
+
+# TSVファイルの内容を読み込む
+$tsvContent = Get-Content -Path $tsvFilePath
+
+# Excel COMオブジェクトを作成
+$excel = New-Object -ComObject Excel.Application
+$excel.Visible = $false
+
+# 新しいExcelワークブックを作成
+$workbook = $excel.Workbooks.Add()
+$sheet = $workbook.Sheets.Item(1)
+$sheet.Name = $sheetName
+
+# TSVデータをExcelシートに書き込み
+$rowIndex = 1
+foreach ($line in $tsvContent) {
+    $columns = $line -split "`t"
+    $columnIndex = 1
+    foreach ($value in $columns) {
+        $sheet.Cells.Item($rowIndex, $columnIndex).Value2 = $value
+        $columnIndex++
+    }
+    $rowIndex++
+}
+
+# Excelファイルを保存
+$workbook.SaveAs($outputExcelPath)
+
+# Excelを閉じてリソースを解放
+$workbook.Close($true)
+$excel.Quit()
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($sheet) | Out-Null
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($workbook) | Out-Null
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
+
+Write-Output "Excelファイルへの変換が完了しました: $outputExcelPath"
+```
+
+#### スクリプトの使い方
+
+このスクリプトを実行するには、起動引数として以下の情報を渡す必要があります：
+1. **TSVファイルのパス** (`-tsvFilePath`)。
+2. **出力するExcelファイルのパス** (`-outputExcelPath`)。
+3. **シート名**（任意） (`-sheetName`)。デフォルトは `"Sheet1"` です。
+
+例えば、次のように実行します。
+
+```powershell
+.\TsvToExcel.ps1 -tsvFilePath "C:\path\to\your\file.tsv" -outputExcelPath "C:\path\to\your\output.xlsx" -sheetName "MyDataSheet"
+```
+
+#### 変更点の説明
+
+1. **起動引数の定義**：
+   - `param` ブロックでスクリプトの起動引数を受け取るようにしました。
+   - `$tsvFilePath`, `$outputExcelPath`, `$sheetName` の3つの引数を受け取ります（`$sheetName` はオプションで、デフォルト値は `"Sheet1"`）。
+
+2. **TSVデータの読み込み**：
+   - `Get-Content` コマンドを使ってTSVファイルの各行を読み込みます。
+
+3. **Excelファイルへの書き込み**：
+   - Excel COMオブジェクトを作成して、新しいExcelワークブックを生成します。
+   - シートに対して、各行・列のデータを書き込みます。
+
+4. **Excelファイルの保存**：
+   - `$workbook.SaveAs($outputExcelPath)` でExcelファイルとして保存します。
+
+#### 注意点
+
+- ExcelのCOMオブジェクトを利用しているため、実行環境にはExcelがインストールされている必要があります。
+- TSVファイルの各行はタブで区切られていることを前提としています。TSVファイル内に不正なデータが含まれていると、Excelへの書き込みでエラーが発生する可能性があるので、必要に応じてTSVファイルの内容を確認してください。
+
+このスクリプトを使って、TSVファイルのデータをExcelに変換する作業が簡単にできるはずです。何か追加の機能やカスタマイズが必要であれば教えてください。
 
 ## コマンドプロンプト
 
