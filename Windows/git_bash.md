@@ -47,10 +47,12 @@ grep_word=$1
 
 nkf $original $converted
 
-while read data ; do
-    echo $original:$data
-done << END
-`grep -n $grep_word $converted`
+result=`grep -n $grep_word $converted`
+if [ -n "$result" ]; then
+    while read data ; do
+        echo "$original:$data"
+    eone << END
+$result
 END
-
+fi
 ```
