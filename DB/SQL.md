@@ -26,6 +26,7 @@ SQLのテクニック全般
       - [例1](#例1)
       - [例2](#例2)
     - [参考](#参考-2)
+  - [ROW\_NUMBER() OVER(PARTITION BY column1 ORDER BY column2) AS ROW\_NUM](#row_number-overpartition-by-column1-order-by-column2-as-row_num)
   - [便利に使える環境](#便利に使える環境)
 
 ## case-when-then
@@ -277,6 +278,79 @@ sqlite> select order_id, item, qty, sum(qty) over (order by order_id) from test_
 ### 参考
 
 [分析関数（ウインドウ関数）をわかりやすく説明してみた:Qiita](https://qiita.com/tlokweng/items/fc13dc30cc1aa28231c5)
+
+## ROW_NUMBER() OVER(PARTITION BY column1 ORDER BY column2) AS ROW_NUM
+
+行番号を生成する。  
+`PARTITION BY`で指定された列の値が同じデータをひとまとめにして、`ORDER BY`で指定されている順に行番号を生成する。  
+`PARTITION BY`で指定された列の値が異なる場合は、1から再割り当てされる。
+
+``` sql
+CREATE TABLE employees (
+    employee_id INTEGER PRIMARY KEY,
+    department_id INTEGER,
+    employee_name TEXT,
+    salary REAL
+);
+
+-- サンプルデータを挿入します
+INSERT INTO employees (employee_id, department_id, employee_name, salary) VALUES
+(1, 1, 'Alice', 5000),
+(2, 1, 'Bob', 6000),
+(3, 1, 'Charlie', 5500),
+(4, 2, 'David', 7000),
+(5, 2, 'Eve', 7200),
+(6, 3, 'Frank', 8000),
+(7, 3, 'Grace', 7500);
+
+```
+
+``` sql
+-- 部門ごとに従業員を給与の降順でランク付けします (SQLite ではウィンドウ関数はサポートされています)
+WITH ranked_employees AS (
+    SELECT 
+        employee_id,
+        department_id,
+        employee_name,
+        salary,
+        ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY salary DESC) AS row_num
+    FROM 
+        employees
+)
+SELECT 
+    department_id,
+    row_num,
+    salary,
+    employee_id,
+    employee_name
+FROM ranked_employees
+ORDER BY department_id, row_num;
+
+-- 結果の例:
+-- 部門ごとに従業員の給与を降順に並べ、ROW_NUMBER()でランクを付けます。
+-- 例えば、department_id = 1 の場合、Bob が 1位、Charlie が 2位、Alice が 3位といった具合に表示されます。
+```
+
+``` sh
+#!/bin/bash
+
+if [ -f ./sample.db ]; then
+    rm ./sample.db
+fi
+
+sqlite3 sample.db < ./create_environment.sql
+sqlite3 sample.db < select.sql
+```
+
+``` txt
+1|1|6000.0|2|Bob
+1|2|5500.0|3|Charlie
+1|3|5000.0|1|Alice
+2|1|7200.0|5|Eve
+2|2|7000.0|4|David
+3|1|8000.0|6|Frank
+3|2|7500.0|7|Grace
+```
 
 ## 便利に使える環境
 
