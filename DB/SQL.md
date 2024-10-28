@@ -27,6 +27,7 @@ SQLのテクニック全般
       - [例2](#例2)
     - [参考](#参考-2)
   - [ROW\_NUMBER() OVER(PARTITION BY column1 ORDER BY column2) AS ROW\_NUM](#row_number-overpartition-by-column1-order-by-column2-as-row_num)
+  - [WITH](#with)
   - [便利に使える環境](#便利に使える環境)
 
 ## case-when-then
@@ -350,6 +351,33 @@ sqlite3 sample.db < select.sql
 2|2|7000.0|4|David
 3|1|8000.0|6|Frank
 3|2|7500.0|7|Grace
+```
+
+## WITH
+
+`SELECT`の結果を、別名として扱うことができるようになる。  
+複数の`SELECT`結果を宣言したい場合は、カンマで区切る。（WITH自体は1つしか書けない。）
+
+``` sql
+WITH ranked_employees AS (
+    SELECT 
+        employee_id,
+        department_id,
+        employee_name,
+        salary,
+        ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY salary DESC) AS row_num
+    FROM 
+        employees
+)
+SELECT 
+    department_id,
+    row_num,
+    salary,
+    employee_id,
+    employee_name
+FROM ranked_employees
+ORDER BY department_id, row_num;
+
 ```
 
 ## 便利に使える環境
