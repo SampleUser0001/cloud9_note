@@ -173,11 +173,12 @@ ChatGPTによる生成。まだ試せていない。
 param (
     [string]$inputFilePath,
     [string]$outputFilePath,
-    [string]$sheetName
+    [string]$sheetName,
+    [bool]$preserveNewLines
 )
 
-if (-not $inputFilePath -or -not $outputFilePath -or -not $sheetName) {
-    Write-Error "Usage: .\ExcelToTsv.ps1 -inputFilePath <InputExcelFilePath> -outputFilePath <OutputTsvFilePath> -sheetName <SheetName>"
+if (-not $inputFilePath -or -not $outputFilePath -or -not $sheetName -or ($preserveNewLines -eq $null)) {
+    Write-Error "Usage: .\ExcelToTsv.ps1 -inputFilePath <InputExcelFilePath> -outputFilePath <OutputTsvFilePath> -sheetName <SheetName> -preserveNewLines <true|false>"
     exit 1
 }
 
@@ -204,7 +205,12 @@ try {
     for ($i = 1; $i -le $data.GetLength(0); $i++) {
         $line = ""
         for ($j = 1; $j -le $data.GetLength(1); $j++) {
-            $cellValue = $data[$i, $j] -replace "\r\n|\n|\r", "`n"
+            $cellValue = $data[$i, $j]
+            if ($preserveNewLines) {
+                $cellValue = $cellValue -replace "\r\n|\n|\r", "`n"
+            } else {
+                $cellValue = $cellValue -replace "\r\n|\n|\r", " "
+            }
             if ($j -eq 1) {
                 $line += $cellValue
             } else {
