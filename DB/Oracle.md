@@ -32,23 +32,27 @@
     - [参考](#参考-4)
   - [CSVデータ登録](#csvデータ登録)
     - [ctlファイル](#ctlファイル)
-      - [参考：登録方法](#参考登録方法)
+      - [説明](#説明)
+      - [登録方法](#登録方法)
+        - [参考：登録方法](#参考登録方法)
+      - [trailing nullcols](#trailing-nullcols)
+      - [参考](#参考-5)
     - [実行](#実行)
   - [Timestamp型 -\> 秒変換する(EXTRACT)](#timestamp型---秒変換するextract)
-    - [参考](#参考-5)
-  - [ユーザオブジェクトの削除](#ユーザオブジェクトの削除)
     - [参考](#参考-6)
+  - [ユーザオブジェクトの削除](#ユーザオブジェクトの削除)
+    - [参考](#参考-7)
   - [Dockerで環境構築する](#dockerで環境構築する)
     - [docker-compose.yml](#docker-composeyml)
     - [コンテナ外からの接続](#コンテナ外からの接続)
     - [注意点](#注意点)
-    - [参考](#参考-7)
+    - [参考](#参考-8)
   - [権限を確認する](#権限を確認する)
   - [expdp/impdp(エクスポート/インポート)](#expdpimpdpエクスポートインポート)
     - [expdp](#expdp)
     - [impdp](#impdp)
   - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
-    - [参考](#参考-8)
+    - [参考](#参考-9)
   - [ライセンス](#ライセンス)
     - [OTN](#otn)
   - [用語](#用語)
@@ -444,26 +448,109 @@ sql*lorder を使う。
 ``` ctl
 options(skip = 1)
 load data
-infile '<csvパス>'
-<登録方法>
-into table <テーブル名>
-fields terminated by ','
+infile '<ファイルパス>'
+<登録方法> into table <対象テーブル>
+fields terminated by ',' 
 optionally enclosed by '"'
 trailing nullcols(
-  <カラム名>, <カラム名> ...
+  EMPNO DECIMAL EXTERNAL,
+  ENAME CHAR,
+  JOB CHAR,
+  MGR DECIMAL EXTERNAL,
+  HIREDATE DATE "YYYYMMDD",
+  SAL DECIMAL EXTERNAL,
+  COMM DECIMAL EXTERNAL,
+  DEPTNO DECIMAL EXTERNAL
 )
-```
-登録方法はとりあえずtruncateでいいんじゃないかな…
 
-#### 参考：登録方法
+```
+
+#### 説明
+
+- options(skip = 1)
+    - 1行目を読み飛ばす
+- fields terminated by ',' 
+    - カンマ区切り
+- optionally enclosed by '"'
+    - 項目をダブルクォーテーションで囲む（かもしれない）。
+- trailing nullcols
+    - 読み込んだとき、CSVの対象項目が空文字だった場合、NULLで埋める。
+
+#### 登録方法
+
+- APPEND
+    - テーブルが空のときに登録
+- REPLACE
+    - Delete - Insertする。失敗したときはRollbackする。
+- TRUNCATE
+    - Delete - Insertする。失敗してもRollbackしない。
+
+##### 参考：登録方法
 
 [忘れっぽいエンジニアのオラクルSQLリファレンス:４種類のロードタイプ（INSERT/APPEND/REPLACE/TRUNCATE）](http://oracle.se-free.com/utl/C2_type.html)
 
-### 実行
+#### trailing nullcols
+
+型を指定できる。
+
+| 指定 | 型 |
+| :-- | :-- |
+| DECIMAL EXTERNAL | 数値（文字列として扱われていても、数値に変換して登録する。） |
+| CHAR | 文字列 |
+| DATE "YYYYMMDD" | 日付とフォーマット |
+
+#### 参考
+
+テーブル定義
+``` sql
+CREATE TABLE EMP (
+ EMPNO               NUMBER(4) not null,
+ ENAME               varchar2(10),
+ JOB                 varchar2(9),
+ MGR                 NUMBER(4),
+ HIREDATE            DATE,
+ SAL                 NUMBER(7,2),
+ COMM                NUMBER(7,2),
+ DEPTNO              NUMBER(2) );
 
 ```
+
+emp.ctl
+
+``` ctl
+options(skip = 1)
+load data
+infile './emp.csv'
+replace
+into table emp
+fields terminated by ','
+optionally enclosed by '"'
+trailing nullcols(
+  EMPNO DECIMAL EXTERNAL,
+  ENAME CHAR,
+  JOB CHAR,
+  MGR DECIMAL EXTERNAL,
+  HIREDATE DATE "YYYYMMDD",
+  SAL DECIMAL EXTERNAL,
+  COMM DECIMAL EXTERNAL,
+  DEPTNO DECIMAL EXTERNAL
+)
+```
+
+emp.csv
+
+``` csv
+EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO
+7369,SMITH,CLERK,7902.0,19801217,800,,20
+7499,ALLEN,SALESMAN,7698.0,19810220,1600,300.0,30
+```
+
+### 実行
+
+``` bash
 sqlldr <接続情報> <ctlファイルパス>
 ```
+
 ※接続情報はsql*plusと同じ。
 
 ## Timestamp型 -> 秒変換する(EXTRACT)
