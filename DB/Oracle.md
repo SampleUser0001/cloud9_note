@@ -491,13 +491,20 @@ trailing nullcols(
 
 #### trailing nullcols
 
-型を指定できる。
+- ここに項目が書かれていると、CSVが空文字のときにNullを指定する。
+- 型を指定できる。
 
 | 指定 | 型 |
 | :-- | :-- |
 | DECIMAL EXTERNAL | 数値（文字列として扱われていても、数値に変換して登録する。） |
 | CHAR | 文字列 |
 | DATE "YYYYMMDD" | 日付とフォーマット |
+
+型は指定したいがNULLにしたくない場合は、デフォルト値を書く。
+
+``` txt
+HIREDATE DATE "DD-MM-YYYY" DEFAULTIF HIREDATE = BLANKS "01-01-1900",
+```
 
 #### 参考
 
