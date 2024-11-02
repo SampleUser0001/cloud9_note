@@ -29,6 +29,7 @@ SQLのテクニック全般
   - [ROW\_NUMBER() OVER(PARTITION BY column1 ORDER BY column2) AS ROW\_NUM](#row_number-overpartition-by-column1-order-by-column2-as-row_num)
   - [WITH](#with)
   - [便利に使える環境](#便利に使える環境)
+  - [GUI Client](#gui-client)
 
 ## case-when-then
 
@@ -383,3 +384,9 @@ ORDER BY department_id, row_num;
 ## 便利に使える環境
 
 - [SQLite_Sample:SampleUser0001:Github](https://sampleuser0001.github.io/SQLite_Sample/)
+
+## GUI Client
+
+- [DBeaver](https://dbeaver.io/)
+    - 今の所おすすめ
+- [SQL workbench](https://www.sql-workbench.eu/index.html)
