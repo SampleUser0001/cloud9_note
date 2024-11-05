@@ -2,9 +2,11 @@
 
 - [コマンドプロンプト/PowerShell](#コマンドプロンプトpowershell)
   - [PowerShell](#powershell)
+    - [PowerShellでこのシステムではスクリプトの実行が無効になっているため、ファイル hoge.ps1 を読み込むことができません。](#powershellでこのシステムではスクリプトの実行が無効になっているためファイル-hogeps1-を読み込むことができません)
+      - [参考](#参考)
     - [uuidgen](#uuidgen)
     - [tail](#tail)
-      - [参考](#参考)
+      - [参考](#参考-1)
     - [grep](#grep)
       - [再帰grep](#再帰grep)
     - [find](#find)
@@ -35,14 +37,24 @@
     - [findstr](#findstr)
       - [findstr:オプション](#findstrオプション)
     - [ファイルサイズを取得する(where)](#ファイルサイズを取得するwhere)
-      - [参考](#参考-1)
-    - [xcopy](#xcopy)
       - [参考](#参考-2)
+    - [xcopy](#xcopy)
+      - [参考](#参考-3)
     - [サービスの停止/起動](#サービスの停止起動)
   - [MD5ハッシュ値取得](#md5ハッシュ値取得)
 
 
 ## PowerShell
+
+### PowerShellでこのシステムではスクリプトの実行が無効になっているため、ファイル hoge.ps1 を読み込むことができません。
+
+``` ps1
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+```
+
+#### 参考
+
+- [PowerShellでこのシステムではスクリプトの実行が無効になっているため、ファイル hoge.ps1 を読み込むことができません。となったときの対応方法:Qiita](https://qiita.com/ponsuke0531/items/4629626a3e84bcd9398f)
 
 ### uuidgen
 
