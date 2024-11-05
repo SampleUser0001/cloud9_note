@@ -28,6 +28,7 @@
       - [スクリプトの使い方](#スクリプトの使い方)
       - [変更点の説明](#変更点の説明)
       - [注意点](#注意点)
+    - [tsv -\> Excel : 追記](#tsv---excel--追記)
   - [コマンドプロンプト](#コマンドプロンプト)
     - [ディレクトリごとコピーする(robocopy)](#ディレクトリごとコピーするrobocopy)
       - [オプション](#オプション)
@@ -346,6 +347,68 @@ Write-Output "Excelファイルへの変換が完了しました: $outputExcelPa
 - TSVファイルの各行はタブで区切られていることを前提としています。TSVファイル内に不正なデータが含まれていると、Excelへの書き込みでエラーが発生する可能性があるので、必要に応じてTSVファイルの内容を確認してください。
 
 このスクリプトを使って、TSVファイルのデータをExcelに変換する作業が簡単にできるはずです。何か追加の機能やカスタマイズが必要であれば教えてください。
+
+### tsv -> Excel : 追記
+
+末尾行に引数のTSVファイルの内容を追記する。
+
+``` ps1
+
+# 起動引数の確認
+param (
+    [string]$tsvFilePath,
+    [string]$outputExcelPath,
+    [string]$sheetName = "Sheet1"
+)
+
+if (-not $tsvFilePath -or -not $outputExcelPath) {
+    Write-Error "Usage: .\TsvToExcel.ps1 -tsvFilePath <TsvFilePath> -outputExcelPath <OutputExcelPath> [-sheetName <SheetName>]"
+    exit 1
+}
+
+# TSVファイルの内容を読み込む
+$tsvContent = Get-Content -Path $tsvFilePath
+
+# Excel COMオブジェクトを作成
+$excel = New-Object -ComObject Excel.Application
+$excel.Visible = $false
+
+# Excelファイルの存在を確認
+if (Test-Path $outputExcelPath) {
+    # 既存のファイルを開く
+    $workbook = $excel.Workbooks.Open($outputExcelPath)
+    # 既存シートを開く
+    $sheet = $workbook.Sheets.Item($sheetName)
+    # 既存データの最後の行を取得
+    $rowIndex = $sheet.UsedRange.Rows.Count + 1
+} else {
+    # 新しいワークブックを作成
+    $workbook = $excel.Workbooks.Add()
+    $sheet = $workbook.Sheets.Item(1)
+    $sheet.Name = $sheetName
+    $rowIndex = 1
+}
+
+# TSVデータをExcelシートに書き込み（書式を維持）
+foreach ($line in $tsvContent) {
+    $columns = $line -split "`t"
+    $columnIndex = 1
+    foreach ($value in $columns) {
+        # 値を直接セルに割り当て、書式を保持
+        $sheet.Cells.Item($rowIndex, $columnIndex).FormulaR1C1 = $value
+        $columnIndex++
+    }
+    $rowIndex++
+}
+
+# Excelファイルを保存
+$workbook.SaveAs($outputExcelPath)
+
+# Excelを閉じてリソースを解放
+$workbook.Close($true)
+$excel.Quit()
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
+```
 
 ## コマンドプロンプト
 
