@@ -52,6 +52,7 @@
   - [expdp/impdp(エクスポート/インポート)](#expdpimpdpエクスポートインポート)
     - [expdp](#expdp)
     - [impdp](#impdp)
+      - [parファイル](#parファイル)
   - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
     - [参考](#参考-9)
   - [ライセンス](#ライセンス)
@@ -683,6 +684,32 @@ expdp system/password@//localhost:1521/FREEPDB1 directory=backup_dir dumpfile=te
 ``` bash
 impdp system/password@//localhost:1521/FREEPDB1 directory=backup_dir dumpfile=test.dmp;
 ```
+
+#### parファイル
+
+インポート設定ファイル。引数として渡してもインポートできるが、設定ファイルとして外に出しておくのが望ましい。
+
+作成例
+
+``` par
+directory=DATA_PUMP_DIR
+dumpfile=mydumpfile.dmp
+logfile=import.log
+schemas=MY_SCHEMA
+tables=MY_SCHEMA.EMPLOYEES, MY_SCHEMA.DEPARTMENTS
+table_exists_action=REPLACE
+```
+
+- table_exists_action
+    - SKIP
+        - 既存のテーブルがあれば、そのテーブルをスキップしてインポートしません（デフォルト）。
+    - APPEND
+        - 既存のテーブルに新しいデータを追加（追記）します。
+        - エラーになるテーブル、レコードがあった場合、エラーにならない範囲で登録される。
+    - TRUNCATE
+        - 既存のテーブルのデータを削除（TRUNCATE）してから、データをインポートします。
+    - REPLACE
+        - 既存のテーブルをドロップしてから、新しくテーブルを作成し、データをインポートします。
 
 ## Oracle Database アーキテクチャ
 
