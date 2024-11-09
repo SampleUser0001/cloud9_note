@@ -71,6 +71,8 @@ Java + Mavenを例にとって記載。
 
 ### コンテナ作成
 
+`hostname`はURLを求められたときに参照するので、把握しておく。
+
 ``` yml
 version: '3.6'
 services:

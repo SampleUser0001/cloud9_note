@@ -679,6 +679,8 @@ exit
 expdp system/password@//localhost:1521/FREEPDB1 directory=backup_dir dumpfile=test.dmp;
 ```
 
+- Dockerコンテナ内でOracleを起動していて、directoryにホストから見えるディレクトリを指定する場合、ホスト側のディレクトリの権限を777にする必要がある。
+
 ### impdp
 
 ``` bash
