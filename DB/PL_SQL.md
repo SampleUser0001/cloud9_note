@@ -14,6 +14,7 @@
     - [IF](#if)
     - [CASE](#case)
   - [SELECT INTO](#select-into)
+  - [カーソル](#カーソル)
 
 ## 実行
 
@@ -166,3 +167,20 @@ INTO
 FROM (通常のSQL)
 ```
 
+## カーソル
+
+``` sql
+DECLARE
+    CURSOR a IS (SELECT文)
+    b a%ROWTYPE;
+BEGIN
+    OPEN a;
+        LOOP
+            FETCH a INTO b
+            EXIT WHEN a%NOTFOUND;
+                bを使った処理
+        END LOOP
+    CLOSE a;
+END;
+/
+```
