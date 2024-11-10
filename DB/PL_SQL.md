@@ -15,6 +15,8 @@
     - [CASE](#case)
   - [SELECT INTO](#select-into)
   - [カーソル](#カーソル)
+  - [カーソル FOR ループ](#カーソル-for-ループ)
+  - [パラメータ付きカーソル](#パラメータ付きカーソル)
 
 ## 実行
 
@@ -181,6 +183,41 @@ BEGIN
                 bを使った処理
         END LOOP
     CLOSE a;
+END;
+/
+```
+
+## カーソル FOR ループ
+
+``` sql
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT employee_id, first_name, last_name
+        FROM employees
+        WHERE department_id = 10;
+BEGIN
+    FOR emp_record IN emp_cursor LOOP
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_record.employee_id || ', Name: ' || emp_record.first_name || ' ' || emp_record.last_name);
+    END LOOP;
+END;
+/
+```
+
+## パラメータ付きカーソル
+
+``` sql
+DECLARE
+  CURSOR emp_cur(d_no NUMBER) IS SELECT empno,ename FROM emp
+                                         WHERE deptno = d_no;
+  d_var  NUMBER;
+BEGIN
+  -- 標準入力から値を取る。
+  d_var := &DEPTNO;
+  
+  -- 引数を取れるカーソル。
+  FOR emp_rec IN emp_cur(d_var) LOOP
+    DBMS_OUTPUT.PUT_LINE(emp_rec.empno||' '||emp_rec.ename);
+  END LOOP;
 END;
 /
 ```
