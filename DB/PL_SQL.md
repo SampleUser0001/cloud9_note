@@ -8,7 +8,12 @@
   - [定数](#定数)
   - [標準出力](#標準出力)
   - [EXIT WHEN](#exit-when)
-  - [FOR LOOP](#for-loop)
+  - [LOOP](#loop)
+    - [FOR LOOP](#for-loop)
+  - [分岐](#分岐)
+    - [IF](#if)
+    - [CASE](#case)
+  - [SELECT INTO](#select-into)
 
 ## 実行
 
@@ -94,7 +99,15 @@ END;
 exit;
 ```
 
-## FOR LOOP
+## LOOP
+
+``` sql
+LOOP
+   EXIT WHEN 条件
+END LOOP
+```
+
+### FOR LOOP
 
 ``` sql
 SET SERVEROUTPUT ON
@@ -115,3 +128,41 @@ c_count = 3
 c_count = 4
 c_count = 5
 ```
+
+## 分岐
+
+### IF
+
+``` sql
+IF THEN
+
+ELSIF
+
+ELSE
+
+END IF
+```
+
+### CASE
+
+``` sql
+CASE value
+    WHEN 10 THEN
+
+    ELSE
+
+END CASE
+```
+
+## SELECT INTO
+
+`SELECT`の結果は必ず1件でなければならない。
+
+``` sql
+SELECT
+    カラム名
+INTO
+    変数名
+FROM (通常のSQL)
+```
+
