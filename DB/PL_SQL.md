@@ -6,6 +6,7 @@
   - [%TYPE](#type)
   - [%ROWTYPE](#rowtype)
   - [定数](#定数)
+  - [標準出力](#標準出力)
   - [EXIT WHEN](#exit-when)
   - [FOR LOOP](#for-loop)
 
@@ -63,6 +64,14 @@ hoge table1%ROWTYPE
 ``` sql
 HOGE CONSTANT VARCHAR2 NOT NULL DEFAULT "HOGE"
 PIYO CONSTANT VARCHAR2 NOT NULL := "PIYO"
+```
+
+## 標準出力
+
+``` sql
+SET SERVEROUTPUT ON
+
+DBMS_OUTPUT.PUTLINE("文字列")
 ```
 
 ## EXIT WHEN
