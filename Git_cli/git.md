@@ -4,6 +4,7 @@
   - [Githubとssh接続する](#githubとssh接続する)
     - [参考](#参考)
   - [.gitignoreについて](#gitignoreについて)
+    - [.gitignoreに書かずに、ローカル管理する](#gitignoreに書かずにローカル管理する)
   - [ブランチ作成元のブランチ名を取得する](#ブランチ作成元のブランチ名を取得する)
   - [ブランチ作成元のコミットIDを取得する](#ブランチ作成元のコミットidを取得する)
     - [参考](#参考-1)
@@ -94,6 +95,10 @@ Host github github.com
 ## .gitignoreについて
 
 [https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff](https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff)
+
+### .gitignoreに書かずに、ローカル管理する
+
+`.git/info/exclude`配下に配置する。
 
 ## ブランチ作成元のブランチ名を取得する
 
