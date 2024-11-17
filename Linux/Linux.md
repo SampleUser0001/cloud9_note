@@ -72,6 +72,8 @@
   - [ファイルの行数を取得する(wc)](#ファイルの行数を取得するwc)
   - [tsvのn列目の値を取得する](#tsvのn列目の値を取得する)
     - [1行目（タイトル行）を読み飛ばす](#1行目タイトル行を読み飛ばす)
+  - [n行ごとに区切る](#n行ごとに区切る)
+    - [末尾の行だけ出力したい](#末尾の行だけ出力したい)
   - [重複排除](#重複排除)
   - [MD5ハッシュ値取得](#md5ハッシュ値取得)
   - [sshポートフォワーディング](#sshポートフォワーディング)
@@ -663,6 +665,34 @@ cat ${ファイルパス} | cut -f $n
 # 何列目がほしいか
 n=
 tail -n +2 ${ファイルパス} | cut -f $n
+```
+
+## n行ごとに区切る
+
+`split`コマンドを使う。prefixで指定したファイル名が生成される。
+
+``` sh
+# ファイルパス
+filepath=
+# 区切り行数
+lines=
+# prefix
+prefix=splited_
+
+split -l $lines $filepath $prefix
+```
+
+### 末尾の行だけ出力したい
+
+``` bash
+# ファイルパス
+filepath=
+# 区切り行数
+lines=
+# prefix
+prefix=splited_
+
+split -l $lines $filepath $prefix && tail -q -n 1 $prefix*
 ```
 
 ## 重複排除
