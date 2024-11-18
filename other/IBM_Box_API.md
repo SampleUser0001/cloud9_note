@@ -2,6 +2,7 @@
 
 - [IBM Box API](#ibm-box-api)
   - [Tokenの取得](#tokenの取得)
+  - [本番の認証](#本番の認証)
   - [フォルダ情報](#フォルダ情報)
   - [ファイルアップロード](#ファイルアップロード)
 
@@ -17,7 +18,14 @@
     - ここでは「ユーザ認証（OAuth 2.0）」を選択。
 6. 開発者トークンを参照
 
-※本番用は別途確認。
+## 本番の認証
+
+OAuth 2.0資格情報の認証
+
+- [SDKを使用したOAuth 2.0:Box](https://ja.developer.box.com/guides/authentication/oauth2/with-sdk/)
+    - APIを使う
+- [SDKを使用しないOAuth 2.0:Box](https://ja.developer.box.com/guides/authentication/oauth2/without-sdk/)
+    - プログラム言語を使う
 
 ## フォルダ情報
 
