@@ -497,3 +497,4 @@ net start %service_name%
 certutil -hashfile %filepath% MD5
 ```
 
+bashのsha1sumのような、[ハッシュ値を使って、ファイルが改ざんされていないことを確認する](../Linux/Linux#ハッシュ値を使って、ファイルが改ざんされていないことを確認する)機能はない。
