@@ -16,8 +16,8 @@
   - [部分文字列の取得](#部分文字列の取得)
     - [部分文字列の取得：参考](#部分文字列の取得参考)
   - [タブ区切り(空白区切り)のN番目の要素を取得する](#タブ区切り空白区切りのn番目の要素を取得する)
-    - [実装例](#実装例)
     - [参考](#参考)
+  - [tsvを正しく読み込む](#tsvを正しく読み込む)
   - [シェルの実行ディレクトリを取得する](#シェルの実行ディレクトリを取得する)
     - [例：シェルの実行ディレクトリを取得する](#例シェルの実行ディレクトリを取得する)
   - [ファイルパスから絶対パスを取得する](#ファイルパスから絶対パスを取得する)
@@ -259,35 +259,30 @@ delimiter=' '
 cut -d '$delimiter' -f $pos ${ファイルパス}
 ```
 
-### 実装例
+### 参考
 
-遅いので注意。  
-また、`for`を使うと、行ではなく、要素単位で取得される。
+- [cutコマンドでタブ区切りの1列目を取り出すには:Ninton](https://www.ninton.co.jp/archives/1993)
+
+## tsvを正しく読み込む
+
+`for`を使うと、行ではなく、要素単位で取得される。  
+普通に`while`で回すと、区切り文字が半角スペースに変換されるため、要素に半角スペースを含んでいる場合、うまく処理できない。
 
 ``` bash
 #!/bin/bash
 
 filepath=$1
-index_id=$2
-index_name=$3
-
-while read data; do
-    # 元がtsvでも、スペース区切りに変換される。
-    id=`echo $data | cut -d ' ' -f $index_id`
-    name=`echo $data | cut -d ' ' -f $index_name`
-    echo -e $id "\t" $name
+# id, nameは変数名。tsvの要素の1個目と2個目
+while IFS=$'\t' read -r id name ; do
+    echo -e $id '\t' $name
 done << END
 `cat $filepath`
 END
 ```
 
-### 参考
-
-- [cutコマンドでタブ区切りの1列目を取り出すには:Ninton](https://www.ninton.co.jp/archives/1993)
-
 ## シェルの実行ディレクトリを取得する
 
-```
+``` bash
 `dirname $0`
 ```
 
