@@ -261,7 +261,8 @@ cut -d '$delimiter' -f $pos ${ファイルパス}
 
 ### 実装例
 
-遅いので注意。
+遅いので注意。  
+また、`for`を使うと、行ではなく、要素単位で取得される。
 
 ``` bash
 #!/bin/bash
@@ -271,6 +272,7 @@ index_id=$2
 index_name=$3
 
 while read data; do
+    # 元がtsvでも、スペース区切りに変換される。
     id=`echo $data | cut -d ' ' -f $index_id`
     name=`echo $data | cut -d ' ' -f $index_name`
     echo -e $id "\t" $name
