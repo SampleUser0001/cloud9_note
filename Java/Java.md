@@ -74,6 +74,7 @@
   - [コマンドラインでcheckstyleを実行する](#コマンドラインでcheckstyleを実行する)
     - [参考](#参考-3)
   - [縦と横を入れ替える](#縦と横を入れ替える)
+  - [CRLF以外の改行コードを無視する](#crlf以外の改行コードを無視する)
   - [文字コードと改行コードの変換を行う](#文字コードと改行コードの変換を行う)
   - [SQLの実行結果をExcelに出力する](#sqlの実行結果をexcelに出力する)
 
@@ -1092,6 +1093,37 @@ hoge1		fuga1
 	piyo2	fuga2
 hoge3	piyo3	
 	piyo4	
+```
+
+## CRLF以外の改行コードを無視する
+
+改行コードの判定は下記でできる。やりたいのはこれではなくて、CRLF以外の改行コードを無視することだが、サンプルのファイルをVSCodeで扱うところで躓いている。
+
+``` java
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class CRLFReader {
+    public static void main(String[] args) {
+        
+        String filePath = args[0];
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // 行末がCRLF（\r\n）であるかどうかをチェック
+                if (line.endsWith("\r")) {
+                    System.out.println("Valid CRLF Line: " + line);
+                } else {
+                    System.out.println("Ignored Line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 ```
 
 ## 文字コードと改行コードの変換を行う
