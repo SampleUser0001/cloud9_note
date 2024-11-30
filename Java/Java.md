@@ -1097,29 +1097,54 @@ hoge3	piyo3
 
 ## CRLF以外の改行コードを無視する
 
-改行コードの判定は下記でできる。やりたいのはこれではなくて、CRLF以外の改行コードを無視することだが、サンプルのファイルをVSCodeで扱うところで躓いている。
+`BufferedReader.readLine()`はCRもLFもCRLFも改行として処理される。  
+ファイルをバイナリとして読み込んで改行判断する。
 
 ``` java
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 
-public class CRLFReader {
-    public static void main(String[] args) {
-        
+public class CRLFBufferedReader extends BufferedReader {
+    public CRLFBufferedReader(Reader in) {
+        super(in);
+    }
+
+    @Override
+    public String readLine() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int ch;
+        while ((ch = read()) != -1) {
+            if (ch == '\r') {
+                int nextCh = read();
+                if (nextCh == '\n') {
+                    break; // CRLFを改行として認識
+                } else if (nextCh != -1) {
+                    sb.append((char) ch).append((char) nextCh);
+                } else {
+                    sb.append((char) ch);
+                }
+            } else {
+                sb.append((char) ch);
+            }
+        }
+        return sb.length() > 0 ? sb.toString() : null;
+    }
+}
+
+```
+
+``` java
+import java.io.FileReader;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
         String filePath = args[0];
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (CRLFBufferedReader reader = new CRLFBufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // 行末がCRLF（\r\n）であるかどうかをチェック
-                if (line.endsWith("\r")) {
-                    System.out.println("Valid CRLF Line: " + line);
-                } else {
-                    System.out.println("Ignored Line: " + line);
-                }
+                System.out.println(line.replace("\n","").replace("\"",""));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
