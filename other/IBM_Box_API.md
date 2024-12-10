@@ -8,6 +8,7 @@
       - [Tokenが生きているか確認する](#tokenが生きているか確認する)
     - [参考](#参考)
   - [フォルダ情報](#フォルダ情報)
+    - [ファイルのハッシュを取得する](#ファイルのハッシュを取得する)
   - [ファイルアップロード](#ファイルアップロード)
 
 ## Tokenの取得
@@ -102,6 +103,14 @@ OAuth 2.0資格情報の認証
 
 ``` bash
 curl -X GET "https://api.box.com/2.0/folders/$folder_id/items" -H "Authorization: Bearer $token"
+```
+
+### ファイルのハッシュを取得する
+
+ファイルに対してAPIを投げれば取れるが、こちらのほうが必要な気がする。
+
+``` bash
+curl -s -X  GET "https://api.box.com/2.0/folders/$folder_id/items" -H "Authorization: Bearer $token" | jq -r '.entries[] | [.name , .sha1] | @tsv'
 ```
 
 ## ファイルアップロード
