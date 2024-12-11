@@ -28,6 +28,7 @@
   - [重複排除(Set)](#重複排除set)
     - [配列 -\> Set](#配列---set)
     - [Set同士を連結する](#set同士を連結する)
+  - [recode](#recode)
   - [Allowlist/Denylist(ホワイトリスト/ブラックリスト)](#allowlistdenylistホワイトリストブラックリスト)
   - [Enumから特定の項目を抽出したListを作る](#enumから特定の項目を抽出したlistを作る)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
@@ -404,6 +405,17 @@ Set<String> set2 = new HashSet<>();
 // データ作成(省略)
 
 set.addAll(set2);
+```
+
+## recode
+
+Java16から正式対応。  
+Modelの代わりに使用できる。  
+getter, equals, hashCode, toStringは生成されるが、setterは生成されない。  
+また、継承できない。
+
+``` java
+public recode Model(int id, String value) {}
 ```
 
 ## Allowlist/Denylist(ホワイトリスト/ブラックリスト)
