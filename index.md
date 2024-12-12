@@ -265,3 +265,4 @@
 ### 外部へのリンク
 
 - [PoiのJUnitを回す](https://www.notion.so/Poi-JUnit-bafa0d7f199d49b8b8308b4dd5752208)
+- [Privateへのリンク](https://main.d1er9p57pxkuki.amplifyapp.com/)
