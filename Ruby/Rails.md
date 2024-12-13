@@ -269,7 +269,7 @@ RailsのMVCモデルの「M」。
 ORMの機能を持つ。  
 [アプリケーションの作成(Scaffold)](#アプリケーションの作成scaffold)の際にも作成される。
 
-``` mermaid
+{% mermaid %}
 classDiagram
 
     class Book
@@ -282,7 +282,7 @@ classDiagram
     
     ApplicationRecord --|> Base
     Book --|> ApplicationRecord
-```
+{% endmermaid %}
 
 ### Modelの作成(generate model)
 
