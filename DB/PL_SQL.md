@@ -17,6 +17,7 @@
   - [カーソル](#カーソル)
   - [カーソル FOR ループ](#カーソル-for-ループ)
   - [パラメータ付きカーソル](#パラメータ付きカーソル)
+  - [FOR UPDATE](#for-update)
 
 ## 実行
 
@@ -220,4 +221,19 @@ BEGIN
   END LOOP;
 END;
 /
+```
+
+## FOR UPDATE
+
+``` sql
+DECLARE
+  CURSOR emp_cur IS
+    SELECT (略) FOR UPDATE;
+  -- 該当行をロックする。通常、Selectはロックされないが、Selectでもロックする。
+
+FOR UPDATE
+  OF <列名>
+  [NOWAIT | WAIT n]
+  -- NOWAIT : ロックされていたら即エラー
+  -- WAIT n : ロックされていたらn秒待つ
 ```
