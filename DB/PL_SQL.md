@@ -18,6 +18,9 @@
   - [カーソル FOR ループ](#カーソル-for-ループ)
   - [パラメータ付きカーソル](#パラメータ付きカーソル)
   - [FOR UPDATE](#for-update)
+  - [WHERE CURRENT OF](#where-current-of)
+    - [修正前](#修正前)
+    - [修正後](#修正後)
 
 ## 実行
 
@@ -236,4 +239,36 @@ FOR UPDATE
   [NOWAIT | WAIT n]
   -- NOWAIT : ロックされていたら即エラー
   -- WAIT n : ロックされていたらn秒待つ
+```
+
+## WHERE CURRENT OF
+
+### 修正前
+
+``` sql
+DECLARE
+    CURSOR emp_cur IS SELECT sal, empno FROM emp WHERE deptno = 10;
+BEGIN
+    FOR emp_rec IN emp_cur LOOP
+        IF emp_rec.sal < 2500 THEN
+            UPDATE emp SET sal = sal + 100 WHERE empno = emp_rec.empno;
+        END IF;
+    END LOOP;
+END
+/
+```
+
+### 修正後
+
+``` sql
+DECLARE
+    CURSOR emp_cur IS SELECT sal, empno FROM emp WHERE deptno = 10 FOR UPDATE;
+BEGIN
+    FOR emp_rec IN emp_cur LOOP
+        IF emp_rec.sal < 2500 THEN
+            UPDATE emp SET sal = sal + 100 WHERE CURRENT OF emp_cur;
+        END IF;
+    END LOOP;
+END
+/
 ```
