@@ -106,6 +106,18 @@ Cloud9を起動したときに行うことの備忘録。
     - [備考](#備考)
     - [参考](#参考-22)
   - [shunit2](#shunit2)
+  - [utPL/SQL, utPL/SQL-cli](#utplsql-utplsql-cli)
+    - [前提](#前提)
+    - [JDK](#jdk)
+    - [utPL/SQL-cli](#utplsql-cli)
+    - [utPL/SQL](#utplsql)
+    - [.env](#env)
+    - [docker-compose.yml](#docker-composeyml)
+    - [起動](#起動)
+    - [コンテナログイン](#コンテナログイン)
+    - [utPL/SQLインストール](#utplsqlインストール)
+      - [インストールに失敗した場合](#インストールに失敗した場合)
+    - [インストール結果確認](#インストール結果確認)
 
 ## git
 ```
@@ -1341,4 +1353,157 @@ echo 'export SHUNIT2_HOME=/opt/shunit2' >> ~/.bashrc
 source ~/.bashrc
 
 ls $SHUNIT2_HOME
+```
+
+## utPL/SQL, utPL/SQL-cli
+
+### 前提
+
+OracleのDockerコンテナで動かす。
+
+### JDK
+
+OpenJDKを使用する。
+
+``` bash
+# URLはhttps://jdk.java.net/で確認。
+wget https://download.java.net/java/GA/jdk23.0.1/c28985cbf10d4e648e4004050f8781aa/11/GPL/openjdk-23.0.1_linux-x64_bin.tar.gz
+ls openjdk* | xargs tar zxvf 
+
+# コンテナ内から書き込みを行うときに必要になる。
+find jdk* -type d | xargs chmod 777
+```
+
+### utPL/SQL-cli
+
+[utPL/SQL-cli](https://github.com/utPLSQL/utPLSQL-cli)
+
+``` bash
+# バージョンは確認。
+wget https://github.com/utPLSQL/utPLSQL-cli/releases/download/3.1.9/utPLSQL-cli.zip
+unzip utPLSQL-cli.zip
+
+find utPLSQL-cli -type d | xargs chmod 777
+```
+
+### utPL/SQL
+
+[utPL/SQL](https://github.com/utPLSQL/utPLSQL)
+
+``` bash
+wget https://github.com/utPLSQL/utPLSQL/releases/download/v3.1.14/utPLSQL.tar.gz
+tar zxvf utPLSQL.tar.gz
+
+find utPLSQL -type d | xargs chmod 777
+```
+
+### .env
+
+``` bash
+export PATH=/home/oracle/jdk-23.0.1/bin:/home/oracle/utPLSQL-cli/bin:$PATH
+```
+
+### docker-compose.yml
+
+必要なのは下記。  
+`PATH`に`java`と`utplsq`を追加したいが、`environment`に書くと、なぜか`sqlplus`コマンドが使えなくなり、コンテナ起動に失敗する。  
+`.env`を持ち込んで、コンテナログイン後に実行する。
+
+``` yml
+    environment:
+      - ORACLE_PWD=password
+      - JAVA_HOME=/home/oracle/jdk-23.0.1
+```
+
+``` yml
+    volumes:
+      - ./jdk-23.0.1:/home/oracle/jdk-23.0.1
+      - ./utPLSQL:/home/oracle/utPLSQL:rw
+      - ./utPLSQL-cli:/home/oracle/utPLSQL-cli
+      - .env:/home/oracle/.env
+```
+
+全部版。
+
+``` yml
+services:
+  oracle-db:
+    image: oracle/database:23.5.0-free
+    container_name: oracle-db
+    environment:
+      - ORACLE_PWD=password
+      - JAVA_HOME=/home/oracle/jdk-23.0.1
+    ports:
+      - "1521:1521"
+    volumes:
+      - ./plsql:/home/oracle/plsql
+      - ./shell:/home/oracle/shell
+      - ./datas:/home/oracle/datas:rw
+      - ./csv_import:/home/oracle/csv_import:rw
+      - ./samples:/home/oracle/samples
+      - ./test:/home/oracle/test
+      - ./jdk-23.0.1:/home/oracle/jdk-23.0.1
+      - ./utPLSQL:/home/oracle/utPLSQL:rw
+      - ./utPLSQL-cli:/home/oracle/utPLSQL-cli
+      - .env:/home/oracle/.env
+      - ./entrypoint.sh:/home/oracle/entrypoint.sh
+```
+
+### 起動
+
+``` bash
+docker compose up -d
+docker compose logs -f
+```
+
+### コンテナログイン
+
+``` bash
+docker exec -it oracle-db bash
+
+# javaとutplsqlへのパスを通す。
+source .env
+```
+
+### utPL/SQLインストール
+
+``` bash
+cd utPLSQL/source
+
+# systemユーザからだとインストールできなかった。(as sysdbaを指定していなかったからかもしれないが・・・)
+sqlplus sys/password@//localhost:1521/FREEPDB1 as sysdba @install_headless.sql
+```
+
+``` sql
+-- UTPLSQLを実行するユーザー（例: SYSTEM）に権限を付与
+GRANT INHERIT PRIVILEGES ON USER UT3 TO SYSTEM;
+
+-- UTPLSQLがアクセスする必要のあるユーザー（UT3）に権限を付与
+GRANT INHERIT PRIVILEGES ON USER SYSTEM TO UT3;
+```
+
+#### インストールに失敗した場合
+
+一度全消しする。  
+デフォルトでは最初に`UT3`ユーザが作成される。
+
+``` sql
+DROP USER UT3 CASCADE;
+```
+
+``` bash
+sqlplus sys/password@//localhost:1521/FREEPDB1 as sysdba @uninstall_all.sql
+```
+
+### インストール結果確認
+
+``` sql
+-- たくさん出てくるはず。
+SELECT object_name, object_type
+FROM all_objects
+WHERE owner = 'UT3';
+```
+
+``` bash
+utplsql info system/password@//localhost:1521/FREEPDB1
 ```
