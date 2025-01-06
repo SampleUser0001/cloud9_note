@@ -24,6 +24,11 @@
   - [カーソルの種類](#カーソルの種類)
     - [明示カーソル](#明示カーソル)
     - [暗黙カーソル](#暗黙カーソル)
+  - [Exception](#exception)
+    - [RAISE](#raise)
+    - [RAISE\_APPLICATION\_ERROR](#raise_application_error)
+    - [others](#others)
+    - [PRAGMA](#pragma)
 
 ## 実行
 
@@ -317,3 +322,46 @@ END;
     - これまでに取り出された件数
 - `emp_cur%ISOPEN`
     - OPENだったらTRUE。
+
+## Exception
+
+`others`が例外名。  
+[例外名一覧](https://www.ibm.com/docs/ja/db2/11.5?topic=plsql-exception-handling)
+
+Exceptionのあり/なしで挙動が異なる。
+
+- Exceptionあり
+    - トランザクション継続
+- Exceptionなし
+    - ロールバックされる
+
+[実装例](https://main.d1er9p57pxkuki.amplifyapp.com/src/PLSQL/Professional_introduction_to_Oracle_PLSQL.html#list05-02sql)
+
+### RAISE
+
+[実装例](https://main.d1er9p57pxkuki.amplifyapp.com/src/PLSQL/Professional_introduction_to_Oracle_PLSQL.html#list05-05sql)
+
+### RAISE_APPLICATION_ERROR
+
+通常のExceptionはメッセージが固定だが、任意のORA-エラーコードを発生できる。
+エラーコードは-20000〜-20999の間。  
+メッセージは2048バイト以内。
+
+[実装例](https://main.d1er9p57pxkuki.amplifyapp.com/src/PLSQL/Professional_introduction_to_Oracle_PLSQL.html#list05-06sql)
+
+### others
+
+othersは複数の例外を受けられるが、そのままだと何が発生したかわからない。  
+コードとメッセージを取得する方法がある。
+
+- `sqlcode`
+    - エラー番号
+- `sqlerrm`
+    - エラーメッセージ
+
+[実装例](https://main.d1er9p57pxkuki.amplifyapp.com/src/PLSQL/Professional_introduction_to_Oracle_PLSQL.html#list05-08sql)
+
+### PRAGMA
+
+無名の内部例外。  
+Oracleで定義されていない例外に名前をつけて、個別処理できるようにする。
