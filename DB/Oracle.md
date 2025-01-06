@@ -383,7 +383,11 @@ SET LINESIZE 32767
 
 -- 1ページの行数
 -- 少ないとヘッダーが多くて見づらいので無制限に設定する
-SET PAGESIZE 0
+-- SET PAGESIZE 0
+-- ヘッダが欲しい場合は下記の設定。
+SET PAGESIZE 50000
+SET HEADING ON
+SET UNDERLINE OFF
 
 -- 「○○行が選択されました」メッセージを非表示にする
 SET FEEDBACK OFF

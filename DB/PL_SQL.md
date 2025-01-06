@@ -21,6 +21,9 @@
   - [WHERE CURRENT OF](#where-current-of)
     - [修正前](#修正前)
     - [修正後](#修正後)
+  - [カーソルの種類](#カーソルの種類)
+    - [明示カーソル](#明示カーソル)
+    - [暗黙カーソル](#暗黙カーソル)
 
 ## 実行
 
@@ -272,3 +275,45 @@ BEGIN
 END
 /
 ```
+
+## カーソルの種類
+
+- 明示カーソル
+    - 明示的にオープン/クローズする
+- 暗黙カーソル
+    - SQL内部で使用される。
+
+### 明示カーソル
+
+``` sql
+DECLARE
+    CURSOR emp_cur -- 省略
+```
+
+- `emp_cur%NOTFOUND`
+    - 直前で取れなかったら、TRUE。
+- `emp_cur%FOUND`
+    - NOTFOUNDの逆
+- `emp_cur%ROWCOUNT`
+    - これまでに取り出された件数
+- `emp_cur%ISOPEN`
+    - OPENだったらTRUE。
+
+### 暗黙カーソル
+
+``` sql
+BEGIN
+    DELETE ...
+    DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT)
+END;
+/
+```
+
+- `emp_cur%NOTFOUND`
+    - 処理される行がない時、TRUE。
+- `emp_cur%FOUND`
+    - NOTFOUNDの逆
+- `emp_cur%ROWCOUNT`
+    - これまでに取り出された件数
+- `emp_cur%ISOPEN`
+    - OPENだったらTRUE。
