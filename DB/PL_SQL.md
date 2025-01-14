@@ -29,6 +29,11 @@
     - [RAISE\_APPLICATION\_ERROR](#raise_application_error)
     - [others](#others)
     - [PRAGMA](#pragma)
+  - [ストアド・サブプログラム](#ストアドサブプログラム)
+    - [構文](#構文)
+    - [実行](#実行-1)
+    - [Execute権限付与](#execute権限付与)
+    - [実装の確認](#実装の確認)
 
 ## 実行
 
@@ -369,3 +374,52 @@ Oracleで定義されていない例外に名前をつけて、個別処理で�
 実装例ではLOOP中にcommitされることで、cursor_err -> ORA-1002が発生する。
 
 [実装例](https://main.d1er9p57pxkuki.amplifyapp.com/src/PLSQL/Professional_introduction_to_Oracle_PLSQL.html#list05-04sql)
+
+## ストアド・サブプログラム
+
+``` txt
+無名ブロックとは異なり、PL/SQLサブプログラム(プロシージャおよびファンクション)は、別々にコンパイルしてOracleデータベースに格納し、起動できます。
+```
+
+[Oracle® Database Oracleプリコンパイラのためのプログラマーズ・ガイド 12c リリース1 (12.1) - ストアド・サブプログラム](https://docs.oracle.com/cd/E57425_01/121/ZZPRE/GUID-5840297F-2757-465C-8B1D-8C6DFFBBFA20.htm)
+
+### 構文
+
+``` sql
+CREATE {FUNCTION | PROCEDURE | PACKAGE} out_put
+IS
+BEGIN
+    (出力)
+END;
+/
+```
+
+### 実行
+
+``` sql
+BEGIN
+    out_put
+END;
+/
+```
+
+### Execute権限付与
+
+``` sql
+GRANT EXECUTE ON out_put TO user1;
+```
+
+### 実装の確認
+
+``` sql
+SELECT text FROM user_source WHERE user = 'OUT_PUT';
+```
+
+- where
+    - name : オブジェクト名
+    - type : オブジェクト型
+    - line : 行番号
+    - text : ソースコード
+
+データディクショナリに登録される。
+
