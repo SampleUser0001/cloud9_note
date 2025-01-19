@@ -261,6 +261,9 @@
 - [形態素解析](./other/MorphologicalAnalysis.md)
 - [Android](./other/Android.md)
 - [SystemWalker OperationManager](./other/SystemWalker_OperationManager.md)
+- [PokeAPI](https://pokeapi.co/)
+    - ポケモンの情報が取得できるAPI。
+    - 日本語があまり強くないが、なにか叩きたいときに使えるかもしれない。
 
 ### 外部へのリンク
 
