@@ -33,6 +33,8 @@
   - [railsコマンド](#railsコマンド)
     - [パス一覧を取得する](#パス一覧を取得する)
     - [Modelが持っている変数を表示する](#modelが持っている変数を表示する)
+  - [Tailwind導入](#tailwind導入)
+    - [参考](#参考-1)
 
 ## install
 
@@ -382,3 +384,14 @@ ${Model名}.columns.each do |column|
     puts "#{column.name}: #{column.type}"
 end
 ```
+
+## Tailwind導入
+
+``` bash
+bundle add tailwindcss-rails
+rails tailwindcss:install
+```
+
+### 参考
+
+- [【Rails】Tailwind CSS 導入〜使えるようになるまで《3分で完了》 : Qiita](https://qiita.com/dzs/items/76cb174e4fb5867bf5be)
