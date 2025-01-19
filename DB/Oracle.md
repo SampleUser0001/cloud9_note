@@ -53,6 +53,10 @@
     - [expdp](#expdp)
     - [impdp](#impdp)
       - [parファイル](#parファイル)
+  - [パーティショニング](#パーティショニング)
+    - [レンジ](#レンジ)
+    - [リスト](#リスト)
+    - [ハッシュ](#ハッシュ)
   - [Oracle Database アーキテクチャ](#oracle-database-アーキテクチャ)
     - [参考](#参考-9)
   - [ライセンス](#ライセンス)
@@ -716,6 +720,62 @@ table_exists_action=REPLACE
         - 既存のテーブルのデータを削除（TRUNCATE）してから、データをインポートします。
     - REPLACE
         - 既存のテーブルをドロップしてから、新しくテーブルを作成し、データをインポートします。
+
+## パーティショニング
+
+テーブル自体と、パーティショニングの宣言が必要。
+
+### レンジ
+
+``` sql
+CREATE TABLE sales (
+    sale_id NUMBER,
+    product_id NUMBER,
+    sale_date DATE,
+    amount NUMBER
+)
+PARTITION BY RANGE (sale_date)
+(
+    PARTITION sales_jan2025 VALUES LESS THAN (TO_DATE('2025-02-01', 'YYYY-MM-DD')),
+    PARTITION sales_feb2025 VALUES LESS THAN (TO_DATE('2025-03-01', 'YYYY-MM-DD')),
+    PARTITION sales_mar2025 VALUES LESS THAN (TO_DATE('2025-04-01', 'YYYY-MM-DD')),
+    PARTITION sales_apr2025 VALUES LESS THAN (TO_DATE('2025-05-01', 'YYYY-MM-DD')),
+    -- 他の月のパーティションも同様に追加
+    PARTITION sales_dec2025 VALUES LESS THAN (TO_DATE('2026-01-01', 'YYYY-MM-DD'))
+);
+```
+
+### リスト
+
+``` sql
+CREATE TABLE sales_by_region (
+    sale_id NUMBER,
+    region_code VARCHAR2(10),
+    sale_date DATE,
+    amount NUMBER
+)
+PARTITION BY LIST (region_code)
+(
+    PARTITION north VALUES ('NORTH'),
+    PARTITION south VALUES ('SOUTH'),
+    PARTITION east VALUES ('EAST'),
+    PARTITION west VALUES ('WEST')
+);
+```
+
+### ハッシュ
+
+``` sql
+CREATE TABLE sales_by_hash (
+    sale_id NUMBER,
+    product_id NUMBER,
+    sale_date DATE,
+    amount NUMBER
+)
+PARTITION BY HASH (product_id)
+PARTITIONS 4;  -- パーティションの数を指定
+
+```
 
 ## Oracle Database アーキテクチャ
 
