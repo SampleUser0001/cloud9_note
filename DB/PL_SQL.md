@@ -34,6 +34,10 @@
     - [実行](#実行-1)
     - [Execute権限付与](#execute権限付与)
     - [実装の確認](#実装の確認)
+  - [エラーの表示](#エラーの表示)
+    - [SHOW ERRORS](#show-errors)
+    - [USER ERRORS ビュー](#user-errors-ビュー)
+  - [INSERT SELECT](#insert-select)
 
 ## 実行
 
@@ -422,4 +426,31 @@ SELECT text FROM user_source WHERE user = 'OUT_PUT';
     - text : ソースコード
 
 データディクショナリに登録される。
+
+## エラーの表示
+
+### SHOW ERRORS
+
+``` sql
+SHOW ERRORS procedure out_put
+```
+
+### USER ERRORS ビュー
+
+``` sql
+select line, text 
+from user_errors 
+where name = 'OUT_PUT';
+```
+
+## INSERT SELECT
+
+VALUESは不要。
+
+``` sql
+INSERT INTO テーブル名 (
+    カラム1, カラム2
+) 
+SELECT カラム1, カラム2 FROM テーブル名 WHERE 条件
+```
 
