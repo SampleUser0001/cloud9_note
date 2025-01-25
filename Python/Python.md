@@ -67,6 +67,8 @@
   - [マルチプロセス](#マルチプロセス)
     - [配列をマルチプロセスで処理する](#配列をマルチプロセスで処理する)
     - [配列ではないがマルチプロセスで処理する](#配列ではないがマルチプロセスで処理する)
+  - [unittest](#unittest)
+    - [テスト実行前にメソッドを実行する](#テスト実行前にメソッドを実行する)
   - [boto3](#boto3)
     - [サービスのclientを取得する](#サービスのclientを取得する)
   - [pyenv](#pyenv)
@@ -971,6 +973,19 @@ if __name__ == '__main__':
 process 1 , time : 0:00:03.838766
 process 4 , time : 0:00:00.768664
 process 100 , time : 0:00:00.709970
+```
+
+## unittest
+
+### テスト実行前にメソッドを実行する
+
+``` python
+import unittest
+
+class TestSampleClass(unittest.TestClass):
+    @classmethod
+    def setUpClass(cls):
+        # ここにやりたいことを書く
 ```
 
 ## boto3
