@@ -64,6 +64,10 @@
   - [format](#format)
   - [for](#for)
   - [重複排除(list -\> set)](#重複排除list---set)
+  - [メソッド呼び出し時に副作用的に別の処理を呼び出す](#メソッド呼び出し時に副作用的に別の処理を呼び出す)
+    - [デコレータを使う](#デコレータを使う)
+    - [クラス全体にデコレータを適用する](#クラス全体にデコレータを適用する)
+    - [`__getattribute__`を使用する](#__getattribute__を使用する)
   - [マルチプロセス](#マルチプロセス)
     - [配列をマルチプロセスで処理する](#配列をマルチプロセスで処理する)
     - [配列ではないがマルチプロセスで処理する](#配列ではないがマルチプロセスで処理する)
@@ -911,6 +915,123 @@ deploy_jobs.append(('batch','IKR01'))
 deploy_jobs.append(('batch','ST0'))
 
 print(set(deploy_jobs))
+```
+
+## メソッド呼び出し時に副作用的に別の処理を呼び出す
+
+```python
+# -*- coding: utf-8 -*-
+from logging import getLogger, config
+import os
+from logutil import LogUtil
+
+PYTHON_APP_HOME = os.getenv('PYTHON_APP_HOME')
+LOG_CONFIG_FILE = ['config', 'log_config.json']
+
+log_conf = LogUtil.get_log_conf(os.path.join(PYTHON_APP_HOME, *LOG_CONFIG_FILE))
+config.dictConfig(log_conf)
+
+class SampleController():
+    def __init__(self) -> None:
+        pass
+
+    def print_log_info_only(self) -> None:
+        logger = getLogger("controller.SampleController.print_log_info_only")
+        logger.info("This is an INFO log")
+        logger.debug("This DEBUG log will not be shown")
+
+    def print_log_debug(self) -> None:
+        logger = getLogger("controller.SampleController.print_log_debug")
+        logger.info("This is an INFO log")
+        logger.debug("This is a DEBUG log")
+
+```
+
+### デコレータを使う
+
+``` python
+from functools import wraps
+from logging import getLogger, config
+import os
+
+def dynamic_logger(logger_name):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            logger = getLogger(logger_name)
+            setattr(args[0], 'logger', logger)  # インスタンスにロガーを設定
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+
+class SampleController():
+    def __init__(self):
+        pass
+
+    @dynamic_logger("controller.SampleController.print_log_info_only")
+    def print_log_info_only(self):
+        self.logger.info("This is an INFO log")
+        self.logger.debug("This DEBUG log will not be shown")
+
+    @dynamic_logger("controller.SampleController.print_log_debug")
+    def print_log_debug(self):
+        self.logger.info("This is an INFO log")
+        self.logger.debug("This is a DEBUG log")
+
+```
+
+### クラス全体にデコレータを適用する
+
+``` python
+def apply_logger(cls):
+    for attr_name, attr_value in cls.__dict__.items():
+        if callable(attr_value):  # メソッドかどうか確認
+            logger_name = f"{cls.__name__}.{attr_name}"
+            decorated = dynamic_logger(logger_name)(attr_value)
+            setattr(cls, attr_name, decorated)
+    return cls
+
+
+@apply_logger
+class SampleController():
+    def __init__(self):
+        pass
+
+    def print_log_info_only(self):
+        self.logger.info("This is an INFO log")
+        self.logger.debug("This DEBUG log will not be shown")
+
+    def print_log_debug(self):
+        self.logger.info("This is an INFO log")
+        self.logger.debug("This is a DEBUG log")
+```
+
+### `__getattribute__`を使用する
+
+``` python
+def apply_logger(cls):
+    for attr_name, attr_value in cls.__dict__.items():
+        if callable(attr_value):  # メソッドかどうか確認
+            logger_name = f"{cls.__name__}.{attr_name}"
+            decorated = dynamic_logger(logger_name)(attr_value)
+            setattr(cls, attr_name, decorated)
+    return cls
+
+
+@apply_logger
+class SampleController():
+    def __init__(self):
+        pass
+
+    def print_log_info_only(self):
+        self.logger.info("This is an INFO log")
+        self.logger.debug("This DEBUG log will not be shown")
+
+    def print_log_debug(self):
+        self.logger.info("This is an INFO log")
+        self.logger.debug("This is a DEBUG log")
+
 ```
 
 ## マルチプロセス
