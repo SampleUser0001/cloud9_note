@@ -39,6 +39,9 @@
     - [SHOW ERRORS](#show-errors)
     - [USER ERRORS ビュー](#user-errors-ビュー)
   - [INSERT SELECT](#insert-select)
+  - [依存/参照オブジェクト](#依存参照オブジェクト)
+    - [直接](#直接)
+    - [再コンパイル](#再コンパイル)
 
 ## 実行
 
@@ -463,3 +466,33 @@ INSERT INTO テーブル名 (
 SELECT カラム1, カラム2 FROM テーブル名 WHERE 条件
 ```
 
+## 依存/参照オブジェクト
+
+プロシージャ/ファンクション内で参照するテーブル等を指す。  
+直接、間接がある。呼ぶ側が依存オブジェクト。
+
+`USER_DEPENDENCIES`ビューで確認できる。
+
+### 直接
+
+``` sql
+select name, type 
+from user_dependencies 
+where referenced_name = '名前';
+```
+
+### 再コンパイル
+
+参照オブジェクトが変更された時のステータスを参照できる。
+
+``` sql
+select 
+  object_name,
+  object_type,
+  status 
+from
+  user_objects 
+where
+   object_name in ('名前');
+   
+```
