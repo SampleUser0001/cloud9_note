@@ -70,6 +70,7 @@
     - [参考](#参考-4)
   - [各ファイルの直近のコミット日とコミットコメントを取得する](#各ファイルの直近のコミット日とコミットコメントを取得する)
   - [ローカルにclone可能なリポジトリを作成する](#ローカルにclone可能なリポジトリを作成する)
+  - [Github Templateの変更をマージする](#github-templateの変更をマージする)
 
 ## Githubとssh接続する
 
@@ -637,4 +638,24 @@ done
 ``` bash
 git init --bare --share=true ${repository_name}
 # git clone ${dir_path}でcloneできる。
+```
+
+## Github Templateの変更をマージする
+
+``` bash
+# TemplateのリポジトリURLを紐付ける
+github_template_repository=git@github.com:${user}/${template}
+git remote add template ${github_template_repository}
+
+# Templateのブランチをfetchする
+git fetch
+
+# fetchしたブランチをマージする。（おそらくコンフリクトが発生する。）
+git merge template/main --allow-unrelated-histories
+
+# 手動マージで良いが、テンプレート側の修正を優先する場合は下記。
+git checkout --theirs .
+
+# コミット
+git commit
 ```
