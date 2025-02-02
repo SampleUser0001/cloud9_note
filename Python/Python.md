@@ -209,6 +209,8 @@ next(csvreader)
 def import_format():
      return_list = []
     with open(FORMAT_PATH, 'r') as f:
+        # readlineとか、readlines等の関数もあるが、末尾に改行コードが残る（仕様）。
+        # 改行を除去したいため、下記を使用する。
         for line in f.read().splitlines():
             return_list.append(line)
     return return_list
