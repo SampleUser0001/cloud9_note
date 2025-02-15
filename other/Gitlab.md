@@ -138,7 +138,9 @@ RUN chown gitlab-runner:gitlab-runner /home/gitlab-runner/.profile
 # CMD ["run" "--user=gitlab-runner" "--working-directory=/home/gitlab-runner"]
 ```
 
-``` bash runner.env
+- `runner.env`
+
+``` bash 
 export MAVEN_HOME=/opt/apache-maven
 export MVN_HOME=/opt/apache-maven
 export PATH=$PATH:$MVN_HOME/bin
