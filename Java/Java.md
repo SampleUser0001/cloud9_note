@@ -1,6 +1,7 @@
 # Java
 
 - [Java](#java)
+  - [record](#record)
   - [Stream](#stream)
     - [ファイル -\> Stream](#ファイル---stream)
     - [Stream -\> String](#stream---string)
@@ -78,6 +79,23 @@
   - [CRLF以外の改行コードを無視する](#crlf以外の改行コードを無視する)
   - [文字コードと改行コードの変換を行う](#文字コードと改行コードの変換を行う)
   - [SQLの実行結果をExcelに出力する](#sqlの実行結果をexcelに出力する)
+
+## record
+
+Java14からプレビュー版で登場。  
+Java16から正式実装。
+
+- メンバ変数が`private final`になる。
+- `toString`, `equals`, `hashCode`が生成される。
+- 継承できない。
+
+``` java
+public record Model(
+    int id,
+    String name,
+    int age
+) {}
+```
 
 ## Stream
 
