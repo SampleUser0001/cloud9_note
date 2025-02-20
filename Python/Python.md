@@ -69,6 +69,7 @@
     - [クラス全体にデコレータを適用する](#クラス全体にデコレータを適用する)
     - [`__getattribute__`を使用する](#__getattribute__を使用する)
   - [マルチプロセス](#マルチプロセス)
+    - [ProcessPoolExecutor](#processpoolexecutor)
     - [配列をマルチプロセスで処理する](#配列をマルチプロセスで処理する)
     - [配列ではないがマルチプロセスで処理する](#配列ではないがマルチプロセスで処理する)
   - [unittest](#unittest)
@@ -1037,6 +1038,54 @@ class SampleController():
 ```
 
 ## マルチプロセス
+
+### ProcessPoolExecutor
+
+``` python
+import csv
+from concurrent.futures import ProcessPoolExecutor
+
+replace_dict_1 = {
+    "A" : "hoge",
+    "B" : "fuga",
+    "C" : "piyo",
+    "D" : "foo",
+    "E" : "bar",
+    "F" : "baz"
+}
+replace_dict_3 = {
+    1 : "one",
+    2 : "two",
+    3 : "three",
+    4 : "four",
+    5 : "five",
+    6 : "six",
+    7 : "seven",
+    8 : "eight",
+    9 : "nine",
+    10 : "ten"
+}
+
+def process_row(row):
+    # Replace the first column using replace_dict_1
+    row[0] = replace_dict_1.get(row[0], row[0])
+    # Replace the third column using replace_dict_3
+    try:
+        key = int(row[2])
+        row[2] = replace_dict_3.get(key, row[2])
+    except ValueError:
+        pass
+    return row
+
+with open('list.tsv', 'r', newline='') as f:
+    reader = csv.reader(f, delimiter='\t')
+    rows = list(reader)
+
+with ProcessPoolExecutor() as executor:
+    processed_rows = list(executor.map(process_row, rows))
+
+print(processed_rows)
+```
 
 ### 配列をマルチプロセスで処理する
 
