@@ -24,6 +24,7 @@
     - [先頭に追記する](#先頭に追記する)
     - [指定した個所を別のファイルの内容に置換する](#指定した個所を別のファイルの内容に置換する)
     - [元のファイルの文字列を置換する](#元のファイルの文字列を置換する)
+  - [csvを改行区切りに変換する](#csvを改行区切りに変換する)
   - [列単位で編集する(awk)](#列単位で編集するawk)
   - [scpコマンド](#scpコマンド)
     - [scp 参考](#scp-参考)
@@ -279,6 +280,14 @@ $ sed -e '/${basicauth}/r basicauth' file1 -e '/${basicauth}/d'
 sed -i 's/${変換前}/${変換後}/g' ${ファイルパス}
 ```
 
+## csvを改行区切りに変換する
+
+ヘッダを取得する時などに使う。
+
+``` bash
+cat ${filepath} | tr ',' '\n' | sed -e 's/"//g'
+```
+
 ## 列単位で編集する(awk)
 
 ```bash
@@ -296,9 +305,10 @@ awk -F' ' '{ print $1 "," toupper($2) "," $3 }' "$input_file" > "$output_file"
 
 ## scpコマンド
 
+``` bash
+scp ${local_path} ${user}@${hostname}:${remote_path}
 ```
-scp <ローカルパス> <ユーザ名>@<接続先ホスト>:<コピー先パス>
-```
+
 ### scp 参考
 
 [Qiita:scpコマンド](https://qiita.com/chihiro/items/142ebe6980a498b5d4a7)
