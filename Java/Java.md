@@ -79,6 +79,16 @@
   - [CRLF以外の改行コードを無視する](#crlf以外の改行コードを無視する)
   - [文字コードと改行コードの変換を行う](#文字コードと改行コードの変換を行う)
   - [SQLの実行結果をExcelに出力する](#sqlの実行結果をexcelに出力する)
+  - [Java 8 -\> 17の間に発生した主なアップデート内容](#java-8---17の間に発生した主なアップデート内容)
+    - [Java 9 (2017年9月)](#java-9-2017年9月)
+    - [Java 10 (2018年3月)](#java-10-2018年3月)
+    - [Java 11 (2018年9月)](#java-11-2018年9月)
+    - [Java 12 (2019年3月)](#java-12-2019年3月)
+    - [Java 13 (2019年9月)](#java-13-2019年9月)
+    - [Java 14 (2020年3月)](#java-14-2020年3月)
+    - [Java 15 (2020年9月)](#java-15-2020年9月)
+    - [Java 16 (2021年3月)](#java-16-2021年3月)
+    - [Java 17 (2021年9月)](#java-17-2021年9月)
 
 ## record
 
@@ -1354,3 +1364,90 @@ public class SQLToExcelExporter {
 
 ```
 
+## Java 8 -> 17の間に発生した主なアップデート内容
+
+Claude 3.7 Sonnetに質問。
+
+``` txt
+Java8 -> 17の間にあった主なアップデートをリストアップしてください。
+```
+
+Java 8から17までに導入された主な変更点を紹介します：
+
+### Java 9 (2017年9月)
+
+- モジュールシステム (Project Jigsaw)
+- JShell（対話型JavaREPL）
+- 改良されたプロセスAPI
+- 不変コレクションファクトリメソッド
+- Stream APIの強化（takeWhile、dropWhile、ofNullable）
+- Optional強化（ifPresentOrElse、or、stream）
+- PrivateインターフェースメソッドとPrivate staticインターフェースメソッド
+- マルチリリースJARファイル
+
+### Java 10 (2018年3月)
+
+- ローカル変数型推論（var）
+- G1GCの並列フルGC
+- アプリケーションクラスデータ共有
+- 非推奨APIの整理
+
+### Java 11 (2018年9月)
+
+- 長期サポート(LTS)リリース
+- 標準HTTPクライアント（java.net.http）
+- エフェメラルTLS 1.3サポート
+- ラムダパラメータでのローカル変数構文
+- Stringの新メソッド（isBlank、lines、strip、repeat）
+- JavaFXがJava SEから分離
+
+### Java 12 (2019年3月)
+
+- Switchの拡張（プレビュー）
+- G1GCの改善
+- 新しいマイクロベンチマークスイート
+- JVMコンスタントAPIの強化
+
+### Java 13 (2019年9月)
+
+- Textブロック（プレビュー）
+- 再実装されたSocket API
+- 動的CDS（クラスデータ共有）アーカイブ
+- ZGC: アンロード未使用クラス
+
+### Java 14 (2020年3月)
+
+- Switch式（正式機能）
+- レコード（プレビュー）
+- パターンマッチングfor instanceof（プレビュー）
+- NullPointerExceptionの改善
+- 便利なNullPointerExceptionメッセージ
+- PackagingTool（jpackage）
+
+### Java 15 (2020年9月)
+
+- Sealed Classes（プレビュー）
+- 隠しクラス
+- TextブロックとMultilineStrings（正式機能）
+- ZGCとShenandoahGCの正式機能化
+- 外部メモリアクセスAPI
+
+### Java 16 (2021年3月)
+
+- レコード（正式機能）
+- パターンマッチングfor instanceof（正式機能）
+- Unix-Domainソケットチャネル
+- 外部リンカーAPI
+- Vector API（インキュベータ）
+
+### Java 17 (2021年9月)
+
+- 長期サポート(LTS)リリース
+- Sealed Classes（正式機能）
+- 強化された疑似乱数ジェネレータ
+- 新しいMacOSレンダリングパイプライン
+- 廃止：Applet API
+- パターンマッチングfor switch（プレビュー）
+- 外部関数とメモリAPI（インキュベータ）
+
+これらの更新により、Javaは近代的な言語機能を取り入れつつ、パフォーマンスと安定性も向上しています。
