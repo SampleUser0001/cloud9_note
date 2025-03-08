@@ -73,6 +73,10 @@
     - [インスタンス生成](#インスタンス生成)
     - [文字列 -\> インスタンス](#文字列---インスタンス)
     - [差分取得](#差分取得)
+    - [Claude 3.7 Sonnetの回答](#claude-37-sonnetの回答)
+      - [主なクラス](#主なクラス)
+      - [新APIの主な特徴](#新apiの主な特徴)
+      - [旧APIとの比較](#旧apiとの比較)
   - [コマンドラインでcheckstyleを実行する](#コマンドラインでcheckstyleを実行する)
     - [参考](#参考-3)
   - [縦と横を入れ替える](#縦と横を入れ替える)
@@ -1054,6 +1058,84 @@ public class DateDiffTest {
     }
 }
 ```
+
+### Claude 3.7 Sonnetの回答
+
+Java 8で大幅な日付・時間APIの刷新がありました。これは「Date-Time API」または「JSR-310」と呼ばれるもので、以前の`java.util.Date`や`java.util.Calendar`クラスの問題点を解決した新しいAPIです。
+
+#### 主なクラス
+
+1. **LocalDate**: 日付のみを表す（年、月、日）
+   ```java
+   LocalDate today = LocalDate.now();
+   LocalDate specificDate = LocalDate.of(2023, Month.APRIL, 1);
+   ```
+
+2. **LocalTime**: 時間のみを表す（時、分、秒、ナノ秒）
+   ```java
+   LocalTime now = LocalTime.now();
+   LocalTime specificTime = LocalTime.of(13, 30, 0);
+   ```
+
+3. **LocalDateTime**: 日付と時間の両方を表す（タイムゾーン情報なし）
+   ```java
+   LocalDateTime dateTime = LocalDateTime.now();
+   ```
+
+4. **ZonedDateTime**: タイムゾーン情報を含む日付と時間
+   ```java
+   ZonedDateTime tokyo = ZonedDateTime.now(ZoneId.of("Asia/Tokyo"));
+   ```
+
+5. **Instant**: UTC（協定世界時）からのナノ秒単位のタイムスタンプ
+   ```java
+   Instant timestamp = Instant.now();
+   ```
+
+6. **Duration**: 二つの時間間の経過時間
+   ```java
+   Duration duration = Duration.between(startTime, endTime);
+   ```
+
+7. **Period**: 二つの日付間の期間
+   ```java
+   Period period = Period.between(startDate, endDate);
+   ```
+
+#### 新APIの主な特徴
+
+1. **不変（Immutable）**: スレッドセーフで、一度作成すると内部状態が変わらない
+2. **流暢なAPI**: メソッドチェーンによる読みやすいコード
+   ```java
+   LocalDate nextWeek = LocalDate.now().plusWeeks(1);
+   ```
+3. **タイムゾーンサポート**: タイムゾーンを明示的に扱える
+4. **ISO-8601準拠**: 国際標準に準拠した日付・時間表現
+5. **DateTimeFormatter**: 柔軟な日付・時間のフォーマット
+   ```java
+   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+   String formattedDate = LocalDate.now().format(formatter);
+   ```
+
+#### 旧APIとの比較
+
+- **旧API（java.util.Date, Calendar）の問題点**:
+  - ミュータブル（変更可能）で不安全
+  - 月が0始まり（1月=0）で混乱しやすい
+  - 日付計算が複雑
+  - タイムゾーン処理が不十分
+  - フォーマットが柔軟でない
+  - スレッドセーフでない
+
+- **新API（java.time）の利点**:
+  - イミュータブル（不変）で安全
+  - 直感的なAPI（月は1始まり）
+  - 日付計算が簡単
+  - タイムゾーンを適切に処理
+  - 柔軟なフォーマット
+  - スレッドセーフ
+
+このJava 8での日付・時間APIの刷新は、ThreeTen（JSR-310）プロジェクトに基づいており、Joda-Timeライブラリから着想を得ています。Java 9以降のバージョンでも、この新しいAPIの基本構造は維持されています。
 
 ## コマンドラインでcheckstyleを実行する
 
