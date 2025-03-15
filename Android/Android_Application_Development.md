@@ -12,6 +12,9 @@
     - [Android端末が接続されていることを確認する](#android端末が接続されていることを確認する)
       - [USB](#usb)
       - [adb確認](#adb確認)
+  - [Android StudioなしでコマンドラインからAndroidエミュレータを起動する](#android-studioなしでコマンドラインからandroidエミュレータを起動する)
+    - [前提](#前提)
+    - [コマンド](#コマンド)
   - [Android端末の開発者モードを有効化する](#android端末の開発者モードを有効化する)
 
 ## 開発環境構築
@@ -146,6 +149,23 @@ adb devices
 # 停止/開始
 adb kill-server && adb start-server
 # 実行すると、Android側で切断/接続を検出する。接続モードの問い合わせが行われるので、画面から操作する。
+```
+
+## Android StudioなしでコマンドラインからAndroidエミュレータを起動する
+
+### 前提
+
+1. adbインストール済み
+2. Android Studioコマンドラインツールインストール済み
+
+### コマンド
+
+``` bash
+# 使用可能なエミュレータを表示
+emulator -list-avds
+
+# エミュレータ起動
+emulator -avd $エミュレータ名
 ```
 
 ## Android端末の開発者モードを有効化する
