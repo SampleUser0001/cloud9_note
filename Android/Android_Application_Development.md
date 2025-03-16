@@ -340,6 +340,13 @@ dependencies {
 adb install ./app/build/outputs/apk/debug/app-debug.apk
 ```
 
+``` bash
+# app-debug.apkをビルドする
+./gradlew assembleDebug
+# app-debug.apkをインストールする
+./gradlew installDebug
+```
+
 ## Android端末の開発者モードを有効化する
 
 1. 設定 -> デバイス情報 -> ビルド番号を7回タップ
