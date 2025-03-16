@@ -51,6 +51,8 @@ jarファイルをexe化できる。
 - [MEGAMOJI - 簡単アニメ絵文字メーカー](https://zk-phi.github.io/MEGAMOJI/)
 - [icon-icons.com](https://icon-icons.com/ja/)
   - スペインのページらしい。
+- [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/index.html)
+  - Androidアイコンが作れる
 
 ## サンプル動画
 
