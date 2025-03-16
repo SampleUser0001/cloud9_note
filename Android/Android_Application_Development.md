@@ -22,6 +22,7 @@
     - [settings.gradle](#settingsgradle)
     - [build.gradle](#buildgradle)
     - [app/build.gradle](#appbuildgradle)
+  - [エミュレータにアプリをインストールする](#エミュレータにアプリをインストールする)
   - [Android端末の開発者モードを有効化する](#android端末の開発者モードを有効化する)
 
 ## 開発環境構築
@@ -329,6 +330,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
 
+```
+
+## エミュレータにアプリをインストールする
+
+``` bash
+# 拡張子 apkのファイルがAndroidアプリ。
+# エミュレータが起動している状態で実行する。
+adb install ./app/build/outputs/apk/debug/app-debug.apk
 ```
 
 ## Android端末の開発者モードを有効化する
