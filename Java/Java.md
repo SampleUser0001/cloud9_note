@@ -93,6 +93,13 @@
     - [Java 15 (2020年9月)](#java-15-2020年9月)
     - [Java 16 (2021年3月)](#java-16-2021年3月)
     - [Java 17 (2021年9月)](#java-17-2021年9月)
+  - [XSS(クロスサイトスクリプティング)対応の例](#xssクロスサイトスクリプティング対応の例)
+    - [Java](#java-1)
+      - [修正前](#修正前)
+      - [修正後](#修正後)
+    - [JSP/Thymeleaf](#jspthymeleaf)
+      - [修正前](#修正前-1)
+      - [修正後](#修正後-1)
 
 ## record
 
@@ -1533,3 +1540,131 @@ Java 8から17までに導入された主な変更点を紹介します：
 - 外部関数とメモリAPI（インキュベータ）
 
 これらの更新により、Javaは近代的な言語機能を取り入れつつ、パフォーマンスと安定性も向上しています。
+
+## XSS(クロスサイトスクリプティング)対応の例
+
+### Java
+
+#### 修正前
+
+``` java
+// XSS脆弱性を含むServletの例
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/vulnerable")
+public class VulnerableServlet extends HttpServlet {
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        // リクエストからユーザー入力を取得
+        String userInput = request.getParameter("name");
+        
+        // コンテンツタイプの設定
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        
+        // レスポンスの作成
+        PrintWriter out = response.getWriter();
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head><title>XSS脆弱性のデモ</title></head>");
+        out.println("<body>");
+        
+        // 危険: ユーザー入力を直接出力 (XSS脆弱性)
+        out.println("<h1>こんにちは、" + userInput + "さん！</h1>");
+        
+        out.println("</body></html>");
+    }
+}
+```
+
+#### 修正後
+
+``` java
+// XSS脆弱性を修正したServletの例
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.text.StringEscapeUtils;
+
+@WebServlet("/secure")
+public class SecureServlet extends HttpServlet {
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        // リクエストからユーザー入力を取得
+        String userInput = request.getParameter("name");
+        
+        // 重要: ユーザー入力をHTMLエスケープ
+        String safeUserInput = StringEscapeUtils.escapeHtml4(userInput);
+        
+        // コンテンツタイプの設定
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        
+        // レスポンスの作成
+        PrintWriter out = response.getWriter();
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head><title>XSS対策済みデモ</title></head>");
+        out.println("<body>");
+        
+        // 安全: エスケープされたユーザー入力を出力
+        out.println("<h1>こんにちは、" + safeUserInput + "さん！</h1>");
+        
+        out.println("</body></html>");
+    }
+}
+```
+
+### JSP/Thymeleaf
+
+#### 修正前
+
+``` html
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSTLを使用したXSS対策</title>
+</head>
+<body>
+    <!-- JSTLのc:outタグを使用してエスケープ処理 -->
+    <h1>こんにちは、<c:out value="${param.name}" />さん！</h1>
+    
+    <!-- 不適切な例: JSP式を直接使用（XSS脆弱性あり） -->
+    <!-- <h1>こんにちは、${param.name}さん！</h1> -->
+</body>
+</html>
+```
+
+#### 修正後
+
+``` html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleafを使用したXSS対策</title>
+</head>
+<body>
+    <!-- Thymeleafのth:text属性は自動的にHTMLエスケープを行う -->
+    <h1>こんにちは、<span th:text="${name}">Guest</span>さん！</h1>
+    
+    <!-- 不適切な例: th:utext属性はエスケープを行わない -->
+    <!-- <h1>こんにちは、<span th:utext="${name}">Guest</span>さん！</h1> -->
+</body>
+</html>
+```
