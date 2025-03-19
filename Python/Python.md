@@ -95,6 +95,8 @@
   - [ssh接続する](#ssh接続する)
   - [mainの戻り値を指定する](#mainの戻り値を指定する)
   - [pandas](#pandas)
+  - [oracledb](#oracledb)
+    - [selectを投げる](#selectを投げる)
 
 ## CSV読み込み
 
@@ -1308,3 +1310,22 @@ if __name__ == "__main__":
 ## pandas
 
 - [実装例](https://github.com/SampleUser0001/Pandas_sample/blob/main/app/src/controller.py)
+
+## oracledb
+
+### selectを投げる
+
+``` python
+import oracledb
+
+try:
+    with oracledb.connect(
+        user=,
+        password=,
+        dsn='IP:Port/接続名') as connection:
+
+        with connection.cursor() as cursor:
+            for r in cursor.execute(sql, parameter_dict):
+                # r[0] : 1項目
+                # r[1] : 2項目
+```
