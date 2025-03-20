@@ -9,9 +9,9 @@
     - [Ubuntuで実機を認識させるための設定](#ubuntuで実機を認識させるための設定)
     - [実機での実行](#実機での実行)
   - [KVM設定（エミュレータ高速化）](#kvm設定エミュレータ高速化)
-    - [Android端末が接続されていることを確認する](#android端末が接続されていることを確認する)
-      - [USB](#usb)
-      - [adb確認](#adb確認)
+  - [Android端末が接続されていることを確認する](#android端末が接続されていることを確認する)
+    - [USB](#usb)
+    - [adb確認](#adb確認)
   - [Android StudioなしでコマンドラインからAndroidエミュレータを起動する](#android-studioなしでコマンドラインからandroidエミュレータを起動する)
     - [前提](#前提)
     - [コマンド](#コマンド)
@@ -135,20 +135,20 @@ sudo adduser $USER libvirt
 kvm-on
 ```
 
-### Android端末が接続されていることを確認する
+## Android端末が接続されていることを確認する
 
 Android端末を接続しているにもかかわらず、うまく認識していないときに参照する。  
 
 Android Studioを起動していると、`ps aux | grep adb`を実行すると、PIDが度々更新されるのが確認できる。  
 その場合はAndroid Studioを停止する。
 
-#### USB
+### USB
 
 ``` bash
 lsusb
 ```
 
-#### adb確認
+### adb確認
 
 ``` bash
 # デバイスの確認
