@@ -12,9 +12,6 @@
   - [Android端末が接続されていることを確認する](#android端末が接続されていることを確認する)
     - [USB](#usb)
     - [adb確認](#adb確認)
-  - [Android StudioなしでコマンドラインからAndroidエミュレータを起動する](#android-studioなしでコマンドラインからandroidエミュレータを起動する)
-    - [前提](#前提)
-    - [コマンド](#コマンド)
   - [プロジェクトの基本構成](#プロジェクトの基本構成)
     - [ディレクトリ構成](#ディレクトリ構成)
     - [AndroidManifest.xml](#androidmanifestxml)
@@ -22,7 +19,12 @@
     - [settings.gradle](#settingsgradle)
     - [build.gradle](#buildgradle)
     - [app/build.gradle](#appbuildgradle)
+  - [Android StudioなしでコマンドラインからAndroidエミュレータを起動する](#android-studioなしでコマンドラインからandroidエミュレータを起動する)
+    - [前提](#前提)
+    - [コマンド](#コマンド)
   - [エミュレータにアプリをインストールする](#エミュレータにアプリをインストールする)
+  - [エミュレータからログを取得してホストに送る](#エミュレータからログを取得してホストに送る)
+  - [エミュレータに電話をかける](#エミュレータに電話をかける)
   - [Android端末の開発者モードを有効化する](#android端末の開発者モードを有効化する)
 
 ## 開発環境構築
@@ -157,23 +159,6 @@ adb devices
 # 停止/開始
 adb kill-server && adb start-server
 # 実行すると、Android側で切断/接続を検出する。接続モードの問い合わせが行われるので、画面から操作する。
-```
-
-## Android StudioなしでコマンドラインからAndroidエミュレータを起動する
-
-### 前提
-
-1. adbインストール済み
-2. Android Studioコマンドラインツールインストール済み
-
-### コマンド
-
-``` bash
-# 使用可能なエミュレータを表示
-emulator -list-avds
-
-# エミュレータ起動
-emulator -avd $エミュレータ名
 ```
 
 ## プロジェクトの基本構成
@@ -332,6 +317,24 @@ dependencies {
 
 ```
 
+## Android StudioなしでコマンドラインからAndroidエミュレータを起動する
+
+### 前提
+
+1. adbインストール済み
+2. Android Studioコマンドラインツールインストール済み
+
+### コマンド
+
+``` bash
+# 使用可能なエミュレータを表示
+emulator -list-avds
+
+# エミュレータ起動
+emulator -avd $エミュレータ名
+```
+
+
 ## エミュレータにアプリをインストールする
 
 ``` bash
@@ -345,6 +348,23 @@ adb install ./app/build/outputs/apk/debug/app-debug.apk
 ./gradlew assembleDebug
 # app-debug.apkをインストールする
 ./gradlew installDebug
+```
+
+## エミュレータからログを取得してホストに送る
+
+1. エミュレータメニューの一番下
+2. Bug report
+3. Bug report dataをチェック
+4. エラーになる操作を行う
+5. Save Reportボタンを押下
+
+## エミュレータに電話をかける
+
+``` bash
+# 発信元
+tel_no=123
+
+adb shell am start -a android.intent.action.CALL -d tel:$tel_no
 ```
 
 ## Android端末の開発者モードを有効化する
