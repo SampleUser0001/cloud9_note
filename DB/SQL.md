@@ -29,6 +29,7 @@ SQLのテクニック全般
   - [ROW\_NUMBER() OVER(PARTITION BY column1 ORDER BY column2) AS ROW\_NUM](#row_number-overpartition-by-column1-order-by-column2-as-row_num)
   - [WITH](#with)
   - [minusの件数](#minusの件数)
+  - [別テーブルにレコードを退避する](#別テーブルにレコードを退避する)
   - [別テーブルに退避したレコードをリカバリする](#別テーブルに退避したレコードをリカバリする)
   - [便利に使える環境](#便利に使える環境)
   - [GUI Client](#gui-client)
@@ -389,6 +390,12 @@ minus自体がOracleのみ。
 
 ``` sql
 select count(*) from (select * from table_a minus select * from table_b);
+```
+
+## 別テーブルにレコードを退避する
+
+``` sql
+CREATE TABLE table_a_bk AS SELECT * FROM table_a;
 ```
 
 ## 別テーブルに退避したレコードをリカバリする
