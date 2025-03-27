@@ -1105,6 +1105,7 @@ if __name__ == '__main__':
     
     print(f'int_list : {int_list}')
     
+    # 第1引数に関数、第2引数に処理する配列を受ける
     with Pool(4) as pool:
         result = pool.map(square, int_list)
         
