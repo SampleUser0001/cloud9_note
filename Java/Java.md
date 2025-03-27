@@ -100,6 +100,12 @@
     - [JSP/Thymeleaf](#jspthymeleaf)
       - [修正前](#修正前-1)
       - [修正後](#修正後-1)
+  - [用語](#用語)
+    - [JavaSE(Java Platform Standard Edition)](#javasejava-platform-standard-edition)
+      - [実装例](#実装例)
+    - [JakartaEE(旧JavaEE) (Enterprise Edition)](#jakartaee旧javaee-enterprise-edition)
+      - [実装例](#実装例-1)
+    - [Spring](#spring)
 
 ## record
 
@@ -1668,3 +1674,31 @@ public class SecureServlet extends HttpServlet {
 </body>
 </html>
 ```
+
+## 用語
+
+### JavaSE(Java Platform Standard Edition)
+
+Javaの最も基本的な仕様。
+
+#### 実装例
+
+- OracleJDK
+- OpenJDK
+    - Amazon Corretto
+    - Microsoft Build of OpenJDK
+
+### JakartaEE(旧JavaEE) (Enterprise Edition)
+
+JavaSEに、大規模なサーバサイドアプリケーション開発機能を追加した、エンタープライズ向けの仕様。
+
+#### 実装例
+
+- WebLogic
+- WebSphere
+- Wildfly
+
+### Spring
+
+J2EEと異なるWebフレームワーク。  
+J2EEのアンチテーゼとして作成されたが、J2EE自体を否定せず、完全ではないが、一部機能はJ2EEに準拠している。
