@@ -7,6 +7,8 @@
   - [fetch](#fetch)
     - [実装例(GET)](#実装例get)
     - [参考](#参考-1)
+  - [テスト](#テスト)
+    - [コマンド](#コマンド)
 
 ## コールバック
 
@@ -69,4 +71,54 @@ requestGithubUser('SampleUser0001');
 ### 参考
 
 - [node-fetch:npm](https://www.npmjs.com/package/node-fetch)
-- 
+
+## テスト
+
+`index.js`
+
+``` javascript
+const retry = async (someFunction, maxRetryCount) => {
+    let currentCount = 0;
+    let error = null;
+    
+    while (maxRetryCount >= currentCount) {
+        try {
+            return await someFunction();
+        } catch (err) {
+            error = err;
+            currentCount++;
+            console.log(`Count ${currentCount} failed: ${error.message}`);
+            continue;
+        }
+    }
+    
+    throw new Error(`Failed after ${maxRetryCount} attempts: ${error.message}`);
+}
+
+module.exports = { retry };
+```
+
+`index.test.js`
+
+``` javascript
+const test = require('node:test');
+const assert = require('node:assert');
+const { retry } = require('./index');
+
+test('Success test', async (t) => {
+    assert.strictEqual(1, 1);
+})
+
+test('Success async retry.', async (t) => {
+    const res = await retry(() => {
+        return 123;
+    }, 2);
+    assert.strictEqual(res, 123);
+});
+```
+
+### コマンド
+
+``` bash
+node --test *.test.js
+```
