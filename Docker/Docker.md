@@ -32,6 +32,9 @@
   - [イメージのビルド](#イメージのビルド)
   - [イメージのpush](#イメージのpush)
   - [イメージの保存/読み込み](#イメージの保存読み込み)
+  - [build結果をtarに出力する/使用する](#build結果をtarに出力する使用する)
+    - [tarに出力](#tarに出力)
+    - [tarをimageに展開](#tarをimageに展開)
   - [docker-compose 起動オプション](#docker-compose-起動オプション)
   - [docker-compose.yml ファイルで使用可能な値](#docker-composeyml-ファイルで使用可能な値)
     - [何もしないコンテナでも上がり続ける](#何もしないコンテナでも上がり続ける)
@@ -345,6 +348,22 @@ docker save <イメージ名> > <イメージ名>.tar
 
 ```sh
 docker load < <イメージ名>.tar
+```
+
+## build結果をtarに出力する/使用する
+
+### tarに出力
+
+``` bash
+docker buildx build \
+  -t my-image:tarred \
+  --output type=tar,dest=./my-image.tar \
+```
+
+### tarをimageに展開
+
+``` bash
+docker load -i my-image.tar
 ```
 
 ## docker-compose 起動オプション
