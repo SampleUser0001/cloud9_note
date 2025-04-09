@@ -218,7 +218,8 @@ npm run start
 
 ### 備考
 
-下記で一括で作成される。
+下記で一括で作成される。  
+**非推奨！** : [create-react-app#17003](https://github.com/facebook/create-react-app/pull/17003)
 
 ``` bash
 npx create-react-app ${プロジェクト名}
