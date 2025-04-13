@@ -14,6 +14,9 @@
     - [実行](#実行)
     - [備考](#備考)
       - [prettier実行](#prettier実行)
+  - [vite](#vite)
+    - [プロジェクト作成](#プロジェクト作成)
+    - [他のコマンド](#他のコマンド)
   - [useState](#usestate)
   - [Reactコンテキスト](#reactコンテキスト)
     - [コンテキストプロバイダー](#コンテキストプロバイダー)
@@ -232,6 +235,26 @@ npx create-react-app ${プロジェクト名}
 ``` bash
 npx prettier --write ${ファイルパス or ディレクトリ}
 ```
+
+## vite
+
+プロジェクトの生成などをやってくれる。`create-react-app`の代替。
+
+[vite : cli](https://ja.vite.dev/guide/cli.html)
+
+### プロジェクト作成
+
+``` bash
+npm create vite@latest
+```
+
+### 他のコマンド
+
+| コマンド | 効果 |
+| :------- | :---- |
+| `vite build` | ビルド |
+| `vite preview` | プロダクションビルドをローカルプレビューする |
+| `vite` | 本番？ |
 
 ## useState
 
