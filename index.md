@@ -269,6 +269,8 @@
 - [PokeAPI](https://pokeapi.co/)
     - ポケモンの情報が取得できるAPI。
     - 日本語があまり強くないが、なにか叩きたいときに使えるかもしれない。
+- [AIに質問した]
+    - [Windows環境でファイル監視をする](./QA_AI/watch_files_windows.md)
 
 ### 外部へのリンク
 
