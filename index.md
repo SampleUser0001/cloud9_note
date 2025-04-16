@@ -271,6 +271,7 @@
     - 日本語があまり強くないが、なにか叩きたいときに使えるかもしれない。
 - [AIに質問した]
     - [Windows環境でファイル監視をする](./QA_AI/watch_files_windows.md)
+    - [任意個数の引数でgrep](./QA_AI/any_args_grep.md)
 
 ### 外部へのリンク
 
