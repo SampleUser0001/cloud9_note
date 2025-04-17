@@ -24,6 +24,7 @@
     - [コマンド](#コマンド)
   - [エミュレータにアプリをインストールする](#エミュレータにアプリをインストールする)
   - [エミュレータからログを取得してホストに送る](#エミュレータからログを取得してホストに送る)
+  - [エミュレータから電話をかける](#エミュレータから電話をかける)
   - [エミュレータに電話をかける](#エミュレータに電話をかける)
   - [Android端末の開発者モードを有効化する](#android端末の開発者モードを有効化する)
 
@@ -358,13 +359,24 @@ adb install ./app/build/outputs/apk/debug/app-debug.apk
 4. エラーになる操作を行う
 5. Save Reportボタンを押下
 
+## エミュレータから電話をかける
+
+本物に対しても使える。
+
+``` bash
+# 発信先
+tel_no=123
+adb shell am start -a android.intent.action.CALL -d tel:$tel_no
+```
+
 ## エミュレータに電話をかける
+
+エミュレータにしか使えない。
 
 ``` bash
 # 発信元
 tel_no=123
-
-adb shell am start -a android.intent.action.CALL -d tel:$tel_no
+adb emu gsm call $tel_no
 ```
 
 ## Android端末の開発者モードを有効化する
