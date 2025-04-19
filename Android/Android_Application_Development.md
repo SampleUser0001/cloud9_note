@@ -27,6 +27,7 @@
   - [エミュレータから電話をかける](#エミュレータから電話をかける)
   - [エミュレータに電話をかける](#エミュレータに電話をかける)
   - [Android端末の開発者モードを有効化する](#android端末の開発者モードを有効化する)
+  - [ログ取得](#ログ取得)
 
 ## 開発環境構築
 
@@ -383,3 +384,12 @@ adb emu gsm call $tel_no
 
 1. 設定 -> デバイス情報 -> ビルド番号を7回タップ
 2. 設定 -> システム -> 開発者向けオプションを有効化
+
+## ログ取得
+
+``` bash
+adb logcat > logfile.txt
+
+# ActivityManagerとMyAppのログのみを取得
+adb logcat ActivityManager:I MyApp:D *:S > filtered_log.txt
+```
