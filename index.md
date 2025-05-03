@@ -272,6 +272,7 @@
 - [AIに質問した]
     - [Windows環境でファイル監視をする](./QA_AI/watch_files_windows.md)
     - [任意個数の引数でgrep](./QA_AI/any_args_grep.md)
+    - [Androidアプリの初期設定](./QA_AI/GenAndroidApp.md)
 
 ### 外部へのリンク
 
