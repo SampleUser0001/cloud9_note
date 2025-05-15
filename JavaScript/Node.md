@@ -9,10 +9,11 @@
     - [参考](#参考-1)
   - [テスト](#テスト)
     - [コマンド](#コマンド)
+  - [起動引数を取る](#起動引数を取る)
 
 ## コールバック
 
-``` node
+``` javascript
 function func01(args, (error, callback) => {
     if(error){
         callback(args)
@@ -121,4 +122,16 @@ test('Success async retry.', async (t) => {
 
 ``` bash
 node --test *.test.js
+```
+
+## 起動引数を取る
+
+``` js
+const args = process.argv;
+
+// 2から。0はnodeコマンド、1はファイル名。
+let args_index = 2;
+
+console.info(args[args_index++])
+console.info(args[args_index++])
 ```
