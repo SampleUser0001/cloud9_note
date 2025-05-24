@@ -34,6 +34,7 @@
     - [非通知でかける](#非通知でかける)
   - [Android端末の開発者モードを有効化する](#android端末の開発者モードを有効化する)
   - [ログ取得](#ログ取得)
+  - [SQLite + inflater + オリジナルViewのサンプル](#sqlite--inflater--オリジナルviewのサンプル)
 
 ## 開発環境構築
 
@@ -489,4 +490,12 @@ adb logcat > logfile.txt
 
 # ActivityManagerとMyAppのログのみを取得
 adb logcat ActivityManager:I MyApp:D *:S > filtered_log.txt
+
+# おすすめ
+adb logcat -c
+adb logcat -v long *:E
 ```
+
+## SQLite + inflater + オリジナルViewのサンプル
+
+- [https://github.com/SampleUser0001/Android_SQLite](https://github.com/SampleUser0001/Android_SQLite)
