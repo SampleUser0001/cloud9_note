@@ -8,6 +8,8 @@
   - [JUnit実行時にSystem.out.printlnが表示されない](#junit実行時にsystemoutprintlnが表示されない)
   - [JUnitのNG内容が見たい](#junitのng内容が見たい)
   - [run時に引数を渡す](#run時に引数を渡す)
+  - [packageを自動的に整理する](#packageを自動的に整理する)
+    - [コマンド](#コマンド)
 
 ## init
 
@@ -101,4 +103,34 @@ tasks.named('test') {
 
 ``` bash
 ./gradlew run --args="${arg1} ${arg2}"
+```
+
+## packageを自動的に整理する
+
+``` groovy
+plugins {
+    id 'com.diffplug.spotless' version '6.21.0'
+}
+
+// ───── Spotless プラグイン設定 ─────
+spotless {
+    java {
+        target 'src/**/*.java'   // チェック対象の Java ソース
+        googleJavaFormat()       // (任意) フォーマッタ
+        removeUnusedImports()    // 未使用 import を検出・（自動）削除
+    }
+}
+
+// preBuild の前にチェックを強制実行
+tasks.named('preBuild') {
+    dependsOn 'spotlessCheck'
+}
+// ───────────────────────────────────
+
+```
+
+### コマンド
+
+``` bash
+./gradlew :app:spotlessApply
 ```
