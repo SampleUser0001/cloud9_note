@@ -419,6 +419,27 @@ public class MainActivity extends AppCompatActivity {
 ### コマンド
 
 ``` bash
+# インストール可能なイメージ
+sdkmanager --list
+
+# イメージのインストール
+sdkmanager "$image_name"
+
+# 使用可能なイメージ
+avdmanager list target
+
+# デバイス表示
+avdmanager list device
+
+# エミュレータ作成
+# 任意のインスタンス名
+name=
+# 「インストール可能なイメージ」
+package=
+# 機種名
+device=
+avdmanager create avd --name $name --package $package --device $device
+
 # 使用可能なエミュレータを表示
 emulator -list-avds
 
