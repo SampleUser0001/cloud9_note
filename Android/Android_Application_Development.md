@@ -27,6 +27,8 @@
   - [Android StudioなしでコマンドラインからAndroidエミュレータを起動する](#android-studioなしでコマンドラインからandroidエミュレータを起動する)
     - [前提](#前提)
     - [コマンド](#コマンド-1)
+    - [起動時にSIMの設定をする](#起動時にsimの設定をする)
+      - [mnc](#mnc)
   - [エミュレータにアプリをインストールする](#エミュレータにアプリをインストールする)
   - [エミュレータからログを取得してホストに送る](#エミュレータからログを取得してホストに送る)
   - [エミュレータから電話をかける](#エミュレータから電話をかける)
@@ -447,6 +449,29 @@ emulator -list-avds
 emulator -avd $エミュレータ名
 ```
 
+### 起動時にSIMの設定をする
+
+``` bash
+tel=09012345678
+
+# ドコモ
+mnc=10
+emulator \
+  -avd $name \
+  -netspeed lte -netdelay none \
+  -prop gsm.sim.operator.numeric=440$mnc \
+  -prop gsm.sim.operator.iso-country=jp \
+  -phone-number $tel
+```
+
+#### mnc
+
+| 事業者 | MCC | MNC | numeric 値 |
+| :----- | :--- | :--- | :------- |
+| NTT ドコモ | 440 | 10 | 44010 |
+| KDDI (au/UQ) | 440 | 50 / 51 | 44050 / 44051 |
+| ソフトバンク | 440 | 20 | 44020 |
+| 楽天モバイル | 440 | 11 | 44011 |
 
 ## エミュレータにアプリをインストールする
 
