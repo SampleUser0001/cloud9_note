@@ -270,7 +270,8 @@
     - ポケモンの情報が取得できるAPI。
     - 日本語があまり強くないが、なにか叩きたいときに使えるかもしれない。
 - [銀行機関コードAPI](./other/bankcode_api.md)
-- [AIに質問した]
+- [Spotify API](./other/Spotify_API.md)
+- AIに質問した
     - [Windows環境でファイル監視をする](./QA_AI/watch_files_windows.md)
     - [任意個数の引数でgrep](./QA_AI/any_args_grep.md)
     - [Androidアプリの初期設定](./QA_AI/GenAndroidApp.md)
