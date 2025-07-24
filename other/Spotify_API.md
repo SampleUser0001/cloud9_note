@@ -19,3 +19,4 @@ url -X POST "https://accounts.spotify.com/api/token" \
     -d "grant_type=client_credentials&client_id=$client_id&client_secret=$secret"
 
 ```
+

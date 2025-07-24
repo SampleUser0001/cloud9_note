@@ -30,6 +30,7 @@
   - [Project Management Tool](#project-management-tool)
   - [Android Application Development](#android-application-development)
   - [Other](#other)
+    - [音楽](#音楽)
     - [外部へのリンク](#外部へのリンク)
 
 ## init/use
@@ -270,12 +271,17 @@
     - ポケモンの情報が取得できるAPI。
     - 日本語があまり強くないが、なにか叩きたいときに使えるかもしれない。
 - [銀行機関コードAPI](./other/bankcode_api.md)
-- [Spotify API](./other/Spotify_API.md)
 - AIに質問した
     - [Windows環境でファイル監視をする](./QA_AI/watch_files_windows.md)
     - [任意個数の引数でgrep](./QA_AI/any_args_grep.md)
     - [Androidアプリの初期設定](./QA_AI/GenAndroidApp.md)
     - [動画から曲名を取得するAPI](./QA_AI/search_from_movie.md)
+    - [ACR Cloud APIの使い方](./QA_AI/Use_ACR_Cloud_API.md)
+
+### 音楽
+
+- [Spotify API](./other/Spotify_API.md)
+- [AudD API](./other/AudD_API.md)
 
 ### 外部へのリンク
 
