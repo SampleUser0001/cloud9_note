@@ -277,6 +277,7 @@
     - [Androidアプリの初期設定](./QA_AI/GenAndroidApp.md)
     - [動画から曲名を取得するAPI](./QA_AI/search_from_movie.md)
     - [ACR Cloud APIの使い方](./QA_AI/Use_ACR_Cloud_API.md)
+- [Youtubeから動画をダウンロードする](./other/Download_Youtube.md)
 
 ### 音楽
 
