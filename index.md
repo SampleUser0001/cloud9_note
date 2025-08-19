@@ -278,6 +278,7 @@
     - [動画から曲名を取得するAPI](./QA_AI/search_from_movie.md)
     - [ACR Cloud APIの使い方](./QA_AI/Use_ACR_Cloud_API.md)
     - [Androidで同じ電話番号のはずなのに片方しか取得できない](./QA_AI/Android_Search.md)
+    - [Androidの通知の実装](./QA_AI/Android_Notification.md)
 - [Youtubeから動画をダウンロードする](./other/Download_Youtube.md)
 
 ### 音楽

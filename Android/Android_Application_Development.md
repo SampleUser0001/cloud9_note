@@ -37,6 +37,9 @@
   - [Android端末の開発者モードを有効化する](#android端末の開発者モードを有効化する)
   - [ログ取得](#ログ取得)
   - [SQLite + inflater + オリジナルViewのサンプル](#sqlite--inflater--オリジナルviewのサンプル)
+  - [Androidの通知の実装](#androidの通知の実装)
+    - [チャネルを作成する](#チャネルを作成する)
+      - [参考](#参考-1)
 
 ## 開発環境構築
 
@@ -545,3 +548,62 @@ adb logcat -v long *:E
 ## SQLite + inflater + オリジナルViewのサンプル
 
 - [https://github.com/SampleUser0001/Android_SQLite](https://github.com/SampleUser0001/Android_SQLite)
+
+## Androidの通知の実装
+
+[Androidの通知の実装](../Android/Android_Application_Development.md#androidの通知の実装)
+
+### チャネルを作成する
+
+Android 8.0（API レベル 26）以降の機能。Android 8.0以降で、作成されていない場合はエラーになる。Android 8.0より前の場合も作成を試みるとエラーになる。
+
+1. 一意のチャネル ID、ユーザーが認識できる名前、重要度を指定して、NotificationChannel オブジェクトを作成します。
+2. 必要に応じて、システム設定内でユーザーに表示する説明を setDescription() で指定します。
+3. createNotificationChannel() に通知チャネルを渡して登録します。
+
+``` java
+import android.os.Build;
+import android.util.Log;
+
+import android.app.NotificationManager;
+import android.app.NotificationChannel;
+
+public static void createNotificationChannels(String channelId, String channelName, String description, NotificationManager notificationManager, String tag) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        NotificationChannel channel = new NotificationChannel(
+            channelId,
+            channelName,
+            NotificationManager.IMPORTANCE_HIGH
+        );
+        channel.setDescription(description);
+        notificationManager.createNotificationChannel(channel);
+        Log.d(tag, "NotificationChannelを作成: " + channelName);
+    } else {
+        Log.d(tag, "Android 7以前のため、NotificationChannelは不要");
+    }
+}
+```
+
+``` java
+// 呼び出す側
+import android.content.Context;
+import android.app.NotificationManager;
+
+NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+if (notificationManager != null) {
+
+    Utils.createNotificationChannels(
+        notificationEnum.getChannelId(),
+        notificationEnum.getTitle(),
+        notificationEnum.getDescription(),
+        notificationManager,
+        getTag()
+    );
+}
+
+
+```
+
+#### 参考
+
+- [通知チャネルを作成する](https://developer.android.com/develop/ui/views/notifications/channels?hl=ja#CreateChannel)
