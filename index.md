@@ -25,6 +25,7 @@
   - [Ruby](#ruby)
   - [C#](#c)
   - [Microsoft Office](#microsoft-office)
+  - [Libre Office](#libre-office)
   - [Logic](#logic)
   - [Security](#security)
   - [Project Management Tool](#project-management-tool)
@@ -211,6 +212,10 @@
 ## Microsoft Office
 
 - [Excel.md](./MicrosoftOffice/Excel.md)
+
+## Libre Office
+
+- [Libre Office](./other/LibreOffice.md)
 
 ## Logic
 
