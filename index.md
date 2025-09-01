@@ -33,6 +33,7 @@
   - [Other](#other)
     - [音楽](#音楽)
     - [外部へのリンク](#外部へのリンク)
+  - [Log](#log)
 
 ## init/use
 
@@ -296,3 +297,7 @@
 - [PoiのJUnitを回す](https://www.notion.so/Poi-JUnit-bafa0d7f199d49b8b8308b4dd5752208)
 - [Privateへのリンク](https://main.d1er9p57pxkuki.amplifyapp.com/)
     - [国際電話番号一覧](https://main.d1er9p57pxkuki.amplifyapp.com/src/others/QA_AI/International_Call.html)
+
+## Log
+
+- [Angular + WebSocketをAWSで動かす](./Log/Angular_WebSocket_in_AWS.md)
