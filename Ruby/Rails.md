@@ -82,6 +82,12 @@ rails g controller greetings index
 
 - g : generator
 - index : メソッド名。複数指定できる。
+    - メソッド名単位でテンプレートファイルとURL(`config/routes.rb`)が生成される。
+
+- 生成/追加されるもの
+    - コントローラ
+    - テンプレートファイル(erb)
+    - `config/routes.rb`
 
 ### 実行結果
 
@@ -138,7 +144,8 @@ end
 
 ## アプリケーションの作成(Scaffold)
 
-コントローラだけではなく、ModelやDB定義もまとめて生成してくれる。
+コントローラだけではなく、ModelやDB定義もまとめて生成してくれる。  
+MVCモデルベースの機能を一通り作成する。CRUDに対応した機能等。
 
 ``` bash
 rails g scaffold book title:string description:text
@@ -148,6 +155,13 @@ rails g scaffold book title:string description:text
 - Model定義
     - title:string
     - description:text
+- `rails db:migrate`すること。
+
+- 生成/追加されるもの
+    - Model
+    - コントローラ
+    - ビュー
+    - ルータ
 
 ### モデル
 
@@ -159,6 +173,8 @@ end
 ```
 
 ### 追加されるルート
+
+`book`で生成するとURLは`books`になる。
 
 ``` txt
        books GET    /books(.:format)             books#index
