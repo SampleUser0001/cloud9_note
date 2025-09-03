@@ -35,6 +35,8 @@
     - [Modelが持っている変数を表示する](#modelが持っている変数を表示する)
   - [Tailwind導入](#tailwind導入)
     - [参考](#参考-1)
+  - [bulma CSS導入](#bulma-css導入)
+    - [注記](#注記)
 
 ## install
 
@@ -411,3 +413,45 @@ rails tailwindcss:install
 ### 参考
 
 - [【Rails】Tailwind CSS 導入〜使えるようになるまで《3分で完了》 : Qiita](https://qiita.com/dzs/items/76cb174e4fb5867bf5be)
+
+## bulma CSS導入
+
+`Gemfile`に下記を追記。
+
+``` Gemfile
+gem "bulma-rails"
+
+gem "cssbundling-rails", "~> 1.4"
+
+```
+
+``` bash
+bundle install
+
+# bulma cssを導入する。
+# npmを使う
+npm install bulma
+
+# application.cssをapplication.scssに名前変更。
+# ファイルがない場合は作成する。
+cp app/assets/stylesheets/application.css app/assets/stylesheets/application.sass.scss
+
+# application.scssにimport文を追記
+echo '@import "bulma/bulma";' >> app/assets/stylesheets/application.sass.scss
+
+# CSSをビルドする。app/assets/builds/application.cssファイルが生成される。
+npm run build:css
+```
+
+`app/views/layouts/application.html.erb`  
+`application.css`をインポートする。
+
+``` txt
+<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+```
+
+### 注記
+
+比較的新しいアプローチ。
+もっとかんたんな方法があるらしい。`app/views/layouts/application.html.erb`にベタ書きするのが一番楽だったが…
+- 参考 : [https://github.com/SampleUser0001/SingleTaskWebPage/blob/main/index.html](https://github.com/SampleUser0001/SingleTaskWebPage/blob/main/index.html)
