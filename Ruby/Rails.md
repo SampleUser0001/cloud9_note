@@ -21,6 +21,7 @@
   - [部分テンプレート](#部分テンプレート)
     - [呼ぶ側](#呼ぶ側)
     - [呼ばれる側](#呼ばれる側)
+    - [部分テンプレート 実装例(2)](#部分テンプレート-実装例2)
   - [Active Recode](#active-recode)
     - [Modelの作成(generate model)](#modelの作成generate-model)
     - [DB定義](#db定義)
@@ -33,6 +34,7 @@
   - [railsコマンド](#railsコマンド)
     - [パス一覧を取得する](#パス一覧を取得する)
     - [Modelが持っている変数を表示する](#modelが持っている変数を表示する)
+  - [db:migrate](#dbmigrate)
   - [Tailwind導入](#tailwind導入)
     - [参考](#参考-1)
   - [bulma CSS導入](#bulma-css導入)
@@ -292,6 +294,30 @@ ruby db:migrate
 {% endraw %}
 ```
 
+### 部分テンプレート 実装例(2)
+
+`new.rb`を`index.rb`に移したときの処理。  
+`taskmanager`は`rb`ファイルで初期化した変数名なので、`rb`の対象メソッドで`new`する必要がある。
+
+``` html
+{% raw %}
+
+<!-- 新規作成 -->
+<%= render "new", taskmanager: @taskmanager %>
+
+{% endraw %}
+```
+
+
+`taskmanagers_controller.rb`
+
+``` rb
+  def index
+    @taskmanager = Taskmanager.new
+  end
+
+```
+
 ## Active Recode
 
 RailsのMVCモデルの「M」。  
@@ -401,6 +427,30 @@ Book.column_names
 ${Model名}.columns.each do |column|
     puts "#{column.name}: #{column.type}"
 end
+```
+
+## db:migrate
+
+``` bash
+rails generate migration ChangeStatusToStringInTaskmanagers
+# db/migrate/配下にrbファイルが作成される。
+```
+
+
+`db/migrate/yyyyMMddHHmmdd_change_status_to_string_in_taskmanagers.rb`
+
+``` rb
+# DBのtaskmanagers.statusの型をstringに変更する。
+class ChangeStatusToStringInTaskmanagers < ActiveRecord::Migration[8.0]
+  def change
+    change_column :taskmanagers, :status, :string
+  end
+end
+```
+
+``` bash
+# 適用する
+rails db:migrate
 ```
 
 ## Tailwind導入
