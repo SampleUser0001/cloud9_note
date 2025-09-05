@@ -15,7 +15,6 @@
   - [アプリケーションの作成(Scaffold)](#アプリケーションの作成scaffold)
     - [モデル](#モデル)
     - [追加されるルート](#追加されるルート)
-    - [マイグレーション](#マイグレーション)
   - [リンクの貼り方](#リンクの貼り方)
   - [erbファイルの編集例](#erbファイルの編集例)
   - [部分テンプレート](#部分テンプレート)
@@ -25,7 +24,8 @@
   - [Active Recode](#active-recode)
     - [Modelの作成(generate model)](#modelの作成generate-model)
     - [DB定義](#db定義)
-  - [マイグレーション概要](#マイグレーション概要)
+  - [マイグレーション](#マイグレーション)
+    - [実行例](#実行例)
   - [シード(seed)](#シードseed)
   - [バリデーション](#バリデーション)
     - [実装例](#実装例)
@@ -34,7 +34,10 @@
   - [railsコマンド](#railsコマンド)
     - [パス一覧を取得する](#パス一覧を取得する)
     - [Modelが持っている変数を表示する](#modelが持っている変数を表示する)
-  - [db:migrate](#dbmigrate)
+  - [コードで管理し、文字列で表示する](#コードで管理し文字列で表示する)
+    - [Enum](#enum)
+    - [表示/定義](#表示定義)
+    - [保存](#保存)
   - [Tailwind導入](#tailwind導入)
     - [参考](#参考-1)
   - [bulma CSS導入](#bulma-css導入)
@@ -191,15 +194,6 @@ end
              DELETE /books/:id(.:format)         books#destroy
 ```
 
-### マイグレーション
-
-DB作成を行う。  
-`db`ディレクトリ配下のrbが実行される。
-
-``` bash
-ruby db:migrate
-```
-
 ## リンクの貼り方
 
 ``` html
@@ -351,10 +345,39 @@ rbファイルだけが生成される。DB定義の更新には[マイグレー
 
 `db.schema.rb`に作成される。
 
-## マイグレーション概要
+## マイグレーション
 
 `db/migrate`配下のファイルを実行する。  
 主なコマンドは`rails db:migreate`だが、`rails db:${その他のコマンド}`で色々できる。
+
+``` bash
+ruby db:migrate
+```
+
+### 実行例
+
+``` bash
+rails generate migration ChangeStatusToStringInTaskmanagers
+# db/migrate/配下にrbファイルが作成される。
+```
+
+
+`db/migrate/yyyyMMddHHmmdd_change_status_to_string_in_taskmanagers.rb`
+
+``` rb
+# DBのtaskmanagers.statusの型をstringに変更する。
+class ChangeStatusToStringInTaskmanagers < ActiveRecord::Migration[8.0]
+  def change
+    change_column :taskmanagers, :status, :string
+  end
+end
+```
+
+``` bash
+# 適用する
+rails db:migrate
+```
+
 
 ## シード(seed)
 
@@ -429,29 +452,106 @@ ${Model名}.columns.each do |column|
 end
 ```
 
-## db:migrate
+## コードで管理し、文字列で表示する
 
-``` bash
-rails generate migration ChangeStatusToStringInTaskmanagers
-# db/migrate/配下にrbファイルが作成される。
-```
+### Enum
 
-
-`db/migrate/yyyyMMddHHmmdd_change_status_to_string_in_taskmanagers.rb`
+`app/models/enums/status.rb`
 
 ``` rb
-# DBのtaskmanagers.statusの型をstringに変更する。
-class ChangeStatusToStringInTaskmanagers < ActiveRecord::Migration[8.0]
-  def change
-    change_column :taskmanagers, :status, :string
+module Enums
+  module Status
+    RUNNING = { id: 1, label: "実行中" }
+    WAITING = { id: 2, label: "待機中" }
+    COMPLETED = { id: 3, label: "完了" }
+
+    def self.get_label(id)
+      status = [ RUNNING, WAITING, COMPLETED ].find { |status| status[:id] == id }
+      status ? status[:label] : ""
+    end
   end
 end
+
 ```
 
-``` bash
-# 適用する
-rails db:migrate
+### 表示/定義
+
+`app/models/taskmanager.rb`
+
+``` rb
+# app/models/taskmanager.rb
+class Taskmanager < ApplicationRecord
+  # 念のため：型を明示してから enum を宣言（DBカラムがあれば冗長だが安全）
+  attribute :status, :integer
+
+  # 正しい enum の定義（位置引数スタイル）
+  enum :status, { running: 1, waiting: 2, completed: 3 }, prefix: true
+
+  # 表示用
+  def status_label
+    Enums::Status.get_label(self.status_before_type_cast)
+  end
+end
+
 ```
+
+部分: `app/views/taskmanagers/_taskmanager.html.erb`
+
+``` html
+<div id="<%= dom_id taskmanager %>" class="box">
+  <p>
+    <strong>Title:</strong>
+    <%= taskmanager.title %>
+  </p>
+
+  <p>
+    <strong>Memo:</strong>
+    <%= taskmanager.memo %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= taskmanager.status_label %>
+  </p>
+
+</div>
+
+```
+
+### 保存
+
+`app/controllers/taskmanagers_controller.rb`
+
+``` rb
+class TaskmanagersController < ApplicationController
+
+  # 省略
+
+  # POST /taskmanagers or /taskmanagers.json
+  def create
+    # 初期値をEnumから取得する
+    params[:taskmanager][:status] = Enums::Status::WAITING[:id]
+    @taskmanager = Taskmanager.new(taskmanager_params)
+
+    respond_to do |format|
+      if @taskmanager.save
+        # taskmanagers_pathでindexにリダイレクトする
+        format.html { redirect_to taskmanagers_path, notice: "タスク登録しました。(" + @taskmanager.title + ")" }
+
+        @taskmanagers = Taskmanager.all
+        format.json { render :index, status: :created }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @taskmanager.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # 省略
+end
+
+```
+
 
 ## Tailwind導入
 
