@@ -20,6 +20,8 @@
     - [条件を満たす要素を削除する(delete\_if)](#条件を満たす要素を削除するdelete_if)
       - [do-endを使わないループ](#do-endを使わないループ)
     - [\&とシンボルを使う](#とシンボルを使う)
+  - [Module](#module)
+    - [実装例](#実装例)
   - [Range](#range)
     - [部分配列の取得](#部分配列の取得)
     - [配列の生成](#配列の生成)
@@ -284,6 +286,41 @@ print(languages.map( &:upcase ) , "\n")
 ``` txt
 ["RUBY", "JAVA", "PYTHON"]
 ["RUBY", "JAVA", "PYTHON"]
+```
+
+## Module
+
+Javaで言うところのstatic的なことができる。  
+enumの実装に使う。
+
+### 実装例
+
+`enum.rb`
+
+``` rb
+module Enums
+  module Status
+    RUNNING = { id: 1, label: "実行中" }
+    WAITING = { id: 2, label: "待機中" }
+    COMPLETED = { id: 3, label: "完了" }
+
+    def self.get_label(id)
+      status = [ RUNNING, WAITING, COMPLETED ].find { |status| status[:id] == id }
+      status ? status[:label] : ""
+    end
+  end
+end
+
+```
+
+`main.rb`
+
+``` rb
+require_relative 'enum'
+
+p 'Hello World'
+p Enums::Status::COMPLETED[:label]
+p Enums::Status::get_label(1)
 ```
 
 ## Range
