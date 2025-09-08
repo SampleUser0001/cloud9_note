@@ -262,14 +262,14 @@ sudo update-alternatives --config javac
 sudo apt install default-jdk
 ```
 
-```
+``` bash
 $ java --version
 openjdk 11.0.9.1 2020-11-04
 OpenJDK Runtime Environment (build 11.0.9.1+1-Ubuntu-0ubuntu1.20.04)
 OpenJDK 64-Bit Server VM (build 11.0.9.1+1-Ubuntu-0ubuntu1.20.04, mixed mode, sharing)
 ```
 
-```
+``` bash
 $ javac --version
 javac 11.0.9.1
 ```
@@ -319,7 +319,7 @@ sudo rm /opt/gradle/gradle-${Gradle_version}-bin.zip
 
 バージョンは[ダウンロードページ](https://maven.apache.org/download.cgi)で事前に確認する。
 
-``` sh
+``` bash
 export MAVEN_VERSION=3.6.3
 cd /usr/local/lib/
 sudo wget https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
