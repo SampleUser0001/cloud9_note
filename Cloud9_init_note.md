@@ -342,11 +342,11 @@ MVN_HOME=/opt/apache-maven
 PATH=$PATH:$MVN_HOME/bin
 ```
 
-```
+``` bash
 source /etc/profile
 ```
 
-```
+``` bash
 mvn -version
 ```
 
