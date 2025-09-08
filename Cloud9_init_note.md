@@ -322,7 +322,7 @@ sudo rm /opt/gradle/gradle-${Gradle_version}-bin.zip
 ``` sh
 export MAVEN_VERSION=3.6.3
 cd /usr/local/lib/
-sudo wget http://ftp.meisei-u.ac.jp/mirror/apache/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+sudo wget https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
 
 sudo tar -xzvf apache-maven-${MAVEN_VERSION}-bin.tar.gz
 sudo mv apache-maven-${MAVEN_VERSION} /opt/
