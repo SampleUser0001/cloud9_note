@@ -22,6 +22,7 @@
     - [参考](#参考-2)
   - [依存ライブラリを取り込む](#依存ライブラリを取り込む)
   - [jarをローカルリポジトリに登録する](#jarをローカルリポジトリに登録する)
+  - [外部jarを取り込む](#外部jarを取り込む)
   - [依存するライブラリを除去する](#依存するライブラリを除去する)
 
 ## 公式
@@ -217,6 +218,24 @@ mvn install:install-file \
     -Dversion=${version} \
     -Dpackaging=jar \
     -DgeneratePom=true
+```
+
+## 外部jarを取り込む
+
+``` bash
+# 対象のjarのパス
+$ ls lib/sample.jar 
+lib/sample.jar
+```
+
+``` xml
+<dependency>
+    <groupId>ittimfn.sample</groupId>
+    <artifactId>sample</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <scope>system</scope>
+    <systemPath>${project.basedir}/lib/sample.jar</systemPath>
+</dependency>
 ```
 
 ## 依存するライブラリを除去する
