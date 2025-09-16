@@ -181,6 +181,118 @@ mvn install -DskipTests=true
 mvn install -Dmaven.test.skip=true
 ```
 
+## 本体とテストのプロジェクトを分ける
+
+### 前提
+
+- Maven + SpringBoot
+- `mvn clean compile package`でテストが行われずにjarファイルが生成される。
+
+### 本体
+
+SpringBoot + すべて含む + Mavenでテストしない設定。
+
+`pom.xml`  
+
+``` xml
+<build>
+  <plugins>
+
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+    </plugin>
+
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>3.0.0-M7</version>
+      <configuration>
+        <skipTests>${skipTests}</skipTests>
+      </configuration>
+    </plugin>
+
+    <plugin>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <version>3.2.0</version>
+      <executions>
+        <execution>
+          <id>make-assembly</id>
+          <phase>package</phase>
+          <goals>
+            <goal>single</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <descriptorRefs>
+          <descriptorRef>jar-with-dependencies</descriptorRef>
+        </descriptorRefs>
+        <archive>
+          <manifest>
+            <mainClass>${project.mainClass}</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+
+### テストプロジェクト
+
+そのままだとjarファイルの中身が通常と違うので、クラスパスが通らない。  
+テスト対象のクラスファイルを抽出したjarを生成する。
+
+#### jar生成
+
+もしかして、全部含むじゃないjarを生成すればいいのか？
+
+``` bash
+mkdir lib
+
+# 作成済みのjarをlib配下にコピー
+cd lib
+original_jar=sample.jar
+picked_jar=sample-plain.jar
+
+jar -xf $original_jar BOOT-INF/classes/ 
+jar -cf $picked_jar -C BOOT-INF/classes/ .
+```
+
+#### pom.xml
+
+``` xml
+    <dependency>
+      <groupId>ittimfn.sample</groupId>
+      <artifactId>sample</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/sample-plain.jar</systemPath>
+    </dependency>
+
+<!-- 省略 -->
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.1.2</version>
+        <configuration>
+          <additionalClasspathElements>
+            <additionalClasspathElement>${project.basedir}/lib/sample.jar</additionalClasspathElement>
+          </additionalClasspathElements>
+          <useManifestOnlyJar>false</useManifestOnlyJar>
+          <useSystemClassLoader>true</useSystemClassLoader>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+
+```
+
 ## getter,setterを作成しない
 
 ``` xml
