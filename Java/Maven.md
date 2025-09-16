@@ -183,6 +183,64 @@ mvn install -Dmaven.test.skip=true
 
 ## 本体とテストのプロジェクトを分ける
 
+### Warning
+
+一応調べたが、SpringBoot部分が厄介。  
+**やめておいたほうが良い。**
+
+#### 代替案
+
+接続先のDBを触りたくない場合は、`pom.xml`に下記を書いておくと、こちらを優先してくれる。
+
+``` xml
+    <!-- H2 Database for testing -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.2.220</version>
+      <scope>test</scope>
+    </dependency>
+```
+
+テスト部分全文
+
+``` xml
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+    <!-- H2 Database for testing -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.2.220</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- JUnit 5 -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.13.4</version>
+      <scope>test</scope>
+    </dependency>
+    <!--<dependency>-->
+    <!--  <groupId>org.junit.jupiter</groupId>-->
+    <!--  <artifactId>junit-jupiter-engine</artifactId>-->
+    <!--  <version>5.13.4</version>-->
+    <!--  <scope>test</scope>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <version>2.2</version>
+      <scope>test</scope>
+    </dependency>
+
+
+```
+
+
 ### 前提
 
 - Maven + SpringBoot
