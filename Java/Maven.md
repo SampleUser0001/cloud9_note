@@ -181,6 +181,176 @@ mvn install -DskipTests=true
 mvn install -Dmaven.test.skip=true
 ```
 
+## 本体とテストのプロジェクトを分ける
+
+### Warning
+
+一応調べたが、SpringBoot部分が厄介。  
+**やめておいたほうが良い。**
+
+#### 代替案
+
+接続先のDBを触りたくない場合は、`pom.xml`に下記を書いておくと、こちらを優先してくれる。
+
+``` xml
+    <!-- H2 Database for testing -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.2.220</version>
+      <scope>test</scope>
+    </dependency>
+```
+
+テスト部分全文
+
+``` xml
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+    <!-- H2 Database for testing -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.2.220</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- JUnit 5 -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.13.4</version>
+      <scope>test</scope>
+    </dependency>
+    <!--<dependency>-->
+    <!--  <groupId>org.junit.jupiter</groupId>-->
+    <!--  <artifactId>junit-jupiter-engine</artifactId>-->
+    <!--  <version>5.13.4</version>-->
+    <!--  <scope>test</scope>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <version>2.2</version>
+      <scope>test</scope>
+    </dependency>
+
+
+```
+
+
+### 前提
+
+- Maven + SpringBoot
+- `mvn clean compile package`でテストが行われずにjarファイルが生成される。
+
+### 本体
+
+SpringBoot + すべて含む + Mavenでテストしない設定。
+
+`pom.xml`  
+
+``` xml
+<build>
+  <plugins>
+
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+    </plugin>
+
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>3.0.0-M7</version>
+      <configuration>
+        <skipTests>${skipTests}</skipTests>
+      </configuration>
+    </plugin>
+
+    <plugin>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <version>3.2.0</version>
+      <executions>
+        <execution>
+          <id>make-assembly</id>
+          <phase>package</phase>
+          <goals>
+            <goal>single</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <descriptorRefs>
+          <descriptorRef>jar-with-dependencies</descriptorRef>
+        </descriptorRefs>
+        <archive>
+          <manifest>
+            <mainClass>${project.mainClass}</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+
+### テストプロジェクト
+
+そのままだとjarファイルの中身が通常と違うので、クラスパスが通らない。  
+テスト対象のクラスファイルを抽出したjarを生成する。
+
+#### jar生成
+
+もしかして、全部含むじゃないjarを生成すればいいのか？
+
+``` bash
+mkdir lib
+
+# 作成済みのjarをlib配下にコピー
+cd lib
+original_jar=sample.jar
+picked_jar=sample-plain.jar
+
+jar -xf $original_jar BOOT-INF/classes/ 
+jar -cf $picked_jar -C BOOT-INF/classes/ .
+```
+
+#### pom.xml
+
+``` xml
+    <dependency>
+      <groupId>ittimfn.sample</groupId>
+      <artifactId>sample</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/sample-plain.jar</systemPath>
+    </dependency>
+
+<!-- 省略 -->
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.1.2</version>
+        <configuration>
+          <additionalClasspathElements>
+            <additionalClasspathElement>${project.basedir}/lib/sample.jar</additionalClasspathElement>
+          </additionalClasspathElements>
+          <useManifestOnlyJar>false</useManifestOnlyJar>
+          <useSystemClassLoader>true</useSystemClassLoader>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+
+```
+
 ## getter,setterを作成しない
 
 ``` xml
