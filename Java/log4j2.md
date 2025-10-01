@@ -144,6 +144,120 @@ public class App {
 }
 ```
 
+## Spring Bootの場合
+
+`pom.xml`
+
+``` xml
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.6</version>
+    <relativePath/>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-log4j2</artifactId>
+    </dependency>
+  </dependencies>
+```
+
+`application.yml`
+
+``` yml
+logging:
+  config: ./src/main/resources/log4j2-spring.xml
+```
+
+`src/main/resources/log4j2-spring.xml`
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project> 
+<!-- statusでlog4j2自体のログを出力する。通常はoff --> 
+<Configuration status="off">
+
+    <!-- Propertiesは、nameの値を変数として使える -->
+    <Properties>
+        <!-- ログのフォーマット 
+           %dは日時。{}に日時の形式を指定
+           %tはスレッド名
+           %-6pはログレベル名称を左詰めで6文字分出力する。「debug」であれば後ろに空白１文字が追加される。
+               但し、%-3pとしても名称は削られず「debug」として出力される。%6と-をとると右づめになる。
+           %c{x}は,例えばロガー名がorg.apache.commons.Fooのとき%c{2}の場合、commons.Fooが出力される
+           %mはログメッセージ
+           %nは改行
+        -->
+        <Property name="format1">%d{yyyy/MM/dd HH:mm:ss.SSS} [%t] %-6p %c{10} line:%L %m%n</Property>
+        <Property name="logfile">./logs/vfs-user-dummy.log</Property>
+        <Property name="logfile-archive">./logs/vfs-user-dummy_%d{yyyy-MM-dd}.tar.gz</Property>
+    </Properties>
+    
+    <Appenders>
+        <!-- コンソールに出力する設定 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>${format1}</pattern>
+            </PatternLayout>
+        </Console>
+
+        <!-- ファイルに出力する設定 -->
+        <!-- どこかのタイミングでローテートする。filePatternとTimeBasedTriggeringPoliciyに依存。-->
+        <RollingFile name="logfile001" append="true" fileName="${logfile}"
+            filePattern="${logfile-archive}">
+            <PatternLayout>
+                <pattern>${format1}</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    
+    <Loggers>
+        <!-- trace以上のログを出力する -->
+        <Root level="trace">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="logfile001" />
+        </Root>
+        <!-- LoggerでRootとは別にpackageごとに指定できる。 -->
+        <Logger name="_org" level="warn" additivity="false">
+            <AppenderRef ref="Test" />
+        </Logger>
+        <Logger name="org" level="warn" additivity="false">
+            <AppenderRef ref="Test" />
+        </Logger>
+       
+        <!-- 同一packageで出力先によってログレベルを変えたい場合は、AppenderRefにlevelをつける。
+        <Logger name="ittimfn.sample" level="debug" additivity="false">
+            <AppenderRef level="debug" ref="logfile001" />
+            <AppenderRef level="info" ref="Console" />
+        </Logger>
+        -->
+    </Loggers>
+</Configuration>
+```
+
+``` xml
+```
+
+
+
+
 ## ThreadContext
 
 log4jが持っている、log専用のMapやStackのようなもの。
