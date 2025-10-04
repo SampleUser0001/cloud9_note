@@ -33,6 +33,7 @@
   - [外部jarを取り込む](#外部jarを取り込む)
     - [exec:java時に含める](#execjava時に含める)
   - [依存するライブラリを除去する](#依存するライブラリを除去する)
+  - [異なるバージョンのJavaでアプリを動かす](#異なるバージョンのjavaでアプリを動かす)
 
 ## 公式
 
@@ -455,3 +456,7 @@ lib/sample.jar
             </exclusions>
         </dependency>
 ```
+
+## 異なるバージョンのJavaでアプリを動かす
+
+- [https://github.com/SampleUser0001/for_java_17](https://github.com/SampleUser0001/for_java_17)
