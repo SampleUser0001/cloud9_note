@@ -18,11 +18,20 @@
   - [dependencyタグのjarをまとめてjarにする](#dependencyタグのjarをまとめてjarにする)
     - [参考](#参考-1)
   - [package,install時にテストをスキップする](#packageinstall時にテストをスキップする)
+  - [本体とテストのプロジェクトを分ける](#本体とテストのプロジェクトを分ける)
+    - [Warning](#warning)
+      - [代替案](#代替案)
+    - [前提](#前提)
+    - [本体](#本体)
+    - [テストプロジェクト](#テストプロジェクト)
+      - [jar生成](#jar生成)
+      - [pom.xml](#pomxml)
   - [getter,setterを作成しない](#gettersetterを作成しない)
     - [参考](#参考-2)
   - [依存ライブラリを取り込む](#依存ライブラリを取り込む)
   - [jarをローカルリポジトリに登録する](#jarをローカルリポジトリに登録する)
   - [外部jarを取り込む](#外部jarを取り込む)
+    - [exec:java時に含める](#execjava時に含める)
   - [依存するライブラリを除去する](#依存するライブラリを除去する)
 
 ## 公式
@@ -406,6 +415,27 @@ lib/sample.jar
     <scope>system</scope>
     <systemPath>${project.basedir}/lib/sample.jar</systemPath>
 </dependency>
+```
+
+### exec:java時に含める
+
+``` xml
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <mainClass>ittimfn.sample.App</mainClass>
+          <additionalClasspathElements>
+            <additionalClasspathElement>${project.basedir}/lib/sample.jar</additionalClasspathElement>
+          </additionalClasspathElements>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 ```
 
 ## 依存するライブラリを除去する
