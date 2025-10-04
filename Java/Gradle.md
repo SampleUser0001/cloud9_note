@@ -10,6 +10,7 @@
   - [run時に引数を渡す](#run時に引数を渡す)
   - [packageを自動的に整理する](#packageを自動的に整理する)
     - [コマンド](#コマンド)
+  - [依存するライブラリを含むjarを生成する](#依存するライブラリを含むjarを生成する)
 
 ## init
 
@@ -134,3 +135,26 @@ tasks.named('preBuild') {
 ``` bash
 ./gradlew :app:spotlessApply
 ```
+
+## 依存するライブラリを含むjarを生成する
+
+``` groovy
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+shadowJar {
+    archiveBaseName = 'usemybatis'
+    archiveClassifier = ''
+    mergeServiceFiles()
+}
+```
+
+``` bash
+./gradlew shadowJar
+
+# 生成されるファイル
+./app/build/libs/usemybatis.jar
+```
+
