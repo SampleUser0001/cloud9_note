@@ -289,6 +289,7 @@
     - [ACR Cloud APIの使い方](./QA_AI/Use_ACR_Cloud_API.md)
     - [Androidで同じ電話番号のはずなのに片方しか取得できない](./QA_AI/Android_Search.md)
     - [Androidの通知の実装](./QA_AI/Android_Notification.md)
+    - [SpringBootのパスワード管理を設定ファイルだけでやりたい](./QA_AI/Spring_Encription.md)
 - [Youtubeから動画をダウンロードする](./other/Download_Youtube.md)
 
 ### 音楽
