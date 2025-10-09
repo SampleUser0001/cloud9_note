@@ -29,6 +29,7 @@
   - [getter,setterを作成しない](#gettersetterを作成しない)
     - [参考](#参考-2)
   - [依存ライブラリを取り込む](#依存ライブラリを取り込む)
+  - [同じバージョンでinstallを再実行する](#同じバージョンでinstallを再実行する)
   - [jarをローカルリポジトリに登録する](#jarをローカルリポジトリに登録する)
   - [外部jarを取り込む](#外部jarを取り込む)
     - [exec:java時に含める](#execjava時に含める)
@@ -405,6 +406,12 @@ jar -cf $picked_jar -C BOOT-INF/classes/ .
 
 ``` sh
 mvn dependency:copy-dependencies
+```
+
+## 同じバージョンでinstallを再実行する
+
+``` bash
+mvn install:install-file
 ```
 
 ## jarをローカルリポジトリに登録する
