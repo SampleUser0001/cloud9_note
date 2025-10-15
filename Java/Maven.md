@@ -149,7 +149,7 @@ mvn clean compile package
 java -classpath target/${jarファイルパス} ${mainメソッドクラスフルパス} ${引数}
 ```
 
-## dependencyタグのjarをまとめてjarにする
+## dependencyタグのjarをまとめてjarにする(SpringBootではない)
 
 ``` xml
 <plugin>
@@ -180,6 +180,29 @@ java -classpath target/${jarファイルパス} ${mainメソッドクラスフ�
 ### 参考
 
 [https://qiita.com/hide/items/0c8795054219d04e5e98](https://qiita.com/hide/items/0c8795054219d04e5e98)
+
+## dependencyタグのjarをまとめてjarにする(SpringBoot)
+
+``` xml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <configuration>
+        <mainClass>com.example.mailapp.MailSendSampleApplication</mainClass>
+        <excludes>
+          <exclude>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+          </exclude>
+        </excludes>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+
 
 ## package,install時にテストをスキップする
 

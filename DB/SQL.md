@@ -384,6 +384,14 @@ ORDER BY department_id, row_num;
 
 ```
 
+## 項目がある場合は削除する
+
+PostgreSQLの場合。ただしVer.13以降。
+
+``` sql
+ALTER TABLE your_table_name DROP COLUMN IF EXISTS your_column_name;
+```
+
 ## minusの件数
 
 minus自体がOracleのみ。
