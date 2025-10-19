@@ -290,6 +290,7 @@
     - [Androidで同じ電話番号のはずなのに片方しか取得できない](./QA_AI/Android_Search.md)
     - [Androidの通知の実装](./QA_AI/Android_Notification.md)
     - [SpringBootのパスワード管理を設定ファイルだけでやりたい](./QA_AI/Spring_Encription.md)
+    - [JSPのinclude文の違い](./QA_AI/JSP_include.md)
 - [Youtubeから動画をダウンロードする](./other/Download_Youtube.md)
 
 ### 音楽
