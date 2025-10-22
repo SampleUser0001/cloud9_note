@@ -257,6 +257,8 @@
 ## Other
 
 - [Charset : 文字コード](./other/Charset.md)
+- AI
+    - [OpenAI](./other/OpenAI.md)
 - [GPT](./other/GPT.md)
 - [other.md](./other/other.md)
 - [Teraterm](./other/Teraterm.md)
