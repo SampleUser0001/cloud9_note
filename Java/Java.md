@@ -26,6 +26,8 @@
     - [Streamの連結](#streamの連結)
     - [groupByする(List -\> List\<List\>)](#groupbyするlist---listlist)
   - [配列 -\> List](#配列---list)
+  - [List -\> 配列](#list---配列)
+    - [参考](#参考-1)
   - [重複排除(Set)](#重複排除set)
     - [配列 -\> Set](#配列---set)
     - [Set同士を連結する](#set同士を連結する)
@@ -46,12 +48,12 @@
   - [指定した文字列で結合する](#指定した文字列で結合する)
     - [Streamを結合する](#streamを結合する)
   - [Tempファイルを作成する / Javaでshを実行する](#tempファイルを作成する--javaでshを実行する)
-    - [参考](#参考-1)
+    - [参考](#参考-2)
   - [Tempディレクトリ作成](#tempディレクトリ作成)
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
-    - [参考](#参考-2)
+    - [参考](#参考-3)
   - [jarの展開/圧縮](#jarの展開圧縮)
     - [展開](#展開)
     - [圧縮](#圧縮)
@@ -79,7 +81,7 @@
       - [新APIの主な特徴](#新apiの主な特徴)
       - [旧APIとの比較](#旧apiとの比較)
   - [コマンドラインでcheckstyleを実行する](#コマンドラインでcheckstyleを実行する)
-    - [参考](#参考-3)
+    - [参考](#参考-4)
   - [縦と横を入れ替える](#縦と横を入れ替える)
   - [CRLF以外の改行コードを無視する](#crlf以外の改行コードを無視する)
   - [文字コードと改行コードの変換を行う](#文字コードと改行コードの変換を行う)
@@ -417,6 +419,16 @@ List<List<Model>> modelsLists = models.stream()
 // 確か特定の型でしか使えなかった気が・・・
 Arrays.asList(releaseEnvironment.split("\\|"));
 ```
+
+## List -> 配列
+
+``` java
+String[] array = arrayList.toArray(new String[arrayList.size()]);s
+```
+
+### 参考
+
+- [【Java】 ArrayListを配列に変換する:Qiita](https://qiita.com/j-work/items/d114bd9fcf7e5e88e659)
 
 ## 重複排除(Set)
 
