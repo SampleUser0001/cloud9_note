@@ -8,8 +8,10 @@
     - [前提](#前提)
     - [コツ](#コツ)
   - [プルダウンの共通化のサンプル](#プルダウンの共通化のサンプル)
-    - [概要](#概要)
-    - [一覧](#一覧)
+    - [結論](#結論)
+    - [一応整理](#一応整理)
+      - [概要](#概要)
+      - [一覧](#一覧)
   - [`null`と文字列の「null」を空文字に変換する](#nullと文字列のnullを空文字に変換する)
     - [参考](#参考)
   - [文字コード対応（Filter）](#文字コード対応filter)
@@ -62,7 +64,24 @@
 
 - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/tree/main/jsp_include_param](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/tree/main/jsp_include_param)
 
-### 概要
+### 結論
+
+もう一回やってみたが、[Enumで定義して、Enumで生成して、JSPで表示して、Servletで受ける](#Enumで定義して、Enumで生成して、JSPで表示して、Servletで受ける)で良くない？
+
+- [Enumで定義して、Enumで生成して、JSPで表示して、Servletで受ける](#Enumで定義して、Enumで生成して、JSPで表示して、Servletで受ける)
+- [jsp_include_param_rendered_02](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/tree/main/jsp_include_param/variants/jsp_include_param_rendered_02)
+    - JSP(呼ぶ側)
+        - [index.jsp](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/variants/jsp_include_param_rendered_02/src/main/webapp/WEB-INF/index.jsp)
+    - Enum(Optionを生成する)
+        - [OptionsEnum01.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/variants/jsp_include_param_rendered_02/src/main/java/ittimfn/sample/includejsp/enums/OptionsEnum01.java)
+        - [OptionsEnum02.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/variants/jsp_include_param_rendered_02/src/main/java/ittimfn/sample/includejsp/enums/OptionsEnum02.java)
+    - Servlet
+        - [IndexServlet.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/variants/jsp_include_param_rendered_02/src/main/java/ittimfn/sample/includejsp/IndexServlet.java)
+
+
+### 一応整理
+
+#### 概要
 
 - `select`(プルダウン)を生成するための値を`Model`に詰めて渡す。  
 - `Model`に詰める値は`enum`で定義。  
@@ -76,7 +95,7 @@
 
 **ちょっと複雑すぎる気がする。**
 
-### 一覧
+#### 一覧
 
 - 呼ばれる側
     - pulldown本体
@@ -96,6 +115,8 @@
         - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/enums/OptionsEnum02.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/enums/OptionsEnum02.java)
     - Servlet
         - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/IndexServlet.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/IndexServlet.java)
+
+
 
 ## `null`と文字列の「null」を空文字に変換する
 
