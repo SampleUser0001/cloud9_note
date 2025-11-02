@@ -11,46 +11,33 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Bulma Clean Example</title>
+  <title>Bulma Example</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
 </head>
-<body class="has-background-light has-text-dark">
-
-  <!-- ナビバー -->
-  <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+<body class="has-navbar-fixed-top has-background-light">
+  <!-- ナビゲーションバー -->
+  <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item has-text-weight-bold" href="#">
-        MySite
-      </a>
+      <a class="navbar-item" href="#">MySite</a>
     </div>
   </nav>
 
-  <!-- メインセクション -->
+  <!-- メインコンテンツ -->
   <section class="section">
     <div class="container">
-      <div class="box">
-        <h1 class="title has-text-primary">こんにちは Bulma!</h1>
-        <p class="subtitle">
-          Bulma だけで整えた、読みやすくシンプルなページです。
-        </p>
-        <p>
-          <button class="button is-link is-light">ボタン例</button>
-          <button class="button is-success is-light">別のボタン</button>
-        </p>
-      </div>
+      <h1 class="title">こんにちは Bulma!</h1>
+      <p class="subtitle">軽くてきれいな CSS フレームワークです。</p>
     </div>
   </section>
 
   <!-- フッター -->
-  <footer class="footer has-background-white-bis">
-    <div class="content has-text-centered has-text-grey">
+  <footer class="footer has-background-white-ter">
+    <div class="content has-text-centered">
       <p>&copy; 2025 Example Inc.</p>
     </div>
   </footer>
-
 </body>
 </html>
-
 ```
 
 ### 実際の見た目
