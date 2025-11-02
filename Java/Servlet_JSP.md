@@ -7,6 +7,9 @@
   - [Enumで定義して、Enumで生成して、JSPで表示して、Servletで受ける](#enumで定義してenumで生成してjspで表示してservletで受ける)
     - [前提](#前提)
     - [コツ](#コツ)
+  - [プルダウンの共通化のサンプル](#プルダウンの共通化のサンプル)
+    - [概要](#概要)
+    - [一覧](#一覧)
   - [`null`と文字列の「null」を空文字に変換する](#nullと文字列のnullを空文字に変換する)
     - [参考](#参考)
   - [文字コード対応（Filter）](#文字コード対応filter)
@@ -51,8 +54,48 @@
 1. 値が`int`の場合は、`String`でも特定できるようにしたほうが良い。`request.getAttribute`の戻り値は`Object`なので、そのままだと`Integer`にキャストしづらい。
 2. `getOptionsHTML`メソッドの引数は`Object`にしたほうがいい。理由は上と同じ。
 3. `getOptionsHTML`メソッドを作らない場合は、`select`を書く処理をJavaScriptに必要。
+    - `hidden`を書いて、それを参照するのが一般的か？
 4. `select`の`id`と`name`は同じ値にする。（必須）
 5. Javaに渡される値は`null`になる可能性があるので、`null`が渡されたら空文字に変換する処理がほしい。
+
+## プルダウンの共通化のサンプル
+
+- [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/tree/main/jsp_include_param](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/tree/main/jsp_include_param)
+
+### 概要
+
+- `select`(プルダウン)を生成するための値を`Model`に詰めて渡す。  
+- `Model`に詰める値は`enum`で定義。  
+- `pulldown.jsp`を呼び出す際のキーとして下記を設定。
+    - `pulldown.key`
+        - `pulldown.jsp`がServletから渡された値（`Model`）を受けるためのキー。
+        - **重要 : jsp:paramで渡せるのはStringだけ。Modelは渡せない。**
+    - `onchange`
+        - プルダウンメニューが変更されたときに実行されるJavaScriptの関数。
+        - 中身は`POST`用 JavaScript。
+
+**ちょっと複雑すぎる気がする。**
+
+### 一覧
+
+- 呼ばれる側
+    - pulldown本体
+        - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/webapp/WEB-INF/common/pulldown.jsp](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/webapp/WEB-INF/common/pulldown.jsp)
+    - POST用 JavaScript
+        - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/webapp/WEB-INF/common/submit.js](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/webapp/WEB-INF/common/submit.js)
+- 呼ぶ側
+    - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/webapp/WEB-INF/index.jsp](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/webapp/WEB-INF/index.jsp)
+- Java
+    - JSPが参照するためのModel
+        - `select`用
+            - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/models/PulldownModel.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/models/PulldownModel.java)
+        - `option`(つまり要素)用
+            - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/models/PulldownOptionModel.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/models/PulldownOptionModel.java)
+    - Modelに詰めるための値
+        - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/enums/OptionsEnum01.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/enums/OptionsEnum01.java)
+        - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/enums/OptionsEnum02.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/enums/OptionsEnum02.java)
+    - Servlet
+        - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/IndexServlet.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/jsp_include_param/src/main/java/ittimfn/sample/includejsp/IndexServlet.java)
 
 ## `null`と文字列の「null」を空文字に変換する
 
