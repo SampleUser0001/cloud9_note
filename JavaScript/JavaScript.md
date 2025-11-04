@@ -198,11 +198,17 @@ sample.hoge();
 
 ## Mapオブジェクト
 
-Javaとだいたい同じだが、forの書き方が違う。
+- Javaとだいたい同じだが、forの書き方が違う。
+- 要素は`[]`で囲む。
+    - `[key, value]`
 
 ``` javascript
+const keys = ["key1", "key2"];
+const getMap = (keys) => {
+    new Map(keys.map(key => [key, getValue(key)]));
+}
 // なにかMapオブジェクトを返す関数。
-const map = getMap();
+const map = getMap(keys);
 
 // map.entries()でも、mapでも同様。
 for (const [key, value] of map.entries()) {
