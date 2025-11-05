@@ -17,6 +17,7 @@
       - [module.exports.関数名](#moduleexports関数名)
     - [参考](#参考-2)
   - [Mapオブジェクト](#mapオブジェクト)
+  - [formタグを使わずにpostする](#formタグを使わずにpostする)
   - [ブラウザでファイルを読み込む](#ブラウザでファイルを読み込む)
     - [前提](#前提)
     - [HTML](#html)
@@ -214,6 +215,49 @@ const map = getMap(keys);
 for (const [key, value] of map.entries()) {
     console.log(`${key}: ${value}`);
 }
+```
+
+## formタグを使わずにpostする
+
+``` html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Select onchangeでPOST</title>
+</head>
+<body>
+
+<select name="fruit" onchange="postSelect(this)">
+  <option value="">-- 選択してください --</option>
+  <option value="apple">りんご</option>
+  <option value="banana">バナナ</option>
+  <option value="orange">オレンジ</option>
+</select>
+
+<script>
+function postSelect(selectElem) {
+  const value = selectElem.value;
+  if (!value) return; // 空なら送信しない
+
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = "/submit"; // ← 実際のPOST先に変更
+
+  const input = document.createElement("input");
+  input.type = "hidden";
+  input.name = "fruit";
+  input.value = value;
+
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
+}
+</script>
+
+</body>
+</html>
+
 ```
 
 ## ブラウザでファイルを読み込む
