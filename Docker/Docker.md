@@ -27,6 +27,7 @@
     - [コマンド](#コマンド)
       - [実行結果](#実行結果)
   - [docker-compose使用時にENTRYPOINTに引数を渡す](#docker-compose使用時にentrypointに引数を渡す)
+  - [使用するymlファイルを指定する](#使用するymlファイルを指定する)
   - [複数のdocker-compose.ymlファイルを使用する](#複数のdocker-composeymlファイルを使用する)
     - [実行例](#実行例)
   - [イメージのビルド](#イメージのビルド)
@@ -311,6 +312,14 @@ Hello hoge !!
 ## docker-compose使用時にENTRYPOINTに引数を渡す
 
 [docker-compose_args:SampleUser0001:Github](https://github.com/SampleUser0001/docker-compose_args)
+
+## 使用するymlファイルを指定する
+
+``` bash
+# 使用するymlファイル
+docker_compose_yml=
+docker-compose -f ${docker_compose_yml}
+```
 
 ## 複数のdocker-compose.ymlファイルを使用する
 
