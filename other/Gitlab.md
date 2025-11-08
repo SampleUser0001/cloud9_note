@@ -9,6 +9,7 @@
     - [CI/CD(.gitlab-ci.yml)](#cicdgitlab-ciyml)
   - [コミット時の表示時刻をJSTにする](#コミット時の表示時刻をjstにする)
   - [バックアップ例](#バックアップ例)
+  - [ChatGPTに聞いた](#chatgptに聞いた)
 
 ## docker-composeを使用して構築する
 
@@ -245,3 +246,7 @@ cp -r /srv/gitlab/data $tmpdir
 now=`date '+%Y%m%d_%H%M%S'`
 zip -r gitlab-$now.zip $tmpdir 
 ```
+
+## ChatGPTに聞いた
+
+- [Gitlab_byChatGPT](./Gitlab_byChatGPT.md)
