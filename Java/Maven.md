@@ -15,9 +15,11 @@
     - [引数でmainメソッドのクラスを指定する](#引数でmainメソッドのクラスを指定する)
     - [起動引数を渡す](#起動引数を渡す)
   - [package, javaコマンドで実行する](#package-javaコマンドで実行する)
-  - [dependencyタグのjarをまとめてjarにする](#dependencyタグのjarをまとめてjarにする)
+  - [dependencyタグのjarをまとめてjarにする(SpringBootではない)](#dependencyタグのjarをまとめてjarにするspringbootではない)
     - [参考](#参考-1)
+  - [dependencyタグのjarをまとめてjarにする(SpringBoot)](#dependencyタグのjarをまとめてjarにするspringboot)
   - [package,install時にテストをスキップする](#packageinstall時にテストをスキップする)
+  - [package時にMD5を生成する](#package時にmd5を生成する)
   - [本体とテストのプロジェクトを分ける](#本体とテストのプロジェクトを分ける)
     - [Warning](#warning)
       - [代替案](#代替案)
@@ -213,6 +215,36 @@ mvn install -DskipTests=true
 
 # コンパイルをスキップ
 mvn install -Dmaven.test.skip=true
+```
+
+## package時にMD5を生成する
+
+``` xml
+<build>
+  <plugins>
+    <plugin>
+      <artifactId>maven-antrun-plugin</artifactId>
+      <version>3.1.0</version>
+      <executions>
+        <execution>
+          <id>generate-md5</id>
+          <phase>package</phase>
+          <configuration>
+            <target>
+              <checksum file="${project.build.directory}/${project.build.finalName}.${project.packaging}"
+                        algorithm="MD5"
+                        fileext=".md5"/>
+            </target>
+          </configuration>
+          <goals>
+            <goal>run</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
+
 ```
 
 ## 本体とテストのプロジェクトを分ける
