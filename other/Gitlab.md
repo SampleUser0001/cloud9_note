@@ -9,9 +9,13 @@
     - [CI/CD(.gitlab-ci.yml)](#cicdgitlab-ciyml)
   - [コミット時の表示時刻をJSTにする](#コミット時の表示時刻をjstにする)
   - [バックアップ例](#バックアップ例)
-  - [ChatGPTに聞いた](#chatgptに聞いた)
+  - [ChatGPTに聞いた構築方法](#chatgptに聞いた構築方法)
+  - [マージの違い（？）](#マージの違い)
+    - [備考](#備考)
 
 ## docker-composeを使用して構築する
+
+**かなり重いのでフリーズする可能性がある**
 
 1. sshポートを変更する(やらなくていい？)
     1. `sudo nano /etc/ssh/sshd_config`
@@ -112,32 +116,35 @@ services:
 ``` Dockerfile
 # Use the GitLab Enterprise Edition base image
 # FROM gitlab/gitlab-ee:17.1.6-ee.0
-FROM gitlab/gitlab-runner:latest
+FROM gitlab/gitlab-runner:alpine
 
 # Install dependencies
-RUN apt-get update && \
-    apt-get install -y wget gnupg2 openjdk-17-jdk sudo
+RUN apk add --no-cache bash wget gnupg openjdk17 sudo
 
 # Install Maven
 WORKDIR /tmp
-ARG MAVEN_VERSION="3.9.9"
-RUN wget https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+ARG MAVEN_VERSION="3.9.11"
+RUN wget https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     tar -xzvf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /opt && \
     ln -s /opt/apache-maven-${MAVEN_VERSION} /opt/apache-maven
 
 # Set environment variables
 # ENV JAVA_HOME=/usr/lib/jvm/adoptopenjdk-17-hotspot
 
-# Runnerはrootで登録するが、ビルドはgitlab-runnerユーザで実行される。
-# ${HOME}/.profileがないので、${HOME}/.bashrcに記載しても呼び出されない。
 COPY runner.env /home/gitlab-runner/.profile
-RUN chown gitlab-runner:gitlab-runner /home/gitlab-runner/.profile
+RUN chown 100:65533 /home/gitlab-runner/.profile
 
 # Verify installations
 # RUN java -version && mvn -version
 
+# Expose necessary ports (if any)
+# EXPOSE 80 443 22
+
+# Define entrypoint
+# ENTRYPOINT ["/assets/wrapper"]
 # ENTRYPOINT ["/usr/bin/dumb-init" "/entrypoint"]
 # CMD ["run" "--user=gitlab-runner" "--working-directory=/home/gitlab-runner"]
+
 ```
 
 - `runner.env`
@@ -248,6 +255,23 @@ now=`date '+%Y%m%d_%H%M%S'`
 zip -r gitlab-$now.zip $tmpdir 
 ```
 
-## ChatGPTに聞いた
+## ChatGPTに聞いた構築方法
 
 - [Gitlab_byChatGPT](./Gitlab_byChatGPT.md)
+
+## マージの違い（？）
+
+前提 : スカッシュマージする
+
+- `Merge commit`
+    - マージコミットができる
+    - コンフリクトが起きにくい？
+- `Fast-forward merge`
+    - マージコミットができない
+    - developの末尾にコミットポイントが作られる
+        - コンフリクトが起きやすい？
+
+### 備考
+
+- 一人でやるならともかく、コンフリクトは起きにくいほうがいい -> Merge commitにしておいたほうがいい？
+- `Merge commit with semi-linear history` は `Merge commit`との違いがわからなかった。
