@@ -961,8 +961,8 @@ sftp ${サーバ側ユーザ}@${サーバホスト}
 ### .ssh/config
 
 ```
-Host ホスト名
-  HostName ホスト名
+Host 任意のホスト名
+  HostName IPアドレス/ホスト名
   User 接続先ユーザ名
   IdentityFile 秘密鍵パス
   IdentitiesOnly yes

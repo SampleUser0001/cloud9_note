@@ -13,7 +13,7 @@
 
 ## docker-composeを使用して構築する
 
-1. sshポートを変更する
+1. sshポートを変更する(やらなくていい？)
     1. `sudo nano /etc/ssh/sshd_config`
     2. `Port = 2424`
     3. `sudo systemctl restart ssh`
@@ -32,6 +32,7 @@
 4. docker-compose.yml作成
     - 設定例は下記。
         - GitlabのバージョンはDocker Hubで確認。
+            - eeよりceのほうがいいかもしれない？
 
         ``` yml
         version: '3.6'
