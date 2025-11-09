@@ -3,6 +3,7 @@
 - [Servlet / JSP](#servlet--jsp)
   - [作成時の全体的な注意点やコツ](#作成時の全体的な注意点やコツ)
   - [Init Sample](#init-sample)
+  - [JSP:開始タグと用途の違い](#jsp開始タグと用途の違い)
   - [booleanでrequiredを表示する](#booleanでrequiredを表示する)
   - [JavaScriptでPOSTしてServletで受ける](#javascriptでpostしてservletで受ける)
   - [Enumで定義して、Enumで生成して、JSPで表示して、Servletで受ける](#enumで定義してenumで生成してjspで表示してservletで受ける)
@@ -29,6 +30,19 @@
 ## Init Sample
 
 - [Servlet_JSP_Tomcat:SampleUser0001:Github](https://sampleuser0001.github.io/Servlet_JSP_Tomcat/)
+
+## JSP:開始タグと用途の違い
+
+- `<%`
+    - スクリプト（スクリプトレット）
+- `<%@`
+    - import、設定
+    - `<%@ page="ittimfn.sample.Hoge"%>`
+- `<%=`
+    - HTMLとして出力する
+    - 主に`value='<%=request.getAttribute("hogeKey")/>'`などで使う。
+- `<%!`
+    - 宣言
 
 ## booleanでrequiredを表示する
 
