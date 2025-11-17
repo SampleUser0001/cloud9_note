@@ -916,6 +916,41 @@ $ java App
 2.149999999999999911182158029987476766109466552734375
 ```
 
+## Timestamp <-> OffsetDateTime
+
+### OffsetDateTime -> Timestamp
+
+``` java
+OffsetDateTime offsetDateTime = new OffsetDateTime();
+
+Timestamp.from(offsetDateTime.toInstant());
+```
+
+### Timestamp -> OffsetDateTime
+
+``` java
+Timestamp ts = Timestamp.valueOf("2025-01-01 12:34:56");
+OffsetDateTime odt = ts.toInstant().atOffset(ZoneOffset.systemDefault().getRules().getOffset(ts.toInstant()));
+```
+
+#### 任意のタイムゾーンで
+
+``` java
+Timestamp ts = Timestamp.valueOf("2025-01-01 12:34:56");
+
+ZoneId zone = ZoneId.of("Asia/Tokyo");
+OffsetDateTime odt = ts.toInstant().atZone(zone).toOffsetDateTime();
+```
+
+#### 特定のオフセットで
+
+``` java
+Timestamp ts = Timestamp.valueOf("2025-01-01 12:34:56");
+
+OffsetDateTime odt = ts.toInstant().atOffset(ZoneOffset.ofHours(9));
+
+```
+
 ## 文字コードを取得する
 
 juniversalchardetを使う。
