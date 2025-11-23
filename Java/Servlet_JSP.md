@@ -21,6 +21,7 @@
   - [`null`と文字列の「null」を空文字に変換する](#nullと文字列のnullを空文字に変換する)
     - [参考](#参考)
   - [文字コード対応（Filter）](#文字コード対応filter)
+  - [RestAPI](#restapi)
 
 ## 作成時の全体的な注意点やコツ
 
@@ -198,3 +199,7 @@ public static final String nullToEmpty(String str) {
 ## 文字コード対応（Filter）
 
 - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/use_el/tomcat-helloworld/src/main/java/com/example/helloworld/CharacterEncodingFilter.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/use_el/tomcat-helloworld/src/main/java/com/example/helloworld/CharacterEncodingFilter.java)
+
+## RestAPI
+
+- [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/rest_api/src/main/java/ittimfn/sample/restapi/IndexServlet.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/rest_api/src/main/java/ittimfn/sample/restapi/IndexServlet.java)
