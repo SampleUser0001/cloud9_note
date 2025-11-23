@@ -3,6 +3,7 @@
 - [Gson](#gson)
   - [pom.xml](#pomxml)
   - [通常の読み込み](#通常の読み込み)
+  - [Model -\> Json](#model---json)
 
 ## pom.xml
 
@@ -60,3 +61,30 @@ public class EndpointModel {
 
 ```
 
+## Model -> Json
+
+これだけでOK。
+
+``` java
+package ittimfn.sample.restapi.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import com.google.gson.Gson;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class DataModel {
+    private int id;
+    private String value;
+
+    public String getJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+}
+
+```
