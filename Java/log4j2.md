@@ -252,11 +252,16 @@ logging:
 </Configuration>
 ```
 
-``` xml
+## stackTraceのそれらしい出力
+
+``` java
+import java.io.PrintgWriter;
+import java.io.StringWriter;
+
+StringWriter sw = new StringWriter();
+e.printStackTrace(new PrintWriter(sw));
+logger.error(sw.toString());
 ```
-
-
-
 
 ## ThreadContext
 
