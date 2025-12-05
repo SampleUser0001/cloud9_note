@@ -1015,6 +1015,19 @@ public class App {
 }
 ```
 
+## contentTypeを自動で判定する
+
+※必ずうまくいくわけではない点は注意。
+
+``` java
+import java.nio.file.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+Path filepath = Paths.get("任意のファイルパス");
+String contentType = Files.probeContentType();
+```
+
 ## DBにSelectを投げた結果、メモリに保持しきれない量が抽出される場合(JDBC)
 
 ### Chat-GPT(3.5)に聞いてみた結果
