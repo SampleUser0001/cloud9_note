@@ -134,6 +134,8 @@
     - [`$PS1` の詳細](#ps1-の詳細)
     - [まとめ](#まとめ)
   - [大文字 -\> 小文字](#大文字---小文字)
+  - [XMLをパースする](#xmlをパースする)
+    - [値として使用する](#値として使用する)
 
 ## 圧縮解凍(tar, gunzip)
 
@@ -1218,3 +1220,21 @@ ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m
 echo ${word} | tr [:upper:] [:lower:]
 ```
 
+## XMLをパースする
+
+``` xml
+<root>
+    <hoge>
+        <piyo value="$HOME/newdir">
+    </hoge>
+</root>
+```
+
+### 値として使用する
+
+``` bash
+xmlpath=test.xml
+
+# xmllintの結果は文字列として扱われるため、再評価が必要。
+mkdir -p $(xmllint --xpath 'string(//root/hoge/piyo/@value)' $xmlpath | envsubst)
+```
