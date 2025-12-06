@@ -194,8 +194,6 @@ public static final String nullToEmpty(String str) {
 
 - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/pulldown/src/main/java/ittimfn/sample/tomcat/pulldown/Util.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/pulldown/src/main/java/ittimfn/sample/tomcat/pulldown/Util.java)
 
-
-
 ## 文字コード対応（Filter）
 
 - [https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/use_el/tomcat-helloworld/src/main/java/com/example/helloworld/CharacterEncodingFilter.java](https://github.com/SampleUser0001/Servlet_JSP_Tomcat/blob/main/use_el/tomcat-helloworld/src/main/java/com/example/helloworld/CharacterEncodingFilter.java)

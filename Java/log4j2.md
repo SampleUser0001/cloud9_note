@@ -5,6 +5,8 @@
     - [pom.xml](#pomxml)
     - [log4j2.xml](#log4j2xml)
     - [java](#java)
+  - [Spring Bootの場合](#spring-bootの場合)
+  - [stackTraceのそれらしい出力](#stacktraceのそれらしい出力)
   - [ThreadContext](#threadcontext)
     - [Java](#java-1)
     - [log4j2.xml](#log4j2xml-1)
