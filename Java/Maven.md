@@ -247,6 +247,67 @@ mvn install -Dmaven.test.skip=true
 
 ```
 
+### MD5を生成し、なおかつ、実装が同じなら同じMD5になるようにする
+
+``` xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.6.0</version>
+            <configuration>
+                <outputTimestamp>2025-11-11T10:35:00Z</outputTimestamp>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+                <execution>
+                <id>generate-md5</id>
+                <phase>package</phase>
+                <goals>
+                    <goal>run</goal>
+                </goals>
+                <configuration>
+                    <target>
+                    <checksum file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar"
+                                algorithm="MD5"
+                                forceOverwrite="false" />
+                    </target>
+                </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.3.0</version>
+            <configuration>
+                <!-- JAR のエントリ時刻を固定 -->
+                <outputTimestamp>2025-11-11T10:35:00Z</outputTimestamp>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+
+```
+
 ## 本体とテストのプロジェクトを分ける
 
 ### Warning
