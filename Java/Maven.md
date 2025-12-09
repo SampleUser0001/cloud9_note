@@ -20,6 +20,7 @@
   - [dependencyタグのjarをまとめてjarにする(SpringBoot)](#dependencyタグのjarをまとめてjarにするspringboot)
   - [package,install時にテストをスキップする](#packageinstall時にテストをスキップする)
   - [package時にMD5を生成する](#package時にmd5を生成する)
+    - [MD5を生成し、なおかつ、実装が同じなら同じMD5になるようにする](#md5を生成しなおかつ実装が同じなら同じmd5になるようにする)
   - [本体とテストのプロジェクトを分ける](#本体とテストのプロジェクトを分ける)
     - [Warning](#warning)
       - [代替案](#代替案)
