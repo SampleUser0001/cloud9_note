@@ -260,6 +260,22 @@ function postSelect(selectElem) {
 
 ```
 
+## formにJavaScriptで要素を追加する
+
+``` javascript
+function add() {
+    const form = document.getElementById("formのID");
+
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.id = "一意のID";
+    input.name = "サーバ側で参照する名前（idと同じがよい）";
+    input.value = "渡したい値";
+
+    form.appendChild(input);
+}
+```
+
 ## ブラウザでファイルを読み込む
 
 ### 前提
