@@ -146,6 +146,8 @@
 - [Selenium(Java)](./Java/Selenium.md)
 - [SpringBatch.md](./Java/SpringBatch.md)
 - [MyBatis](./Java/MyBatis.md)
+- [FreeMarker](./Java/FreeMarker.md)
+    - テンプレートエンジン
 - [TestContainers](./Java/TestContainers.md)
 
 ### Middleware
