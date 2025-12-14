@@ -21,6 +21,7 @@ Cloud9を起動したときに行うことの備忘録。
       - [参考](#参考-3)
     - [aptでJavaをインストール](#aptでjavaをインストール)
       - [参考](#参考-4)
+    - [update-alternativesの選択肢に上がってくるようにする](#update-alternativesの選択肢に上がってくるようにする)
   - [Gradle](#gradle)
   - [Maven](#maven)
     - [Maven(binary)](#mavenbinary)
@@ -277,6 +278,18 @@ javac 11.0.9.1
 #### 参考
 
 [Ubuntu 20.04にAptを使用してJavaをインストールする方法](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-20-04-ja)
+
+### update-alternativesの選択肢に上がってくるようにする
+
+前提: 手動でJDKをダウンロード->展開->`/usr/lib/jvm/`に配置していること。
+
+``` bash
+# 2500は優先度。大きいほうが優先だが、バージョンと同値にするのが一般的？
+sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-25.0.1/bin/java 2500
+sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk-25.0.1/bin/javac 2500
+```
+
+`$JAVA_HOME`は自動で指定されない。手動で書く必要がある。
 
 ## Gradle
 
