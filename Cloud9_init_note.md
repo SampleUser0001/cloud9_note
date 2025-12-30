@@ -415,11 +415,12 @@ rm -rf /tmp/jd-cli
 
 ### antインストール
 ```
-wget https://ftp.yz.yamagata-u.ac.jp/pub/network/apache//ant/binaries/apache-ant-1.10.7-bin.tar.gz
-tar zxvf apache-ant-1.10.7-bin.tar.gz
+ANT_VERSION=
+wget https://ftp.yz.yamagata-u.ac.jp/pub/network/apache//ant/binaries/apache-ant-$ANT_VERSION-bin.tar.gz
+tar zxvf apache-ant-$ANT_VERSION-bin.tar.gz
 sudo mkdir /usr/share/ant
-sudo mv apache-ant-1.10.7 /usr/share/ant
-sudo ln -s /usr/share/ant/apache-ant-1.10.7/bin/ant /usr/bin/ant
+sudo mv apache-ant-$ANT_VERSION /usr/share/ant
+sudo ln -s /usr/share/ant/apache-ant-$ANT_VERSION/bin/ant /usr/bin/ant
 ```
 ※yumのantは古いため使わない。
 
