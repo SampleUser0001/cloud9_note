@@ -477,6 +477,21 @@ git checkout --theirs ${filepath}
 git checkout --ours ${filepath}
 ```
 
+#### 一方的に自分のブランチだけを採用する
+
+``` bash
+# ファイル確認
+git diff --name-only | uniq 
+
+# 自分のブランチの修正を採用
+git diff --name-only | uniq | xargs git checkout --ours
+
+git add .
+
+# rebaseの続き
+git rebase --continue
+```
+
 ## 直前のコミットの取り消し
 
 ### 直前のコミットの逆で上書き(revert)

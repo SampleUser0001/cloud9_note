@@ -213,6 +213,14 @@ collect(Collectors.toMap(Model::getId, Bean::getValue))
 collect(Collectors.toMap(Model::getId, Bean::getValue, (x, y) -> y, LinkedHashMap::new))
 ```
 
+### ソートする
+
+``` java
+import java.util.Comparator;
+
+sorted(Comparator.comparingInt(int型の値))
+```
+
 ### 合計値算出
 
 ``` java
