@@ -28,6 +28,7 @@ SQLのテクニック全般
     - [参考](#参考-2)
   - [ROW\_NUMBER() OVER(PARTITION BY column1 ORDER BY column2) AS ROW\_NUM](#row_number-overpartition-by-column1-order-by-column2-as-row_num)
   - [WITH](#with)
+  - [任意の順にソートする](#任意の順にソートする)
   - [項目がある場合は削除する](#項目がある場合は削除する)
   - [minusの件数](#minusの件数)
   - [別テーブルにレコードを退避する](#別テーブルにレコードを退避する)
@@ -382,6 +383,22 @@ SELECT
     employee_name
 FROM ranked_employees
 ORDER BY department_id, row_num;
+
+```
+
+## 任意の順にソートする
+
+``` sql
+SELECT
+  *
+FROM
+  animals
+ORDER BY
+  CASE id
+    WHEN 'hoge' THEN 1
+    WHEN 'aaa' THEN 2
+    WHEN 'fuga' THEN 3
+  END
 
 ```
 
