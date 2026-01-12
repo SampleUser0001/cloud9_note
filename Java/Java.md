@@ -13,6 +13,7 @@
       - [Collectors.toList()とStream.toList()の違い](#collectorstolistとstreamtolistの違い)
     - [Stream -\> Map](#stream---map)
       - [順番を保持する](#順番を保持する)
+    - [ソートする](#ソートする)
     - [合計値算出](#合計値算出)
     - [List -\> Stream](#list---stream)
     - [List\<ModelA\> -\> Map\<ModelA, List\<ModelB\>\>](#listmodela---mapmodela-listmodelb)
