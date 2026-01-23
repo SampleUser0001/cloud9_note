@@ -237,3 +237,20 @@ public class MyBatisUtil {
 | & | `&amp;` |
 | '(シングルクォーテーション) | `&apos;` |
 | "(ダブルクォーテーション) | `&quot;` |
+
+## IN句を配列で生成する
+
+``` xml
+<where>
+    <if test="inValueList != null and inValueList.size() > 0">
+        AND カラム名 IN
+        <foreach collection="inValueList"
+                 item="value"
+                 open="("
+                 separator=","
+                 close=")">
+            #{value}
+        </foreach>    
+    </if>
+</where
+```
