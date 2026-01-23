@@ -252,5 +252,5 @@ public class MyBatisUtil {
             #{value}
         </foreach>    
     </if>
-</where
+</where>
 ```
