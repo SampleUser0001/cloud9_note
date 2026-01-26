@@ -29,6 +29,7 @@ SQLのテクニック全般
   - [ROW\_NUMBER() OVER(PARTITION BY column1 ORDER BY column2) AS ROW\_NUM](#row_number-overpartition-by-column1-order-by-column2-as-row_num)
   - [WITH](#with)
   - [任意の順にソートする](#任意の順にソートする)
+  - [結合相手のテーブルのうち、条件を満たしている項目の件数をgroup byする](#結合相手のテーブルのうち条件を満たしている項目の件数をgroup-byする)
   - [項目がある場合は削除する](#項目がある場合は削除する)
   - [minusの件数](#minusの件数)
   - [別テーブルにレコードを退避する](#別テーブルにレコードを退避する)
@@ -400,6 +401,18 @@ ORDER BY
     WHEN 'fuga' THEN 3
   END
 
+```
+
+## 結合相手のテーブルのうち、条件を満たしている項目の件数をgroup byする
+
+``` sql
+select
+    A.id,
+    count(B.value_a where B.value_a is null or B.value_a = '') as count_value_a_is_empty ,
+    count(B.value_b where B.value_b is null or B.value_b = '') as count_value_b_is_empty ,
+from tableA as A
+inner join tableB as B
+on B.id = A.id_b
 ```
 
 ## 項目がある場合は削除する
