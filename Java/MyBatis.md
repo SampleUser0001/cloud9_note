@@ -200,6 +200,31 @@ public class MyBatisUtil {
 
 - [Use_MyBatis : SampleUser0001](https://github.com/SampleUser0001/Use_MyBatis)
 
+## トランザクションの書き方
+
+### 概要
+
+`sqlSessionFactory.openSession(boolean)`に渡す値で挙動に違いがある。
+
+- `true` : 自動で`commit`される。
+    - 1回呼ぶ毎に`commit`される。
+- `false` : 手動で`commit/rollback`する必要がある。
+
+### 手動
+
+``` java
+private SqlSessionFactory sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
+
+try(SqlSession session = sqlSessionFactory.openSession(false)) {
+    // 省略
+    session.commit();
+} catch (Exception e) {
+    session.rollback();
+    throw e;    
+}
+
+```
+
 ## 環境を切り替える
 
 ``` java
