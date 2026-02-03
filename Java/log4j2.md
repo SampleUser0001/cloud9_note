@@ -205,8 +205,8 @@ logging:
            %nは改行
         -->
         <Property name="format1">%d{yyyy/MM/dd HH:mm:ss.SSS} [%t] %-6p %c{10} line:%L %m%n</Property>
-        <Property name="logfile">./logs/vfs-user-dummy.log</Property>
-        <Property name="logfile-archive">./logs/vfs-user-dummy_%d{yyyy-MM-dd}.tar.gz</Property>
+        <Property name="logfile">./logs/app.log</Property>
+        <Property name="logfile-archive">./logs/app_%d{yyyy-MM-dd}.tar.gz</Property>
     </Properties>
     
     <Appenders>
