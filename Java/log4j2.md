@@ -223,6 +223,7 @@ logging:
             filePattern="${logfile-archive}">
             <PatternLayout>
                 <pattern>${format1}</pattern>
+                <charset>UTF-8</charset>
             </PatternLayout>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />
