@@ -11,6 +11,7 @@
     - [Java](#java-1)
     - [log4j2.xml](#log4j2xml-1)
     - [実行結果](#実行結果)
+  - [別名](#別名)
   - [参考](#参考)
 
 ## 設定例
@@ -372,6 +373,10 @@ public class App {
 ``` txt
 2023/02/19 00:37:56.102 [main] INFO   ittimfn.threadcontext.App line:17 info , key=value
 ```
+
+## 別名
+
+- https://github.com/SampleUser0001/log4j2_alias[https://github.com/SampleUser0001/log4j2_alias]
 
 ## 参考
 
