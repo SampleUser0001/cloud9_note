@@ -259,7 +259,7 @@ logging:
 ## stackTraceのそれらしい出力
 
 ``` java
-import java.io.PrintgWriter;
+import java.io.PrintWriter;
 import java.io.StringWriter;
 
 StringWriter sw = new StringWriter();
