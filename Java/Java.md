@@ -51,6 +51,7 @@
   - [Tempファイルを作成する / Javaでshを実行する](#tempファイルを作成する--javaでshを実行する)
     - [参考](#参考-2)
   - [Tempディレクトリ作成](#tempディレクトリ作成)
+  - [DBのSelectの結果を配列やListに詰めないで処理する](#dbのselectの結果を配列やlistに詰めないで処理する)
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
@@ -781,6 +782,10 @@ $ java App
 /tmp
 /tmp/6812748981744988023
 ```
+
+## DBのSelectの結果を配列やListに詰めないで処理する
+
+- [https://github.com/SampleUser0001/java_stream_db](https://github.com/SampleUser0001/java_stream_db)
 
 ## 最小の実行環境を提供する(jdeps, jlink)
 
