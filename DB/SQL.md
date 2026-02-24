@@ -408,8 +408,8 @@ ORDER BY
 ``` sql
 select
     A.id,
-    count(B.value_a where B.value_a is null or B.value_a = '') as count_value_a_is_empty ,
-    count(B.value_b where B.value_b is null or B.value_b = '') as count_value_b_is_empty ,
+    count(CASE WHEN B.value_a is null or B.value_a = '' THEN 1 END) as count_value_a_is_empty ,
+    count(CASE WHEN B.value_b is null or B.value_b = '' THEN 1 END) as count_value_b_is_empty ,
 from tableA as A
 inner join tableB as B
 on B.id = A.id_b
