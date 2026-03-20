@@ -58,6 +58,7 @@
 - [MySQL.md](./DB/MySQL.md)
 - [SQLite](./DB/SQLite.md)
 - [Microsoft SQL Server](./DB/SQL_Server.md)
+- [PostgreSQL](./DB/PostgreSQL.md)
 
 ## AWS
 
