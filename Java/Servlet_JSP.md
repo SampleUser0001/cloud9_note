@@ -9,6 +9,7 @@
   - [Enumで定義して、Enumで生成して、JSPで表示して、Servletで受ける](#enumで定義してenumで生成してjspで表示してservletで受ける)
     - [前提](#前提)
     - [コツ](#コツ)
+  - [HttpServletRequestのパラメータ一覧](#httpservletrequestのパラメータ一覧)
   - [JSP: 共通化](#jsp-共通化)
     - [実行時（動的）](#実行時動的)
       - [受ける](#受ける)
@@ -88,6 +89,15 @@
     - `hidden`を書いて、それを参照するのが一般的か？
 4. `select`の`id`と`name`は同じ値にする。（必須）
 5. Javaに渡される値は`null`になる可能性があるので、`null`が渡されたら空文字に変換する処理がほしい。
+
+## HttpServletRequestのパラメータ一覧
+
+``` java
+request.getParameterMap()
+       .entrySet()
+       .stream()
+       .forEach(e -> logger.info("key: {}, value: {}", e.getKey(), e.getValue()));
+```
 
 ## JSP: 共通化
 

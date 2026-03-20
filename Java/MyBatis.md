@@ -272,10 +272,9 @@ public class MyBatisUtil {
 ``` xml
 <where>
     <if test="inValueList != null and inValueList.size() > 0">
-        AND カラム名 IN
         <foreach collection="inValueList"
                  item="value"
-                 open="("
+                 open="AND カラム名 IN ("
                  separator=","
                  close=")">
             #{value}
