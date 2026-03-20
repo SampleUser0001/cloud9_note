@@ -76,6 +76,7 @@
   - [文字コードを取得する](#文字コードを取得する)
     - [nkfを使う](#nkfを使う)
   - [contentTypeを自動で判定する](#contenttypeを自動で判定する)
+  - [JDBC トランザクション](#jdbc-トランザクション)
   - [DBにSelectを投げた結果、メモリに保持しきれない量が抽出される場合(JDBC)](#dbにselectを投げた結果メモリに保持しきれない量が抽出される場合jdbc)
     - [Chat-GPT(3.5)に聞いてみた結果](#chat-gpt35に聞いてみた結果)
   - [JGit](#jgit)
@@ -1041,6 +1042,29 @@ import java.nio.file.Paths;
 
 Path filepath = Paths.get("任意のファイルパス");
 String contentType = Files.probeContentType();
+```
+
+## JDBC トランザクション
+
+``` java
+import javax.sql.DataSource;
+import java.sql.Connection;
+
+DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
+
+// コネクションを開く
+Connection conn = dataSource.getConnection();
+// 下記で自動コミットを無効化。trueを引数に渡した場合、１件ごとに自動でコミットされる。
+conn.setAutoCommit(false);
+
+// SQL実行
+
+// コミット
+conn.commit();
+
+// ロールバック
+conn.rollback();
+
 ```
 
 ## DBにSelectを投げた結果、メモリに保持しきれない量が抽出される場合(JDBC)
