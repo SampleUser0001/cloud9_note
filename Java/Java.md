@@ -73,6 +73,7 @@
     - [Timestamp -\> OffsetDateTime](#timestamp---offsetdatetime-1)
       - [任意のタイムゾーンで](#任意のタイムゾーンで)
       - [特定のオフセットで](#特定のオフセットで)
+  - [Java25以上でlombokがコンパイルエラーになる](#java25以上でlombokがコンパイルエラーになる)
   - [文字コードを取得する](#文字コードを取得する)
     - [nkfを使う](#nkfを使う)
   - [contentTypeを自動で判定する](#contenttypeを自動で判定する)
@@ -969,6 +970,26 @@ OffsetDateTime odt = ts.toInstant().atZone(zone).toOffsetDateTime();
 Timestamp ts = Timestamp.valueOf("2025-01-01 12:34:56");
 
 OffsetDateTime odt = ts.toInstant().atOffset(ZoneOffset.ofHours(9));
+
+```
+
+## Java25以上でlombokがコンパイルエラーになる
+
+``` xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.11.0</version>
+    <configuration>
+        <annotationProcessorPaths>
+            <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.42</version>
+            </path>
+        </annotationProcessorPaths>
+    </configuration>
+</plugin>
 
 ```
 
