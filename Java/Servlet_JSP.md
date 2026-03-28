@@ -15,10 +15,6 @@
       - [受ける](#受ける)
     - [コンパイル時に生成（静的）](#コンパイル時に生成静的)
   - [プルダウンの値をServletから渡して、JSPに反映する](#プルダウンの値をservletから渡してjspに反映する)
-    - [Servlet(共通)](#servlet共通)
-    - [JSP](#jsp)
-    - [JavaScript](#javascript)
-      - [DOMContentLoaderを使う](#domcontentloaderを使う)
   - [プルダウンの共通化のサンプル](#プルダウンの共通化のサンプル)
     - [結論](#結論)
     - [一応整理](#一応整理)
@@ -141,56 +137,7 @@ request.getParameterMap()
 
 ## プルダウンの値をServletから渡して、JSPに反映する
 
-### Servlet(共通)
-
-``` java
-request.setAttribute("selectedValue", "大阪");
-```
-
-### JSP
-
-``` jsp
-<select name="city">
-    <option value="東京"  <c:if test="${selectedValue == '東京'}">selected</c:if>>東京</option>
-    <option value="大阪"  <c:if test="${selectedValue == '大阪'}">selected</c:if>>大阪</option>
-    <option value="名古屋" <c:if test="${selectedValue == '名古屋'}">selected</c:if>>名古屋</option>
-</select>
-```
-
-``` jsp
-<select name="city">
-    <option value="東京"  ${selectedValue == '東京'  ? 'selected' : ''}>東京</option>
-    <option value="大阪"  ${selectedValue == '大阪'  ? 'selected' : ''}>大阪</option>
-    <option value="名古屋" ${selectedValue == '名古屋' ? 'selected' : ''}>名古屋</option>
-</select>
-```
-
-### JavaScript
-
-``` html
-<select id="city" name="city">
-    <option value="東京">東京</option>
-    <option value="大阪">大阪</option>
-    <option value="名古屋">名古屋</option>
-</select>
-
-<script>
-    // EL式でServletの値をJS変数に受け取る
-    const selectedValue = "${selectedValue}";
-
-    // selectのvalueに代入するだけでOK
-    document.getElementById("city").value = selectedValue;
-</script>
-```
-
-#### DOMContentLoaderを使う
-
-``` javascript
-// DOMContentLoaded を使う場合
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("city").value = "${selectedValue}";
-});
-```
+- [https://github.com/SampleUser0001/Servlet_JSP_Pulldown](https://github.com/SampleUser0001/Servlet_JSP_Pulldown)
 
 ## プルダウンの共通化のサンプル
 
