@@ -3,6 +3,14 @@
 - [Servlet / JSP](#servlet--jsp)
   - [作成時の全体的な注意点やコツ](#作成時の全体的な注意点やコツ)
   - [Init Sample](#init-sample)
+  - [HttpRequest](#httprequest)
+    - [get/postをServletで受ける](#getpostをservletで受ける)
+    - [JSPへ値を渡す](#jspへ値を渡す)
+    - [JSPで受ける](#jspで受ける)
+      - [JSPでリクエストパラメータを取得](#jspでリクエストパラメータを取得)
+  - [session](#session)
+    - [Servlet](#servlet)
+    - [JSP](#jsp)
   - [JSP:開始タグと用途の違い](#jsp開始タグと用途の違い)
   - [booleanでrequiredを表示する](#booleanでrequiredを表示する)
   - [JavaScriptでPOSTしてServletで受ける](#javascriptでpostしてservletで受ける)
@@ -37,6 +45,81 @@
 ## Init Sample
 
 - [Servlet_JSP_Tomcat:SampleUser0001:Github](https://sampleuser0001.github.io/Servlet_JSP_Tomcat/)
+
+## HttpRequest
+
+### get/postをServletで受ける
+
+- Postも構文的には同じ。`doPost`メソッドでPostを受ける。
+- `request.getParameter()`でパラメータ一覧が取得できる
+
+``` java
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.IOException;
+
+public class SampleServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String name = request.getParameter("name"); // クエリ取得
+        response.getWriter().println("Hello " + name);
+    }
+}
+```
+
+### JSPへ値を渡す
+
+``` java
+request.setAttribute("message", "Hello JSP");
+request.getRequestDispatcher("/result.jsp").forward(request, response);
+```
+
+### JSPで受ける
+
+``` jsp
+${message}
+```
+
+または、
+
+``` jsp
+<%= request.getAttribute("message") %>
+```
+
+#### JSPでリクエストパラメータを取得
+
+## session
+
+### Servlet
+
+``` java
+// インスタンス取得
+HttpSession session = request.getSession();
+
+// 値設定
+session.setAttribute("user", "suzuki");
+
+// 取得
+String user = (String) session.getAttribute("user");
+
+// 削除
+session.removeAttribute("user");
+```
+
+### JSP
+
+EL式(新しい)
+``` jsp
+${sessionScope.user}
+```
+
+スクリプトレット(古い)
+``` jsp
+<%= session.getAttribute("user") %>
+```
 
 ## JSP:開始タグと用途の違い
 
