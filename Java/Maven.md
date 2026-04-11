@@ -58,11 +58,11 @@ mvn -B archetype:generate \
 ### 新
 
 ``` sh
-mvn -B archetype:generate \
- -DgroupId=ittimfn.sample
- -DartifactId=SampleApp
- -DarchetypeArtifactId=maven-archetype-quickstart
- -DarchetypeVersion=1.4
+mvn archetype:generate \
+  -DgroupId=ittimfn.sample \
+  -DartifactId=ReadChildren \
+  -DarchetypeArtifactId=maven-archetype-quickstart \
+  -DinteractiveMode=false
 ```
 
 
