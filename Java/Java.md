@@ -73,6 +73,8 @@
     - [Timestamp -\> OffsetDateTime](#timestamp---offsetdatetime-1)
       - [任意のタイムゾーンで](#任意のタイムゾーンで)
       - [特定のオフセットで](#特定のオフセットで)
+  - [XMLの読み書き](#xmlの読み書き)
+    - [タグについてもう少し細かく取得する](#タグについてもう少し細かく取得する)
   - [Java25以上でlombokがコンパイルエラーになる](#java25以上でlombokがコンパイルエラーになる)
   - [文字コードを取得する](#文字コードを取得する)
     - [nkfを使う](#nkfを使う)
@@ -972,6 +974,17 @@ Timestamp ts = Timestamp.valueOf("2025-01-01 12:34:56");
 OffsetDateTime odt = ts.toInstant().atOffset(ZoneOffset.ofHours(9));
 
 ```
+
+## XMLの読み書き
+
+- [Read_XML_Children_java](https://github.com/SampleUser0001/Read_XML_Children_Java)
+    - 木構造のXMLを読み書きする
+
+### タグについてもう少し細かく取得する
+
+- [XMLReader](https://github.com/SampleUser0001/Sample_ReadXML_byJava/blob/main/XMLReader/src/main/java/sample/read/xml/App.java)
+    - タグ名の取得 : `Element.getTagName()`
+    - タグが持っているパラメータを取得する : `Element.getAttribute(String)`
 
 ## Java25以上でlombokがコンパイルエラーになる
 
