@@ -121,7 +121,7 @@ Path path =
     <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>exec-maven-plugin</artifactId>
-      <version>1.2.1</version>
+      <version>3.6.3</version>
       <configuration>
         <mainClass>${project.mainClass}</mainClass>
       </configuration>
