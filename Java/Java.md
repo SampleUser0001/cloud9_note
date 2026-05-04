@@ -37,6 +37,7 @@
   - [Enumから特定の項目を抽出したListを作る](#enumから特定の項目を抽出したlistを作る)
   - [propertiesファイルの読み込み](#propertiesファイルの読み込み)
     - [PropertiesEnum](#propertiesenum)
+    - [TSVに変換する](#tsvに変換する)
   - [実行可能jarファイルの実行](#実行可能jarファイルの実行)
     - [外部のライブラリを使用する](#外部のライブラリを使用する)
   - [jarファイルの中身を見る](#jarファイルの中身を見る)
@@ -558,6 +559,30 @@ public enum PropertiesEnum {
 
     public String getPropertiesValue() {
         return properties.getProperty(this.key);
+    }
+}
+```
+
+### TSVに変換する
+
+``` java
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+public class ReadProperties {
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.println("Usage: java ReadProperties <properties-file>");
+            return;
+        }
+        Properties properties = new Properties();
+        try (FileInputStream fis = new FileInputStream(args[0])) {
+            properties.load(fis);
+            properties.forEach((key, value) -> System.out.println(key + "\t" + value));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 ```
