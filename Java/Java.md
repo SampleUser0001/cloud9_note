@@ -99,6 +99,7 @@
   - [CRLF以外の改行コードを無視する](#crlf以外の改行コードを無視する)
   - [文字コードと改行コードの変換を行う](#文字コードと改行コードの変換を行う)
   - [SQLの実行結果をExcelに出力する](#sqlの実行結果をexcelに出力する)
+  - [SQLフォーマッタ](#sqlフォーマッタ)
   - [異なるバージョンのJavaでアプリを動かす](#異なるバージョンのjavaでアプリを動かす)
   - [Java 8 -\> 17の間に発生した主なアップデート内容](#java-8---17の間に発生した主なアップデート内容)
     - [Java 9 (2017年9月)](#java-9-2017年9月)
@@ -1611,6 +1612,99 @@ public class SQLToExcelExporter {
     }
 }
 
+```
+
+## SQLフォーマッタ
+
+``` java
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class SqlFormatter {
+
+    private static final Set<String> KEYWORDS_NEWLINE = Set.of(
+        "SELECT", "FROM", "WHERE", "GROUP BY", "ORDER BY",
+        "HAVING", "JOIN", "LEFT JOIN", "RIGHT JOIN", "INNER JOIN",
+        "OUTER JOIN", "ON", "AND", "OR"
+    );
+
+    public static String format(String sql) {
+        StringBuilder result = new StringBuilder();
+        int indent = 0;
+
+        // 空白正規化（※文字列リテラルは未対応の簡易版）
+        sql = sql.replaceAll("\\s+", " ").trim();
+
+        String[] tokens = sql.split(" ");
+
+        for (int i = 0; i < tokens.length; i++) {
+            String original = tokens[i];               // 出力用（そのまま）
+            String upper = original.toUpperCase();     // 判定用
+
+            // ===== 複合キーワード（GROUP BY など）=====
+            if (i < tokens.length - 1) {
+                String nextOriginal = tokens[i + 1];
+                String twoWordUpper = upper + " " + nextOriginal.toUpperCase();
+
+                if (KEYWORDS_NEWLINE.contains(twoWordUpper)) {
+                    result.append("\n")
+                          .append(indent(indent))
+                          .append(original)
+                          .append(" ")
+                          .append(nextOriginal)
+                          .append(" ");
+                    i++; // 次トークン消費
+                    continue;
+                }
+            }
+
+            // ===== 改行キーワード =====
+            if (KEYWORDS_NEWLINE.contains(upper)) {
+                result.append("\n")
+                      .append(indent(indent))
+                      .append(original)
+                      .append(" ");
+                continue;
+            }
+
+            // ===== 開き括弧 =====
+            if (original.contains("(")) {
+                result.append(original).append(" ");
+                indent++;
+                result.append("\n").append(indent(indent));
+                continue;
+            }
+
+            // ===== 閉じ括弧 =====
+            if (original.contains(")")) {
+                indent = Math.max(0, indent - 1);
+                result.append("\n")
+                      .append(indent(indent))
+                      .append(original)
+                      .append(" ");
+                continue;
+            }
+
+            // ===== 通常トークン =====
+            result.append(original).append(" ");
+        }
+
+        return result.toString().trim();
+    }
+
+    private static String indent(int level) {
+        return "    ".repeat(level); // スペース4つ
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        String sql = Files.lines(Paths.get(args[0])).map(Object::toString).collect(Collectors.joining(" "));
+
+        System.out.println(format(sql));
+    }
+}
 ```
 
 ## 異なるバージョンのJavaでアプリを動かす
