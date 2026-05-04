@@ -630,6 +630,7 @@ Map<String, DataB> dataBMap
 - [https://github.com/SampleUser0001#multithread](https://github.com/SampleUser0001#multithread)
     - [MultiThreadSample](https://github.com/SampleUser0001/MultiThreadSample)
     - [MultiThread_SplitFile_Java](https://github.com/SampleUser0001/MultiThread_SplitFile_Java)
+    - [Use_CountDownLatch](https://github.com/SampleUser0001/Use_CountDownLatch)
 
 ## ディレクトリを再帰的にたどる
 
@@ -641,7 +642,7 @@ import java.nio.file.Files;
 import java.io.IOException;
 
 try (Stream<Path> stream = Files.walk(Paths.get("."))) {
-    stream.forEach(System.out::println);
+    stream.forEach(System.out::println);    
 } catch(IOException e) {
     e.printStackTrace();
 }
