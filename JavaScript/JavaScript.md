@@ -16,6 +16,7 @@
       - [module.exports](#moduleexports)
       - [module.exports.関数名](#moduleexports関数名)
     - [参考](#参考-2)
+  - [オブジェクトの要素(キー/値)を取得する](#オブジェクトの要素キー値を取得する)
   - [Mapオブジェクト](#mapオブジェクト)
   - [formタグを使わずにpostする](#formタグを使わずにpostする)
   - [formにJavaScriptで要素を追加する](#formにjavascriptで要素を追加する)
@@ -197,6 +198,24 @@ sample.hoge();
 
 - [jsのimportとrequireの違い:Qiita](https://qiita.com/minato-naka/items/39ecc285d1e37226a283)
 - [CommonJS:Wikipedia](https://ja.wikipedia.org/wiki/CommonJS)
+
+## オブジェクトの要素(キー/値)を取得する
+
+``` javascript
+// オブジェクト
+const o = { key1 : "value1"};
+
+// キー取得
+const keys = Object.keys(o);
+
+// 値を取得
+keys.forEach(key => {
+    console.info("value: " + o[key]);
+});
+
+// または下記。
+o.key1;
+```
 
 ## Mapオブジェクト
 
