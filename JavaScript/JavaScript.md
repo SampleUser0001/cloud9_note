@@ -20,6 +20,9 @@
   - [Mapオブジェクト](#mapオブジェクト)
   - [formタグを使わずにpostする](#formタグを使わずにpostする)
   - [formにJavaScriptで要素を追加する](#formにjavascriptで要素を追加する)
+  - [classを追加する](#classを追加する)
+  - [数値であることを判定する](#数値であることを判定する)
+  - [数値にカンマをつける](#数値にカンマをつける)
   - [ブラウザでファイルを読み込む](#ブラウザでファイルを読み込む)
     - [前提](#前提)
     - [HTML](#html)
@@ -294,6 +297,27 @@ function add() {
 
     form.appendChild(input);
 }
+```
+
+## classを追加する
+
+``` javascript
+const className = '任意のクラス';
+const element = document.getElementById('hoge');
+element.classList.add(className);
+```
+
+## 数値であることを判定する
+
+``` javascript
+const num = 0
+Number.isFinite(num);
+```
+
+## 数値にカンマをつける
+
+``` javascript
+const v = value.toLocaleString('ja-JP');
 ```
 
 ## ブラウザでファイルを読み込む
