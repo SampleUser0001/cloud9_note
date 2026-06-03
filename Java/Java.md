@@ -3,6 +3,7 @@
 - [Java](#java)
   - [record](#record)
   - [Stream](#stream)
+    - [順番](#順番)
     - [ファイル -\> Stream](#ファイル---stream)
     - [Stream -\> String](#stream---string)
       - [参考](#参考)
@@ -147,6 +148,10 @@ public record Model(
 ```
 
 ## Stream
+
+### 順番
+
+- `forEach`メソッドは順番が守られるとは限らない。順番を気にするなら`forEachOrdered`を使用すること。
 
 ### ファイル -> Stream
 
