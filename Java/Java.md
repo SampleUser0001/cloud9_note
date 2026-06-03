@@ -51,10 +51,12 @@
   - [Listの結合](#listの結合)
   - [指定した文字列で結合する](#指定した文字列で結合する)
     - [Streamを結合する](#streamを結合する)
+    - [結合時に先頭、末尾につける文字列を指定する](#結合時に先頭末尾につける文字列を指定する)
   - [Tempファイルを作成する / Javaでshを実行する](#tempファイルを作成する--javaでshを実行する)
     - [参考](#参考-2)
   - [Tempディレクトリ作成](#tempディレクトリ作成)
   - [DBのSelectの結果を配列やListに詰めないで処理する](#dbのselectの結果を配列やlistに詰めないで処理する)
+  - [tnsnames.oraから接続URLを生成する](#tnsnamesoraから接続urlを生成する)
   - [最小の実行環境を提供する(jdeps, jlink)](#最小の実行環境を提供するjdeps-jlink)
     - [前提](#前提)
     - [手順](#手順)
@@ -744,12 +746,16 @@ System.out.println(joiner.toString());
 import java.util.stream.Collectors;
 
 Stream<String> stream = // 任意の値
-String joined = stream.forEachOrdered(Collectors(joining(",")));
+String joined = stream.forEachOrdered(Collectors.joining(",")));
 
-// String head = "head";
-// String tail = "tail";
-// stream.forEachOrdered(Collectors(joining(",", head, tail));
+```
 
+### 結合時に先頭、末尾につける文字列を指定する
+
+``` java
+String head = "head";
+String tail = "tail";
+stream.forEachOrdered(Collectors.joining(",", head, tail));
 ```
 
 ## Tempファイルを作成する / Javaでshを実行する
@@ -853,6 +859,27 @@ $ java App
 ## DBのSelectの結果を配列やListに詰めないで処理する
 
 - [https://github.com/SampleUser0001/java_stream_db](https://github.com/SampleUser0001/java_stream_db)
+
+## tnsnames.oraから接続URLを生成する
+
+``` txt
+ネットサービス名= 
+    (DESCRIPTION =
+        (ADDRESS =
+            (PROTOCOL = TCP)
+            (HOST = ホスト名)
+            (PORT = 1521)
+        )
+        (CONNECT_DATA = 
+            (SERVICE_NAME = サービス名)
+        )
+    )
+
+```
+
+``` java
+String url = "jdbc:oracle:thin:@ホスト名:1521/サービス名";
+```
 
 ## 最小の実行環境を提供する(jdeps, jlink)
 

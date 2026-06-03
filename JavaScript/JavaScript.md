@@ -23,6 +23,7 @@
   - [classを追加する](#classを追加する)
   - [数値であることを判定する](#数値であることを判定する)
   - [数値にカンマをつける](#数値にカンマをつける)
+  - [数値に0埋めする](#数値に0埋めする)
   - [ブラウザでファイルを読み込む](#ブラウザでファイルを読み込む)
     - [前提](#前提)
     - [HTML](#html)
@@ -30,6 +31,7 @@
     - [コールバックで共通化する](#コールバックで共通化する)
   - [JSON - Base64変換](#json---base64変換)
   - [サブウィンドウ](#サブウィンドウ)
+  - [表示/非表示を切り替える](#表示非表示を切り替える)
 
 ## ページ読み込み時に呼び出す
 
@@ -320,6 +322,13 @@ Number.isFinite(num);
 const v = value.toLocaleString('ja-JP');
 ```
 
+## 数値に0埋めする
+
+``` javascript
+const num = 1;
+num.padStart(3,'0');
+```
+
 ## ブラウザでファイルを読み込む
 
 ### 前提
@@ -444,3 +453,15 @@ function load() {
 ## サブウィンドウ
 
 - [subwindow:SampleUser0001](https://github.com/SampleUser0001/subwindow)
+
+## 表示/非表示を切り替える
+
+``` javascript
+const el = document.getElementByID("任意のID");
+
+// 表示
+el.style.display = "";
+
+// 非表示
+el.style.display = "none";
+```
