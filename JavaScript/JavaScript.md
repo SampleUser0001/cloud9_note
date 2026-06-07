@@ -24,6 +24,7 @@
   - [数値であることを判定する](#数値であることを判定する)
   - [数値にカンマをつける](#数値にカンマをつける)
   - [数値に0埋めする](#数値に0埋めする)
+  - [プルダウン(Select)のOptionをJavaScriptで生成する](#プルダウンselectのoptionをjavascriptで生成する)
   - [ブラウザでファイルを読み込む](#ブラウザでファイルを読み込む)
     - [前提](#前提)
     - [HTML](#html)
@@ -327,6 +328,47 @@ const v = value.toLocaleString('ja-JP');
 ``` javascript
 const num = 1;
 num.padStart(3,'0');
+```
+
+## プルダウン(Select)のOptionをJavaScriptで生成する
+
+``` html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <div>
+        <select id="genPulldown"></select>
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>
+```
+
+``` javascript
+function generatePulldown() {
+    const genPulldown = document.getElementById("genPulldown");
+    const options = [
+        {value: "1", label: "Option 1"},
+        {value: "2", label: "Option 2"},
+        {value: "3", label: "Option 3"},
+        {value: "4", label: "Option 4"},
+        {value: "5", label: "Option 5"}
+    ];
+
+    options.forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option.value;
+        optionElement.textContent = option.label;
+        genPulldown.appendChild(optionElement);
+    });
+}
+
+generatePulldown();
 ```
 
 ## ブラウザでファイルを読み込む
