@@ -327,7 +327,7 @@ const v = value.toLocaleString('ja-JP');
 
 ``` javascript
 const num = 1;
-num.padStart(3,'0');
+String(num).padStart(3,'0');
 ```
 
 ## プルダウン(Select)のOptionをJavaScriptで生成する
