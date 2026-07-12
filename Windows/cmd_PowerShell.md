@@ -13,9 +13,18 @@
     - [touch（新しいファイルを生成する）](#touch新しいファイルを生成する)
       - [空のファイルを作る](#空のファイルを作る)
     - [ファイルを空にする](#ファイルを空にする)
+    - [which](#which)
+    - [環境変数名設定](#環境変数名設定)
+    - [環境変数表示](#環境変数表示)
+    - [PATHに追加](#pathに追加)
+    - [PATHから削除](#pathから削除)
+    - [パスが存在するか確認する](#パスが存在するか確認する)
+    - [エイリアス設定](#エイリアス設定)
+    - [エイリアス表示](#エイリアス表示)
     - [コンソール出力](#コンソール出力)
     - [ps1ファイルの起動引数の取得](#ps1ファイルの起動引数の取得)
     - [文字列の置換](#文字列の置換)
+    - [if文でfalseを取得](#if文でfalseを取得)
     - [ファイル読み込み](#ファイル読み込み)
       - [単一の文字列](#単一の文字列)
       - [配列](#配列)
@@ -115,6 +124,54 @@ New-Item -Type File ${ファイルパス}
 Clear-Content ${ファイルパス}
 ```
 
+### which
+
+``` powershell
+gcm コマンド | fl 
+```
+
+### 環境変数名設定
+
+``` powershell
+$env:変数名 = 値
+```
+
+### 環境変数表示
+
+``` powershell
+$env : PATH -split ':'
+```
+
+### PATHに追加
+
+``` powershell
+$ENV:Path = "パス;"+$ENV:Path
+```
+
+### PATHから削除
+
+``` powershell
+Set-Item ENV:Path $ENV:Path.Replace("削除するパス", "")
+```
+
+### パスが存在するか確認する
+
+``` powershell
+Test-Path パス
+```
+
+### エイリアス設定
+
+``` powershell
+Set-Alias -Name エイリアス名 -Value パス
+```
+
+### エイリアス表示
+
+``` powershell
+
+```
+
 ### コンソール出力
 
 ``` powershell
@@ -134,6 +191,14 @@ Write-Host $Args[1]
 ``` powershell
 $str = '{hoge}'
 Write-Host $str.replace($str, 'hoge')
+```
+
+### if文でfalseを取得
+
+``` ps1
+if(-not $(trueになる文)) {
+}
+# !も使用できる
 ```
 
 ### ファイル読み込み
