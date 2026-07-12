@@ -45,6 +45,9 @@
   - [jarファイルの中身を見る](#jarファイルの中身を見る)
   - [新規ファイルの書き込み](#新規ファイルの書き込み)
     - [ファイルの書き込み：参考](#ファイルの書き込み参考)
+  - [ファイルがある場合は追記、ない場合は新規作成](#ファイルがある場合は追記ない場合は新規作成)
+    - [Java8](#java8)
+    - [Java6](#java6)
   - [Mapのループ](#mapのループ)
   - [Mapをほかの型のMapに変換する](#mapをほかの型のmapに変換する)
   - [マルチスレッド](#マルチスレッド)
@@ -664,6 +667,63 @@ try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("書き込みフ�
 ### ファイルの書き込み：参考
 
 [https://docs.oracle.com/javase/jp/8/docs/api/java/nio/file/Files.html#newBufferedWriter-java.nio.file.Path-java.nio.charset.Charset-java.nio.file.OpenOption...-](https://docs.oracle.com/javase/jp/8/docs/api/java/nio/file/Files.html#newBufferedWriter-java.nio.file.Path-java.nio.charset.Charset-java.nio.file.OpenOption...-)
+
+## ファイルがある場合は追記、ない場合は新規作成
+
+### Java8
+
+``` java
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.UUID;
+
+public class NewFilesApp {
+    public static void main(String[] args) throws IOException {
+        UUID uuid = UUID.randomUUID();
+        Path path = Paths.get("NewFilesApp.txt");
+        try(BufferedWriter writer = Files.newBufferedWriter(path, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            writer.write(uuid.toString());
+            writer.newLine();
+        }
+    }
+}
+```
+
+### Java6
+
+``` java
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.UUID;
+
+public class OldNewFilesApp {
+    public static void main(String[] args) {
+        UUID uuid = UUID.randomUUID();
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter("OldNewFilesApp.txt",true);
+            writer.write(uuid.toString());
+            writer.write(System.lineSeparator());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+```
 
 ## Mapのループ
 
