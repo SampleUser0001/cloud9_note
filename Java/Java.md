@@ -91,6 +91,7 @@
   - [JDBC トランザクション](#jdbc-トランザクション)
   - [DBにSelectを投げた結果、メモリに保持しきれない量が抽出される場合(JDBC)](#dbにselectを投げた結果メモリに保持しきれない量が抽出される場合jdbc)
     - [Chat-GPT(3.5)に聞いてみた結果](#chat-gpt35に聞いてみた結果)
+  - [標準ライブラリでSQLパラメータを埋める](#標準ライブラリでsqlパラメータを埋める)
   - [JGit](#jgit)
   - [Windows + git bashとLinuxのファイルパス問題](#windows--git-bashとlinuxのファイルパス問題)
   - [Java8以降の日付の扱い(LocalDate, LocalDateTime)](#java8以降の日付の扱いlocaldate-localdatetime)
@@ -1303,6 +1304,10 @@ Javaで大量のデータをDBから取得する際に、メモリに保持し�
    JPAやHibernateを使用する場合、クエリを設計し、適切なページングを設定してデータを取得できます。
 
 これらの方法を使用することで、大量のデータを効率的に取得し、メモリ使用量を最適化することができます。選択肢の中から、プロジェクトの要件に最適な方法を選んで実装してください。
+
+## 標準ライブラリでSQLパラメータを埋める
+
+- [https://github.com/SampleUser0001/Sqlite_Java#ittimfnsamplesqliterepositorysqliterepositoryjava](https://github.com/SampleUser0001/Sqlite_Java#ittimfnsamplesqliterepositorysqliterepositoryjava)
 
 ## JGit
 
