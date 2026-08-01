@@ -89,6 +89,18 @@
     - [nkfを使う](#nkfを使う)
   - [contentTypeを自動で判定する](#contenttypeを自動で判定する)
   - [JDBC トランザクション](#jdbc-トランザクション)
+  - [大量にInsertを流す](#大量にinsertを流す)
+    - [基本実装](#基本実装)
+    - [高速化のポイント](#高速化のポイント)
+      - [AutoCommitをOFF](#autocommitをoff)
+      - [PreparedStatementを使い回す](#preparedstatementを使い回す)
+      - [executeBatch()](#executebatch)
+      - [バッチサイズ](#バッチサイズ)
+      - [Commitもまとめる](#commitもまとめる)
+      - [並列化](#並列化)
+    - [100万件のINSERTのイメージ](#100万件のinsertのイメージ)
+    - [数千万件以上なら](#数千万件以上なら)
+    - [一般的な推奨構成](#一般的な推奨構成)
   - [DBにSelectを投げた結果、メモリに保持しきれない量が抽出される場合(JDBC)](#dbにselectを投げた結果メモリに保持しきれない量が抽出される場合jdbc)
     - [Chat-GPT(3.5)に聞いてみた結果](#chat-gpt35に聞いてみた結果)
   - [標準ライブラリでSQLパラメータを埋める](#標準ライブラリでsqlパラメータを埋める)
@@ -1256,6 +1268,215 @@ conn.commit();
 conn.rollback();
 
 ```
+
+## 大量にInsertを流す
+
+### 基本実装
+
+```java
+Connection conn = dataSource.getConnection();
+conn.setAutoCommit(false);
+
+String sql = "INSERT INTO EMPLOYEE(ID, NAME, AGE) VALUES (?, ?, ?)";
+
+try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+    int batchSize = 1000;
+
+    for (int i = 0; i < employees.size(); i++) {
+
+        Employee e = employees.get(i);
+
+        ps.setLong(1, e.getId());
+        ps.setString(2, e.getName());
+        ps.setInt(3, e.getAge());
+
+        ps.addBatch();
+
+        if ((i + 1) % batchSize == 0) {
+            ps.executeBatch();
+            ps.clearBatch();
+        }
+    }
+
+    ps.executeBatch();
+    conn.commit();
+}
+```
+
+### 高速化のポイント
+
+#### AutoCommitをOFF
+
+```java
+conn.setAutoCommit(false);
+```
+
+これだけでも数十倍速くなることがあります。
+
+---
+
+#### PreparedStatementを使い回す
+
+毎回
+
+```java
+prepareStatement(...)
+```
+
+しないこと。
+
+PreparedStatementは一度だけ生成します。
+
+---
+
+#### executeBatch()
+
+1件ずつ
+
+```java
+executeUpdate();
+```
+
+するのではなく、
+
+```java
+addBatch();
+```
+
+して
+
+```java
+executeBatch();
+```
+
+します。
+
+これによりDBとの通信回数が激減します。([Oracle Docs][1])
+
+---
+
+#### バッチサイズ
+
+Oracleでは一般的に
+
+* 100件
+* 500件
+* 1000件
+
+あたりが最も効率が良いことが多く、Oracleのドキュメントでも概ね50～100程度から試し、ワークロードに合わせて調整することが推奨されています。極端に大きいバッチはメモリ使用量が増え、性能が低下することがあります。([Oracle Docs][2])
+
+例
+
+```java
+batchSize = 1000;
+```
+
+---
+
+#### Commitもまとめる
+
+悪い例
+
+```java
+executeUpdate();
+commit();
+```
+
+良い例
+
+```java
+1000件
+↓
+executeBatch()
+↓
+commit()
+```
+
+#### 並列化
+
+例えば
+
+```
+100万件
+
+↓
+
+4スレッド
+
+25万件ずつ
+```
+
+各スレッドが別ConnectionでBatch Insertするとさらに高速になります。
+
+ただし
+
+* UNDO
+* REDO
+* ロック
+
+との兼ね合いがあるため、CPU数以上にスレッドを増やしても速くならないことが多いです。
+
+### 100万件のINSERTのイメージ
+
+```
+CSV
+
+ ↓
+
+1000件読み込み
+
+ ↓
+
+PreparedStatement
+
+ ↓
+
+addBatch()
+
+ ↓
+
+executeBatch()
+
+ ↓
+
+commit()
+
+ ↓
+
+次の1000件
+```
+
+メモリ使用量も少なく、高速です。
+
+### 数千万件以上なら
+
+もし
+
+* CSV
+* TSV
+* 固定長ファイル
+
+からOracleへロードするのであれば、Java経由でINSERTするより **SQL*Loader** の方が数倍～数十倍高速になるケースがあります。
+
+---
+
+### 一般的な推奨構成
+
+JavaでOracleへ大量データを投入するのであれば、次の構成が最もバランスが良いです。
+
+* `PreparedStatement`
+* `addBatch()`
+* `executeBatch()`
+* `AutoCommit=false`
+* 500～1000件ごとに `executeBatch()` と `commit()`
+* 必要に応じて複数スレッド（各スレッドで独立したConnectionを使用）
+
+この構成で、多くの業務システムでは十分に高いINSERT性能を得られます。
+
+[1]: https://docs.oracle.com/en/database/oracle/oracle-database/23/jjdbc/performance-extensions.html?utm_source=chatgpt.com "Performance Extensions"
+[2]: https://docs.oracle.com/database/121/JJDBC/oraperf.htm?utm_source=chatgpt.com "Performance Extensions"
+
 
 ## DBにSelectを投げた結果、メモリに保持しきれない量が抽出される場合(JDBC)
 
