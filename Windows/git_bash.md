@@ -3,6 +3,7 @@
 - [git bash](#git-bash)
   - [diffの文字化け対応](#diffの文字化け対応)
   - [Shift-JISのファイルに対してgrepする](#shift-jisのファイルに対してgrepする)
+  - [ユニコードを日本語表示する](#ユニコードを日本語表示する)
 
 ## diffの文字化け対応
 
@@ -55,4 +56,10 @@ if [ -n "$result" ]; then
 $result
 END
 fi
+```
+
+## ユニコードを日本語表示する
+
+``` bash
+printf "$(gitコマンド)"
 ```
