@@ -33,6 +33,7 @@
   - [JSON - Base64変換](#json---base64変換)
   - [サブウィンドウ](#サブウィンドウ)
   - [表示/非表示を切り替える](#表示非表示を切り替える)
+  - [チェックボックスにチェックする](#チェックボックスにチェックする)
 
 ## ページ読み込み時に呼び出す
 
@@ -507,3 +508,13 @@ el.style.display = "";
 // 非表示
 el.style.display = "none";
 ```
+
+## チェックボックスにチェックする
+
+``` javascript
+let checkbox = document.getElementById("checkboxのID");
+
+// 下記のどちらか。「checked」と書かれるのは2つ目のみ。
+checkbox.setAttribute("checked", "checked");
+checkbox.checked = "checked";
+``` 
