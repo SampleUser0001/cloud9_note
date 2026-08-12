@@ -104,6 +104,9 @@
   - [DBにSelectを投げた結果、メモリに保持しきれない量が抽出される場合(JDBC)](#dbにselectを投げた結果メモリに保持しきれない量が抽出される場合jdbc)
     - [Chat-GPT(3.5)に聞いてみた結果](#chat-gpt35に聞いてみた結果)
   - [標準ライブラリでSQLパラメータを埋める](#標準ライブラリでsqlパラメータを埋める)
+  - [数値にカンマをつける](#数値にカンマをつける)
+  - [formatで年号を表示する](#formatで年号を表示する)
+    - [フォーマットパターン](#フォーマットパターン)
   - [JGit](#jgit)
   - [Windows + git bashとLinuxのファイルパス問題](#windows--git-bashとlinuxのファイルパス問題)
   - [Java8以降の日付の扱い(LocalDate, LocalDateTime)](#java8以降の日付の扱いlocaldate-localdatetime)
@@ -1529,6 +1532,37 @@ Javaで大量のデータをDBから取得する際に、メモリに保持し�
 ## 標準ライブラリでSQLパラメータを埋める
 
 - [https://github.com/SampleUser0001/Sqlite_Java#ittimfnsamplesqliterepositorysqliterepositoryjava](https://github.com/SampleUser0001/Sqlite_Java#ittimfnsamplesqliterepositorysqliterepositoryjava)
+
+## 数値にカンマをつける
+
+``` java
+String.format("%,d", 1000000);
+```
+
+## formatで年号を表示する
+
+当然だが使用してはいけない。
+
+``` java
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+Locale locale = Locale.of("ja", "JP", "JP");
+Calendar calendar = Calendar.getInstance(locale);
+
+new SimpleDateFormat("Gy.MM.dd", locale)
+    .format(calendar.getTime());
+```
+
+### フォーマットパターン
+
+- Gy.MM.dd
+    - 令和8年
+- GGy
+    - 令和8年
+- Gyy
+    - 令和08年
 
 ## JGit
 
