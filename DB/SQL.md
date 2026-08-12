@@ -30,6 +30,7 @@ SQLのテクニック全般
   - [WITH](#with)
   - [任意の順にソートする](#任意の順にソートする)
   - [結合相手のテーブルのうち、条件を満たしている項目の件数をgroup byする](#結合相手のテーブルのうち条件を満たしている項目の件数をgroup-byする)
+  - [substrを使ってInner Joinする](#substrを使ってinner-joinする)
   - [項目がある場合は削除する](#項目がある場合は削除する)
   - [minusの件数](#minusの件数)
   - [別テーブルにレコードを退避する](#別テーブルにレコードを退避する)
@@ -413,6 +414,14 @@ select
 from tableA as A
 inner join tableB as B
 on B.id = A.id_b
+```
+
+## substrを使ってInner Joinする
+
+``` sql
+from tableA a
+inner join tableB b
+on trim(substr(a.code, 1, 6)) = trim(b.code)
 ```
 
 ## 項目がある場合は削除する
