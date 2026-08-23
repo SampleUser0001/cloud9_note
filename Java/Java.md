@@ -50,6 +50,11 @@
     - [Java6](#java6)
   - [Mapのループ](#mapのループ)
   - [Mapをほかの型のMapに変換する](#mapをほかの型のmapに変換する)
+  - [Map.equals](#mapequals)
+    - [Key.java](#keyjava)
+    - [Model.java](#modeljava)
+    - [App.java](#appjava)
+    - [実行結果](#実行結果)
   - [マルチスレッド](#マルチスレッド)
   - [ディレクトリを再帰的にたどる](#ディレクトリを再帰的にたどる)
   - [Listの結合](#listの結合)
@@ -763,6 +768,129 @@ Map<String, DataB> dataBMap
                                         entry -> new DataB(entry));
 ```
 
+## Map.equals
+
+- lombokを使うとなんとなくequalsのオブジェクト差分を吸収してくれるが、lombokがない場合はどうなるか。
+    - Mapはkey-valueが同じ値（Object的に同じでなくても良い）であればequalsはtrueを返す。
+
+### Key.java
+
+``` java
+package enums;
+
+public enum Key {
+    KEY_1,
+    KEY_2;
+}
+
+```
+
+### Model.java
+
+``` java
+package model;
+
+import enums.Key;
+import java.util.*;
+
+public class Model {
+
+    Map<Key, Object> map = new HashMap<Key, Object>();
+
+    public Model() {}
+    
+    public Model(Map<Key, Object> map) {
+        super();
+        this.map = map;
+    }
+
+    public Map<Key, Object> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<Key, Object> map) {
+        this.map = map;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(map);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Model other = (Model) obj;
+        return Objects.equals(map, other.map);
+    }
+    
+    
+}
+
+```
+
+### App.java
+
+``` java
+package exec;
+
+import enums.Key;
+import model.Model;
+
+import java.util.Map;
+import java.util.HashMap;
+
+public class App {
+    public static void main(String[] args) {
+        Map<Key, Object> map1 = new HashMap<Key, Object>();
+        Map<Key, Object> map2 = new HashMap<Key, Object>();
+
+        Object obj = new Integer(1);
+        Object obj2 = "hogehoge";
+
+        Object obj1 = new Integer(1);
+        Object obj12 = "hogehoge";
+
+        
+        map1.put(Key.KEY_1, obj);
+        map2.put(Key.KEY_1, obj1);
+        map1.put(Key.KEY_2, obj2);
+        map2.put(Key.KEY_2, obj12);
+
+        System.out.println(map1.equals(map2));
+        System.out.println(new Model(map1).equals(new Model(map2)));
+
+    
+        Map<String, Object> maps1 = new HashMap<String, Object>();
+        Map<String, Object> maps2 = new HashMap<String, Object>();
+
+        maps1.put("ho", obj);
+        maps2.put("ho", obj1);
+        maps1.put("pi", obj2);
+        maps2.put("pi", obj12);
+
+        System.out.println(maps1.equals(maps2));
+        System.out.println(new Model(map1).equals(new Model(map2)));
+
+    }
+}
+
+```
+
+### 実行結果
+
+``` txt
+true
+true
+true
+true
+```
+
 ## マルチスレッド
 
 - [https://github.com/SampleUser0001#multithread](https://github.com/SampleUser0001#multithread)
@@ -1216,18 +1344,18 @@ public class App {
 
     private List<String> convertToList(InputStream is) throws IOException {
         List<String> returnList = new ArrayList<>();
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-			for (;;) {
-				String line = br.readLine();
-				if (line == null) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+            for (;;) {
+                String line = br.readLine();
+                if (line == null) {
                     break;
                 } else {
                     returnList.add(line);
                 }
-			}
-		}
+            }
+        }
         return returnList;
-	}
+    }
     
     public static void main(String[] args) throws IOException, InterruptedException {
         new App().exec(args);
@@ -1778,17 +1906,17 @@ public class App {
 
 Sample.tsv
 ``` tsv : Sample.tsv
-hoge1		hoge3	
-	piyo2	piyo3	piyo4
-fuga1	fuga2		
+hoge1        hoge3    
+    piyo2    piyo3    piyo4
+fuga1    fuga2        
 ```
 
 実行結果
 ``` tsv
-hoge1		fuga1
-	piyo2	fuga2
-hoge3	piyo3	
-	piyo4	
+hoge1        fuga1
+    piyo2    fuga2
+hoge3    piyo3    
+    piyo4    
 ```
 
 ## CRLF以外の改行コードを無視する
