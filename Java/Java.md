@@ -15,6 +15,8 @@
     - [Stream -\> Map](#stream---map)
       - [順番を保持する](#順番を保持する)
     - [ソートする](#ソートする)
+      - [特定の型（int）](#特定の型int)
+      - [参考（旧）](#参考旧)
     - [合計値算出](#合計値算出)
     - [List -\> Stream](#list---stream)
     - [List\<ModelA\> -\> Map\<ModelA, List\<ModelB\>\>](#listmodela---mapmodela-listmodelb)
@@ -256,11 +258,30 @@ collect(Collectors.toMap(Model::getId, Bean::getValue, (x, y) -> y, LinkedHashMa
 
 ### ソートする
 
+`Comparator`インタフェースを実装しなくてよい！
+
+``` java
+import java.util.Comparator;
+
+.stream()
+.sorted(
+    Comparator.comparing(Model::getSortKey1)
+              .thenComparing(Model::getSortKey2)
+              .thenComparing(Model::getSortKey3)
+)
+```
+
+#### 特定の型（int）
+
 ``` java
 import java.util.Comparator;
 
 sorted(Comparator.comparingInt(int型の値))
 ```
+
+#### 参考（旧）
+
+- [](https://tech-blog.rakus.co.jp/entry/20220928/sort)
 
 ### 合計値算出
 
