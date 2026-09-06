@@ -129,6 +129,10 @@
   - [縦と横を入れ替える](#縦と横を入れ替える)
   - [CRLF以外の改行コードを無視する](#crlf以外の改行コードを無視する)
   - [文字コードと改行コードの変換を行う](#文字コードと改行コードの変換を行う)
+  - [ファイル読み込み時にMalformedInputExceptionが発生したとき、対象の文字を調査する](#ファイル読み込み時にmalformedinputexceptionが発生したとき対象の文字を調査する)
+    - [改行でエラーになるとき](#改行でエラーになるとき)
+      - [想定ケース](#想定ケース)
+      - [実装](#実装)
   - [SQLの実行結果をExcelに出力する](#sqlの実行結果をexcelに出力する)
   - [SQLフォーマッタ](#sqlフォーマッタ)
   - [異なるバージョンのJavaでアプリを動かす](#異なるバージョンのjavaでアプリを動かす)
@@ -2062,6 +2066,91 @@ public class NkfLike {
     }
 }
 ```
+
+## ファイル読み込み時にMalformedInputExceptionが発生したとき、対象の文字を調査する
+
+``` java
+import java.nio.*;
+import java.nio.charset.*;
+import java.nio.file.*;
+
+public class FindMalformedByte {
+    public static void main(String[] args) throws Exception {
+        Path path = Paths.get("target.txt");
+        byte[] data = Files.readAllBytes(path);
+
+        Charset charset = StandardCharsets.UTF_8;
+        CharsetDecoder decoder = charset.newDecoder()
+                .onMalformedInput(CodingErrorAction.REPORT)
+                .onUnmappableCharacter(CodingErrorAction.REPORT);
+
+        ByteBuffer bb = ByteBuffer.wrap(data);
+        CharBuffer cb = CharBuffer.allocate(data.length + 1);
+
+        CoderResult result = decoder.decode(bb, cb, true);
+
+        if (result.isMalformed() || result.isUnmappable()) {
+            int errorPos = bb.position(); // エラーが発生した位置(バイト)
+            int len = result.length();
+
+            System.out.println("エラー位置(バイトオフセット): " + errorPos);
+            System.out.print("問題のバイト列: ");
+            for (int i = 0; i < len; i++) {
+                System.out.printf("0x%02X ", data[errorPos + i]);
+            }
+            System.out.println();
+
+            // 前後のコンテキストを表示
+            int start = Math.max(0, errorPos - 20);
+            int end = Math.min(data.length, errorPos + 20);
+            System.out.println("周辺データ: " + new String(data, start, end - start, StandardCharsets.ISO_8859_1));
+        } else {
+            System.out.println("デコードエラーなし");
+        }
+    }
+}
+```
+
+### 改行でエラーになるとき
+
+#### 想定ケース
+
+元のファイルはShiftjis想定で、改行直前に全角スペースがあり、その辺りでエラーになる。
+
+1. 全角スペースが行末で分割されている(最有力)
+    - Shift_JISの全角スペースは 0x81 0x40 の2バイトです。もし元データが固定長レコード(汎用機/COBOL由来のバッチ出力など)や、何らかの理由で行の長さを揃えるロジックを通っている場合、この2バイトの途中で改行が挿入されてしまうことがあります。
+    - ...0x81 [改行] 0x40...
+    - こうなると、0x81だけでは1バイト目として不完全なため、そこでデコーダが「不正なバイト列」としてエラーを出します。改行の直前で起きているように見えるのはこのためです。
+2. charsetの指定が"Shift_JIS"か"MS932"(Windows-31J)かの違い
+    - JavaのビルトインCharset "Shift_JIS" は仕様に厳密なため、0x81 0x40 を全角スペースとして正しく認識しますが、環境依存文字やベンダー拡張が絡む場合は "MS932" や "Windows-31J" の方が寛容に読めることがあります。
+
+#### 実装
+
+``` java
+import java.nio.file.*;
+
+public class CheckSplitByte {
+    public static void main(String[] args) throws Exception {
+        byte[] data = Files.readAllBytes(Paths.get("target.txt"));
+
+        for (int i = 0; i < data.length - 1; i++) {
+            int b1 = data[i] & 0xFF;
+            int b2 = (i + 1 < data.length) ? data[i + 1] & 0xFF : -1;
+
+            // 0x81単独で、直後が改行(0x0D or 0x0A)なら分割の疑いあり
+            if (b1 == 0x81 && (b2 == 0x0D || b2 == 0x0A)) {
+                System.out.printf("怪しい箇所: offset=%d  0x%02X の直後に改行%n", i, b1);
+            }
+            // 逆に、行頭が0x40から始まっている場合も分割の疑いあり
+            if ((data[i] & 0xFF) == 0x0A && i + 1 < data.length && (data[i + 1] & 0xFF) == 0x40) {
+                System.out.printf("怪しい箇所: offset=%d  改行直後が0x40単独%n", i);
+            }
+        }
+    }
+}
+```
+
+
 
 ## SQLの実行結果をExcelに出力する
 
