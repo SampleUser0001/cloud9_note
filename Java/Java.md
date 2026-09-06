@@ -57,6 +57,7 @@
     - [Model.java](#modeljava)
     - [App.java](#appjava)
     - [実行結果](#実行結果)
+  - [Collection -\> List](#collection---list)
   - [マルチスレッド](#マルチスレッド)
   - [ディレクトリを再帰的にたどる](#ディレクトリを再帰的にたどる)
   - [Listの結合](#listの結合)
@@ -914,6 +915,14 @@ true
 true
 true
 true
+```
+
+## Collection -> List
+
+主に`Map.values()`対応。
+
+``` java
+List<Model> list = new ArrayList<Model>(map.values());
 ```
 
 ## マルチスレッド
