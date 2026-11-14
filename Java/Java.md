@@ -138,6 +138,7 @@
   - [SQLの実行結果をExcelに出力する](#sqlの実行結果をexcelに出力する)
   - [SQLフォーマッタ](#sqlフォーマッタ)
   - [異なるバージョンのJavaでアプリを動かす](#異なるバージョンのjavaでアプリを動かす)
+  - [StringTokenizer](#stringtokenizer)
   - [Java 8 -\> 17の間に発生した主なアップデート内容](#java-8---17の間に発生した主なアップデート内容)
     - [Java 9 (2017年9月)](#java-9-2017年9月)
     - [Java 10 (2018年3月)](#java-10-2018年3月)
@@ -2372,6 +2373,35 @@ public class SqlFormatter {
 ## 異なるバージョンのJavaでアプリを動かす
 
 - [https://github.com/SampleUser0001/for_java_17](https://github.com/SampleUser0001/for_java_17)
+
+## StringTokenizer
+
+**StringTokenizerは、互換性を維持する目的で保持されているレガシー・クラスであり、新規コードでは使用が推奨されていません。 この機能の使用を考えているなら、Stringのsplitメソッドまたはjava.util.regexパッケージを代わりに使用することをお薦めします。**
+
+``` java
+import java.util.StringTokenizer;
+
+public class App {
+    public static void main(String[] args) {
+        StringTokenizer st = new StringTokenizer("Hello World");
+        while (st.hasMoreTokens()) {
+            System.out.println(st.nextToken());
+        }
+
+        StringTokenizer stComma = new StringTokenizer("Hello,World", ",");
+        while (stComma.hasMoreTokens()) {
+            System.out.println(stComma.nextToken());
+        }
+    }
+}
+```
+
+``` txt
+Hello
+World
+Hello
+World
+```
 
 ## Java 8 -> 17の間に発生した主なアップデート内容
 
