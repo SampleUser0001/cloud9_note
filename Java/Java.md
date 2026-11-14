@@ -60,6 +60,7 @@
   - [Collection -\> List](#collection---list)
   - [マルチスレッド](#マルチスレッド)
   - [ディレクトリを再帰的にたどる](#ディレクトリを再帰的にたどる)
+  - [ディレクトリ直下のみ取得する](#ディレクトリ直下のみ取得する)
   - [Listの結合](#listの結合)
   - [指定した文字列で結合する](#指定した文字列で結合する)
     - [Streamを結合する](#streamを結合する)
@@ -948,6 +949,28 @@ try (Stream<Path> stream = Files.walk(Paths.get("."))) {
     stream.forEach(System.out::println);    
 } catch(IOException e) {
     e.printStackTrace();
+}
+```
+
+## ディレクトリ直下のみ取得する
+
+ディレクトリも一緒に取得されるので、必要に応じて`filter`する。
+
+``` java
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
+
+public class App {
+    public static void main(String[] args) {
+        try {
+            Files.list(Paths.get("."))
+                 .forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
 ```
 
