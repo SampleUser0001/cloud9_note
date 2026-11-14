@@ -9,6 +9,7 @@
     - [過去のログ:その1](#過去のログその1-1)
       - [注意点](#注意点)
   - [自分自身のファイル名を取得する](#自分自身のファイル名を取得する)
+  - [do - while](#do---while)
   - [forをワンライナーで行う](#forをワンライナーで行う)
   - [起動引数を使う](#起動引数を使う)
     - [引数をすべてまとめて参照する](#引数をすべてまとめて参照する)
@@ -24,6 +25,7 @@
   - [シェルの実行ディレクトリを取得する](#シェルの実行ディレクトリを取得する)
     - [例：シェルの実行ディレクトリを取得する](#例シェルの実行ディレクトリを取得する)
   - [ファイルパスから絶対パスを取得する](#ファイルパスから絶対パスを取得する)
+    - [realpathがない場合](#realpathがない場合)
   - [ファイルパスからファイル名のみ取得](#ファイルパスからファイル名のみ取得)
   - [ファイルパスからディレクトリ名のみ取得](#ファイルパスからディレクトリ名のみ取得)
   - [.envファイルの読み込み方](#envファイルの読み込み方)
@@ -114,6 +116,25 @@ done < <対象ファイル>
 ``` bash
 self_fpath=$(realpath "${BASH_SOURCE[0]}")
 echo $self_fpath
+```
+
+## do - while
+
+``` bash
+#!/bin/bash
+
+count=0
+while true; do
+    # なんか処理を書く
+
+    if [ $count -ge 10 ]; then
+        break
+    else
+        count=$((count + 1))
+        echo "Count: $count"
+    fi
+done
+echo "Finished counting"
 ```
 
 ## forをワンライナーで行う
@@ -349,6 +370,17 @@ ittimfn@penguin:~/cloud9_note/tmp/tmp2$ sh ../test.sh
 
 ``` bash
 realpath ${filepath}
+```
+
+### realpathがない場合
+
+``` bash
+#!/bin/bash
+
+THIS="${BASH_SOURCE[0]}"
+HERE="$(cd "$(dirname "$THIS")" && pwd)"
+THIS="$HERE/$(basename "$BASH_SOURCE")"
+echo "$THIS"
 ```
 
 ## ファイルパスからファイル名のみ取得
