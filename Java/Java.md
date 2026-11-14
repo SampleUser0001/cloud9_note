@@ -78,6 +78,7 @@
     - [圧縮](#圧縮)
     - [jarコマンド:参考](#jarコマンド参考)
   - [StringBuilderとStringBufferの違い](#stringbuilderとstringbufferの違い)
+  - [MessageFormat](#messageformat)
   - [SimpleDateFormat](#simpledateformat)
     - [String -\> Date](#string---date)
     - [Date -\> String](#date---string)
@@ -1188,6 +1189,25 @@ jar -cf ${jarファイル}.jar ${ディレクトリ}
 - StringBuffer
   - スレッドセーフ。
   - 早くない。
+
+## MessageFormat
+
+Stringに値を埋め込んでStringを生成する。  
+format側は0開始でなくて良いが、数値はindexとして使用される。
+
+※多分古い。`String.format`で良い気がする。
+
+``` java
+import java.text.MessageFormat;
+
+public class App {
+    public static void main(String[] args) {
+        MessageFormat mf = new MessageFormat("{0}, {2}, {1}");
+        System.out.println(mf.format(new Object[]{"World", 1,"How are you?"}));
+    }
+}
+```
+
 
 ## SimpleDateFormat
 
