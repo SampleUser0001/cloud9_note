@@ -65,6 +65,10 @@
   - [指定した文字列で結合する](#指定した文字列で結合する)
     - [Streamを結合する](#streamを結合する)
     - [結合時に先頭、末尾につける文字列を指定する](#結合時に先頭末尾につける文字列を指定する)
+  - [ファイルに書いてある順にソートする](#ファイルに書いてある順にソートする)
+    - [input](#input)
+    - [sort](#sort)
+    - [実行結果](#実行結果-1)
   - [Tempファイルを作成する / Javaでshを実行する](#tempファイルを作成する--javaでshを実行する)
     - [参考](#参考-2)
   - [Tempディレクトリ作成](#tempディレクトリ作成)
@@ -1025,6 +1029,72 @@ String joined = stream.forEachOrdered(Collectors.joining(",")));
 String head = "head";
 String tail = "tail";
 stream.forEachOrdered(Collectors.joining(",", head, tail));
+```
+
+## ファイルに書いてある順にソートする
+
+``` java
+
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+
+public class App {
+    public static void main(String[] args) throws IOException {
+        List<Model> lines = Files.readAllLines(Paths.get("input"))
+            .stream()
+            .map(line -> {
+                String[] parts = line.split("\t");
+                return new Model(parts[0], Integer.parseInt(parts[1]));
+            })
+            .collect(Collectors.toList());
+
+        Map<String, Integer> sortMap = new HashMap<>();
+        List<String> sortList = Files.readAllLines(Paths.get("sort"));
+        for (int i = 0; i < sortList.size(); i++) {
+            sortMap.put(sortList.get(i), i);
+        }
+
+        Comparator<Model> cmp = Comparator
+            .comparingInt((Model m) -> sortMap.getOrDefault(m.name(), Integer.MAX_VALUE))
+            .thenComparing(Model::name);  
+        
+        lines.sort(cmp);
+        System.out.println(lines);
+    }
+}
+```
+
+### input
+
+``` tsv
+aaa	1
+bbb	2
+ccc	3
+ddd	4
+eee	5
+```
+
+### sort
+
+```
+bbb
+eee
+ccc
+aaa
+ddd
+```
+
+### 実行結果
+
+```
+[Model{name='bbb', value=2}, Model{name='eee', value=5}, Model{name='ccc', value=3}, Model{name='aaa', value=1}, Model{name='ddd', value=4}]
 ```
 
 ## Tempファイルを作成する / Javaでshを実行する
